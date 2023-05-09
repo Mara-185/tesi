@@ -131,6 +131,5 @@ dmypy.json
 # root stuff
 *.root
 
-
 # h5 stuff
 *.h5
