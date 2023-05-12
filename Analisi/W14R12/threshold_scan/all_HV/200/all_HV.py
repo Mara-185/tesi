@@ -173,7 +173,8 @@ def main(input_file, overwrite=False):
             set_integer_ticks(plt.gca().xaxis)
             cb = integer_ticks_colorbar()
             cb.set_label("Pixels / bin")
-            pdf.savefig(); plt.clf()
+            pdf.savefig();
+            plt.savefig(f"all_{name}_thscan_{the_vh}.png"); plt.clf()
 
 
         # Compute the threshold for each pixel as the weighted average
@@ -229,7 +230,8 @@ def main(input_file, overwrite=False):
             set_integer_ticks(plt.gca().yaxis)
             plt.legend(loc="upper right")
             plt.grid(axis='y')
-            pdf.savefig();plt.clf()
+            pdf.savefig();
+            plt.savefig(f"all_{name}_thdist_{the_vh}.png"); plt.clf()
 
 ###################################################
         # plt.title(subtitle)
