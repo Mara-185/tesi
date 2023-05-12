@@ -173,8 +173,7 @@ def main(input_file, overwrite=False):
             set_integer_ticks(plt.gca().xaxis)
             cb = integer_ticks_colorbar()
             cb.set_label("Pixels / bin")
-            pdf.savefig();
-            plt.savefig(f"all_norm_thscan_{the_vh}.png"); plt.clf()
+            pdf.savefig(); plt.clf()
 
 
         # Compute the threshold for each pixel as the weighted average
@@ -195,39 +194,52 @@ def main(input_file, overwrite=False):
             lc = min(col_n - 1, lc - col_start)
             th = threshold_DAC[fc:lc+1,:]
             th_mean = ufloat(np.mean(th[th>0]), np.std(th[th>0], ddof=1))
-            #bin_height, bin_edge, _ = plt.hist(th.reshape(-1), bins=m2-m1, range=[m1, m2],
-            #         label=f"{name} ${th_mean:L}$", histtype='step', color=f"C{i}")
             bin_height, bin_edge, _ = plt.hist(th.reshape(-1), bins=m2-m1, range=[m1, m2],
-                     label=f"{name}", histtype='step', color=f"C{i}")
+                 label=f"{name}", histtype='step', color=f"C{i}")
 ##############################################
-
-            low = [10000,10, 0]
-            up = [100500, 200, 30]
             bin_center = (bin_edge[:-1]+bin_edge[1:])/2
-            popt, pcov = curve_fit(gauss, bin_center, bin_height, p0 = [16000, 60, 3], bounds=(low, up))
+            if the_vh==140:
+                popt, pcov = curve_fit(gauss, bin_center, bin_height,
+                    p0 = [2500, 30, 3], bounds=([1000,10, 0],[4000, 150, 30]))
+                #low = [1000,10, 0]
+                #up = [4000, 150, 30]
+            elif the_vh==200:
+                popt, pcov = curve_fit(gauss, bin_center, bin_height,
+                    p0 = [2000, 60, 5], bounds=([1000,10, 0],[4000, 150, 40]))
+            else:
+                print("Define new range.")
+
             print(*popt)
             mean[i] = popt[1]
             perr = np.sqrt(np.diag(pcov))
             print(*perr)
             xb = np.arange(bin_edge[0], bin_edge[-1], 0.005)
-            plt.plot(xb, gauss(xb, *popt), "r-", label=f"fit {name}:\nmean={ufloat(round(popt[1], 3), round(perr[1],3))}\nsigma={ufloat(round(popt[2], 3), round(perr[2],3))}")
+            plt.plot(xb, gauss(xb, *popt), "-", label=f"fit {name}:\nmean={ufloat(round(popt[1], 2), round(perr[1],2))}\nsigma={ufloat(round(popt[2], 2), round(perr[2],2))}")
             #Save results in a txt file
-            with open(f"th_fitresults_{the_vh}[all norm].txt", "w") as outf:
+            with open(f"th_fitresults_{the_vh}[all cascode].txt", "w") as outf:
                 print("#A#mean#sigma:", file=outf)
                 print(*popt, file=outf)
                 print("#SA#Smean#Ssigma:", file=outf)
                 print(*perr, file=outf)
 
+            plt.title(subtitle)
+            plt.suptitle(f"Threshold distribution ({name})")
+            plt.xlabel("Threshold [DAC]")
+            plt.ylabel("Pixels / bin")
+            set_integer_ticks(plt.gca().yaxis)
+            plt.legend(loc="upper right")
+            plt.grid(axis='y')
+            pdf.savefig();plt.clf()
+
 ###################################################
-        plt.title(subtitle)
-        plt.suptitle("Threshold distribution")
-        plt.xlabel("Threshold [DAC]")
-        plt.ylabel("Pixels / bin")
-        set_integer_ticks(plt.gca().yaxis)
-        plt.legend(loc="upper left", fontsize=9)
-        plt.grid(axis='y')
-        pdf.savefig();
-        plt.savefig(f"all_norm_thdist_{the_vh}.png"); plt.clf()
+        # plt.title(subtitle)
+        # plt.suptitle("Threshold distribution")
+        # plt.xlabel("Threshold [DAC]")
+        # plt.ylabel("Pixels / bin")
+        # set_integer_ticks(plt.gca().yaxis)
+        # plt.legend()
+        # plt.grid(axis='y')
+        # pdf.savefig(); plt.clf()
 
 
         # ToT vs injected charge as 2D histogram
@@ -237,6 +249,8 @@ def main(input_file, overwrite=False):
             plt.pcolormesh(
                 occupancy_edges[2], np.linspace(-0.5, 127.5, 129, endpoint=True),
                 hist.transpose(), vmin=1, cmap=VIRIDIS_WHITE_UNDER, rasterized=True)  # Necessary for quick save and view in PDF
+            np.nan_to_num(hist, copy=False)
+
             plt.title(subtitle)
             plt.suptitle(f"ToT curve ({name})")
             plt.xlabel("Injected charge [DAC]")
@@ -261,19 +275,83 @@ def main(input_file, overwrite=False):
 
             #FIT
             if name!="All FEs":
+                if the_vh==200:
+                    ##############PLOT AND FIT AFTER SHIFT #####################
+                    occupancy_shift = occupancy_edges[2]-29
+                    plt.pcolormesh(
+                        occupancy_shift, np.linspace(-0.5, 127.5, 129, endpoint=True),
+                        hist.transpose(), vmin=1, cmap=VIRIDIS_WHITE_UNDER, rasterized=True)  # Necessary for quick save and view in PDF
+                    np.nan_to_num(hist, copy=False)
+
+                    plt.title(subtitle)
+                    plt.suptitle(f"ToT curve ({name})")
+                    plt.xlabel("True Injected charge [DAC]")
+                    plt.ylabel("ToT [25 ns]")
+                    set_integer_ticks(plt.gca().xaxis, plt.gca().yaxis)
+                    cb = integer_ticks_colorbar()
+                    cb.set_label("Hits / bin")
+                    pdf.savefig(); plt.clf()
+
+                    print(i, mean[i-1])
+                    def func_casc(x,a,b,c,t):
+                        return np.where(x<mean[i-1]-29, 0, np.maximum(0, a*x+b-(c/(x-t))))
+
+                    tot_mean_shift = tot_mean
+                    mask_tot = np.isfinite(tot_mean_shift)
+                    tot_mean_shift = tot_mean_shift[mask_tot]
+                    occu = occupancy_shift[:-1]
+                    charge_dac_bins2 = occu[mask_tot]
+
+                    popt, pcov = curve_fit(func_casc, charge_dac_bins2, tot_mean_shift,
+                        p0 = [0.15, 2, 100, -10],bounds=([0 , -100, 0, -40], [0.3, 100,1000, 80]),
+                        maxfev=10000)
+                    perr = np.sqrt(np.diag(pcov))
+
+                    print(*popt)
+                    print(*perr)
+
+                    plt.pcolormesh(
+                        occupancy_shift, np.linspace(-0.5, 127.5, 129, endpoint=True),
+                        hist.transpose(), vmin=1, cmap=VIRIDIS_WHITE_UNDER, rasterized=True)  # Necessary for quick save and view in PDF
+
+                    y = np.arange(mean[i-1]-29.01, 250, 1)
+                    plt.plot(y, func_casc(y, *popt), "r-", label=f"fit {name}:\na ={ufloat(round(popt[0], 3), round(perr[0], 3))}\nb = {ufloat(round(popt[1],3),round(perr[1],3))}\nc = {ufloat(round(popt[2],3),round(perr[2], 3))}\nt = {ufloat(np.around(popt[3],3),round(perr[3], 3))}")
+                    plt.xlim([0, 250])
+                    plt.ylim([0, 60])
+
+                    plt.title(subtitle)
+                    plt.suptitle(f"ToT curve fit ({name})")
+                    plt.xlabel("True injected charge [DAC]")
+                    plt.ylabel("ToT [25 ns]")
+                    set_integer_ticks(plt.gca().xaxis, plt.gca().yaxis)
+                    cb = integer_ticks_colorbar()
+                    cb.set_label("Hits / bin")
+                    plt.legend(loc="upper left")
+                    pdf.savefig(); plt.clf()
+
+
+            ################################### FIT #############
                 print(i, mean[i-1])
                 def func_casc(x,a,b,c,t):
                     return np.where(x<mean[i-1], 0, np.maximum(0, a*x+b-(c/(x-t))))
-                low = [0 , -10, 0, 0]
-                up = [0.2, 10,1000, 80]
+
 
                 mask_tot = np.isfinite(tot_mean)
                 tot_mean = tot_mean[mask_tot]
                 occu = occupancy_edges[2][:-1]
-                charge_dac_bins = occu[mask_tot]
+                charge_dac_bins2 = occu[mask_tot]
 
-                popt, pcov = curve_fit(func_casc, charge_dac_bins, tot_mean,
-                    p0 = [0.15, 2, 10, 10],bounds=(low, up), maxfev=10000)
+
+                if the_vh==140:
+                    popt, pcov = curve_fit(func_casc, charge_dac_bins2, tot_mean,
+                        p0 = [0.15, 2, 100, 1],bounds=([0 , -100, 0, 0], [0.2, 100,1000, 80]), maxfev=10000)
+                    #low = [0 , -100, 0, 0]
+                    #up = [0.2, 100,1000, 80]
+                elif the_vh==200:
+                    popt, pcov = curve_fit(func_casc, charge_dac_bins2, tot_mean,
+                        p0 = [0.15, 2, 100, 10],bounds=([0 , -100, 0, 0], [0.3, 100,10000, 80]), maxfev=10000)
+                else:
+                    print("Define new range.")
                 perr = np.sqrt(np.diag(pcov))
 
                 print(*popt)
@@ -284,19 +362,18 @@ def main(input_file, overwrite=False):
                     hist.transpose(), vmin=1, cmap=VIRIDIS_WHITE_UNDER, rasterized=True)  # Necessary for quick save and view in PDF
 
                 y = np.arange(mean[i-1]-0.01, 250, 1)
-                plt.plot(y, func_casc(y, *popt), "r-",
-                    label=f"fit {name}:\na ={ufloat(round(popt[0], 3), round(perr[0], 3))}\nb = {ufloat(round(popt[1],3),round(perr[1],3))}\nc = {ufloat(round(popt[2],3),round(perr[2], 3))}\nt = {ufloat(np.around(popt[3],3),round(perr[3], 3))}")
+                plt.plot(y, func_casc(y, *popt), "r-", label=f"fit {name}:\na ={ufloat(round(popt[0], 3), round(perr[0], 3))}\nb = {ufloat(round(popt[1],3),round(perr[1],3))}\nc = {ufloat(round(popt[2],3),round(perr[2], 3))}\nt = {ufloat(np.around(popt[3],3),round(perr[3], 3))}")
                 plt.xlim([0, 250])
-                plt.ylim([0, 40])
+                plt.ylim([0, 60])
 
                 plt.title(subtitle)
-                plt.suptitle("ToT curve fit")
+                plt.suptitle(f"ToT curve fit ({name})")
                 plt.xlabel("True injected charge [DAC]")
                 plt.ylabel("ToT [25 ns]")
                 set_integer_ticks(plt.gca().xaxis, plt.gca().yaxis)
                 cb = integer_ticks_colorbar()
                 cb.set_label("Hits / bin")
-                plt.legend(loc="upper right", fontsize=8)
+                plt.legend(loc="upper left")
                 pdf.savefig(); plt.clf()
 
 

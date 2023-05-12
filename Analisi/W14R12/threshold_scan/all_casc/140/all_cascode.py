@@ -173,7 +173,8 @@ def main(input_file, overwrite=False):
             set_integer_ticks(plt.gca().xaxis)
             cb = integer_ticks_colorbar()
             cb.set_label("Pixels / bin")
-            pdf.savefig(); plt.clf()
+            pdf.savefig();
+            plt.savefig(f"all_casc_thscan_{the_vh}.png"); plt.clf()
 
 
         # Compute the threshold for each pixel as the weighted average
@@ -235,7 +236,8 @@ def main(input_file, overwrite=False):
         # plt.legend(loc="upper left", fontsize=9)
         # plt.grid(axis='y')
         plt.xlim([40,80])
-        pdf.savefig(); plt.clf()
+        pdf.savefig();
+        plt.savefig(f"all_casc_thdist_{the_vh}");plt.clf()
 
 
         # ToT vs injected charge as 2D histogram
