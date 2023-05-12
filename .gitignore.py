@@ -132,4 +132,4 @@ dmypy.json
 *.root
 
 # h5 stuff
-*.h5.h5
+Analisi/*.h5
