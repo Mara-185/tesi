@@ -1,0 +1,780 @@
+\documentclass[10pt,a4paper,twoside]{report}
+
+%LOAD PACKAGES
+\input{utils.tex}
+
+
+%------------------------------------
+%		INFO
+%------------------------------------
+
+%\title{Studio di rivelatori a pixel monolitici CMOS per l'upgrade dell'esperimento Belle II}
+%\author{Mara Stefania Calò}
+%\date{9 Novembre 2022}
+%\newcommand{\institution}{Università di Pisa}
+%\newcommand{\department}{Dipartimento di Fisica}
+
+%--------------------------------------
+%		TITLE
+%--------------------------------------
+
+
+\begin{document}
+
+%Contenuti
+\doublespacing
+\tableofcontents
+\singlespacing
+
+
+\begin{comment}
+\begin{frontespizio}
+\Universita{Pisa}
+\Logo[scale=.1]{logo}
+\Dipartimento{Fisica}
+\Corso{Fisica delle Interazioni Fondamentali}
+\Titolo{Studio di rivelatori a pixel monolitici CMOS per l'upgrade dell'esperimento Belle II}
+\Candidato{Mara Stefania Calo'}
+\Relatore{prof. Francesco Forti}
+\Annoaccademico{2022.2023}
+\end{frontespizio}
+\end{comment}
+
+\newpage
+
+% --------------------------------------------
+%		ABSTRACT 
+%---------------------------------------------
+\section*{Abstract}
+
+\begin{comment}
+Belle II è un esperimento di fisica delle particelle situato a Tsukuba, in Giappone, nel laboratorio (di) KEK (100 km da Tokyo). E' una flavor-factory di seconda generazione che opera alla frontiera dell'intensità, detenendo il record mondiale di maggiore luminosità. L'acceleratore SuperKEKB è un collider di fasci $e^{+}$ $e^{-}$ con energie asimmetriche e piccate alla risonanza $\Upsilon$(4S). Auspica a raccogliere un set di dati fino a 50 $ab^{-1}$ (x50 Belle dataset, x100 BaBar dataset) per studiare la violazione di CP nei mesoni B e ricerca nuova fisica oltre il Modello Standard.
+\end{comment}
+
+
+% --------------------------------------------
+%		CAPITOLO 1 
+%---------------------------------------------
+\chapter{Belle II e acceleratore SKB (SuperKEKB)}
+%\addcontentsline{toc}{chapter}{Belle II e acceleratore SKB (SuperKeKB)}
+
+\begin{comment}
+Belle II è un esperimento general-purpose utilizzato nello studio dei parametri del Modello Standard (MS) e nella ricerca di Fisica oltre il MS (Beyond Standard Model, BSM).
+In particolare l'esperimento studia la violazione di CP nei sistemi di mesoni B e cerca evidenze di Nuova Fisica (New Physic, NP) nei decadimenti dei mesoni B, dei mesoni D, nei leptoni $\tau$ e nel dark sector (settore della materia oscura), in particolare dei fotoni oscuri.
+\end{comment}
+
+%---------------------------------------------
+%			1.1
+%---------------------------------------------
+\section{Programma di fisica alle B-Factory}
+%\addcontentsline{toc}{section}{Programma di fisica alle B-Factory}
+
+\begin{comment}
+
+Lo SM è una teoria che descrive tre delle interazioni fondamentali tra le particelle elementari, cioè l'interazione forte, debole ed elettromagnetica (ad esclusione quindi, della gravità).
+Classifica tutte le particelle fino ad ora note, in 4 gruppi principali: quark, leptoni, bosoni e Higgs. 
+
+\begin{figure}
+\includegraphics{SM}
+\caption{Modello Standard}
+\label{fig:sm}
+\end{figure}
+
+Nonostante abbia ottenuto negli anni una serie di sorprendenti successi, riuscendo a predire con precisione nuove particelle e nuovi meccanismi fino a quel momento sconosciuti, ci sono ancora numerosi e fondamentali aspetti della Natura sulla quale non è in grado di dare risposte. 
+
+Si conoscono, ad esempio, tre generazioni di quark e leptoni ma non si sa se debbano essere i soli e non si conosce il perché della loro gerarchia di massa.
+Il meccanismo di Higgs spiega la causa delle masse delle particelle elementari attraverso la rottura spontanea della simmetria elettrodebole, ma non giustifica quella dei neutrini. 
+Lo SM inoltre potrebbe prevedere anche l'esistenza di altri bosoni Higgs-like, eventualmente vettoriali, la cui esistenza sarebbe giustificata in alcune teorie di Supersimmetria (SUSY) o altre di Nuova Fisica.
+Un'ulteriore problema irrisolto è l'asimmetria tra materia e antimateria nell'universo. Nonostante la violazione di CP sia necessaria per spiegare l'attuale stato dell'universo, quella osservata è diversi ordini di grandezza minore, rispetto a quella necessaria per spiegare la dominazione della materia sull'antimateria, che ha permesso l'evoluzione dell'universo come lo osserviamo oggi. 
+Inoltre, gli elementi della matrice di Cabibbo-Kobayashi-Maskawa (CKM), la cui fase complessa è alla base della violazione di CP nel settore dei flavor dei quark, sono diagonali e questo potrebbe suggerire l'esistenza di una nuova simmetria, che esiste non rotta ad elevate energie (superiori all'ordine del TeV).
+Tutte queste questioni aperte, incentivano dunque la ricerca di nuove particelle e nuovi processi (meccanismi) che possano dare delle risposte.
+Alla frontiera dell'energia, esperimenti com il Large Hadron Collider (LHC) a Ginevra, cercano nuove particelle prodotte nella collisione protone-protone fino ad una energia nel centro di massa di 14 TeV.
+Alla frontiera della luminosità invece, la traccia di nuove particelle e meccanismi si cerca in misure di precisione nelle reazioni soppresse nella fisica del flavor o nelle deviazioni dalle predizioni del MS. Le discrepanze infatti, possono essere interpretate come indizio (segnale) di nuova fisica oltre il Modello Standard. Quest'ultimo è l'approccio di Belle II.
+\end{comment}
+
+\subsection{Ricerche di nuova fisica (BSM)}
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+%	PRIMO CASO DA PHYSICS BOOK
+%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{comment}
+In Belle II è possibile ricercare modelli di nuova fisica che includono specifici accoppiamenti di flavor, la cui ricerca indiretta potrebbe spingere la scala di energia di nuovi meccanismi a livelli anche più alti rispetto alla ricerca diretta, suggerendo inoltre, in quale direzione muoversi per scoprire eventuali nuovi processi. 
+
+Un'importante transizione molto studiata in Belle II è \textit{b}$\rightarrow$\textit{s}. 
+Inizialmente la misura di violazione di CP nei sistemi $B_{d}$ è stata fatta usando transizioni a tre livelli del tipo \textit{b}$\rightarrow$\textit{c\bar{c}s}, ad esempio nel golden channel B$\rightarrow$ J/$\psi$$K_{S}^{0}$. Successivamente si è cominciato ad osservare la violazione di CP anche nelle transizioni a loop indotto(??) \textit{b}$\rightarrow$\textit{s}, come B$\rightarrow$ $\phi$$K_{S}^{0}$ oppure B$\rightarrow$ $\eta'$$K_{S}^{0}$. Anche se l'attuale precisione possibile in questi canali, non raggiunge quella dei precedenti.
+
+Nello MS la violazione di CP attesa in queste transizioni è abbastanza piccola, quindi qualsiasi osservazioni significativa potrebbe essere segnale di nuova fisica. 
+
+Un ulteriore indizio di nuova fisica, è stato trovato negli anni passati nella misura del Branching-ratio di B$\rightarrow$ $\nu\tau$, che è una annichilazione a tre livelli del tipo \textit{b}$\rightarrow$\textit{u} e il cui stato finale include almeno due neutrini, per cui una sfida impegnativa dal punto di vista sperimentale.
+\end{comment}
+
+\subsection{Fisica del flavor}
+
+\subsection{Materia oscura}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+%	SECONDO CASO DA PHYSICS BOOK overview
+%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+
+
+
+%---------------------------------------------
+%			1.2
+%---------------------------------------------
+\section{Acceleratore SuperKEKB}
+%\addcontentsline{toc}{section}{Acceleratore SuperKEKB}
+
+\begin{comment}
+La sensibilità nelle misure di precisione alla ricerca di nuova fisica, sono possibili soprattutto grazie alla complessità e alle ottime prestazioni dell'acceleratore SuperKEKB che ospita il rivelatore ermetico Belle II. Risultato di molti anni di efficiente collaborazione tra i ricercatori del laboratorio KEK e tutte le collaborazioni internazionali che partecipano all'esperimento.
+
+SuperKEKB è un collider asimmetrico $e^{+}e^{-}$ di 3 km di circonferenza, piccato a una energia del centro di massa pari a $\sqrt{s}$ = 10.58 GeV, che corrisponde alla massa della risonanza $\Upsilon(4S)$. 
+
+Rispetto al suo predecessore KEKB, l'attuale acceleratore ha permesso di ottenere il primato di luminosità mai raggiunta, pari a ......, utilizzando uno schema differente nell'accelerazione e scontro dei fasci, attraverso alcune migliorìe e aggiunte nelle componenti fondamentali dell'acceleratore stesso.
+
+\begin{figure}
+\includegraphics{SuperKEKB}
+\caption{L'acceleratore SuperKEKB nel 2021. Le lettere V ed H indicano rispettivamente i collimatori verticali ed orizzontali. Ciascun anello è diviso in 12 sezioni, dalla prima chiamata D01 fino al'ultima D12.}
+\label{fig:superkekb}
+\end{figure}
+
+
+(Andiamo attraverso le sue principali caratteristiche)
+%%struttura meccanica(lunghezza, fasci, etc...)
+\end{comment}
+
+\subsection{Luminosità}
+
+\begin{comment}
+Uno dei parametri cardine di un acceleratore è la luminosità, che rappresenta il rate di interazione per unità di sezione d'urto tra particelle che collidono:
+
+\begin{equation}
+L =\frac{1}{\sigma}\frac{dN}{dt} 
+\end{eqaution}
+
+da cui, invertendo la relazione per ricavare N, cioè il numero degli eventi fisici osservabili, si ottiene:
+
+\begin{equation}
+N = \int_{0}^{T} L\sigma dt
+\end{equation}
+
+dove T è la durata dell'esperimento, $\sigma$ la sezione d'urto del processo fisico d'interesse.
+In generale la luminosità è strettamente dipendente dai parametri di macchina dell'acceleratore e dalle caratteristiche del fascio. Può essere espressa come:
+
+\begin{equation}
+L = ..................
+\end{equation}
+
+dove ......
+
+L'attuale record mondiale detenuto da SuperKEKB è di 3.8$\dot 10^{34}$ $cm^{-2} s^{-1}$ con $\beta^{*}_{y}$= 1.0 mm. Il target nei prossimi anni è quello di raggiungere un picco di luminosità pari a 6.3 $\dot 10^{35}$ $cm^{-2} s^{-1}$, possibile aumentando le correnti dei fasci e riducendo la sezione degli stesi nel Punto d'Interazione (IP), strizzando la funzione di betatrone fino a un valore $\beta^{*}_{y}$= 0.3 mm.
+La gestione del background dei fasci diventa una questione fondamentale in questo ambito, sia per raggiungere il target, sia per affinare le misure di fisica possibili. 
+
+Attualmente si stima che il background dovrebbe rimanere accettabile fino ad una luminosità di 2,8$\dot 10^{35}$ $cm^{-2} s^{-1}$ con $\beta^{*}_{y}$= 0.6 mm. 
+%METTI REFERENZA '' Beam bkg expectation (A)''
+
+Come vedremo, la possibilità di raggiungere picchi più elevati di luminosità è strettamente legata a un piano di upgrade del rivelatore e di alcune componenti dell'acceleratore stesso.
+
+\end{comment}
+
+
+\subsection{Energia dei fasci}
+
+\begin{comment}
+
+L'energia dei fasci è determinata dal programma di fisica interessante per l'esperimento. Attualmente SuperKEKB collide un fascio di elettroni di energia pari a 7 GeV (High Energy Ring, HER) con un fascio di positroni a 4 GeV (Low Energy Ring, LER), ottendendo un'energia nel centro di massa piccata alla risonanza $\Upsilon$(4S). 
+Anche la scelta di utilizzare fasci asimmetrici in energia (come già il suo predecessore KEKB, che collideva fasci di elettroni a 8 GeV con fasci di positroni a 3.5 GeV) è necessaria per identificare e misurare i vertici di decadimento delle particelle create nella collisione. Questo meccanismo permette infatti di dare ai prodotti un boost, migliorando la ricostruzione dei vertici e quindi incrementando la sensibilità alle misure di fisica??????????????????????
+%%VEDI COME E' NECESSARIO NELLE MISURE DI FISICA
+
+In figura \vref{beame} è mostrata la flessibilità dell'energia di entrambi i fasci LER e HER. Il range possibile copre energie dalla $\Upsilon$(1S) alla $\Upsilon$(6S), con picco corrispondente a 11.24 GeV. 
+
+\begin{figure}
+\includegraphics{beam_energy}
+\caption{Nenergie dei fasci per raggiungere energie nel centro di massa pari a $\Upsilon$(4S), $\Upsilon$(6S),11.24 GeV e 12 GeV. L'asse orizzontale rappresenta l'energia del LER e quella verticale del HER. }
+\label{fig:beame}
+\end{figure}
+
+\end{comment}
+
+\subsection{Schema ''Nano-beam''}
+
+\begin{comment}
+Come accennato nei paragrafi precedenti, un elemento chiave per definire la luminosità è la funzione beta $\beta$ nel PI. Per poter aumentare la luminosità è necessario diminuire il valore di $\beta$ compatibilmente con la variazione di tutti gli altri parametri di macchina e non, che rientrano nella sua definizione. 
+In particolare, lo schema dei fasci utilizzato in SuperKEKB è chiamato \textit{nano-beam scheme}, e ha permesso di ottenere una luminosità 40 volte maggiore di quella del predecessore KEKB (che ha operato dal....al 2011), riuscendo a ridurre di 1/20 la funzione $\beta$ nel PI. 
+
+Questo nuovo schema, ideato da P. Raimondi, prevede che i fasci collidano a grande angolo, in SuperKEKB pari a 83 mrad, (mantenendo i fasci separati tramite quadrupoli magnetici) per poter ridurre l'hourglass effect, che subentra per bunch di particelle molto lunghi all'interno del fascio. (Vediamo i parametri fondamentali che influenzano la scelta.)
+L'area di sovrapposizione dei fasci è localizzata e la sua lunghezza è data da:
+
+\begin{equation}
+d = \frac{\sigma_{x}^{*}}{sin\phi_{x}}
+\end{equation}
+
+con $\phi_{x}$ definito come metà dell'angolo di crossing. La lunghezza di overlap d, rappresenta la vera lunghezza del bunch da considerare nella ``valutazione'' dell'effetto clessidra, ed è più piccola dell'effettiva lunghezza del bunch lungo la direzione dell'asse del fascio. Per ridurre l'effetto clessidra, è necessario avere:
+
+\begin{equation}
+\beta_{y}^{*} \geq d = \frac{\sigma_{x}^{*}}{sin\phi_{x}}
+\end{equation}
+
+Dunque per aumentare la funzione $\beta$ nel PI, è necessario diminuire il valore di d, facendo decrescere la sezione orizzontale nel PI e aumentando l'angolo di crossing.
+Utilizzare un angolo di crossing abbastanza grande, ha altre implicazioni positive sul funzionamento dell'acceleratore:
+
+\begin{item}
+\item permettel'installazione di un nuovo sistema di focusing nel PI con un quadrupolo magnetico superconduttore;
+\item permette di avere due linee separate che ospitano i fasci HER e LER;
+\item diminuisce l'effetto dei ''fringe fields'' nel PI, che sono residui dei magneti nelle vicinanze. 
+\end{item}
+
+%%%%%% CRAB WAIS COLLISION SCHEME
+In figura \ref{fig:beampar} si riportano i parametri di macchina (default) dell'acceleratore SuperKEKB.
+
+\begin{equation}
+\includegraphics{beam_par}
+\caption{Parametri di macchina di SuperKEKB. Il simbolo ''*'' indica i valori nel PI.}
+\label{fig:beampar}
+\end{equation}
+
+%PARLARE DELLA COSA ORIZZONTALE???
+
+\end{comment}
+
+
+\begin{comment}
+\subsection{Cromaticità e correzioni ottiche}
+%SECONDO ME NO
+\end{comment}
+
+\subsection{Iniezione}
+%BHO
+
+\subsection{Alcune ulteriori modifiche rispetto a KEKB}
+
+\begin{comment}
+
+L'upgrade da KEKB a SuperKEKB, come in parte visto, ha richiesto importanti cambiamenti nei fasci e nello schema di collisione, tutto volto a raggiungere nuove vette di luimnosità. Altre fondamentali modifiche sono state fatte lungo l'anello di collisione, tra cui:
+
+\begin{item}
+\item rifacimento della regione d'interazione, che comprende 4 m intorno al PI, in modo da poter ospitare il nuovo detector Belle II, il sistema di focusing finale dei fasci e le due beam pipes;
+\item il sistema a radiofrequenza è stato modificato per permettere una corrente maggiore dei fasci;
+\item l'aggiunta di alcuni collimatori lungo entrambi gli anelli (11 nel LER  e 20 nel HER) per poter limitare il danno da radiazione sul rivelatore e i ''quenches'' dei magneti superconduttori, cioè un surriscaldamento dei suoi avvolgimenti che genericamente causa la perdità della superconduttività, dissipando la corrente circolante.
+\item anche il sistema di vuoto è stato migliorato per limitare alcuni effetti collegati alla perdita di potenza del fascio, allungando quindi la vita media del fascio stesso.
+\end{item}
+
+\end{comment}
+
+
+\subsection{Sistemi di monitoraggio del background}
+%% Per le sorgenti di rumore si rimanda al capitolo 2 o lo metti nel capitolo 2?
+
+\begin{comment}
+Il background è una delle principali problematiche di un rivelatore, sia per le misure di precisione di fisica, sia per le performance dei vari strati rivelatori di cui è formato Belle II.
+A tal ragione, vengono utilizzati diversi rivelatori per poter avere misure della dose di radiazione sia sul rivelatore che su zone delicate dell'acceleratore, per poter intervenire quanto prima in caso di livelli troppo elevati. Grandi dosi di radiazione infatti, posso causare danni accidentali sul rivelatore, diminuendone le performance.??????????????????????
+Tra i principali (?) ci sono:
+
+\begin{itemize}
+\item Detector di diamante (chiamati ''Diamanti'') che monitorano il rate della dose di radiazione nella zona d'interazione della beam pipe. Questi rientrano anche nel ''fast beam abort system'', cioè un sistema di controllo che considera dati di diversi detector per poter valutare lo ''spegnimento'' dei fasci, per evitare che situazioni fuori controllo arrechino danni a tutta la struttura.
+\item il CLAWS (sCintillation Light And Waveform Sensors), formato da scintillatori di materiale plastico e fotomoltiplicatori di silicio, usato per monitorare il background di Belle II in corrispondenza dell'iniezione del fascio (nell'anello principale). Con i diamanti fa parte della logica del sistema di aborto del fascio.
+\item TPC's (Time Projection Chambers) che fornisce misure sulla direzione del flusso dei neutroni nel tunnel che ospita l'acceleratore.
+\item Tubi di $He^{3}$ per il conteggio dei neutroni termici (con energie cinetiche inferiori a 1/10 di eV, generalmente intorno a 0.025 eV) intorno al rivelatore Belle II.
+\end{itemize}
+
+\end{comment}
+%---------------------------------------------
+%			1.3
+%---------------------------------------------
+\section{Il rivelatore Belle II}
+%\addcontentsline{toc}{section}{Il rivelatore Belle II}
+
+\begin{comment}
+Il rivelatore Belle II è uno spettrometro di particelle general-purpose, ottimizzato nelle misure di precisione dei mesoni B e dei loro prodotti di decadimento. Rispetto al suo predecessore Belle, deve riuscire a mantenere buone performance, pur avendo un minore boost nel centro di masse e nonostante sia sottoposto a maggiori livelli di background e quindi di radiazione, che sono la principale causa di una prematura degradazione delle prestazioni e della vita media del rivelatore stesso.
+
+Belle II consiste in una serie di sottorivelatori annidiati, che circondano il PI dei due fasci, posti intorno alla beam pipe di berillio di 1cm di raggio.
+
+\end{comment}
+
+\subsection{Vertex Detector (VXD)}
+
+\subsection{Central Drift Chamber (CDC)}
+
+\subsection{Particle identification system (TOP e ARICH)}
+
+\subsection{Calorimetro elettromagnetico (ECL)}
+
+\subsection{$K_{L}$ muon detector (KLM)}
+
+\subsection{Sistema di trigger}
+
+
+%---------------------------------------------
+%			1.4
+%---------------------------------------------
+\section{Stato attuale e prospettive delle prese dati}
+%\addcontentsline{toc}{section}{Stato attuale e prospettive delle prese dati}
+
+%%%% 	Luminosità raggiunte e statistica?
+%%Belle II online luminosity & record luminosità istantanea
+%% doev si vuole arrivare 50 abinv e come??
+%% cose achved nelle previsioni parametri di macchina dell'articolo B
+
+%ARTICOLO B: there are two major upgrades of the machine plannd in the next ten years:....
+
+
+% --------------------------------------------
+%		CAPITOLO 2 
+%---------------------------------------------
+\chapter{Upgrade di Belle II}
+%\addcontentsline{toc}{chapter}{Upgrade di Belle II}
+
+%---------------------------------------------
+%			2.1
+%---------------------------------------------
+\section{Sorgenti di background e limitazioni di Belle II}
+%\addcontentsline{toc}{section}{Sorgenti di background e limitazioni di Belle II}
+
+\subsection{Effetto Touschek}
+
+\subsection{Beam-gas scattering}
+
+\subsection{Radiative Bhabha scattering e processi a due fotoni}
+
+\subsection{Radiazione di sincrotrone (SR)}
+
+\subsection{Instabilità ''Head-tail''}
+
+\subsection{Stato attuale del background e implicazioni future}
+
+
+%---------------------------------------------
+%			2.2
+%---------------------------------------------
+\section{Motivazioni per l'upgrade}
+%\addcontentsline{toc}{section}{Motivazioni per l'upgrade}
+
+%% Incremento del background per raggiungere elevate luminosità
+%% Degradazione dei componenti del rivelatore
+%% Occupancy e radiation hardness
+%% Riduzione del materiale interposto (dei rivelatori) per permettere maggiore risoluzione a bassi impulsi
+
+
+
+%---------------------------------------------
+%			2.3
+%---------------------------------------------
+\section{Sommario di possibili upgrade}
+%\addcontentsline{toc}{section}{Sommario di possibili upgrade}
+
+\subsection{DEPFET}
+
+\subsection{Thin sensor}
+
+\subsection{CMOS MAPS}
+
+\subsection{SOI}
+
+
+% --------------------------------------------
+%		CAPITOLO 3 
+%---------------------------------------------
+\chapter{Il rivelatore VTX}
+%\addcontentsline{toc}{chapter}{Il rivelatore VTX}
+
+
+%---------------------------------------------
+%			3.1
+%---------------------------------------------
+\section{Layout del rivelatore VTX}
+%\addcontentsline{toc}{section}{Layout del rivelatore VTX}
+
+\subsection{iVTX}
+
+\subsection{oVTX}
+
+
+%---------------------------------------------
+%			3.2
+%---------------------------------------------
+\section{Simulazioni di performance}
+%\addcontentsline{toc}{section}{Simulazioni di performance}
+
+
+%---------------------------------------------
+%			3.3
+%---------------------------------------------
+\section{Caratteristiche chip sensore}
+%\addcontentsline{toc}{section}{Caratteristiche chip sensore}
+
+%% OBELIX
+
+
+%---------------------------------------------
+%			3.4
+%---------------------------------------------
+\section{Struttura meccanica}
+%\addcontentsline{toc}{section}{Struttura meccanica}
+
+%% Struttura Layer
+%% Sistema di cooling 
+%% Connessioni?
+
+
+% --------------------------------------------
+%		CAPITOLO 4
+%---------------------------------------------
+\chapter{Sensori CMOS MAPS}
+%\addcontentsline{toc}{chapter}{Sensori CMOS MAPS}
+
+
+\section{Rivelatori a semiconduttore}
+%\addcontentsline{toc}{section}{Rivelatori a semiconduttore}
+
+\section{Sensori a pixel monolitici/ibridi}
+%\addcontentsline{toc}{section}{Sensori a pixel monolitici/ibridi}
+
+\section{Tecnologia CMOS MAPS}
+%\addcontentsline{toc}{section}{Tecnologia CMOS MAPS}
+
+\begin{comment}
+small fill factor /large fill factor
+\end{comment}
+
+\section{Storia degli sviluppi di Monopix}
+%\addcontentsline{toc}{section}{Storia degli sviluppi di Monopix}
+
+
+
+% --------------------------------------------
+%		CAPITOLO 5
+%---------------------------------------------
+
+\chapter{Caratterizzazione di TJ-Monopix 2}
+%\addcontentsline{toc}{chapter}{Caratterizzazione di TJ-Monopix 2}
+
+\section{Matrice e flavor}
+
+\subsection{Funzionamento della maschera per i pixel rumorosi}
+
+\subsection{Readout analogico e digitale}
+
+\subsubsection{Reset del BCID}
+\begin{comment}
+REFERENZE
+\end{comment}
+
+\subsubsection{Registri principali (e conversioni?)}
+
+\subsection{Confronto degli andamenti con le simulazioni}
+%\addcontentsline{toc}{subsection}{Confronto degli andamenti con le simulazioni}
+
+
+\section{Caratterizzazione tramite l'iniezione}
+%\addcontentsline{toc}{section}{Caratterizzazione tramite l'iniezione}
+
+\begin{comment}
+Nel prototipo sotto studio, il chip W14R12, si sono rilevate fin da subito alcune problematiche legate ai pixel della matrice, sia per quel che riguarda la parte analogica che quella digitale.
+In particolare, a differenza del suo predecessore TJ-Monopix1, TJ-Monopix2 è equipaggiato da un circuito che permette il \textit{tuning della threshold}, ossia di correggere, anche se di pochi DAC, la threshold di ciascun pixel, in modo da avere una threshold globale più uniforme possibile, o comunque con una dispersione piccola quanto possibile.
+
+Preliminarmente però, è necessario studiare la distribuzione della threshold su tutta la matrice e noi abbiamo analizzato separatamente i 4 flavor, per poter anche studiare le loro principali differenze di funzionamento e performance.
+
+Il fine ultimo di questa misura, è anche quello di riuscire a caratterizzare il comportamento di ciascun pixel, ad una carica iniettata equivalente all'energia tipica rilasciata dagli elettroni emessi dal decadimento di materiali radioattivi, e in particolare quelli dovuti alla cattura elettronica nel \ch{^55Fe}, le cui linee di emissione sono abbastanza piccate da permettere poi di confrontare i dati più facilmente. Come spiegato meglio nel paragrafo (?????), il \ch{^55Fe} ha una prima linea di emissione a  5.9 KeV che corrisponde in media all'incirca a 1616 $e^{-}$ generati (nel pixel?). Per questa ragione, nelle misure di iniezione è necessario, in base ai valori di conversione tra DAC ed $e^{-}$ SCRIVI, arrivare ad iniettare cariche in modo da studiare il comportamento dei pixel in queste regioni maggiormente interessanti. 
+\end{comment}
+
+%------------------------------------------------------------
+\subsection{Problema nel circuito di iniezione}
+
+\begin{comment}
+Nel portare avanti le misure suddette, ci si è accorti di un problema nel circuito di iniezione che ne limita il range di funzionamento: l'altezza dell'impulso di iniezione infatti, cresce linearmente come aspettato fino ad un valore di $\approx$ 140 DAC, ma al al di sopra di questo valore, il circuito non solo aumenta di poco l'altezza del segnale, ma aumenta artificialmente anche il valore della threshold di un certo $\Delta V$ (o equivalentemente $\Delta Q$, collegati dal fattore di conversione in....).
+Inoltre, per altezze dell'impulso di iniezione superiori a 200 DAC, solo il valore della threshold viene aumentato, senza però incrementare in alcun modo l'effettiva carica iniettata.
+
+Per questa problematica, la caratterizzazione della threshold e della sua dispersione su tutti i flavor della matrice, ha richiesto una serie di misure ulteriori.
+\end{comment}
+
+%-------------------------------------------------------
+\subsection{Misura dello shift medio sul valore di threshold per cariche iniettate superiori a 140 DAC}
+
+\begin{comment}
+Per poter valutare dunque questo shift artificiale sul valore della threshold, per ogni flavor della matrice abbiamo effettuato due misure della threshold e sua dispersione separate:
+
+\begin{itemize}
+\item per carica iniettata pari a 140 DAC $\rightarrow$ prima della regione di saturazione;
+\item per carica iniettata pari a 200 DAC $\rightarrow$ limite massimo della ragione di saturazione (da questo valore in poi, aumenta solo la threshold, non la carica effettivamente iniettata).
+\end{itemize}
+
+Per ognuna di queste misure, è stata fittata la distribuzione della threshold per poter ottenere un valore medio sull'intero flavor, e chiamando $\Q_{th, 140}$ e $\Q_{th, 200}$  rispettivamente i valori di threshold ottenuti per iniezione a 140 e 200 DAC, è stato stimato lo shift medio come:
+
+\begin{equation}
+\Delta Q = Q_{th,200} - Q_{th,140}
+\end{equation}
+
+Infine, ai dati ottenuti per impulsi di iniezioni di 200 DAC, è stato sottratto questo valore di carica, per poter estrapolare fino a un valore di 170 DAC effettivo, il comportamento dei pixel iniettati.
+
+Si riporta nelle sezioni successive quanto ottenuto per ciascun flavor della matrice, con il metodo utilizzato per poter stimare la threshold.
+
+\end{comment}
+
+%--------------------------------------------------------------------
+\subsection{Curva S e threshold}
+%\addcontentsline{toc}{subsection}{Curva S e threshold}
+
+\begin{comment}
+Per poter ottenere il valore della threshold per ogni pixel, ciascuno di essi deve essere iniettato un numero arbitrario di volte (noi abbiamo scelto 100), per ogni valore di impulso di iniezione compreso tra un valore minimo, scelto settando il registro del chip ''\textbf{VL}'' e un valore massimo, per mezzo del registro ''\textbf{VH}'', con step a scelta da noi settato a 1.
+Fissato il valore dell'impulso di iniezione, si considera la media dei 100 output ottenuti. Così facendo, per ogni pixel, si ottiene la tipica curva nota come ''\textit{S-curve}'', che matematicamente è una error function (?) e da cui si stima il valore della threshold, prendendo il valore di carica iniettata per la quale la curva è a metà della sua altezza massima. Plottando il numero di hit rilevate su ciascun pixel diviso il numero totale, per ogni valore di carica iniettata, la metà altezza corrisponde al valore di carica per la quale il pixel rileva 50 hit su 100 totali iniettate e cioè ha un'occupancy di 0.50.
+
+SPIEGARE METODO DI LUDOVICO????
+
+METTI FIGURA
+\begin{figure}
+\centering
+\includegraphics[]{}
+\caption{Esempio di S-curve e stima della threshold}
+\label{ex_scurve}
+\end{figure}
+
+\end{comment}
+
+\subsubsection{Normal FE}
+
+\begin{comment}
+
+Come spiegato in sezione (.........METTI) il primo flavor della matrice è il \textbf{Normal}, che comprende 512 righe (0-511) e 224 colonne (0-223) per un totale di 114.688 pixel.
+In figura (...) sono plottate tutte le s-curve dei pixel del primo flavor. I registri del chip sono stati settati con gli stessi valori utilizzati durante il Test Beam a Desy che sono riportati in seguito:
+
+COLORAAAAAAAA
+
+\begin{table}
+\centering
+\begin{tabular}{c|c}
+Registri & Default Settings (''GOE'') \\
+\hline
+ITHR & 64 \\
+\hline
+IBIAS & 50 \\
+\hline
+VRESET & 143 \\
+\hline
+ICASN & 0 \\
+\hline
+VCASP & 93 \\
+\hline
+VCASC & 228 \\
+\hline
+IDB & 100 \\
+\hline
+ITUNE & 53 \\
+\hline
+VCLIP & 255 \\
+\hline
+ICOMP & 80 \\
+\hline
+IDEL & 88 \\
+\hline
+IRAM & 50 \\
+\hline
+\end{tabular}
+\caption{Settings dei principali registri utilizzati per il chip W14R12, flavors Normal e Cascode, durante il Test Beam a Desy.}
+\label{tb_settings}
+\end{table}
+
+\begin{figure}
+\centering
+\includegraphics[scale=.6]{all_norm_thscan_140}
+\caption{S-curves di tutti i pixel del flavor Normal della matrice con un impulso di iniezione di 140 DAC.}
+\label{norm_scurve_140}
+\end{figure}
+
+Utilizzando questi valori, nessun pixel di questo flavor è risultato rumoroso e dunque non è stato necessario utilizzare alcuna maschera.
+
+Come spiegato nella sezione (....) sono state fittate le distribuzioni delle threshold ottenute in due misure separate con un impulso di iniezione rispettivamente di 140 DAC e 200 DAC, mostrate in figura (...).
+
+\begin{figure}
+\centering
+\subfigure[VH = 140 DAC]
+{\includegraphics[scale=0.6]{all_norm_thdist_140}}\quad
+\subfigure[VH = 200 DAC]
+{\includegraphics[scale=0.6{all_norm_thdist_200}}\\
+\caption{Distribuzioni delle threshold prima della saturazione e alla saturazione massima.}
+\label{thdist_norm}
+\end{figure}
+
+
+\end{comment}
+
+\subsubsection{Cascode FE}
+
+\begin{comment}
+
+Il secondo flavor \textbf{Cascode} comprende 512 righe (0-511) e 224 colonne (224-447) anch'esso per un totale di 114.688 pixel. Anche per queste misure sono stati utilizzati come valori dei registri quelli del TB@Desy riportati in tabella (riferimento) e anche qui non sono stati identificati pixel rumorosi.
+In figura (...) le S-curves di tutti i pixel.
+
+\begin{figure}
+\centering
+\includegraphics[scale=.6]{all_casc_thscan_140}
+\caption{S-curves di tutti i pixel del flavor Cascode della matrice con un impulso di iniezione di 140 DAC.}
+\label{casc_scurve_140}
+\end{figure}
+
+Anche qui sono state fittate le distribuzioni delle threshold, riportate in figura (...).
+
+
+\begin{figure}
+\centering
+\subfigure[VH = 140 DAC]
+{\includegraphics[scale=0.6]{all_casc_thdist_140}}\quad
+\subfigure[VH = 200 DAC]
+{\includegraphics[scale=0.6{all_casc_thdist_200}}\\
+\caption{Distribuzioni delle threshold prima della saturazione e alla saturazione massima.}
+\label{thdist_casc}
+\end{figure}
+
+\end{comment}
+
+
+\subsubsection{HV-Cascode FE}
+
+\begin{comment}
+
+Il terzo flavor \textbf{HV-Cascode} comprende 512 righe (0-511) per 32 colonne (448 -479) per un totale di 16384 pixel. Anche per questi ultimi due flavor HV, sono stati settati particolari valori dei registri, il cui funzionamento è stato studiato durante il Test Beam a Desy. Sono riportati nella tabella(ref).
+
+\begin{table}
+\centering
+\begin{tabular}{c|c}
+Registri & Default Settings (''GOE'') \\
+\hline
+ITHR & 30 \\
+\hline
+IBIAS & 60 \\
+\hline
+VRESET & 100 \\
+\hline
+ICASN & 8 \\
+\hline
+VCASP & 40 \\
+\hline
+VCASC & 228 \\
+\hline
+IDB & 100 \\
+\hline
+ITUNE & 53 \\
+\hline
+VCLIP & 255 \\
+\hline
+ICOMP & 80 \\
+\hline
+IDEL & 88 \\
+\hline
+IRAM & 50 \\
+\hline
+\end{tabular}
+\caption{Settings dei principali registri utilizzati per il chip W14R12, flavors HV's durante il Test Beam a Desy.}
+\label{tb_hv_settings}
+\end{table}
+
+Come visibile dalle S-Curves su tutta la regione interessata, con questa scelta dei parametri vi erano molti pixel rumorosi, che in questa fase delle misure, non sono stati mascherati.
+
+\begin{figure}
+\centering
+\includegraphics[scale=.6]{all_HVc_thscan_140}
+\caption{S-curves di tutti i pixel del flavor HV Cascode della matrice con un impulso di iniezione di 140 DAC.}
+\label{hvc_scurve_140}
+\end{figure}
+
+
+Di seguito in figura (ref), i fit delle distribuzioni delle threshold per i due diversi impulsi di iniezione.
+
+\begin{figure}
+\centering
+\subfigure[VH = 140 DAC]
+{\includegraphics[scale=0.6]{all_HVc_thdist_140}}\quad
+\subfigure[VH = 200 DAC]
+{\includegraphics[scale=0.6{all_HVc_thdist_200}}\\
+\caption{Distribuzioni delle threshold prima della saturazione e alla saturazione massima.}
+\label{thdist_hvc}
+\end{figure}
+
+\end{comment}
+
+\subsubsection{HV-Normal FE}
+
+\begin{comment}
+Il quarto ed ultimo flavor \textbf{HV-Normal} comprende 512 righe (0-511) per 32 colonne (448 -479) per un totale di 16384 pixel. Anche qui i registri sono stati settati ai valori riportati in tabella (ref). Di seguito in figura (ref), la S-curve su tutti i pixel e anche qui possiamo vedere diverso rumore a pixel noisy, non mascherati. In quest'ultimo flavor inoltre, le ultime 16 colonne non erano funzionanti, queste hanno restituito un picco di threshold a zero che è stato escluso dal plot della distribuzione delle threshold. Dunque in realtà in quest'ultimo pezzo della matrice, i pixel studiati sono stati la metà, ossia 8192.
+
+\begin{figure}
+\centering
+\includegraphics[scale=.6]{all_HV_thscan_140}
+\caption{S-curves di tutti i pixel del flavor HV Cascode della matrice con un impulso di iniezione di 140 DAC.}
+\label{hv_scurve_140}
+\end{figure}
+
+
+Di seguito in figura (ref), i fit delle distribuzioni delle threshold per i due diversi impulsi di iniezione.
+
+\begin{figure}
+\centering
+\subfigure[VH = 140 DAC]
+{\includegraphics[scale=0.6]{all_HV_thdist_140}}\quad
+\subfigure[VH = 200 DAC]
+{\includegraphics[scale=0.6{all_HV_thdist_200}}\\
+\caption{Distribuzioni delle threshold prima della saturazione e alla saturazione massima.}
+\label{thdist_hvc}
+\end{figure}
+
+
+
+\end{comment}
+
+
+\subsection{Noise and Equivalent Noise Charge (ENC)}
+%\addcontentsline{toc}{subsection}{Noise and Equivalent Noise Charge (ENC)}
+
+\subsection{Curve del Time Over Threshold (TOT) e fit}
+%\addcontentsline{toc}{subsection}{Curve del Time Over Threshold (TOT) e fit}
+
+\section{Caratterizzazione con le sorgenti radioattive}
+%\addcontentsline{toc}{section}{Caratterizzazione con le sorgenti radioattive}
+
+Fe55, Am241, Cd109, Sr190
+
+\subsection{Calibrazione della capacità di iniezione}
+%\addcontentsline{toc}{subsection}{Calibrazione della capacità di iniezione}
+
+
+% --------------------------------------------
+%		CONCLUSIONI 
+%---------------------------------------------
+\chapter{Conclusioni}
+%\addcontentsline{toc}{chapter}{Conclusioni}
+
+
+
+
+% --------------------------------------------
+%		INDICE 
+%---------------------------------------------
+%\index{Conclusioni}
+%\index{Pixel ibridi}
+%\index{Ibridizzazione}
+\printindex
+
+% --------------------------------------------
+%		BIBLIOGRAFIA 
+%---------------------------------------------
+
+% --------------------------------------------
+%		ACRONIMI
+%---------------------------------------------
+
+% --------------------------------------------
+%		LIST OF FIGURE AND TABLES 
+%---------------------------------------------
+
+\end{document}

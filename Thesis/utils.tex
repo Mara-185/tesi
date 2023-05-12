@@ -1,0 +1,35 @@
+\usepackage[T1]{fontenc}
+\usepackage[italian,english]{babel}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage[printonlyused,withpage]{acronym}
+\usepackage{hyperref}
+\usepackage{frontespizio}
+\usepackage{imakeidx}
+\usepackage{comment}
+\usepackage{xcolor}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{chemformula}
+%[display]
+
+\titleformat{\chapter}%
+  {\normalfont\bfseries\huge}{\thechapter.}{10pt}{}
+
+% Cartelle da cui recuperare le immagini
+\graphicspath{{immagini/}, {grafici/}}
+
+%Indice
+\makeindex
+
+%Indice dei contenuti
+\hypersetup{
+    colorlinks = false,
+    allbordercolors = {white}
+}
+
+%Numerazione subsubsection
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+
