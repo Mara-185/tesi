@@ -132,4 +132,4 @@ dmypy.json
 *.root
 
 # h5 stuff
-Analisi/*.h5
+Analisi/W14R12/threshold_scan/all_casc/140/20221003_115355_threshold_scan_interpreted.h5
