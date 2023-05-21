@@ -311,27 +311,42 @@ def main(input_file, overwrite=False):
 
         ############ OCCUPANCY (28, 512, 198)
         # Save some data
+        #thresholds
         threshold_data = np.full((512, 512), np.nan)
         threshold_data[col_start:col_stop,row_start:row_stop] = threshold_DAC
+
+        #noise
         noise_data = np.full((512, 512), np.nan)
         noise_data[col_start:col_stop,row_start:row_stop] = noise_DAC
-        # tot_data = np.full((198,128,), np.nan)
-        # tot_data = hist_t
+
+        #columns
+        col_data = np.full((2,1), np.nan)
+        col_data[0]=col_start
+        col_data[1]=col_stop
+
+        #tot
+        #print(tot_hist[2][70:140,0:25])
+        # tot_data = np.full((charge_dac_bins,128), np.nan)
+        # tot_data[col_start:col_stop,row_start:row_stop,:,:]= tot_hist[1]
+
+        #occupancy
+        occupancy_data = np.full((512, 512, charge_dac_bins),np.nan)
+        occupancy_data[col_start:col_stop,row_start:row_stop,:] = occupancy
+
         np.savez_compressed(
             os.path.splitext(output_file)[0] + ".npz",
             thresholds=threshold_data,
             noise=noise_data,
-            col_s = col_start,
-            col_st = col_stop,
+            col=col_data,
             charge_edges = occupancy_edges[2],
-            tot = tot_hist,
-            occup = occupancy)
+            tot = tot_hist[2],
+            occup = occupancy_data)
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument(
-        "input_file", nargs="*",
+    parser.add_argument("-i",
+        "--input_file", nargs="*",
         help="The _threshold_scan_interpreted.h5 file(s)."
              " If not given, looks in output_data/module_0/chip_0.")
     parser.add_argument("-f", "--overwrite", action="store_true",
@@ -339,11 +354,27 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     files = []
-    if args.input_file:  # If anything was given on the command line
+
+    if args.input_file[0]=="all":
+        files.extend(glob.glob("*_threshold_scan_interpreted.h5"))
+    else:
         for pattern in args.input_file:
             files.extend(glob.glob(pattern, recursive=True))
-    else:
-        files.extend(glob.glob("output_data/module_0/chip_0/*_threshold_scan_interpreted.h5"))
+
+
+    # if args.input_file:  # If anything was given on the command line
+    #     for pattern in args.input_file:
+    #         files.extend(glob.glob(pattern, recursive=True))
+    # elif not args.input_file:
+    #     files.extend(glob.glob("output_data/module_0/chip_0/*_threshold_scan_interpreted.h5"))
+
+    # if not args.input_file:  # If anything was given on the command line
+    #     files.extend(glob.glob("output_data/module_0/chip_0/*_threshold_scan_interpreted.h5"))
+    #     print(files)
+    # else:
+    #     for pattern in args.input_file:
+    #         files.extend(glob.glob(pattern, recursive=True))
+
     files.sort()
 
     for fp in tqdm(files, unit="file"):

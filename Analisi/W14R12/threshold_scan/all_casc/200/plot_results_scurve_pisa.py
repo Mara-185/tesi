@@ -15,8 +15,17 @@ from uncertainties import ufloat
 from plot_utils_pisa import *
 from scipy.optimize import curve_fit
 
+import warnings
+
 VIRIDIS_WHITE_UNDER = matplotlib.cm.get_cmap('viridis').copy()
 VIRIDIS_WHITE_UNDER.set_under('w')
+
+#@np.errstate(all='ignore')
+# def my_mean(a):
+#     # I expect to see RuntimeWarnings in this block
+#     with warnings.catch_warnings():
+#         warnings.simplefilter("ignore", category=RuntimeWarning)
+#         return np.mean(a)
 
 
 def main(input_file, overwrite=False):
@@ -248,7 +257,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     files = []
-    print(args.input_file)
+    #print(args.input_file)
     if args.input_file[0]=="all":
         files.extend(glob.glob("*_threshold_scan_interpreted_scurve.npz"))
     else:
@@ -263,26 +272,27 @@ if __name__ == "__main__":
 
     files.sort()
 
-    tot = np.full((5,198,128), np.nan)
-    occupancy = np.full((512,512,198),np.nan)
-    #charge_dac_edges =
+    tot = np.zeros((198,128))
+    occupancy_npz = np.full((512,512,198),np.nan)
+
     # Load results from NPZ files
     thresholds = np.full((512, 512), np.nan)
     noise = np.full((512, 512), np.nan)
-    col_start = np.full((1,8),np.nan)
-    col_stop = np.full((1,8),np.nan)
+
+
+    #print(np.nonzero(tot))
 
 
     for i,fp in enumerate(tqdm(files, unit="file")):
         with np.load(fp) as data:
-            print(data['thresholds'])
+            charge_dac_edges = np.full((len(data["charge_edges"])),np.nan)
+
             overwritten = (~np.isnan(thresholds)) & (~np.isnan(data['thresholds']))
             n_overwritten = np.count_nonzero(overwritten)
             if n_overwritten:
                 print("WARNING Multiple values of threshold for the same pixel(s)")
                 print(f"    count={n_overwritten}, file={fp}")
             thresholds = np.where(np.isnan(thresholds), data['thresholds'], thresholds)
-            print(data['thresholds'])
 
             overwritten = (~np.isnan(noise)) & (~np.isnan(data['noise']))
             n_overwritten = np.count_nonzero(overwritten)
@@ -291,16 +301,38 @@ if __name__ == "__main__":
                 print(f"    count={n_overwritten}, file={fp}")
             noise = np.where(np.isnan(noise), data['noise'], noise)
 
-            # col_start[i] = data["col_s"]
-            # col_stop[i] = data["col_st"]
+            overwritten = (~np.isnan(charge_dac_edges)) & (~np.isnan(data['charge_edges']))
+            n_overwritten = np.count_nonzero(overwritten)
+            if n_overwritten:
+                print("WARNING Multiple values of threshold for the same pixel(s)")
+                print(f"    count={n_overwritten}, file={fp}")
+            charge_dac_edges = np.where(np.isnan(charge_dac_edges), data['charge_edges'], charge_dac_edges)
+            #print(charge_dac_edges)
 
-            charge_dac_edges = data["charge_edges"]
-            tot= data["tot"]
-            occupancy = data["occup"]
+            col = data['col']
+            #print(col)
+
+            tot+= data["tot"]
+            #print(tot[60:100,0:20])
+            #print(tot.shape)
+
+            #occupancy_npz = data["occup"]
+            # print(occupancy.shape)
+            # print(occupancy[200:230,230:240,150])
+
+            overwritten = (~np.isnan(occupancy_npz)) & (~np.isnan(data['occup']))
+            n_overwritten = np.count_nonzero(overwritten)
+            if n_overwritten:
+                print("WARNING Multiple values of threshold for the same pixel(s)")
+                print(f"    count={n_overwritten}, file={fp}")
+            occupancy_npz = np.where(np.isnan(occupancy_npz), data['occup'], occupancy_npz)
+
+            # print(occupancy[230:240, 210:215,60:90])
 
 
-    global mean
-    mean =  np.zeros((4, 1), dtype="float")
+
+    global mean_b
+    mean_b =  np.zeros((4, 1), dtype="float")
     # Do the plotting
     with PdfPages(args.output_file) as pdf:
         plt.figure(figsize=(6.4, 4.8))
@@ -321,33 +353,12 @@ if __name__ == "__main__":
             # if fc >= col_stop[i] or lc < col_start[i]:
             #     continue
             th = thresholds[fc:lc+1,:]
-            print(th)
+            #print(th)
             th_mean = ufloat(np.mean(th[th>0]), np.std(th[th>0], ddof=1))
             th_m = np.mean(th[th>0])
             bin_height, bin_edge, _ = plt.hist(th.reshape(-1), bins=m2-m1, range=[m1, m2],
                      label=f"{name}", histtype='step', color=f"C{i}")
             entries = np.sum(bin_height)
-
-            #Fit
-            low = [0.1*entries,10, 0]
-            up = [0.3*entries+1, 200, 30]
-
-
-            bin_center = (bin_edge[:-1]+bin_edge[1:])/2
-            popt, pcov = curve_fit(gauss, bin_center, bin_height, p0 = [0.2*entries, th_m, 3], bounds=(low, up))
-            print(*popt)
-            mean[i] = popt[1]
-            perr = np.sqrt(np.diag(pcov))
-            print(*perr)
-            xb = np.arange(bin_edge[0], bin_edge[-1], 0.005)
-            plt.plot(xb, gauss(xb, *popt), "r-", label=f"fit {name}:\nmean={ufloat(round(popt[1], 3), round(perr[1],3))}\nsigma={ufloat(round(popt[2], 3), round(perr[2],3))}")
-            #Save results in a txt file
-            with open(f"th_fitresults[all {name}].txt", "w") as outf:
-                print("#A#mean#sigma:", file=outf)
-                print(*popt, file=outf)
-                print("#SA#Smean#Ssigma:", file=outf)
-                print(*perr, file=outf)
-
 
         plt.suptitle("Threshold distribution")
         plt.xlabel("Threshold [DAC]")
@@ -355,7 +366,73 @@ if __name__ == "__main__":
         set_integer_ticks(plt.gca().yaxis)
         plt.legend(loc="upper left", fontsize=9)
         plt.grid(axis='y')
-        pdf.savefig(); plt.clf()
+        pdf.savefig();plt.clf()
+
+            ##############################
+            ###########         MIO
+            ##############################
+
+        for i, (fc, lc, name) in enumerate(FRONTENDS):
+            # if fc >= col_stop[i] or lc < col_start[i]:
+            #     continue
+            th = thresholds[fc:lc+1,:]
+            #print(th)
+            th_mean = ufloat(np.mean(th[th>0]), np.std(th[th>0], ddof=1))
+            th_m = np.mean(th[th>0])
+            bin_height, bin_edge, _ = plt.hist(th.reshape(-1), bins=m2-m1, range=[m1, m2],
+                     label=f"{name}", histtype='step', color=f"C{i}")
+            entries = np.sum(bin_height)
+
+            if entries!=0:
+                plt.clf()
+
+                bin_height, bin_edge, _ = plt.hist(th.reshape(-1), bins=m2-m1, range=[m1, m2],
+                         label=f"{name}", histtype='step', color=f"C{i}")
+
+                #Fit
+                low = [0.1*entries,10, 0]
+                up = [0.3*entries+1, 200, 30]
+
+
+                bin_center = (bin_edge[:-1]+bin_edge[1:])/2
+                # print(bin_center)
+                # print(bin_height)
+                popt, pcov = curve_fit(gauss, bin_center, bin_height, p0 = [0.2*entries, th_m, 3], bounds=(low, up))
+                print(*popt)
+                mean_b[i] = popt[1]
+                perr = np.sqrt(np.diag(pcov))
+                print(*perr)
+                xb = np.arange(bin_edge[0], bin_edge[-1], 0.005)
+                plt.plot(xb, gauss(xb, *popt), "r-", label=f"fit {name}:\nmean={ufloat(round(popt[1], 3), round(perr[1],3))}\nsigma={ufloat(round(popt[2], 3), round(perr[2],3))}")
+                #Save results in a txt file
+                with open(f"th_fitresults[all {name}].txt", "w") as outf:
+                    print("#A#mean#sigma:", file=outf)
+                    print(*popt, file=outf)
+                    print("#SA#Smean#Ssigma:", file=outf)
+                    print(*perr, file=outf)
+
+                plt.suptitle("Threshold distribution")
+                plt.xlabel("Threshold [DAC]")
+                plt.ylabel("Pixels / bin")
+                set_integer_ticks(plt.gca().yaxis)
+                plt.legend(loc="upper left", fontsize=9)
+                plt.grid(axis='y')
+                pdf.savefig();
+
+                plt.xlim([60,120])
+                pdf.savefig()
+                plt.savefig(f"all_casc_thdisp_200.png")
+                plt.clf()
+
+
+        plt.clf()
+        # plt.suptitle("Threshold distribution")
+        # plt.xlabel("Threshold [DAC]")
+        # plt.ylabel("Pixels / bin")
+        # set_integer_ticks(plt.gca().yaxis)
+        # plt.legend(loc="upper left", fontsize=9)
+        # plt.grid(axis='y')
+
 
         # Threshold map
         plt.axes((0.125, 0.11, 0.775, 0.72))
@@ -377,7 +454,7 @@ if __name__ == "__main__":
             ns = noise[fc:lc+1,:]
             noise_mean = ufloat(np.mean(ns[ns>0]), np.std(ns[ns>0], ddof=1))
             plt.hist(ns.reshape(-1), bins=min(20*m, 100), range=[0, m],
-                     label=f"{name} ${noise_mean:L}$", histtype='step', color=f"C{i}")
+                    label=f"{name} ${noise_mean:L}$", histtype='step', color=f"C{i}")
         plt.suptitle(f"Noise (width of s-curve slope) distribution")
         plt.xlabel("Noise [DAC]")
         plt.ylabel("Pixels / bin")
@@ -396,17 +473,20 @@ if __name__ == "__main__":
         set_integer_ticks(plt.gca().xaxis, plt.gca().yaxis)
         cb = plt.colorbar()
         cb.set_label("Noise [DAC]")
-        frontend_names_on_top()
+        #frontend_names_on_top()
         pdf.savefig(); plt.clf()
 
 
         # ToT vs injected charge as 2D histogram
-        for i, (fc, lc, name) in enumerate(FRONTENDS):
-            #for j in range(0,8,1):
-            plt.pcolormesh(
-                charge_dac_edges[:-1], np.linspace(-0.5, 127.5, 128, endpoint=True),
-                tot[2].transpose(), vmin=1, cmap=VIRIDIS_WHITE_UNDER, rasterized=True)  # Necessary for quick save and view in PDF
-        plt.suptitle(f"ToT curve ({name})")
+        #for i, (fc, lc, name) in enumerate(FRONTENDS):
+        #print(np.nonzero(tot))
+        plt.pcolormesh(
+            charge_dac_edges[:-1], np.linspace(-0.5, 127.5, 128, endpoint=True),
+            tot.transpose(), vmin=1, cmap=VIRIDIS_WHITE_UNDER, rasterized=True)  # Necessary for quick save and view in PDF
+            # plt.pcolormesh(
+            #     charge_dac_edges[:-1], np.linspace(-0.5, 127.5, 128, endpoint=True),
+            #     tot[2].transpose(), vmin=1, cmap=VIRIDIS_WHITE_UNDER, rasterized=True)  # Necessary for quick save and view in PDF
+        plt.suptitle(f"ToT curve (Cascode)")
         plt.xlabel("Injected charge [DAC]")
         plt.ylabel("ToT [25 ns]")
         set_integer_ticks(plt.gca().xaxis, plt.gca().yaxis)
@@ -416,23 +496,47 @@ if __name__ == "__main__":
 
 
         # S-Curve as 2D histogram
-        occupancy_charges = charge_dac_edges[i].astype(np.float32)
+        occupancy_charges = charge_dac_edges.astype(np.float32)
+        #print(charge_dac_edges)
+        #print(occupancy_charges)
         occupancy_charges = (occupancy_charges[:-1] + occupancy_charges[1:]) / 2
-        occupancy_charges = np.tile(occupancy_charges, (223, 512, 1))
-        charge_dac_range = [min(charge_dac_edges) - 0.5, max(charge_dac_edges) + 0.5]
-        for i, (fc, lc, name) in enumerate(FRONTENDS):
-            if fc >= col_stop or lc < col_start:
-                continue
-            fc = max(0, fc - col_start)
-            lc = min(col_stop-col_start - 1, lc - col_start)
-            plt.hist2d(occupancy_charges[fc:lc+1,:,:].reshape(-1),
-                       occupancy[i][fc:lc+1,:,:].reshape(-1),
-                       bins=[len(charge_dac_edges[i])-1, 150], range=[charge_dac_range, [0, 1.5]],
-                       cmin=1, rasterized=True)  # Necessary for quick save and view in PDF
-            plt.suptitle(f"S-Curve ({name})")
-            plt.xlabel("Injected charge [DAC]")
-            plt.ylabel("Occupancy")
-            set_integer_ticks(plt.gca().xaxis)
-            cb = integer_ticks_colorbar()
-            cb.set_label("Pixels / bin")
-            pdf.savefig(); plt.clf()
+        #print(occupancy_charges)
+        #print(len(occupancy_charges))
+        occupancy_charges = np.tile(occupancy_charges, (512, 512, 1))
+        #print(occupancy_charges)
+        charge_dac_range = [min(charge_dac_edges) - 0.5, max(charge_dac_edges) + 0.5 -1]
+        #print(charge_dac_range)
+
+
+
+
+        for fc, lc, name in FRONTENDS:
+            #print(name)
+            if name=="Cascode":
+            # if fc >= col_stop or lc < col_start:
+            #     continue
+            # fc = max(0, fc - col_start)
+            # lc = min(col_stop-col_start - 1, lc - col_start)
+            #occu= occupancy[fc:lc+1]
+                #print(occupancy_charges.shape)
+                #a = occupancy_charges[fc:lc+1,:,:].reshape(-1)
+                #print(a)
+                #b =  occupancy_npz[fc:lc+1,:,:].reshape(-1)
+                # print(np.count_nonzero(np.isnan(occupancy_npz[fc:lc+1,:,:])))
+                # print(a.shape)
+                # print(b.shape)
+                plt.hist2d(occupancy_charges[fc:lc+1,:,:].reshape(-1),
+                        occupancy_npz[fc:lc+1,:,:].reshape(-1),
+                        bins=[198, 150], range=[charge_dac_range, [0, 1.5]],
+                        cmin=1, rasterized=True)  # Necessary for quick save and view in PDF
+                # plt.hist2d(occupancy_charges.reshape(-1),
+                #     occu.reshape(-1),
+                #     bins=[len(charge_dac_edges)-1, 150], range=[charge_dac_range, [0, 1.5]],
+                #     cmin=1, rasterized=True)  # Necessary for quick save and view in PDF
+                plt.suptitle(f"S-Curve ({name})")
+                plt.xlabel("Injected charge [DAC]")
+                plt.ylabel("Occupancy")
+                set_integer_ticks(plt.gca().xaxis)
+                cb = integer_ticks_colorbar()
+                cb.set_label("Pixels / bin")
+                pdf.savefig(); plt.clf()
