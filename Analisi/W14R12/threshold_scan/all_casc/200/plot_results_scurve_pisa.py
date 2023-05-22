@@ -477,6 +477,8 @@ if __name__ == "__main__":
         pdf.savefig(); plt.clf()
 
 
+
+
         # ToT vs injected charge as 2D histogram
         #for i, (fc, lc, name) in enumerate(FRONTENDS):
         #print(np.nonzero(tot))
@@ -493,6 +495,96 @@ if __name__ == "__main__":
         cb = integer_ticks_colorbar()
         cb.set_label("Hits / bin")
         pdf.savefig(); plt.clf()
+
+
+
+        ####################### TOT MEAN VS INJ CHARGE ##########
+
+        tot_temp = np.tile(np.linspace(0, 127, 128, endpoint=True), (198,1))
+        tot_mean= np.sum(tot_temp*tot,axis=1)/ np.sum(tot, axis=1)
+        del tot_temp
+
+        plt.plot(charge_dac_edges[:-1], tot_mean, rasterized=True)
+        plt.suptitle(f"ToT curve (Cascode)")
+        plt.xlabel("Injected charge [DAC]")
+        plt.ylabel("ToT [25 ns]")
+        plt.ylim([0,128])
+        set_integer_ticks(plt.gca().xaxis, plt.gca().yaxis)
+        pdf.savefig(); plt.clf()
+
+
+        ########################################TOT SHIFT AND FIT ##############
+        charge_shift = charge_dac_edges[:-1] - 29
+        plt.pcolormesh(
+            charge_shift, np.linspace(-0.5, 127.5, 128, endpoint=True),
+            tot.transpose(), vmin=1, cmap=VIRIDIS_WHITE_UNDER, rasterized=True)  # Necessary for quick save and view in PDF
+
+        plt.suptitle(f"ToT curve (Cascode)")
+        plt.xlabel("True Injected charge [DAC]")
+        plt.ylabel("ToT [25 ns]")
+        set_integer_ticks(plt.gca().xaxis, plt.gca().yaxis)
+        cb = integer_ticks_colorbar()
+        cb.set_label("Hits / bin")
+        plt.xlim([0,200])
+        pdf.savefig(); plt.clf()
+
+        #print(mean_b)
+        def func_norm(x,a,b,c,t):
+            return np.where(x<mean_b[1]-29, 0, np.maximum(0, a*x+b-(c/(x-t))))
+
+
+        tot_mean_shift = tot_mean
+        mask_tot = np.isfinite(tot_mean_shift)
+        tot_mean_shift = tot_mean_shift[mask_tot]
+        occu = charge_shift
+        charge_dac_bins2 = occu[mask_tot]
+
+        popt, pcov = curve_fit(func_norm, charge_dac_bins2, tot_mean_shift,
+            p0 = [0.15, 2, 100, -10],bounds=([0 , -100, 0, -40], [0.3, 100,1000, 80]),
+            maxfev=10000)
+        perr = np.sqrt(np.diag(pcov))
+
+        print(*popt)
+        print(*perr)
+
+        plt.pcolormesh(
+            charge_shift, np.linspace(-0.5, 127.5, 128, endpoint=True),
+            tot.transpose(), vmin=1, cmap=VIRIDIS_WHITE_UNDER, rasterized=True)  # Necessary for quick save and view in PDF
+
+        plt.xlim([0, 250])
+        plt.ylim([0, 60])
+        plt.suptitle(f"ToT curve (Cascode)")
+        plt.xlabel("True injected charge [DAC]")
+        plt.ylabel("ToT [25 ns]")
+        set_integer_ticks(plt.gca().xaxis, plt.gca().yaxis)
+        cb = integer_ticks_colorbar()
+        cb.set_label("Hits / bin")
+        pdf.savefig(); plt.clf()
+
+
+
+        plt.pcolormesh(
+            charge_shift, np.linspace(-0.5, 127.5, 128, endpoint=True),
+            tot.transpose(), vmin=1, cmap=VIRIDIS_WHITE_UNDER, rasterized=True)  # Necessary for quick save and view in PDF
+
+        y = np.arange(mean_b[1]-29.01, 250, 1)
+        plt.plot(y, func_norm(y, *popt), "r-", label=f"fit Cascode:\na ={ufloat(round(popt[0], 3), round(perr[0], 3))}\nb = {ufloat(round(popt[1],3),round(perr[1],3))}\nc = {ufloat(round(popt[2],3),round(perr[2], 3))}\nt = {ufloat(np.around(popt[3],3),round(perr[3], 3))}")
+        plt.xlim([0, 250])
+        plt.ylim([0, 60])
+
+        plt.suptitle(f"ToT curve fit (Cascode)")
+        plt.xlabel("True injected charge [DAC]")
+        plt.ylabel("ToT [25 ns]")
+        set_integer_ticks(plt.gca().xaxis, plt.gca().yaxis)
+        cb = integer_ticks_colorbar()
+        cb.set_label("Hits / bin")
+        plt.legend(loc="upper left")
+        plt.savefig("Tot_fit_cascode(200).png")
+        pdf.savefig(); plt.clf()
+
+
+
+
 
 
         # S-Curve as 2D histogram
@@ -539,4 +631,5 @@ if __name__ == "__main__":
                 set_integer_ticks(plt.gca().xaxis)
                 cb = integer_ticks_colorbar()
                 cb.set_label("Pixels / bin")
+                plt.savefig("all_casc_thscan_200.png")
                 pdf.savefig(); plt.clf()
