@@ -33,7 +33,7 @@ Preliminarly it's necessary to study the threshold distribution on the whole mat
 The ultimate purpose of this measurement is to describe (depict, mark out) the behaviour of each pixel, injecting a charge equivalent to the typical energy released from electrons emitted in radioactive decays (decays of radioactive materials) and in particular those produced by the electronic capture of \ch{^{55}Fe} (presente in laboratorio). As explained in the previous section (reference), the \ch{^{55}Fe} has an emission spectrum (lines) with lines quite peaked (sharp) and this allows to compare data more easily. The first line is at 5.9 KeV which corresponds on average to about 1616 $e^{-}$ released (through the pixel??).
 For this reason during the injection measurement, it's mandatory to know the conversion between DAC and $e^{-}$ (reference) and to inject charges in order to study pixel behaviour  the right region, which are more interesting from a physical point of view.
 
-\begin{figure}
+\begin{figure}[h!]
 \centering
 \includegraphics[scale=0.8]{spectrum_fe}
 \caption{\ch{^{55}Fe} (radiactive source) emission spectrum using the analog output of a PMOS reset front-end of TJ-Monopix 1. (referenceeeeee)}
@@ -41,68 +41,67 @@ For this reason during the injection measurement, it's mandatory to know the con
 \end{figure}
 
 %------------------------------------------------------------
-\subsection{Problema nel circuito di iniezione}
+\subsection{Injection circuit issues}
 
-\begin{comment}
-Nel portare avanti le misure suddette, ci si è accorti di un problema nel circuito di iniezione che ne limita il range di funzionamento: l'altezza dell'impulso di iniezione infatti, cresce linearmente come aspettato fino ad un valore di $\approx$ 140 DAC, ma al al di sopra di questo valore, il circuito non solo aumenta di poco l'altezza del segnale, ma aumenta artificialmente anche il valore della threshold di un certo $\Delta V$ (o equivalentemente $\Delta Q$, collegati dal fattore di conversione in....).
-Inoltre, per altezze dell'impulso di iniezione superiori a 200 DAC, solo il valore della threshold viene aumentato, senza però incrementare in alcun modo l'effettiva carica iniettata.
+In carrying out the measurements mentioned above, we noticed (NO) some issues with the injection circuit which limits its working range: (as a matter of fact) the height of the injection pulse is expected to grow (increase) linearly up to a value of (about) $\approx$ 140 DAC, but  above this (quantity) value, the circuit increases not only a little the height of the signal, but also the threshold artificially grows by a certain amount of $\Delta V$ (or equivalently of $\Delta Q$, related by the conversion factor....REFERENCE).
+Moreover, for injection height grater than 200 DAC, only the threshold grows, without increasing the actual injected charge in any way.
 
-Per questa problematica, la caratterizzazione della threshold e della sua dispersione su tutti i flavor della matrice, ha richiesto una serie di misure ulteriori.
-\end{comment}
+For this reason, the investigation on the (values) behaviour of the threshold and its dispersion of all flavours of the matrix, required a series of additional measurements.
 
 %-------------------------------------------------------
-\subsection{Misura dello shift medio sul valore di threshold per cariche iniettate superiori a 140 DAC}
+\subsection{Measurement of the average shift of the threshold value for injected charge greater than 140 DAC}
 
-\begin{comment}
-Per poter valutare dunque questo shift artificiale sul valore della threshold, per ogni flavor della matrice abbiamo effettuato due misure della threshold e sua dispersione separate:
+To evaluate this artificial shift of the threshold, two different measurements of the threshold and its dispersion have been done, for each flavor:
 
 \begin{itemize}
-\item per carica iniettata pari a 140 DAC $\rightarrow$ prima della regione di saturazione;
-\item per carica iniettata pari a 200 DAC $\rightarrow$ limite massimo della ragione di saturazione (da questo valore in poi, aumenta solo la threshold, non la carica effettivamente iniettata).
+\item for an injected charge equal to 140 DAC $\rightarrow$ before the saturation region;
+\item for an injected charge equal to 200 DAC $\rightarrow$ almost the maximum limit of the saturation region (from this value onward only the threshold increases, not the injected charge).
 \end{itemize}
 
-Per ognuna di queste misure, è stata fittata la distribuzione della threshold per poter ottenere un valore medio sull'intero flavor, e chiamando $\Q_{th, 140}$ e $\Q_{th, 200}$  rispettivamente i valori di threshold ottenuti per iniezione a 140 e 200 DAC, è stato stimato lo shift medio come:
+The threshold distributions obtained from each measurements have been fitted to extract an average value on the whole flavor. Naming $Q_{th, 140}$ and $Q_{th, 200}$  the threshold obtained from injections of 140 and 200 DAC respectively, the mean shift has been estimated by:
 
 \begin{equation}
 \Delta Q = Q_{th,200} - Q_{th,140}
 \end{equation}
 
-Infine, ai dati ottenuti per impulsi di iniezioni di 200 DAC, è stato sottratto questo valore di carica, per poter estrapolare fino a un valore di 170 DAC effettivo, il comportamento dei pixel iniettati.
+Eventually, this charge shift has been subtracted from data collected for injection pulses of 200 DAC, in order to extrapolate (deduce) the behaviour of the injected pixels up to a value fo 170 DAC.
 
-Si riporta nelle sezioni successive quanto ottenuto per ciascun flavor della matrice, con il metodo utilizzato per poter stimare la threshold.
+What has been obtained for each flavor is reported in the following section, together with a briefly explanation of the method used to estimate (evaluate) the threshold.
 
-\end{comment}
 
 %--------------------------------------------------------------------
-\subsection{Curva S e threshold}
+\subsection{Threshold and S-Curve}
 %\addcontentsline{toc}{subsection}{Curva S e threshold}
 
+In order to obtain the thresold value for every pixel, each one has to be injected a random (arbitrary) number of times (we have chosen 100 times) for each value of the injection pulse between a minimum value, chosen set the chip register ''\textbf{VL}'' and a maximum value, set by the ''\textbf{VH}'' register, with a random step which is 1 for us.(ANCHE NO)
+
+So with(fixed) the value of the injection pulse fixed, the mean of 100 output are considered. In this way, the typical curve, better known as ''\textit{S-curve}'', is obtained for each pixel. It is an \textit{error-function} from which the value of the threshold is evaluated considering (taing, extractin, pulling out) the value of the injected charge at half of the curve's maximum height.
+
+Plotting the number of hits observed on each pixel divided by the total number of injections, for each injected charge, the half height corresponds to a charge value for which the pixel detects 50 hits of 100 injected and so when it has an occupancy of 0.5.
+
+%%%%SPIEGARE METODO DI LUDOVICO???? 
+
+
+%%%METTI ESEMPIO S-CURVE
 \begin{comment}
-Per poter ottenere il valore della threshold per ogni pixel, ciascuno di essi deve essere iniettato un numero arbitrario di volte (noi abbiamo scelto 100), per ogni valore di impulso di iniezione compreso tra un valore minimo, scelto settando il registro del chip ''\textbf{VL}'' e un valore massimo, per mezzo del registro ''\textbf{VH}'', con step a scelta da noi settato a 1.
-Fissato il valore dell'impulso di iniezione, si considera la media dei 100 output ottenuti. Così facendo, per ogni pixel, si ottiene la tipica curva nota come ''\textit{S-curve}'', che matematicamente è una error function (?) e da cui si stima il valore della threshold, prendendo il valore di carica iniettata per la quale la curva è a metà della sua altezza massima. Plottando il numero di hit rilevate su ciascun pixel diviso il numero totale, per ogni valore di carica iniettata, la metà altezza corrisponde al valore di carica per la quale il pixel rileva 50 hit su 100 totali iniettate e cioè ha un'occupancy di 0.50.
-
-SPIEGARE METODO DI LUDOVICO????
-
-METTI FIGURA
 \begin{figure}
 \centering
 \includegraphics[]{}
-\caption{Esempio di S-curve e stima della threshold}
+\caption{An example of the S-Curve and the evluation of the threshold.}
 \label{ex_scurve}
 \end{figure}
-
 \end{comment}
+
+In the following are reported the results of this study for the flavors of all matrix.
 
 \subsubsection{Normal FE}
 
-\begin{comment}
+As epxplained in the section (reference) the first flavor of the matrix is the \textbf{Normal FE}, which consist of 512 rows (0-511 in registers?) and 224 columns for a total of 114.688 pixels. In figure \vref{fig:norm_scurve_140} are plotted all the s-curves of the Normal flavor pixels. The chip registers have been set with the same values used during the Test Beam at Desy (during...) which are reported in table \vref{tab:tb_settings}.
 
-Come spiegato in sezione (.........METTI) il primo flavor della matrice è il \textbf{Normal}, che comprende 512 righe (0-511) e 224 colonne (0-223) per un totale di 114.688 pixel.
-In figura (...) sono plottate tutte le s-curve dei pixel del primo flavor. I registri del chip sono stati settati con gli stessi valori utilizzati durante il Test Beam a Desy che sono riportati in seguito:
+%%%COLORAAAAAAAA
+COLORAAAAA
 
-COLORAAAAAAAA
-
-\begin{table}
+\begin{table}[h!]
 \centering
 \begin{tabular}{c|c}
 Registri & Default Settings (''GOE'') \\
@@ -132,73 +131,64 @@ IDEL & 88 \\
 IRAM & 50 \\
 \hline
 \end{tabular}
-\caption{Settings dei principali registri utilizzati per il chip W14R12, flavors Normal e Cascode, durante il Test Beam a Desy.}
-\label{tb_settings}
+\caption{Settings of the main registers used for the W14R12 chip, for Normale and Cascode flavors, during the Test Beam in Desy.}
+\label{tab:tb_settings}
 \end{table}
 
-\begin{figure}
+\begin{figure}[h!]
 \centering
 \includegraphics[scale=.6]{all_norm_thscan_140}
-\caption{S-curves di tutti i pixel del flavor Normal della matrice con un impulso di iniezione di 140 DAC.}
-\label{norm_scurve_140}
+\caption{S-curves of all pixels of the Normal FE with an injection pulse of 140 DAC.}
+\label{fig:norm_scurve_140}
 \end{figure}
 
-Utilizzando questi valori, nessun pixel di questo flavor è risultato rumoroso e dunque non è stato necessario utilizzare alcuna maschera.
+Using this setting, none of the pixels were noisy and so it wasn't necessary introduce (use, ...) any mask.
 
-Come spiegato nella sezione (....) sono state fittate le distribuzioni delle threshold ottenute in due misure separate con un impulso di iniezione rispettivamente di 140 DAC e 200 DAC, mostrate in figura (...).
+As already explained in the previous section (reference?) the threshold distributions from the two different measurements with an injection pulse of 140 and 200 DAC respectively, have been fitted and they are showed in figure \vref{fig:thdist_norm}
 
-\begin{figure}
+\begin{figure}[h!]
 \centering
 \subfigure[VH = 140 DAC]
 {\includegraphics[scale=0.6]{all_norm_thdist_140}}\quad
 \subfigure[VH = 200 DAC]
-{\includegraphics[scale=0.6{all_norm_thdist_200}}\\
-\caption{Distribuzioni delle threshold prima della saturazione e alla saturazione massima.}
-\label{thdist_norm}
+{\includegraphics[scale=0.6]{all_norm_thdist_200}}\\
+\caption{Threshold distributions of \textbf{Normal} flavor before and at the maximum saturation, respectively.}
+\label{fig:thdist_norm}
 \end{figure}
+ 
+For the greater (higher) injection height, 8 different measurement have be actually done, each one on 28 consecutive columns and on all rows. Then data have been put together to obtain a single (summary) plot on the whole flavor. Same procedure has been preformed on the \textbf{Cascode FE}.
 
-Per altezza dell'impulso di iniezione maggiore, in realtà sono state fatte 8 diverse misure, ciascuna su 28 colonne consecutive e tutte le righe. Sono stati poi messi insieme i dati per ricavare plot riassuntivi sull'intero flavor. Stessa cosa è stata fatta per il flavor \textbf{Cascode}.
-
-
-\end{comment}
 
 \subsubsection{Cascode FE}
 
-\begin{comment}
+\textbf{Cascode FE} is the second flavor and like \textbf{Normal FE} it consists of 512 rows (0-511) and 224 columns (224-447) for a number of total pixels equal to 114.688. Also for this study (measurement) the same values' registers of the setting used during the Test Beam in Desy (table \vref{tab:tb_settings}) have been used and there weren't find noisy pixels. 
+In figure \vref{fig:casc_curve_140} the S-curves of all pixels ar showed.
 
-Il secondo flavor \textbf{Cascode} comprende 512 righe (0-511) e 224 colonne (224-447) anch'esso per un totale di 114.688 pixel. Anche per queste misure sono stati utilizzati come valori dei registri quelli del TB@Desy riportati in tabella (riferimento) e anche qui non sono stati identificati pixel rumorosi.
-In figura (...) le S-curves di tutti i pixel.
-
-\begin{figure}
+\begin{figure}[h!]
 \centering
 \includegraphics[scale=.6]{all_casc_thscan_140}
-\caption{S-curves di tutti i pixel del flavor Cascode della matrice con un impulso di iniezione di 140 DAC.}
-\label{casc_scurve_140}
+\caption{S-curves of all pixels in the \textbf{Cascode} flavor with an injection pulse of 140 DAC.}
+\label{fig:casc_scurve_140}
 \end{figure}
 
-Anche qui sono state fittate le distribuzioni delle threshold, riportate in figura (...).
+The fit of the threshold distributions instead, are showed in figure \vref{fig:thdist_casc}.
 
-
-\begin{figure}
+\begin{figure}[h!]
 \centering
 \subfigure[VH = 140 DAC]
 {\includegraphics[scale=0.6]{all_casc_thdist_140}}\quad
 \subfigure[VH = 200 DAC]
-{\includegraphics[scale=0.6{all_casc_thdist_200}}\\
-\caption{Distribuzioni delle threshold prima della saturazione e alla saturazione massima.}
-\label{thdist_casc}
+{\includegraphics[scale=0.6]{all_casc_thdist_200}}\\
+\caption{Threshold distributions of \textbf{Cascode} flavor before and at the maximum saturation, respectively.}
+\label{fig:thdist_casc}
 \end{figure}
-
-\end{comment}
 
 
 \subsubsection{HV-Cascode FE}
 
-\begin{comment}
+The third flavor is \textbf{HV-Cascode FE} where HV stands for \textbf{High Voltage} and it is formed (consists) of 512 rows (0-511) and 32 columns (448-479) for a total number of pixel equal to 16384. Also for these last two flavors, the main chip registers are set with the same values tested and used during the Test Beam (@Desy). They are reported in table \vref{tab:tb_hv_settings}.
 
-Il terzo flavor \textbf{HV-Cascode} comprende 512 righe (0-511) per 32 colonne (448 -479) per un totale di 16384 pixel. Anche per questi ultimi due flavor HV, sono stati settati particolari valori dei registri, il cui funzionamento è stato studiato durante il Test Beam a Desy. Sono riportati nella tabella(ref).
-
-\begin{table}
+\begin{table}[h!]
 \centering
 \begin{tabular}{c|c}
 Registri & Default Settings (''GOE'') \\
@@ -228,63 +218,62 @@ IDEL & 88 \\
 IRAM & 50 \\
 \hline
 \end{tabular}
-\caption{Settings dei principali registri utilizzati per il chip W14R12, flavors HV's durante il Test Beam a Desy.}
-\label{tb_hv_settings}
+\caption{Settings of the main registers used for the W14R12 chip, for the HV's flavors, during the Test Beam in Desy.}
+\label{tab:tb_hv_settings}
 \end{table}
 
-Come visibile dalle S-Curves su tutta la regione interessata, con questa scelta dei parametri vi erano molti pixel rumorosi, che in questa fase delle misure, non sono stati mascherati.
+As we can see from the plot of the alle S-curves in figure \vref{fig:hvc_scurve_140}, with these choices of values' registers, there were a lot of noisy pixels, but at this stage of measurements, they were not masked.
 
-\begin{figure}
+\begin{figure}[h!]
 \centering
 \includegraphics[scale=.6]{all_HVc_thscan_140}
-\caption{S-curves di tutti i pixel del flavor HV Cascode della matrice con un impulso di iniezione di 140 DAC.}
-\label{hvc_scurve_140}
+\caption{S-curves of all pixels in \textbf{HV Cascode} flavor with an injection pulse of 140 DAC.}
+\label{fig:hvc_scurve_140}
 \end{figure}
 
+In figure \vref{fig:thdist_hvc} are showed the fit of the threshold distributions for the two different injections pulse.
 
-Di seguito in figura (ref), i fit delle distribuzioni delle threshold per i due diversi impulsi di iniezione.
-
-\begin{figure}
+\begin{figure}[h!]
 \centering
 \subfigure[VH = 140 DAC]
 {\includegraphics[scale=0.6]{all_HVc_thdist_140}}\quad
 \subfigure[VH = 200 DAC]
-{\includegraphics[scale=0.6{all_HVc_thdist_200}}\\
-\caption{Distribuzioni delle threshold prima della saturazione e alla saturazione massima.}
-\label{thdist_hvc}
+{\includegraphics[scale=0.6]{all_HVc_thdist_200}}\\
+\caption{Threshold distributions of \textbf{HV Cascode} flavor before and at the maximum saturation, respectively.}
+\label{fig:thdist_hvc}
 \end{figure}
 
-
-\end{comment}
 
 \subsubsection{HV-Normal FE}
 
-\begin{comment}
-Il quarto ed ultimo flavor \textbf{HV-Normal} comprende 512 righe (0-511) per 32 colonne (448 -479) per un totale di 16384 pixel. Anche qui i registri sono stati settati ai valori riportati in tabella (ref). Di seguito in figura (ref), la S-curve su tutti i pixel e anche qui possiamo vedere diverso rumore a pixel noisy, non mascherati. In quest'ultimo flavor inoltre, le ultime 16 colonne non erano funzionanti, queste hanno restituito un picco di threshold a zero che è stato escluso dal plot della distribuzione delle threshold. Dunque in realtà in quest'ultimo pezzo della matrice, i pixel studiati sono stati la metà, ossia 8192.
+The fourth and last flavor is the \textbf{HV-Normal FE} which consists of 512 rows (0-511) and 32 columns (479-511) for a total number of pixel equal to 16.384. The main registers have been set with the values reported in table \vref{tab:tb_hv_settings}.
+In figure \vref{fig:hv_scurve_140}, the S-curves of all pixel in the flavor. Also here we can see that there were some noisy pixels unmasked.
+Moreover, in this final flavor, the last 16 columns were not working and as a matter of fact they had return a peak of threshold near the value 0, which is excluded from the threshold distributions plots.
 
-\begin{figure}
+So actually in this part of the matrix, the real number of pixel studied was the half of the total, such as 8192 pixels.
+
+
+
+\begin{figure}[h!]
 \centering
 \includegraphics[scale=.6]{all_HV_thscan_140}
-\caption{S-curves di tutti i pixel del flavor HV Cascode della matrice con un impulso di iniezione di 140 DAC.}
-\label{hv_scurve_140}
+\caption{S-curves of all pixels in \textbf{HV Cascode FE} with an injection pulse of 140 DAC.}
+\label{fig:hv_scurve_140}
 \end{figure}
 
+In figure \vref{fig:thdist_hvc} the fit of the threshold distributions for the two different values of injection height are reported.
 
-Di seguito in figura (ref), i fit delle distribuzioni delle threshold per i due diversi impulsi di iniezione.
 
-\begin{figure}
+\begin{figure}[h!]
 \centering
 \subfigure[VH = 140 DAC]
 {\includegraphics[scale=0.6]{all_HV_thdist_140}}\quad
 \subfigure[VH = 200 DAC]
-{\includegraphics[scale=0.6{all_HV_thdist_200}}\\
-\caption{Distribuzioni delle threshold prima della saturazione e alla saturazione massima.}
-\label{thdist_hvc}
+{\includegraphics[scale=0.6]{all_HV_thdist_200}}\\
+\caption{Threshold distributions of \textbf{HV} flavor before and at the maximum saturation, respectively.}
+\label{fig:thdist_hvc}
 \end{figure}
 
-
-
-\end{comment}
 
 
 \subsection{Noise and Equivalent Noise Charge (ENC)}
