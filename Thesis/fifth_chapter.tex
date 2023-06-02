@@ -18,9 +18,132 @@ REFERENZE
 
 \subsubsection{Main registers (and conversion?)}
 
+
+
 \subsection{Comparison of trends from data with simulation}
 %\addcontentsline{toc}{subsection}{Confronto degli andamenti con le simulazioni}
 
+To understand how the threshold's value changes with the settings of the chip, we take different measurements varying the values of the main registers which are responsible for it.
+The results are compared with simultion done by Hung Pham (...).
+
+\subsubsection{$I_{CASN}$}
+
+This current is responsible of the output baseline. In a few words, higher this value, higher the baseline, lower the threshold and also a little bit the gain.
+
+In figure \vref{fig:icasn_sim}, we can see the behaviour of the threshold and the gain, increasing the value o $I_{CASN}$.
+
+\begin{figure}
+\centering
+\includegraphics[scale=.5]{icasn_simulation}
+\caption{Trends of Gain and Threshold increasing $I_{CASN}$.}
+\label{fig:icasn_sim}
+\end{figure}
+
+To verify this behaviour, we run three different analysis (measurements) by fixing $I_{THR}$ = 20, 40, 64 and changing $I_{CASN}$ from 0  to 30 DAC, with a step of 5 DAC. We have done this enabling 200 pixels in the Cascode FE (rows: 472 - 512, cols: 225 - 230).
+
+For each measurements we fit the threshold distribution with a gaussian function in order to obtain average values of the threshold and its dispersion.
+
+\begin{itemize}
+\item[$I_{THR}=64$]:
+
+\begin{tabular}{c | c | c}
+$I_{CASN}$ [DAC] & THR [DAC] & THR Dispersion [DAC]\\
+\hline
+0 & 61.43 & 2.45\\
+5 & 53.42 & 2.45\\
+10 & 50.33 & 2.45\\
+15 & 48.21 & 2.41\\
+20 & 46.70 & 2.38\\
+25 & 45.49 & 2.52\\
+30 & 46.09 & 2.50
+\end{tabular}
+
+\item[$I_{THR}=40$]:
+
+\begin{tabular}{c | c | c}
+$I_{CASN}$ [DAC] & THR [DAC] & THR Dispersion [DAC]\\
+\hline
+0 & 47.28 & 2.12\\
+5 & 41.07 & 2.02\\
+10 & 38.39 & 2.03\\
+15 & 36.65 & 1.95\\
+20 & 35.53 & 1.91\\
+25 & NaN & NaN\\
+30 & 33.37 & 2.04
+\end{tabular}
+
+Here we can see a particular setting, that is $I_{THR}=40$ AND $I_{CASN}$=25, for which the chip doesn't seem to work.
+
+PIXEL THAT FIRE UP??
+
+\item[$I_{THR}=20$]:
+
+\begin{tabular}{c | c | c}
+$I_{CASN}$ [DAC] & THR [DAC] & THR Dispersion [DAC]\\
+\hline
+0 & 34.43 & 1.95\\
+5 & 28.10& 1.72\\
+10 & 26.59 & 1.75\\
+15 & 24.66 & 1.77\\
+\end{tabular}
+\medskip\\
+
+\end{itemize}
+
+In figure \vref{fig:alltrends_icasn} all trends obtained from these data are reported.
+
+TREND OF DISPERSION?
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=.7]{all_trends(ICASN)}
+\caption{Threshold vs. $I_{CASN}$ for $I_{THR}$= 20, 40, 64.}
+\label{fig:alltrends_icasn}
+\end{figure}
+
+\subsubsection{$I_{THR}$}
+
+Reusing the same data of the previous measurements, we can also study the trend of the threshold changing the value of $I_{THR}$ and fixing that of $I_{CASN}$. We consider only $I_{CASN}$ from 0 to 15 DAC, because for highr values we don't have enough values of the threshold (only two, for $I_{THR}$=40, 64). The results are showed in figure \vref{fig:alltrends_ithr}.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=.7]{all_trends(ITHR)}
+\caption{Threshold vs. $I_{THR}$ for $I_{CASN}$= 0, 5, 10, 15.}
+\label{fig:alltrends_ithr}
+\end{figure}
+
+We can compare them with the simulation done by Hung Pham (\vref{fig:ithr_sim}). 
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=.7]{ithr_simulation}
+\caption{Trends of Gain and Threshold increasing $I_{CASN}$.}
+\label{fig:ithr_sim}
+\end{figure}
+
+\subsubsection{Time over Threshold (ToT)}
+
+The last analysis that we have done to make a comparison with the simulations, is about the trend of the ToT, changing the value of $I_{CASN}$ for a fixed value of $I_{THR}$ and vice versa. In particular we consider the data obtained with $I_{CASN}$ fixed to 0 DAC and $I_{THR}$ to 64 DAC, which are the values for this registers, studied and used during the Test Beam in Desy.
+
+\begin{figure}[h!]
+\centering
+\subfigure[ToT vs $I_{THR}$ ($I_{CASN}$=0 DAC) - Data]
+{\includegraphics[scale=0.5]{tot_curves_icasn0}}\quad
+\subfigure[ToT vs $I_{THR}$ ($I_{CASN}$=0 DAC) - Simulation]
+{\includegraphics[scale=0.4]{tot_curves_icasn0_simu}}\\
+\caption{.}
+\label{fig:tot_vs_ithr}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\subfigure[ToT vs $I_{CASN}$ ($I_{THR}$=64 DAC) - Data]
+{\includegraphics[scale=0.5]{tot_curves_ithr64}}\quad
+\subfigure[ToT vs $I_{CASN}$ ($I_{THR}$=64 DAC) - Simulation]
+{\includegraphics[scale=0.4]{tot_curves_ithr64_simu}}\\
+\caption{.}
+\label{fig:tot_vs_icasn}
+\end{figure}
 
 \section{Characterization by injection}
 %\addcontentsline{toc}{section}{Caratterizzazione tramite l'iniezione}
@@ -289,3 +412,14 @@ Fe55, Am241, Cd109, Sr190
 
 \subsection{Calibrazione della capacità di iniezione}
 %\addcontentsline{toc}{subsection}{Calibrazione della capacità di iniezione}
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%			BIBLIOGRPAHY
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%1. THESIS MUSTAKAS
