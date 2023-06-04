@@ -121,13 +121,24 @@ We can compare them with the simulation done by Hung Pham (\vref{fig:ithr_sim}).
 \label{fig:ithr_sim}
 \end{figure}
 
+\subsubsection{$V_{CASP}$???}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=.7]{TH_vs_VCASP(point)}
+\caption{Trends of Threshold increasing $V_{CASP}$.}
+\label{fig:th_vs_casp}
+\end{figure}
+
+
+
 \subsubsection{Time over Threshold (ToT)}
 
 The last analysis that we have done to make a comparison with the simulations, is about the trend of the ToT, changing the value of $I_{CASN}$ for a fixed value of $I_{THR}$ and vice versa. In particular we consider the data obtained with $I_{CASN}$ fixed to 0 DAC and $I_{THR}$ to 64 DAC, which are the values for this registers, studied and used during the Test Beam in Desy.
 
 \begin{figure}[h!]
 \centering
-\subfigure[ToT vs $I_{THR}$ ($I_{CASN}$=0 DAC) - Data]
+\subfigure[ToT vs $I_{THR}$ ($I_{CASN}$=0 DAC) - Data [\textbf{Cascode}]]
 {\includegraphics[scale=0.5]{tot_curves_icasn0}}\quad
 \subfigure[ToT vs $I_{THR}$ ($I_{CASN}$=0 DAC) - Simulation]
 {\includegraphics[scale=0.4]{tot_curves_icasn0_simu}}\\
@@ -137,13 +148,25 @@ The last analysis that we have done to make a comparison with the simulations, i
 
 \begin{figure}[h!]
 \centering
-\subfigure[ToT vs $I_{CASN}$ ($I_{THR}$=64 DAC) - Data]
+\subfigure[ToT vs $I_{CASN}$ ($I_{THR}$=64 DAC) - Data [\textbf{Cascode}]]
 {\includegraphics[scale=0.5]{tot_curves_ithr64}}\quad
 \subfigure[ToT vs $I_{CASN}$ ($I_{THR}$=64 DAC) - Simulation]
 {\includegraphics[scale=0.4]{tot_curves_ithr64_simu}}\\
 \caption{.}
 \label{fig:tot_vs_icasn}
 \end{figure}
+
+\begin{figure}[h!]
+\centering
+\subfigure[ToT vs $V_{CASP}$ - Data [\textbf{Cascode}]]
+{\includegraphics[scale=0.5]{tot_vcasp(cascode)}}\quad
+\subfigure[ToT vs $V_{CASP}$ - Data [\textbf{Normal}]]
+{\includegraphics[scale=0.4]{tot_vcasp(normal)}}\\
+\caption{.}
+\label{fig:tot_vs_vcasp}
+\end{figure}
+
+
 
 \section{Characterization by injection}
 %\addcontentsline{toc}{section}{Caratterizzazione tramite l'iniezione}
@@ -267,7 +290,7 @@ IRAM & 50 \\
 
 Using this setting, none of the pixels were noisy and so it wasn't necessary introduce (use, ...) any mask.
 
-As already explained in the previous section (reference?) the threshold distributions from the two different measurements with an injection pulse of 140 and 200 DAC respectively, have been fitted and they are showed in figure \vref{fig:thdist_norm}
+As already explained in the previous section (reference?) the threshold distributions from the two different measurements with an injection pulse of 140 and 200 DAC respectively, have been fitted and they are showed in figure \pageref{fig:thdist_norm}
 
 \begin{figure}[h!]
 \centering

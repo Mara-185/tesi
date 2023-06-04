@@ -1,0 +1,16 @@
+/home/labb2/tj-monopix2-daq/tjmonopix2/scans/output_data/module_0/chip_0/20221003_150807_threshold_scan VCASP=3
+/home/labb2/tj-monopix2-daq/tjmonopix2/scans/output_data/module_0/chip_0/20221003_151306_threshold_scan VCASP=13
+/home/labb2/tj-monopix2-daq/tjmonopix2/scans/output_data/module_0/chip_0/20221003_151758_threshold_scan VCASP=23
+/home/labb2/tj-monopix2-daq/tjmonopix2/scans/output_data/module_0/chip_0/20221003_152249_threshold_scan VCASP=33
+/home/labb2/tj-monopix2-daq/tjmonopix2/scans/output_data/module_0/chip_0/20221003_152739_threshold_scan VCASP=43
+/home/labb2/tj-monopix2-daq/tjmonopix2/scans/output_data/module_0/chip_0/20221003_153230_threshold_scan VCASP=53
+/home/labb2/tj-monopix2-daq/tjmonopix2/scans/output_data/module_0/chip_0/20221003_153720_threshold_scan VCASP=63
+/home/labb2/tj-monopix2-daq/tjmonopix2/scans/output_data/module_0/chip_0/20221003_154211_threshold_scan VCASP=73
+/home/labb2/tj-monopix2-daq/tjmonopix2/scans/output_data/module_0/chip_0/20221003_154703_threshold_scan VCASP=83
+/home/labb2/tj-monopix2-daq/tjmonopix2/scans/output_data/module_0/chip_0/20221003_155157_threshold_scan VCASP=93
+/home/labb2/tj-monopix2-daq/tjmonopix2/scans/output_data/module_0/chip_0/20221003_155649_threshold_scan VCASP=103
+/home/labb2/tj-monopix2-daq/tjmonopix2/scans/output_data/module_0/chip_0/20221003_160140_threshold_scan VCASP=113
+/home/labb2/tj-monopix2-daq/tjmonopix2/scans/output_data/module_0/chip_0/20221003_160630_threshold_scan VCASP=123
+/home/labb2/tj-monopix2-daq/tjmonopix2/scans/output_data/module_0/chip_0/20221003_161121_threshold_scan VCASP=133
+/home/labb2/tj-monopix2-daq/tjmonopix2/scans/output_data/module_0/chip_0/20221003_161614_threshold_scan VCASP=143
+/home/labb2/tj-monopix2-daq/tjmonopix2/scans/output_data/module_0/chip_0/20221003_162106_threshold_scan VCASP=153

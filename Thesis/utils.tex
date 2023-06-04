@@ -14,10 +14,10 @@
 \usepackage{chemformula}
 \usepackage{varioref}
 \usepackage{subfigure}
+\usepackage{alphalph}
 
 
 %\usepackage{url}
-%\usepackage{alphalph}
 %\usepackage{listings}
 %\usepackage[toc]{appendix}
 
@@ -41,4 +41,8 @@
 %Numerazione subsubsection
 \setcounter{tocdepth}{3}
 \setcounter{secnumdepth}{3}
+
+
+%COMMAND TO INCREASE POSSIBLE LABELS IN CAPTION
+\renewcommand*{\thesubfigure}{(\alphalph{\value{subfigure}})}
 
