@@ -397,28 +397,28 @@ def main(input_file, overwrite=False):
         #Compute the noise (the width of the up-slope of the s-curve)
         #as a variance with the weights above
 
-        # noise_DAC = np.sqrt(average((occupancy_charges - np.expand_dims(threshold_DAC, -1))**2, axis=2, weights=w, invalid=0))
-        # del w
-        #
-        # # Noise hist
-        # m = int(np.ceil(noise_DAC.max(initial=0, where=np.isfinite(noise_DAC)))) + 1
-        # for i, (fc, lc, name) in enumerate(FRONTENDS):
-        #     if fc >= col_stop or lc < col_start:
-        #         continue
-        #     fc = max(0, fc - col_start)
-        #     lc = min(col_n - 1, lc - col_start)
-        #     ns = noise_DAC[fc:lc+1,:]
-        #     noise_mean = ufloat(np.mean(ns[ns>0]), np.std(ns[ns>0], ddof=1))
-        #     plt.hist(ns.reshape(-1), bins=min(20*m, 100), range=[0, m],
-        #              label=f"{name} ${noise_mean:L}$", histtype='step', color=f"C{i}")
-        # plt.title(subtitle)
-        # plt.suptitle(f"Noise (width of s-curve slope) distribution")
-        # plt.xlabel("Noise [DAC]")
-        # plt.ylabel("Pixels / bin")
-        # set_integer_ticks(plt.gca().yaxis)
-        # plt.grid(axis='y')
-        # plt.legend()
-        # pdf.savefig(); plt.clf()
+        noise_DAC = np.sqrt(average((occupancy_charges - np.expand_dims(threshold_DAC, -1))**2, axis=2, weights=w, invalid=0))
+        del w
+
+        # Noise hist
+        m = int(np.ceil(noise_DAC.max(initial=0, where=np.isfinite(noise_DAC)))) + 1
+        for i, (fc, lc, name) in enumerate(FRONTENDS):
+            if fc >= col_stop or lc < col_start:
+                continue
+            fc = max(0, fc - col_start)
+            lc = min(col_n - 1, lc - col_start)
+            ns = noise_DAC[fc:lc+1,:]
+            noise_mean = ufloat(np.mean(ns[ns>0]), np.std(ns[ns>0], ddof=1))
+            plt.hist(ns.reshape(-1), bins=min(20*m, 100), range=[0, m],
+                     label=f"{name} ${noise_mean:L}$", histtype='step', color=f"C{i}")
+        plt.title(subtitle)
+        plt.suptitle(f"Noise (width of s-curve slope) distribution")
+        plt.xlabel("Noise [DAC]")
+        plt.ylabel("Pixels / bin")
+        set_integer_ticks(plt.gca().yaxis)
+        plt.grid(axis='y')
+        plt.legend()
+        pdf.savefig(); plt.clf()
 
         #Noise map
 
@@ -473,6 +473,16 @@ def main(input_file, overwrite=False):
         #     pdf.savefig(); plt.clf()
 
         plt.close()
+
+    # Save data in npz file
+    np.savez_compressed(
+        "all_thresholds_HVs.npz",
+        all_th = threshold_DAC,
+        all_noise = noise_DAC,
+        all_tot_HVC = tot_hist[3],
+        all_tot_HV = tot_hist[4],
+        all_occup = occupancy)
+    print("\"*.npz\" file is created.")
 
 def gauss(x, A, mean, sigma):
     return  A * np.exp(-(x - mean) ** 2 / (2 * sigma ** 2))

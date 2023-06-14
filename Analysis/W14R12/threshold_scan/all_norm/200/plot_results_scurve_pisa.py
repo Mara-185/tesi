@@ -310,7 +310,13 @@ if __name__ == "__main__":
                 print(f"    count={n_overwritten}, file={fp}")
             occupancy_npz = np.where(np.isnan(occupancy_npz), data['occup'], occupancy_npz)
 
-
+    np.savez_compressed(
+        "all_thresholds_norm.npz",
+        all_th = thresholds,
+        all_noise = noise,
+        all_tot = tot,
+        all_occup = occupancy_npz)
+    print("\"*.npz\" file is created.")
 
     global mean_b
     mean_b =  np.zeros((4, 1), dtype="float")
