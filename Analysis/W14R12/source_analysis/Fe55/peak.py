@@ -4,10 +4,13 @@ import argparse
 import glob
 import os
 import traceback
+import warnings
 from matplotlib.backends.backend_pdf import PdfPages
 import matplotlib.pyplot as plt
 import numpy as np
+import itertools
 from scipy.optimize import curve_fit
+from scipy.optimize import OptimizeWarning
 from scipy.stats import norm
 from uncertainties import ufloat
 import tables as tb
@@ -84,7 +87,7 @@ def main(input_file, overwrite=False):
             edges = [np.arange(0,513,1, dtype=int),
                 np.arange(0,513,1, dtype=int), np.arange(0,129,1, dtype=int)]
             #print(edges)
-            print("We are in npz")
+            print("Npz analysis...\n")
             # print(counts.shape)
             # print(counts)
 
@@ -154,17 +157,17 @@ def main(input_file, overwrite=False):
             pdf.savefig(); plt.clf()
             for m, s, n in zip(popt, np.sqrt(pcov.diagonal()), ["f0", "mu0", "sigma0"]):
                 print(f"{n:>10s} = {ufloat(m,s)}")
-            print(total_hits)
+            #print(total_hits)
 
 
 
         # Find peaks each frontend
         for fc, lc, name in FRONTENDS:
-            print(name, fc, lc)
+            #print(name, fc, lc)
             tot_x2 = edges[2][:-1]
             counts2 = counts[fc:lc+1,:,:]
             check = np.allclose(counts2,counts2[0])
-            print(check)
+            #print(check)
             if not check:
                 for col, row in [(None, None)]:  # For debugging
                     if col is None and row is None:
@@ -202,31 +205,109 @@ def main(input_file, overwrite=False):
                     print(f"FIT {name}:")
                     for m, s, n in zip(popt, np.sqrt(pcov.diagonal()), ["f0", "mu0", "sigma0"]):
                         print(f"{n:>10s} = {ufloat(m,s)}")
-                    print(total_hits2)
+                    #print(total_hits2)
+
 
 
         # Analysis for each pixel
-        # for fc, lc, name in FRONTENDS:
-        #     print(name, fc, lc)
-        #     tot_x2 = edges[2][:-1]
-        #     counts2 = counts[fc:lc+1,:,:]
-        #     check = np.allclose(counts2,counts2[0])
-        #     print(check)
-        #     if not check:
-        #         for col, row in [(None, None)]:  # For debugging
-        #             if col is None and row is None:
-        #                 pixel_hits2 = counts2.sum(axis=(0,1))
-        #             else:
-        #                 pixel_hits = counts[col,row,:]
-        #             total_hits2 = pixel_hits2.sum()
-        #             fit_cut = 12
-        #             #################        FE55 FIT        ####################
-        #             popt, pcov = curve_fit(
-        #                 ff_Fe55, tot_x2[fit_cut:], pixel_hits2[fit_cut:],
-        #                 p0= (0.3*total_hits2, 20, 5))
-        #
-        #             perr = np.sqrt(np.diag(pcov))
+        peaks = np.full((512,512), np.nan)
+        dpeaks = np.full((512,512), np.nan)
+        sigma_p = np.full((512,512), np.nan)
+        dsigma_p = np.full((512,512), np.nan)
+        for fc, lc, name in FRONTENDS:
+            print(name, fc, lc)
+            print("\n")
+            tot_xp = edges[2][:-1]
+            countsp = counts[fc:lc+1,:,:]
+            check = np.allclose(countsp,countsp[0])
+            #print(check)
 
+            if not check:
+                with open("bad_pixels.txt", "w+") as pixf:
+                    print("Bad pixels:", file=pixf)
+                    for col, row in tqdm(itertools.product(range(224), range(512), repeat=1), desc=f"Progress in {name}: "):  # For debugging
+                        #print(col,row)
+                        pixel_hits = countsp[col,row,:]
+                        #print(pixel_hits)
+                        total_hits = pixel_hits.sum()
+                        fit_cut = 12
+                        if name=="Cascode":
+                            col=col+224
+                        #################        FE55 FIT        ####################
+                        try:
+                            popt, pcov = curve_fit(
+                                ff_Fe55, tot_x2[fit_cut:], pixel_hits[fit_cut:],
+                                p0= (0.3*total_hits, 20, 5))
+                        except (RuntimeError, OptimizeWarning):
+                            print(f"({col,row}) - {name}", file=pixf)
+                            pass
+                        else:
+                            perr = np.sqrt(np.diag(pcov))
+
+                            # plt.step(tot_xp, pixel_hits, where='mid')
+                            # plt.plot(tot_xp[fit_cut:], ff_Fe55(tot_xp[fit_cut:], *popt), "r-",
+                            #     label=f"fit {name}:\nmean={ufloat(round(popt[1], 3), round(perr[1],3))}"
+                            #         f"\nsigma={ufloat(round(popt[2], 3),round(perr[2],3))}")
+                            # plt.title("Time of acquisition: 2.5 hours")
+                            # #plt.title(f"Pixel (col, row) = ({'all' if col is None else col}, {'all' if row is None else row})")
+                            # plt.suptitle(f"Fe55 fit - {name} ({col,row})")
+                            # plt.xlabel("ToT [25 ns]")
+                            # plt.ylabel("Hits / bin")
+                            # plt.legend()
+                            # pdf.savefig(); plt.clf()
+                            # print(f"FIT {name}:")
+                            # for m, s, n in zip(popt, np.sqrt(pcov.diagonal()), ["f0", "mu0", "sigma0"]):
+                            #     print(f"{n:>10s} = {ufloat(m,s)}")
+                            # print(total_hits)
+                            # print(f"COL = {col}")
+
+                            peaks[col,row] = popt[1]
+                            dpeaks[col,row] = popt[2]
+                            sigma_p[col,row] = perr[1]
+                            dsigma_p[col,row] = perr[2]
+                            # print(peaks)
+                            # print(dpeaks)
+                            # print(sigma_p)
+                            # print(dsigma_p)
+
+        np.savez_compressed(
+            "tot_fe_peaks.npz",
+            tot_peaks = peaks,
+            dtot_peaks = dpeaks,
+            tot_sigma_peaks = sigma_p,
+            dtot_sigma_peaks = dsigma_p)
+        print("\"*.npz\" file is created.")
+
+        #print(peaks)
+        #print(peaks[224:226,:])
+                    # perr = np.sqrt(np.diag(pcov))
+                    #
+                    # plt.step(tot_xp, pixel_hits, where='mid')
+                    # plt.plot(tot_xp[fit_cut:], ff_Fe55(tot_xp[fit_cut:], *popt), "r-",
+                    #     label=f"fit {name}:\nmean={ufloat(round(popt[1], 3), round(perr[1],3))}"
+                    #         f"\nsigma={ufloat(round(popt[2], 3),round(perr[2],3))}")
+                    # plt.title("Time of acquisition: 2.5 hours")
+                    # #plt.title(f"Pixel (col, row) = ({'all' if col is None else col}, {'all' if row is None else row})")
+                    # if name=="cascode":
+                    #     col=col+224
+                    # plt.suptitle(f"Fe55 fit - {name} ({col,row})")
+                    # plt.xlabel("ToT [25 ns]")
+                    # plt.ylabel("Hits / bin")
+                    # plt.legend()
+                    # pdf.savefig(); plt.clf()
+                    # print(f"FIT {name}:")
+                    # for m, s, n in zip(popt, np.sqrt(pcov.diagonal()), ["f0", "mu0", "sigma0"]):
+                    #     print(f"{n:>10s} = {ufloat(m,s)}")
+                    # print(total_hits)
+                    #
+                    # peaks[col,row] = popt[1]
+                    # dpeaks[col,row] = popt[2]
+                    # sigma_p[col,row] = perr[1]
+                    # dsigma_p[col,row] = perr[2]
+                    # print(peaks)
+                    # print(dpeaks)
+                    # print(sigma_p)
+                    # print(dsigma_p)
 
 
         plt.close()
@@ -243,6 +324,8 @@ if __name__ == "__main__":
                         help="the *.npz file has to be given, in order to avoid the analysis.")
     args = parser.parse_args()
 
+    # Set OptimizeWarning
+    warnings.simplefilter("error", OptimizeWarning)
 
     files = []
     if args.input_file:  # If anything was given on the command line

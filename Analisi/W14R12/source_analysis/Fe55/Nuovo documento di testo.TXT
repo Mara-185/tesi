@@ -1,1 +1,0 @@
-salva picco per ogni pixel e matrice

@@ -1,0 +1,3 @@
+Bad pixels:
+((27, 454)) - Normal
+((122, 30)) - Normal
