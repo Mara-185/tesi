@@ -1,0 +1,4 @@
+I launch the script (./plot_std_pisa.py -j fe55_all.pdf percorsi_dei_file_interpreted.h5) 
+written by Ludovico, to make a single plot with all data obtained with Fe55 acquisitions. 
+It creates a pdf named “fe55_all.pdf”. 
+I report below the plots. 
