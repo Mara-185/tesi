@@ -13,6 +13,7 @@ import tables as tb
 from tqdm import tqdm
 from uncertainties import ufloat
 from plot_utils_pisa import *
+import sys
 
 VIRIDIS_WHITE_UNDER = matplotlib.cm.get_cmap('viridis').copy()
 VIRIDIS_WHITE_UNDER.set_under('w')
@@ -64,6 +65,10 @@ def main(input_file, overwrite=False):
         # Prepare histograms
         occupancy = np.zeros((col_n, row_n, charge_dac_bins))
         tot_hist = [np.zeros((charge_dac_bins, 128)) for _ in range(len(FRONTENDS) + 1)]
+
+        tot_hist2 = [np.zeros((col_n, row_n, charge_dac_bins, 128)) for _ in range(len(FRONTENDS) + 1)]
+
+
         dt_tot_hist = [np.zeros((128, 479)) for _ in range(len(FRONTENDS) + 1)]
         dt_q_hist = [np.zeros((charge_dac_bins, 479)) for _ in range(len(FRONTENDS) + 1)]
 
@@ -74,6 +79,9 @@ def main(input_file, overwrite=False):
 
             # Load hits
             hits = f.root.Dut[i_first:i_last]
+            # print(hits.shape)
+            # print(hits[0]["te"])
+            # sys.exit()
             with np.errstate(all='ignore'):
                 tot = (hits["te"] - hits["le"]) & 0x7f
             fe_masks = [(hits["col"] >= fc) & (hits["col"] <= lc) for fc, lc, _ in FRONTENDS]
@@ -92,14 +100,27 @@ def main(input_file, overwrite=False):
             occupancy += occupancy_tmp
             del occupancy_tmp
 
+            # print(col_n, row_n)
+
             for i, ((fc, lc, _), mask) in enumerate(zip(chain([(0, 511, 'All FEs')], FRONTENDS), chain([slice(-1)], fe_masks))):
-                if fc >= col_stop or lc < col_start:
+                if fc >= col_stop or lc < col_start or i==0:
                     continue
 
+                # print(col_n, row_n)
                 # ToT vs injected charge as 2D histogram
                 tot_hist[i] += np.histogram2d(
                     charge_dac[mask], tot[mask], bins=[charge_dac_bins, 128],
                     range=[charge_dac_range, [-0.5, 127.5]])[0]
+
+                #print(tot[mask].shape, len(mask))
+                #sys.exit()
+                # print(col_n, row_n)
+                # print(col_start, col_stop, row_start, row_stop)
+
+                # tot_hist2[i] += np.histogramdd(
+                #     (hits["col"][mask], hits["row"][mask], charge_dac[mask], tot[mask]),
+                #     bins=[col_n, row_n,charge_dac_bins, 128],
+                #     range=[[col_start, col_stop], [row_start, row_stop],charge_dac_range, [-0.5, 127.5]])[0]
 
                 # Histograms of time since previous hit vs TOT and QINJ
                 dt_tot_hist[i] += np.histogram2d(
