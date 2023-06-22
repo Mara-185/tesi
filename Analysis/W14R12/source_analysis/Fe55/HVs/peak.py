@@ -357,7 +357,7 @@ def main(input_file, overwrite=False):
                     # print(dsigma_p)
 
 
-        #plt.close()
+        plt.close()
 
 
 if __name__ == "__main__":

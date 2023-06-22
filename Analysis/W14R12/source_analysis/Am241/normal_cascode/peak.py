@@ -16,6 +16,8 @@ from uncertainties import ufloat
 import tables as tb
 from tqdm import tqdm
 from plot_utils_pisa import *
+import sys
+
 
 
 def ff_Am241(x, f0, a, f1, mu1, sigma1, f2, mu2, sigma2, f3, mu3, sigma3, f4, mu4, sigma4):
@@ -32,8 +34,9 @@ def ff_Fe55(x, f0, mu0, sigma0):
     )
 
 
+
 def main(input_file, overwrite=False):
-    output_file = os.path.splitext(input_file)[0] + "_peak.pdf"
+    output_file = "Am241_norm_casc_peak.pdf"
     if os.path.isfile(output_file) and not overwrite:
         return
     print("Plotting", input_file)
@@ -82,7 +85,9 @@ def main(input_file, overwrite=False):
         else:
             for i,ft in enumerate(tqdm(args.npz, unit="file")):
                 with np.load(ft) as data:
-                    counts = data['tot']
+                    counts2d = data['counts']
+                    tot1d = data['tot']
+                    counts=data['counts_peak']
 
             edges = [np.arange(0,513,1, dtype=int),
                 np.arange(0,513,1, dtype=int), np.arange(0,129,1, dtype=int)]
@@ -95,6 +100,11 @@ def main(input_file, overwrite=False):
 
         # Histograms
         max_tot = np.argmax(counts, axis=2)
+        #print(max_tot.shape)
+        max_tot2 = max_tot.astype(float)
+        #max_tot2[ max_tot2==0 ] = np.nan
+        #print(max_tot2.shape)
+        max_tot = max_tot2
 
 
         for fc, lc, name in FRONTENDS:
@@ -123,17 +133,20 @@ def main(input_file, overwrite=False):
 
         # Find peaks of all data
         tot_x = edges[2][:-1]
+        cut_x = 5
+        tot_xax = tot_x[cut_x:]
         for col, row in [(None, None)]:  # For debugging
             if col is None and row is None:
                 pixel_hits = counts.sum(axis=(0,1))
             else:
                 pixel_hits = counts[col,row,:]
             total_hits = pixel_hits.sum()
-            fit_cut = 12
+            print(total_hits)
+            fit_cut = 35
             #################        FE55 FIT        ####################
             popt, pcov = curve_fit(
-                ff_Fe55, tot_x[fit_cut:], pixel_hits[fit_cut:],
-                p0= (0.3*total_hits, 20, 5))
+                ff_Am241, tot_x[fit_cut:], pixel_hits[fit_cut:],
+                p0= (total_hits, 15 , 0.2*total_hits, 50, 5,0.2*total_hits, 60, 5,0.1*total_hits, 70, 5,0.05*total_hits, 90, 5))
 
             perr = np.sqrt(np.diag(pcov))
 
@@ -145,28 +158,38 @@ def main(input_file, overwrite=False):
             #         0.1*total_hits, 65, 5,
             #         1e-3*total_hits, 75, 5,
             #         1e-3*total_hits, 90, 5))
-            plt.step(tot_x, pixel_hits, where='mid')
-            plt.plot(tot_x[fit_cut:], ff_Fe55(tot_x[fit_cut:], *popt),
+            plt.step(tot_xax, pixel_hits[cut_x:], where='mid')
+            plt.plot(tot_x[fit_cut:], ff_Am241(tot_x[fit_cut:], *popt),
                 label=f"fit {name}:\nmean={ufloat(round(popt[1], 3), round(perr[1],3))}"
                     f"\nsigma={ufloat(round(popt[2], 3),round(perr[2],3))}")
             plt.title(f"Pixel(col, row)=({'all' if col is None else col},{'all' if row is None else row}) - Time of acquisition: 2.5 hours")
-            plt.suptitle("Fe55 fit")
+            plt.suptitle("Am241 fit")
             plt.xlabel("ToT [25 ns]")
             plt.ylabel("Hits / bin")
+            plt.xlim([cut_x,128])
             plt.legend()
             pdf.savefig(); plt.clf()
-            for m, s, n in zip(popt, np.sqrt(pcov.diagonal()), ["f0", "mu0", "sigma0"]):
+            for m, s, n in zip(popt, np.sqrt(pcov.diagonal()), ["f0", "a", "f1", "mu1", "sigma1", "f2", "mu2", "sigma2", "f3", "mu3", "sigma3", "f4", "mu4", "sigma4"]):
+                #f0, a, f1, mu1, sigma1, f2, mu2, sigma2, f3, mu3, sigma3, f4, mu4, sigma4
                 print(f"{n:>10s} = {ufloat(m,s)}")
             #print(total_hits)
 
 
 
         # Find peaks each frontend
-        for fc, lc, name in FRONTENDS:
+        peaks_all = np.full((2,4),np.nan)
+        dpeaks_all = np.full((2,4),np.nan)
+        sigma_p_all = np.full((2,4),np.nan)
+        dsigma_p_all = np.full((2,4),np.nan)
+        for i, (fc, lc, name) in enumerate(FRONTENDS):
+            print(i)
             #print(name, fc, lc)
             tot_x2 = edges[2][:-1]
+            cut_x = 5
+            tot_xax = tot_x[cut_x:]
             counts2 = counts[fc:lc+1,:,:]
             check = np.allclose(counts2,counts2[0])
+            print(check)
             #print(check)
             if not check:
                 for col, row in [(None, None)]:  # For debugging
@@ -175,11 +198,20 @@ def main(input_file, overwrite=False):
                     else:
                         pixel_hits = counts[col,row,:]
                     total_hits2 = pixel_hits2.sum()
-                    fit_cut = 12
+                    print(total_hits2)
+                    fit_cut = 35
                     #################        FE55 FIT        ####################
-                    popt, pcov = curve_fit(
-                        ff_Fe55, tot_x2[fit_cut:], pixel_hits2[fit_cut:],
-                        p0= (0.3*total_hits2, 20, 5))
+                    if name=='Normal':
+                        print("Fit in Normal:")
+                        popt, pcov = curve_fit(
+                            ff_Am241, tot_x2[fit_cut:], pixel_hits2[fit_cut:],
+                            p0= (total_hits2, 10 , 0.2*total_hits2, 55, 5,0.2*total_hits2, 70, 5,0.1*total_hits2, 77, 5,0.05*total_hits2, 96, 5))
+                    elif name=='Cascode':
+                        print("Fit in Cascode:")
+                        popt, pcov = curve_fit(
+                            ff_Am241, tot_x2[fit_cut:], pixel_hits2[fit_cut:],
+                            p0= (total_hits2, 11 , 0.2*total_hits2, 50, 5,0.2*total_hits2, 60, 5,0.1*total_hits2, 70, 5,0.05*total_hits2, 90, 5))
+
 
                     perr = np.sqrt(np.diag(pcov))
 
@@ -191,22 +223,56 @@ def main(input_file, overwrite=False):
                     #         0.1*total_hits, 65, 5,
                     #         1e-3*total_hits, 75, 5,
                     #         1e-3*total_hits, 90, 5))
-                    plt.step(tot_x2, pixel_hits2, where='mid')
-                    plt.plot(tot_x2[fit_cut:], ff_Fe55(tot_x2[fit_cut:], *popt), "r-",
+                    plt.step(tot_xax, pixel_hits2[cut_x:], where='mid')
+                    plt.plot(tot_x2[fit_cut:], ff_Am241(tot_x2[fit_cut:], *popt), "r-",
                         label=f"fit {name}:\nmean={ufloat(round(popt[1], 3), round(perr[1],3))}"
                             f"\nsigma={ufloat(round(popt[2], 3),round(perr[2],3))}")
-                    plt.title("Time of acquisition: 2.5 hours")
+                    plt.title("Time of acquisition: 55 minutes")
                     #plt.title(f"Pixel (col, row) = ({'all' if col is None else col}, {'all' if row is None else row})")
-                    plt.suptitle(f"Fe55 fit - {name}")
+                    plt.suptitle(f"Am241 fit - {name}")
                     plt.xlabel("ToT [25 ns]")
                     plt.ylabel("Hits / bin")
                     plt.legend()
+                    plt.xlim([cut_x,128])
                     pdf.savefig(); plt.clf()
                     print(f"FIT {name}:")
-                    for m, s, n in zip(popt, np.sqrt(pcov.diagonal()), ["f0", "mu0", "sigma0"]):
+                    for m, s, n in zip(popt, np.sqrt(pcov.diagonal()), ["f0", "a", "f1", "mu1", "sigma1", "f2", "mu2", "sigma2", "f3", "mu3", "sigma3", "f4", "mu4", "sigma4"]):
                         print(f"{n:>10s} = {ufloat(m,s)}")
                     #print(total_hits2)
 
+            #f0, a, f1, mu1, sigma1, f2, mu2, sigma2, f3, mu3, sigma3, f4, mu4, sigma4
+                peaks_all[i, 0] = popt[3]
+                peaks_all[i, 1] = popt[6]
+                peaks_all[i, 2] = popt[9]
+                peaks_all[i, 3] = popt[12]
+
+                dpeaks_all[i,0] = perr[3]
+                dpeaks_all[i,1] = perr[6]
+                dpeaks_all[i,2] = perr[9]
+                dpeaks_all[i,3] = perr[12]
+
+                sigma_p_all[i,0] = popt[4]
+                sigma_p_all[i,1] = popt[7]
+                sigma_p_all[i,2] = popt[10]
+                sigma_p_all[i,3] = popt[13]
+
+                dsigma_p_all[i,0] = perr[4]
+                dsigma_p_all[i,1] = perr[7]
+                dsigma_p_all[i,2] = perr[10]
+                dsigma_p_all[i,3] = perr[13]
+
+        # print(peaks_all)
+        # print(dpeaks_all)
+        # print(sigma_p_all)
+        # print(dsigma_p_all)
+
+        np.savez_compressed(
+            "tot_am_allnormcasc_peaks.npz",
+            tot_peaks = peaks_all,
+            dtot_peaks = dpeaks_all,
+            tot_sigma_peaks = sigma_p_all,
+            dtot_sigma_peaks = dsigma_p_all)
+        print("\"*.npz\" file is created.")
 
 
         # Analysis for each pixel
@@ -217,7 +283,9 @@ def main(input_file, overwrite=False):
         for fc, lc, name in FRONTENDS:
             print(name, fc, lc)
             print("\n")
+            cut_x = 5
             tot_xp = edges[2][:-1]
+            tot_ax = tot_xp[cut_x:]
             countsp = counts[fc:lc+1,:,:]
             check = np.allclose(countsp,countsp[0])
             #print(check)
@@ -230,48 +298,58 @@ def main(input_file, overwrite=False):
                         pixel_hits = countsp[col,row,:]
                         #print(pixel_hits)
                         total_hits = pixel_hits.sum()
-                        fit_cut = 12
-                        if name=="Cascode":
-                            col=col+224
-                        #################        FE55 FIT        ####################
-                        try:
-                            popt, pcov = curve_fit(
-                                ff_Fe55, tot_x2[fit_cut:], pixel_hits[fit_cut:],
-                                p0= (0.3*total_hits, 20, 5))
-                        except (RuntimeError, OptimizeWarning):
-                            print(f"({col,row}) - {name}", file=pixf)
-                            pass
-                        else:
-                            perr = np.sqrt(np.diag(pcov))
+                        #print(f"Total:{total_hits}")
+                        if total_hits>100:
+                            print(f"Total:{total_hits}")
+                            fit_cut = 12
+                            if name=="Cascode":
+                                col=col+224
+                            if name == "HV Casc.":
+                                col=col+448
+                            if name == "HV":
+                                col=col+480
+                            #################        FE55 FIT        ####################
+                            try:
+                                popt, pcov = curve_fit(
+                                    ff_Am241, tot_xp[fit_cut:], pixel_hits[fit_cut:],
+                                    p0= (total_hits, 15 , 0.2*total_hits, 50, 5,0.2*total_hits, 60, 5,0.1*total_hits, 70, 5,0.05*total_hits, 90, 5))
+                            except (RuntimeError, OptimizeWarning):
+                                print(f"({col,row}) - {name}", file=pixf)
+                                pass
+                            else:
+                                perr = np.sqrt(np.diag(pcov))
 
-                            # plt.step(tot_xp, pixel_hits, where='mid')
-                            # plt.plot(tot_xp[fit_cut:], ff_Fe55(tot_xp[fit_cut:], *popt), "r-",
-                            #     label=f"fit {name}:\nmean={ufloat(round(popt[1], 3), round(perr[1],3))}"
-                            #         f"\nsigma={ufloat(round(popt[2], 3),round(perr[2],3))}")
-                            # plt.title("Time of acquisition: 2.5 hours")
-                            # #plt.title(f"Pixel (col, row) = ({'all' if col is None else col}, {'all' if row is None else row})")
-                            # plt.suptitle(f"Fe55 fit - {name} ({col,row})")
-                            # plt.xlabel("ToT [25 ns]")
-                            # plt.ylabel("Hits / bin")
-                            # plt.legend()
-                            # pdf.savefig(); plt.clf()
-                            # print(f"FIT {name}:")
-                            # for m, s, n in zip(popt, np.sqrt(pcov.diagonal()), ["f0", "mu0", "sigma0"]):
-                            #     print(f"{n:>10s} = {ufloat(m,s)}")
-                            # print(total_hits)
-                            # print(f"COL = {col}")
+                                plt.step(tot_xp, pixel_hits, where='mid')
+                                plt.plot(tot_xp[fit_cut:], ff_Am241(tot_xp[fit_cut:], *popt), "r-",
+                                    label=f"fit {name}:\nmean={ufloat(round(popt[1], 3), round(perr[1],3))}"
+                                        f"\nsigma={ufloat(round(popt[2], 3),round(perr[2],3))}")
+                                plt.title("Time of acquisition: 2.5 hours")
+                                #plt.title(f"Pixel (col, row) = ({'all' if col is None else col}, {'all' if row is None else row})")
+                                plt.suptitle(f"Fe55 fit - {name} ({col,row})")
+                                plt.xlabel("ToT [25 ns]")
+                                plt.ylabel("Hits / bin")
+                                plt.legend()
+                                pdf.savefig(); plt.clf()
+                                print(f"FIT {name}:")
+                                for m, s, n in zip(popt, np.sqrt(pcov.diagonal()), ["f0", "mu0", "sigma0"]):
+                                    print(f"{n:>10s} = {ufloat(m,s)}")
+                                # print(total_hits)
+                                print(f"COL = {col}")
 
-                            peaks[col,row] = popt[1]
-                            dpeaks[col,row] = perr[1]
-                            sigma_p[col,row] = popt[2]
-                            dsigma_p[col,row] = perr[2]
-                            # print(peaks)
-                            # print(dpeaks)
-                            # print(sigma_p)
-                            # print(dsigma_p)
+                                peaks[col,row] = popt[1]
+                                dpeaks[col,row] = perr[1]
+                                sigma_p[col,row] = popt[2]
+                                dsigma_p[col,row] = perr[2]
+                                # print(peaks)
+                                # print(dpeaks)
+                                # print(sigma_p)
+                                # print(dsigma_p)
+
+        # plt.close()
+        # sys.exit()
 
         np.savez_compressed(
-            "tot_fe_peaks.npz",
+            "tot_am_peaks.npz",
             tot_peaks = peaks,
             dtot_peaks = dpeaks,
             tot_sigma_peaks = sigma_p,
