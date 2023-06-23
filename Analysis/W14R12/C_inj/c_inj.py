@@ -27,7 +27,7 @@ FRONTENDS_TOT = [
 FRONTENDS_TOT2 = [
     # a , b, c, t , name
     (0.135, 0, 48, 'Normal'),
-    (0.119, 1.4, 40, 'Cascode'),
+    (0.078, 10, 28, 'Cascode'),
     (0.257, 3.2, 17, 'HV Casc.'),
     (0.275, -5.7, 42, 'HV')]
 
@@ -125,7 +125,13 @@ def main(th_file, peak_file, source, fe, overwrite=False):
                     break
             print(fc,lc,name)
 
-            th_140 = 53.62
+            if name=="Normal":
+                th_140 = 53.62
+            elif name=="Cascode":
+                th_140 = 60.19
+
+            print(f"Threshold:{th_140}")
+
             c = ((th_140)**2)*a-(a*t*th_140)+(b*th_140)-(t*b)
 
 
@@ -182,10 +188,11 @@ def main(th_file, peak_file, source, fe, overwrite=False):
         #               ALPHA
 
         #plt.hist(c_inj_alpha[fc:lc+1].reshape(-1),bins=20, range=[int(min-.5),int(max+1.5)], label=fe)
-        #CASCODE
-        #bin_height, bin_edge,_ = plt.hist(dat[fc:lc+1].reshape(-1), range=[12.5, 14], label=fe)
-        #NORMAL
-        bin_height, bin_edge,_ = plt.hist(dat.reshape(-1),range = [8,10], label=fe)
+        if name== "Cascode":
+            bin_height, bin_edge,_ = plt.hist(dat.reshape(-1), range=[7, 11], label=fe)
+        elif name=="Normal":
+            bin_height, bin_edge,_ = plt.hist(dat.reshape(-1),range = [8,10], label=fe)
+
         print(bin_height)
 
         plt.xlabel("C_inj_alpha [$e^{-}$/DAC]")
@@ -203,10 +210,10 @@ def main(th_file, peak_file, source, fe, overwrite=False):
         perr = np.sqrt(np.diag(pcov))
         x = np.arange(bin_edge[0], bin_edge[-1], 0.005)
 
-        #CASCODE
-        #bin_height, bin_edge,_ = plt.hist(dat[fc:lc+1].reshape(-1),range=[12.5, 14], label=fe)
-        #NORMAL
-        bin_height, bin_edge,_ = plt.hist(dat.reshape(-1),range = [8,10], label=fe)
+        if name=="Cascode":
+            bin_height, bin_edge,_ = plt.hist(dat.reshape(-1),range=[7, 11], label=fe)
+        elif name=="Normal":
+            bin_height, bin_edge,_ = plt.hist(dat.reshape(-1),range = [8,10], label=fe)
 
         plt.plot(x, gauss(x, *popt), "r-", label=f"fit {name}:\nmean={ufloat(round(popt[1], 3), round(perr[1],3))}\nsigma={ufloat(round(popt[2], 3), round(perr[2],3))}")
         plt.xlabel("C_inj_alpha [$e^{-}$/DAC]")
@@ -226,10 +233,10 @@ def main(th_file, peak_file, source, fe, overwrite=False):
         #                       BETA
 
         #plt.hist(c_inj_beta[fc:lc+1].reshape(-1),bins=20, range=[int(min-.5),int(max+1.5)], label=fe)
-        #CASCODE:
-        #bin_height, bin_edge,_ = plt.hist(dat2[fc:lc+1].reshape(-1),range=[14, 16],label=fe)
-        #NORMAL
-        bin_height, bin_edge,_ = plt.hist(dat2.reshape(-1),range = [8,12],label=fe)
+        if name=="Cascode":
+            bin_height, bin_edge,_ = plt.hist(dat2.reshape(-1),range=[7, 11],label=fe)
+        elif name=="Normal":
+            bin_height, bin_edge,_ = plt.hist(dat2.reshape(-1),range = [8,12],label=fe)
 
         plt.xlabel("C_inj_beta [$e^{-}$/DAC]")
         plt.ylabel("Counts")
@@ -246,10 +253,10 @@ def main(th_file, peak_file, source, fe, overwrite=False):
         perr = np.sqrt(np.diag(pcov))
         x = np.arange(bin_edge[0], bin_edge[-1], 0.005)
 
-        #CASCODE:
-        #bin_height, bin_edge,_ = plt.hist(dat2[fc:lc+1].reshape(-1),range=[14, 16],label=fe)
-        #NORMAL
-        bin_height, bin_edge,_ = plt.hist(dat2.reshape(-1),range = [8,12],label=fe)
+        if name=="Cascode":
+            bin_height, bin_edge,_ = plt.hist(dat2.reshape(-1),range=[7, 11],label=fe)
+        elif name=="Normal":
+            bin_height, bin_edge,_ = plt.hist(dat2.reshape(-1),range = [8,12],label=fe)
 
         plt.plot(x, gauss(x, *popt), "r-", label=f"fit {name}:\nmean={ufloat(round(popt[1], 3), round(perr[1],3))}\nsigma={ufloat(round(popt[2], 3), round(perr[2],3))}")
         plt.xlabel("C_inj_beta [$e^{-}$/DAC]")
