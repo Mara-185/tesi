@@ -16,6 +16,7 @@ from uncertainties import ufloat
 import tables as tb
 from tqdm import tqdm
 from plot_utils_pisa import *
+import sys
 
 
 def ff_Am241(x, f0, a, f1, mu1, sigma1, f2, mu2, sigma2, f3, mu3, sigma3, f4, mu4, sigma4):
@@ -33,7 +34,7 @@ def ff_Fe55(x, f0, mu0, sigma0):
 
 
 def main(input_file, overwrite=False):
-    output_file = os.path.splitext(input_file)[0] + "_peak.pdf"
+    output_file = os.path.splitext(input_file)[0] + "_peak2.pdf"
     if os.path.isfile(output_file) and not overwrite:
         return
     print("Plotting", input_file)
@@ -149,7 +150,7 @@ def main(input_file, overwrite=False):
             plt.plot(tot_x[fit_cut:], ff_Fe55(tot_x[fit_cut:], *popt),
                 label=f"fit {name}:\nmean={ufloat(round(popt[1], 3), round(perr[1],3))}"
                     f"\nsigma={ufloat(round(popt[2], 3),round(perr[2],3))}")
-            plt.title(f"Pixel(col, row)=({'all' if col is None else col},{'all' if row is None else row}) - Time of acquisition: 2.5 hours")
+            plt.title(f"Normal & Cascode FE - Time of acquisition: 2.5 hours")
             plt.suptitle("Fe55 fit")
             plt.xlabel("ToT [25 ns]")
             plt.ylabel("Hits / bin")
@@ -192,7 +193,11 @@ def main(input_file, overwrite=False):
                     #         1e-3*total_hits, 75, 5,
                     #         1e-3*total_hits, 90, 5))
                     plt.step(tot_x2, pixel_hits2, where='mid')
-                    plt.plot(tot_x2[fit_cut:], ff_Fe55(tot_x2[fit_cut:], *popt), "r-",
+                    # plt.plot(tot_x2[fit_cut:], ff_Fe55(tot_x2[fit_cut:], *popt), "r-",
+                    #     label=f"fit {name}:\nmean={ufloat(round(popt[1], 3), round(perr[1],3))}"
+                    #         f"\nsigma={ufloat(round(popt[2], 3),round(perr[2],3))}")
+
+                    plt.plot(tot_x2[fit_cut:], ff_Fe55(tot_x2[fit_cut:], *popt),
                         label=f"fit {name}:\nmean={ufloat(round(popt[1], 3), round(perr[1],3))}"
                             f"\nsigma={ufloat(round(popt[2], 3),round(perr[2],3))}")
                     plt.title("Time of acquisition: 2.5 hours")
@@ -201,11 +206,15 @@ def main(input_file, overwrite=False):
                     plt.xlabel("ToT [25 ns]")
                     plt.ylabel("Hits / bin")
                     plt.legend()
-                    pdf.savefig(); plt.clf()
+                    pdf.savefig()
+                    plt.savefig(f"fe55_{name}_peak.png"); plt.clf()
                     print(f"FIT {name}:")
                     for m, s, n in zip(popt, np.sqrt(pcov.diagonal()), ["f0", "mu0", "sigma0"]):
                         print(f"{n:>10s} = {ufloat(m,s)}")
                     #print(total_hits2)
+
+        # plt.close()
+        # sys.exit()
 
 
 

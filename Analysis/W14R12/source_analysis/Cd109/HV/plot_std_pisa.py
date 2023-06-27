@@ -150,7 +150,7 @@ def main(input_files, overwrite=False, log_tot=False, output_file=None):
         # Create npz of all inputs files
 
         np.savez_compressed(
-            "tot_am_HVfiles.npz",
+            "tot_cd_HVfiles.npz",
             counts = counts2d,
             counts2 = counts2d16,
             counts2e = counts2d_edges,
@@ -231,8 +231,8 @@ def main(input_files, overwrite=False, log_tot=False, output_file=None):
                      hist, where='mid', label=name)
         plt.title("ToT")
         plt.xlabel("ToT [25 ns]")
-        # plt.xlim([10,128])
-        # plt.ylim([0,1000000])
+        plt.xlim([10,128])
+        plt.ylim([0,100])
         plt.ylabel("Hits / bin")
         plt.grid(axis='y')
         if log_tot:

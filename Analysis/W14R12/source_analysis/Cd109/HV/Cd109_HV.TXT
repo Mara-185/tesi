@@ -1,0 +1,14 @@
+20221011_193425_source_scan	10min (no mask)
+20221012_183014_source_scan	30 in	no hot pixel
+
+
+
+
+altri?
+20221012_100339_source_scan	15 min (no mask)
+20221012_103806_source_scan	10 min (no mask)
+20221012_112254_source_scan	10 min (no mask)
+
+20221012_125508_source_scan	10 min (mask)
+20221012_131626_source_scan	30 min (other mask noisy)
+

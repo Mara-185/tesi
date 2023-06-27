@@ -436,7 +436,6 @@ In figure \vref{fig:thdist_hvc} the fit of the threshold distributions for the t
 \end{figure}
 
 
-
 \subsection{Noise and Equivalent Noise Charge (ENC)}
 %\addcontentsline{toc}{subsection}{Noise and Equivalent Noise Charge (ENC)}
 
@@ -444,12 +443,130 @@ In figure \vref{fig:thdist_hvc} the fit of the threshold distributions for the t
 %\addcontentsline{toc}{subsection}{Curve del Time Over Threshold (TOT) e fit}
 
 A side effect of the injection circuit issue is that the response of the chip can not be characterized in a region of charge that usually corresponds to the emission peaks of the radioactive sources available in the laboratory. 
-For this reason, a fit of the ToT obtained at the maximum possible injected charge has been done, in order to extrapolate the probable value of ToT in the
+For this reason, a fit of the ToT obtained at the maximum possible injected charge has been done, in order to extrapolate the most probable value of ToT in the main interesting region of charge.
+
+The function chosen for this purpose is:
+
+\begin{equation}
+y(x) = a\cdot x +b -\frac{c}{x-t}
+\end{equation}
+
+with \textit{a}, \textit{b}, \textit{c} and \textit{t} free parameters.
+
+Actually we know that the ToT distribution starts to grow near the threshold, so a random parameter could be computed in function of the threshold value estimated from the previous measurements, explained in section (reference).
+
+In particular knowing that y($x_{th}$) must be equal to 0, it can be imposed:
+
+\begin{equation}
+0 = a\cdot x_{th} + b - \frac{c}{x_{th}-t}  \hspace{.4cm}	\Rightarrow  \hspace{.4cm}	c = x_{th}^{2}\cdot a + x_{th}\cdot (b-a\cdot t) - t\cdot b
+\end{equation}
+
+In this way the number of parameters to fit is reduced.
+
+So the same data collected in the previous measurements of thresholds (for VH=200 DAC unit), have been used to fit the ToT curves of all pixels for each frontend.
+In table \vref{tab:th_fe} are reported the value of the threshold considered for each frontend to extrapolate the value of the parameter \textit{c}and the results of the fit for all parameters. In figure \vref{fig:tot_fe} the results obtained for all Normal, Cascode and HVs FE.
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{c|c|c|c|c}
+ & \textbf{Normal} & \textbf{Cascode} & \textbf{HV Cascode} & \textbf{HV} \\
+\hline
+\textit{threshold [DAC unit]} & 53.62 & 60.19 & 35.34 & 31.70 \\
+\textit{a} & & & & \\
+\textit{b} & & & & \\
+\textit{c} & & & & \\
+\textit{t} & & & & \\
+\end{tabular}
+\caption{Threshold and parameters obtained from the fit of ToT curve for each frontend.}
+\label{tab:th_fe}
+\end{table}
+
+\begin{figure}[h!]
+\centering
+\subfigure[\textbf{Normal}]
+{\includegraphics[scale=0.35]{tot_fit_normal(200)}}\quad
+\subfigure[\textbf{Cascode}]
+{\includegraphics[scale=0.35]{tot_fit_cascode(200)}}\\
+\subfigure[\textbf{HV Cascode}]
+{\includegraphics[scale=0.35]{tot_fit_HV_Casc.(200)}}\quad
+\subfigure[\textbf{HV}]
+{\includegraphics[scale=0.35]{tot_fit_HV(200)}}\\
+\caption{ToT curves fit for all frontend.}
+\label{fig:tot_fe}
+\end{figure}
+
+ 
+
+
+
+
+
+
+
+
+
+
+
 
 \section{Radioactive sources}
 %\addcontentsline{toc}{section}{Caratterizzazione con le sorgenti radioattive}
 
-Fe55, Am241, Cd109, Sr190
+\subsection{\ch{^{55}Fe}}
+
+\begin{figure}[h!]
+\centering
+\subfigure[\textbf{Normal}]
+{\includegraphics[scale=0.35]{fe55_Normal_peak}}\quad
+\subfigure[\textbf{Cascode}]
+{\includegraphics[scale=0.35]{fe55_Cascode_peak}}\\
+\subfigure[\textbf{HV Cascode}]
+{\includegraphics[scale=0.35]{fe_HV Casc._peak}}\quad
+\subfigure[\textbf{HV}]
+{\includegraphics[scale=0.35]{fe_HV_peak}}\\
+\caption{\ch{^{55}Fe} pekas for all frontends.}
+\label{fig:fe_all}
+\end{figure}
+
+
+CUT ON HVs flavors because of bad columns, many 0 ToT.
+
+\subsection{\ch{^{241}Am}}
+
+
+\begin{figure}[h!]
+\centering
+\subfigure[\textbf{Normal}]
+{\includegraphics[scale=0.35]{am_Normal_peak}}\quad
+\subfigure[\textbf{Cascode}]
+{\includegraphics[scale=0.35]{am_Cascode_peak}}\\
+\subfigure[\textbf{HV Cascode}]
+{\includegraphics[scale=0.35]{am_HV Casc._peak}}\quad
+\subfigure[\textbf{HV}]
+{\includegraphics[scale=0.35]{am_HV_peak}}\\
+\caption{\ch{^{241}Am} pekas for all frontends.}
+\label{fig:fe_all}
+\end{figure}
+
+
+
+\subsection{\ch{^{109}Cd}}
+
+\begin{figure}[h!]
+\centering
+\subfigure[\textbf{Normal}]
+{\includegraphics[scale=0.35]{cd109_Normal_peak}}\quad
+\subfigure[\textbf{Cascode}]
+{\includegraphics[scale=0.35]{cd109_Cascode_peak}}\\
+\subfigure[\textbf{HV Cascode}]
+{\includegraphics[scale=0.35]{cd109_HV Casc._peak}}\quad
+\subfigure[\textbf{HV}]
+{\includegraphics[scale=0.35]{cd109_HV_peak}}\\
+\caption{\ch{^{109}Cd} pekas for all frontends.}
+\label{fig:fe_all}
+\end{figure}
+
+\subsection{\ch{^{190}Sr}}
+
 
 \subsection{Injection capacitance calibration}
 %\addcontentsline{toc}{subsection}{Calibrazione della capacità di iniezione}

@@ -1,2 +1,4 @@
-20221011_184322_source_scan 	10 min
+20221011_184322_source_scan 	10 min aborting error at 85%
 20221011_180920_source_scan	? "Abortin error"
+
+forse 10 min in totale
