@@ -14,6 +14,7 @@ from tqdm import tqdm
 from uncertainties import ufloat
 from plot_utils_pisa import *
 from scipy.optimize import curve_fit
+from scipy.stats import norm
 
 VIRIDIS_WHITE_UNDER = matplotlib.cm.get_cmap('viridis').copy()
 VIRIDIS_WHITE_UNDER.set_under('w')
@@ -302,59 +303,119 @@ def main(input_file, overwrite=False):
 
         #Threshold map
 
-        # plt.axes((0.125, 0.11, 0.775, 0.72))
-        # plt.pcolormesh(occupancy_edges[0], occupancy_edges[1], threshold_DAC.transpose(),
-        #                rasterized=True)  # Necessary for quick save and view in PDF
-        # plt.title(subtitle)
-        # plt.suptitle("Threshold map")
-        # plt.xlabel("Column")
-        # plt.ylabel("Row")
-        # set_integer_ticks(plt.gca().xaxis, plt.gca().yaxis)
-        # cb = plt.colorbar()
-        # cb.set_label("Threshold [DAC]")
-        # frontend_names_on_top()
-        # pdf.savefig(); plt.clf()
+        plt.axes((0.125, 0.11, 0.775, 0.72))
+        plt.pcolormesh(occupancy_edges[0], occupancy_edges[1], threshold_DAC.transpose(),
+                       rasterized=True)  # Necessary for quick save and view in PDF
+        plt.title(subtitle)
+        plt.suptitle("Threshold map")
+        plt.xlabel("Column")
+        plt.ylabel("Row")
+        set_integer_ticks(plt.gca().xaxis, plt.gca().yaxis)
+        cb = plt.colorbar()
+        cb.set_label("Threshold [DAC]")
+        frontend_names_on_top()
+        pdf.savefig();
+        plt.savefig("threshold_map_norm_140.png"); plt.clf()
 
         #Compute the noise (the width of the up-slope of the s-curve)
         #as a variance with the weights above
 
-        # noise_DAC = np.sqrt(average((occupancy_charges - np.expand_dims(threshold_DAC, -1))**2, axis=2, weights=w, invalid=0))
-        # del w
-        #
-        # # Noise hist
-        # m = int(np.ceil(noise_DAC.max(initial=0, where=np.isfinite(noise_DAC)))) + 1
-        # for i, (fc, lc, name) in enumerate(FRONTENDS):
-        #     if fc >= col_stop or lc < col_start:
-        #         continue
-        #     fc = max(0, fc - col_start)
-        #     lc = min(col_n - 1, lc - col_start)
-        #     ns = noise_DAC[fc:lc+1,:]
-        #     noise_mean = ufloat(np.mean(ns[ns>0]), np.std(ns[ns>0], ddof=1))
-        #     plt.hist(ns.reshape(-1), bins=min(20*m, 100), range=[0, m],
-        #              label=f"{name} ${noise_mean:L}$", histtype='step', color=f"C{i}")
-        # plt.title(subtitle)
-        # plt.suptitle(f"Noise (width of s-curve slope) distribution")
-        # plt.xlabel("Noise [DAC]")
-        # plt.ylabel("Pixels / bin")
-        # set_integer_ticks(plt.gca().yaxis)
-        # plt.grid(axis='y')
-        # plt.legend()
-        # pdf.savefig(); plt.clf()
+        noise_DAC = np.sqrt(average((occupancy_charges - np.expand_dims(threshold_DAC, -1))**2, axis=2, weights=w, invalid=0))
+        del w
 
-        #Noise map
+        # Noise hist
+        m = int(np.ceil(noise_DAC.max(initial=0, where=np.isfinite(noise_DAC)))) + 1
+        for i, (fc, lc, name) in enumerate(FRONTENDS):
+            if fc >= col_stop or lc < col_start:
+                continue
+            fc = max(0, fc - col_start)
+            lc = min(col_n - 1, lc - col_start)
+            ns = noise_DAC[fc:lc+1,:]
+            noise_mean = ufloat(np.mean(ns[ns>0]), np.std(ns[ns>0], ddof=1))
+            plt.hist(ns.reshape(-1), bins=min(20*m, 100), range=[0, m],
+                     label=f"{name} ${noise_mean:L}$", histtype='step', color=f"C{i}")
 
-        # plt.axes((0.125, 0.11, 0.775, 0.72))
-        # plt.pcolormesh(occupancy_edges[0], occupancy_edges[1], noise_DAC.transpose(),
-        #                rasterized=True)  # Necessary for quick save and view in PDF
-        # plt.title(subtitle)
-        # plt.suptitle("Noise (width of s-curve slope) map")
-        # plt.xlabel("Column")
-        # plt.ylabel("Row")
-        # set_integer_ticks(plt.gca().xaxis, plt.gca().yaxis)
-        # cb = plt.colorbar()
-        # cb.set_label("Noise [DAC]")
-        # frontend_names_on_top()
-        # pdf.savefig(); plt.clf()
+
+        plt.title(subtitle)
+        plt.suptitle(f"Noise (width of s-curve slope) distribution")
+        plt.xlabel("Noise [DAC]")
+        plt.ylabel("Pixels / bin")
+        set_integer_ticks(plt.gca().yaxis)
+        plt.grid(axis='y')
+        plt.legend()
+        pdf.savefig();
+        plt.savefig("Noise_hist_norm_140.png"); plt.clf()
+
+        # Noise Hist Fit
+        for i, (fc, lc, name) in enumerate(FRONTENDS):
+            if fc >= col_stop or lc < col_start:
+                continue
+            fc = max(0, fc - col_start)
+            lc = min(col_n - 1, lc - col_start)
+            ns = noise_DAC[fc:lc+1,:]
+            noise_mean = ufloat(np.mean(ns[ns>0]), np.std(ns[ns>0], ddof=1))
+            bin_height_noise, bin_edge_noise, _ = plt.hist(ns.reshape(-1), bins=min(20*m, 100), range=[0, m],
+                     label=f"{name} ${noise_mean:L}$", histtype='step', color=f"C{i}")
+
+
+##############################################
+
+            # low = [10000,10, 0]
+            # up = [100500, 200, 30]
+
+            def gauss2(x, f1, mu1, sigma1, f2, mu2, sigma2):
+                return (
+                    f1 * norm.pdf(x, mu1, sigma1)  # First peak
+                    + f2 * norm.pdf(x, mu2, sigma2)  # Second peak
+                    )
+
+            bin_center_noise = (bin_edge_noise[:-1]+bin_edge_noise[1:])/2
+            popt_noise, pcov_noise = curve_fit(gauss2, bin_center_noise, bin_height_noise)
+            print(*popt_noise)
+            perr_noise = np.sqrt(np.diag(pcov_noise))
+            print(*perr_noise)
+
+            xb_noise = np.arange(bin_edge_noise[0], bin_edge_noise[-1], 0.005)
+            plt.plot(xb_noise, gauss2(xb_noise, *popt_noise), "r-", label=f"fit {name}:\nmean1={ufloat(round(popt_noise[1], 3), round(perr_noise[1],3))}\nsigma1={ufloat(round(popt_noise[2], 3), round(perr_noise[2],3))}"
+                                                                        f"\nmean2={ufloat(round(popt_noise[4], 3), round(perr_noise[4],3))}\nsigma1={ufloat(round(popt_noise[5], 3), round(perr_noise[5],3))}")
+            #Save results in a txt file
+            with open(f"noise_fitresults_{the_vh}[all norm].txt", "w") as outf:
+                print("#A#mean1#sigma1#mean2#sigma2:", file=outf)
+                print(*popt_noise, file=outf)
+                print("#SA#Smean1#Ssigma1#Smean2#Ssigma2:", file=outf)
+                print(*perr_noise, file=outf)
+
+###################################################
+
+
+
+        plt.title(subtitle)
+        plt.suptitle(f"Noise (width of s-curve slope) distribution")
+        plt.xlabel("Noise [DAC]")
+        plt.ylabel("Pixels / bin")
+        set_integer_ticks(plt.gca().yaxis)
+        plt.grid(axis='y')
+        plt.xlim([0,6])
+        plt.legend()
+        pdf.savefig();
+        plt.savefig("Noise_hist_norm_140_fit.png"); plt.clf()
+
+
+        # Noise map
+
+        plt.axes((0.125, 0.11, 0.775, 0.72))
+        plt.pcolormesh(occupancy_edges[0], occupancy_edges[1], noise_DAC.transpose(),
+                       rasterized=True)  # Necessary for quick save and view in PDF
+        plt.title(subtitle)
+        plt.suptitle("Noise (width of s-curve slope) map")
+        plt.xlabel("Column")
+        plt.ylabel("Row")
+        set_integer_ticks(plt.gca().xaxis, plt.gca().yaxis)
+        cb = plt.colorbar()
+        cb.set_label("Noise [DAC]")
+        frontend_names_on_top()
+        pdf.savefig();
+        plt.savefig("Noise_map_norm_140.png"); plt.clf()
 
         # Time since previous hit vs ToT
 
