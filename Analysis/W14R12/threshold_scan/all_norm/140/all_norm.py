@@ -355,7 +355,7 @@ def main(input_file, overwrite=False):
             ns = noise_DAC[fc:lc+1,:]
             noise_mean = ufloat(np.mean(ns[ns>0]), np.std(ns[ns>0], ddof=1))
             bin_height_noise, bin_edge_noise, _ = plt.hist(ns.reshape(-1), bins=min(20*m, 100), range=[0, m],
-                     label=f"{name} ${noise_mean:L}$", histtype='step', color=f"C{i}")
+                     label=f"{name}", histtype='step', color=f"C{i}")
 
 
 ##############################################

@@ -186,7 +186,7 @@ This method allows to study the noise and threshold of all pixels and also the t
 
 \begin{figure}
 \centering
-\includegraphics[scale=.7]{scurve_ex}
+\includegraphics[scale=.6]{scurve_ex}
 \caption{An example of the S-Curve fitted by the CDF to evaluate threshold and noise.}
 \label{ex_scurve}
 \end{figure}
@@ -251,15 +251,6 @@ In figure \vref{fig:norm_scurve_140} are plotted all the s-curves of the all wel
 
 The threshold and noise distributions obtained injecting all pixels as explained above, have been fitted with a gaussian distribution and they are shown in figure \pageref{fig:thdist_norm} with their maps, too.
 
-\begin{comment}
-\begin{figure}[h!]
-\centering
-\includegraphics[scale=0.6]{all_norm_thdist_140}
-\caption{Threshold distributions of \textbf{Normal} flavor for VH = 140 DAC}
-\label{fig:thdist_norm}
-\end{figure}
-\end{comment}
-
 \begin{figure}[h!]
 \centering
 \subfigure[Threshold distribution]
@@ -290,15 +281,6 @@ In figure \vref{fig:casc_curve140} the S-curves of all pixels are shown.
 
 The fit of the threshold and noise distributions and maps instead, are shown in figure \vref{fig:thdist_casc}.
 
-\begin{comment}
-\begin{figure}[h!]
-\centering
-\includegraphics[scale=0.5]{all_casc_thdist_140}
-\caption{Threshold distributions of \textbf{Cascode} flavor for VH = 140 DAC.}
-\label{fig:thdist_casc}
-\end{figure}
-\end{comment}
-
 
 \begin{figure}[h!]
 \centering
@@ -324,7 +306,7 @@ The fit of the threshold and noise distributions and maps instead, are shown in 
 
 The third flavor is \textbf{HV-Cascode FE} where HV stands for \textbf{High Voltage} and it is formed (counts) of 512 rows and 32 columns for a total number of pixel equal to 16384. Also for these last two flavors, the main chip registers are set with the same values tested and used during the Test Beam (@Desy) (but different from those used for the first two flavors). They are reported in table \vpageref{tab:tb_hv_settings} .
 
-As we can see from the plot of the alle S-curves in figure \vref{fig:hvc_scurve_140}, there were a lot of noisy pixels with these choices of values' registers, but at this stage of measurements they were not masked.
+As we can see from the plot of the alle S-curves in figure \vpageref{fig:hvc_scurve_140}, there were a lot of noisy pixels with these choices of values' registers, but at this stage of measurements they were not masked.
 As a matter of fact along the y-axis of this plot is displayed the occupancy and when this values becomes higher than 1, it means that the pixel detects more hits than the injected ones, so it could be identified as ''\textit{noisy pixel} (because it results active regardless of the charge injection)''.
 
 
@@ -335,12 +317,15 @@ As a matter of fact along the y-axis of this plot is displayed the occupancy and
 \label{fig:hvc_scurve_140}
 \end{figure}
 
-In figure \vref{fig:thdist_hvc} are shown the fit of the threshold distribution.
+In figure \vref{fig:thdist_hvc} are shown the fit of the threshold and noise distributions.
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.5]{all_HVc_thdist_140}
-\caption{Threshold distributions of \textbf{HV Cascode} flavor for VH = 140 DAC.}
+\subfigure[Threshold distribution]
+{\includegraphics[scale=0.35]{all_HVc_thdist_140}}\quad
+\subfigure[Noise distribution]
+{\includegraphics[scale=0.37]{Noise_hist_HV Casc._140_fit}}\\
+\caption{HV Cascode FE.}
 \label{fig:thdist_hvc}
 \end{figure}
 
@@ -348,8 +333,8 @@ In figure \vref{fig:thdist_hvc} are shown the fit of the threshold distribution.
 \subsubsection{HV-Normal FE}
 
 The fourth and last flavor is the \textbf{HV-Normal FE} which consists of 512 rows and 32 columns for a total number of pixel equal to 16.384. The main registers have been set with the values reported in table \vpageref{tab:tb_hv_settings}.
-In figure \vref{fig:hv_scurve_140}, the S-curves of all pixel in the flavor. Also here we can see that there were some noisy pixels unmasked.
-Moreover, in this final flavor, the last 16 columns were not working and as a matter of fact they had return a peak of threshold near the value 0, which is excluded from the threshold distributions plots.
+In figure \vpageref{fig:hv_scurve_140}, the S-curves of all pixel in the flavor. Also here we can see that there were some noisy pixels unmasked.
+Moreover, in this final flavor, the last 16 columns were not working (visible in the maps in figure \vpageref{HVs_maps}) and as a matter of fact they had return a peak of threshold near the value 0, which is excluded from the threshold distributions plots.
 
 So actually in this part of the matrix, the real number of pixel studied was the half of the total, such as 8192 pixels.
 
@@ -361,18 +346,35 @@ So actually in this part of the matrix, the real number of pixel studied was the
 \label{fig:hv_scurve_140}
 \end{figure}
 
-In figure \vref{fig:thdist_hvc} the fit of the threshold distribution.
-
+In figure \vref{fig:thdist_hv} the fit of the threshold and noise distributions.
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.5]{all_HV_thdist_140}
-\caption{Threshold distributions of \textbf{HV} flavor for VH = 140 DAC}
-\label{fig:thdist_hvc}
+\subfigure[Threshold distribution]
+{\includegraphics[scale=0.35]{all_HV_thdist_140}}\quad
+\subfigure[Noise distribution]
+{\includegraphics[scale=0.37]{Noise_hist_HV_140_fit}}\\
+\caption{HV Normal FE.}
+\label{fig:thdist_hv}
+\end{figure}
+
+
+At last in figure \vpageref{HVs_maps} the threshold and noise maps of the whole HV flavor.
+
+\begin{figure}[h!]
+\centering
+\subfigure[Threshold map]
+{\includegraphics[scale=0.35]{threshold_map_All FEs_140}}\quad
+\subfigure[Noise map]
+{\includegraphics[scale=0.37]{Noise_map_HV Casc._140}}\\
+\caption{HV's FE.}
+\label{fig:HVs_maps}
 \end{figure}
 
 
 \subsubsection{Summary Table}
+
+In table \vpageref{th_noise_all} a summary of results for threshold, noise and threshold dispersion of all FE.
 
 \begin{table}[h!]
 \centering
@@ -380,20 +382,18 @@ In figure \vref{fig:thdist_hvc} the fit of the threshold distribution.
 \rowcolor{CornflowerBlue}
 Front-End & Threshold [$e^{-}$] & Threshold dispersion [$e^{-}$] & Noise [$e^{-}$]\\
 \hline
-Normal  & 53.62 $\pm$ 0.01 & 2.21 $\pm$ 0.01 &\\
+Normal  & 53.62 $\pm$ 0.01 & 2.21 $\pm$ 0.01 & \shortstack{2.503 $\pm$ 0.005 \\ 3.037 $\pm$ 0.002}\\
 \hline
-Cascode & 60.19 $\pm$ 0.01 & 2.81 $\pm$ 0.01 &\\
+Cascode & 60.19 $\pm$ 0.01 & 2.81 $\pm$ 0.01 & 2.400 $\pm$ 0.003\\
 \hline
-HV & 35.34 $\pm$ 0.05 & 2.59 $\pm$ 0.05 &\\
+HV - Cascode & 35.34 $\pm$ 0.05 & 2.59 $\pm$ 0.05 & 1.0781 $\pm$ 0.0003\\
 \hline
-HV - Cascode & 31.70 $\pm$ 0.10 & 2.30 $\pm$ 0.10 &\\
+HV & 31.70 $\pm$ 0.10 & 2.30 $\pm$ 0.10 & 1.080 $\pm$ 0.033\\
 \hline
 \end{tabular}
 \caption{Summary table of threshold and noise values for all flavors of the W14R12 chip.}
 \label{tab:th_noise_all}
 \end{table}
-
-
 
 
 
@@ -462,6 +462,7 @@ The function chosen for this purpose is:
 
 \begin{equation}
 y(x) = a\cdot x +b -\frac{c}{x-t}
+\label{fit_function}
 \end{equation}
 
 with \textit{a}, \textit{b}, \textit{c} and \textit{t} free parameters and where the \textit{y} represents the ToT corresponding to a precise value of collected charge, express by \textit{x}. 
@@ -510,7 +511,7 @@ In table \vref{tab:th_fe} are reported the value of the threshold considered for
 
 
 %--------------------------------------------------------------------
-\section{Response to radioactive source and absolute calibration}
+\section{Response to radioactive source and absolute calibration} \label{source_ana}
 
 %06/10/2022 LOGBOOK
 
@@ -518,6 +519,12 @@ The absolute calibration of the matrix consists in characterizing the signal res
 In fact the known energies of the sources emission spectrum (so that the charge released in the matrix from particles emitted in decays) allow to compare the spectra obtained irradiating the chip, with the expected value of their peaks. [Only the events in which all charge inducted is collected in a single pixel are a part of the peaks reconstructed by the chip.]\\
 Moreover these radioactive sources allowed to extend the ToT calibration for(at) higher value with respect to the limit imposed by the saturation of the internal injection circuit (section \ref{inj_issue}). In table \vref{tab:radio_sources} are shown the emission energies of the sources employed, that it was possible to see with the chip under test.
 
+[Considering that the average energy necessary to produce an electron/hole pair in silicon is 3.65 eV, it is possible to convert the peak energies in a mean value of electrons released by the means of equation \vpageref{energy_electron_conv}. So in the table are reported also the equivalent emission in electrons, which will be useful further.]
+
+\begin{equation}
+N_{e^{-}} = \frac{E \, [eV]}{3.65 [\frac{eV}{e/h \, pair}]}
+\label{energy_electron_conv}
+\end{equation}
 %%CONVERSIONE IN ELETTRONI
 %SR90 BETA SOURCE???
 
@@ -530,17 +537,17 @@ Source & Energy $\gamma$ [KeV] & Equivalent charge [$e^{-}$]\\[2ex]
 \hline
 \ch{^{55}Fe} & 5.9 & 1616\\[0.5ex]
 \hline
-\ch{^{241}Am} & 13.9 & 60\\[0.5ex]
+\ch{^{241}Am} & 13.9 & 3808\\[0.5ex]
 \hline
-\ch{^{241}Am} & 17.7 & 100\\[0.5ex]
+\ch{^{241}Am} & 17.7 & 4849\\[0.5ex]
 \hline
-\ch{^{241}Am} & 20.7 & 8\\[0.5ex]
+\ch{^{241}Am} & 20.7 & 5671\\[0.5ex]
 \hline
-\ch{^{109}Cd} & 22 &40\\[0.5ex]
+\ch{^{109}Cd} & 22 & 6027\\[0.5ex]
 \hline
-\ch{^{241}Am} & 26.4 & 228\\[0.5ex]
+\ch{^{241}Am} & 26.4 & 7233\\[0.5ex]
 \hline
-\ch{^{241}Am} & 59.7 & 100\\
+\ch{^{241}Am} & 59.7 & 16356\\
 \hline
 \end{tabular}
 \caption{Emission lines of \ch{^{55}Fe}, \ch{^{241}Am}, \ch{^{109}Cd} sources visible by the sensor.}
@@ -583,7 +590,7 @@ Results are reported in figure \vref{fig:am_all}. In the case of the first two f
 \centering
 \includegraphics[scale=.4]{Am241}
 \caption{\ch{^{241}Am} $\gamma$ emission spectrum.}
-\label{am241_spectrum}
+\label{fig:am241_spectrum}
 \end{figure}
 
 
@@ -604,7 +611,7 @@ Results are reported in figure \vref{fig:am_all}. In the case of the first two f
 %--------------------------------------------------------------------
 \subsection{\ch{^{109}Cd}}
 
-The third source employed was the \ch{^{109}Cd}. In its spectrum a peak at 22 KeV is expected. In figure \vref{cd_all} the results obtained irradiating all FE.
+The third source employed was the \ch{^{109}Cd}. This isotope decay in \ch{^{109}Ag} by electronic capture, producing a photon of 22 KeV in the transistion. In figure \vref{cd_all} the results obtained irradiating all FE. 
 
 \begin{figure}[h!]
 \centering
@@ -626,9 +633,77 @@ The third source employed was the \ch{^{109}Cd}. In its spectrum a peak at 22 Ke
 
 
 \subsection{Injection capacitance calibration}
-%\addcontentsline{toc}{subsection}{Calibrazione della capacità di iniezione}
 
-\subsection{CHeck on linearity of tot fit}
+Here it's necessary to point out that for iron source more statistics were collected so in this case a complete analysis of each pixel could be done. For the other sources instead, there weren't enough statistics on every pixel so the injection capacitance has been estimate only as a mean value for the whole front-end, just to compare with the results obtained from the iron analysis.  
+
+In case of \ch{^{55}FE} source, we managed to fit the emission peak for each working pixel of the whole matrix. The value of the charge corresponding to the ToT peak of the emission line was extrapolate considering the parameters' values obtained by fitting the $Q_{inj}$ - ToT relationship (section \vpageref{tot_fit}). \\
+
+Specifically the fit function \vpageref{fit_function} was inverted obtaining:
+
+\begin{equation}
+x(y) = \bigg(\frac{t}{2} - \frac{b}{2a} + \frac{y}{2a}\bigg) \pm \sqrt{\bigg(\frac{t}{2} + \frac{b}{2a} - \frac{y}{2a}\bigg)^{2} + \frac{c}{a}}
+\end{equation}
+
+where \textit{x} represents the charge corresponding to the ToT labeled by \textit{y}.
+
+As shown in table \vpageref{tab:radio_sources}, the charge released in the sensor (considering that collected from only one pixel) corresponds roughly ($\approx$, approximately) to 1616 $e^{-}$. Therefore it was possible to calculate (estimate) the conversion factor for each pixel as follows:
+
+\begin{equation}
+C_{f}\bigg[\frac{e^{-}}{DAC}\bigg] = \frac{1616 \, e^{-}}{ToT \, \frac{DAC}{ToT unit}}
+\label{inj_cap}
+\end{equation} 
+
+By these steps, a value of the injection capacitance was estimated for each well-functioning pixel. In figure \vpageref{fig:cap_dist} is reported the distributions of the injection capacitance estimated, fitted by a gaussian function.
+
+\begin{figure}
+\centering
+\subfigure[\textbf{Normal}]
+{\includegraphics[scale=0.35]{c_inj_alpha_fe_Normal}}\quad
+\subfigure[\textbf{Cascode}]
+{\includegraphics[scale=0.35]{c_inj_alpha_fe_Cascode}}\\
+\subfigure[\textbf{HV - Cascode}]
+{\includegraphics[scale=0.35]{c_inj_alpha_fe_Hv Casc.}}\quad
+\subfigure[\textbf{HV}]
+{\includegraphics[scale=0.35]{c_inj_alpha_fe_HV}}\\
+\caption{Injection capacitance distributions of all FE.}
+\label{fig:cap_dist}
+\end{figure} 
+
+[As expected the capacitance oh the HV's flavors is much higher than the Normal and Cascode FE. No! It's expected all the same?] 
+
+Regarding the other sources, it was impossibile to fit the distributions for each pixel due to low statistics. For this reason only a mean value for all flavor could be extrapolate. In tabel \vpageref{tab:cap_mean} the results obtained with the same method used with the iron source.
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{>{\columncolor{NavyBlue!70}} C{3cm}|C{2.4cm}|C{2.4cm}|C{2.4cm}|C{2.4cm}}
+\rowcolor{CornflowerBlue}
+Source peak & $C_{Normal}$ & $C_{Cascode}$ & $C_{HV Cascode}$ & $C_{HV}$\\[2ex]
+\hline
+\ch{^{55}Fe} (5.9 KeV) &  & & & \\[0.5ex]
+\hline
+\ch{^{241}Am} (13.9 KeV) &  & & &\\[0.5ex]
+\hline
+\ch{^{241}Am} (17.7 KeV) &  & & &\\[0.5ex]
+\hline
+\ch{^{241}Am} (20.7 KeV) &  & & &\\[0.5ex]
+\hline
+\ch{^{109}Cd} (22 KeV)&  & & &\\[0.5ex]
+\hline
+\ch{^{241}Am} (26.4 KeV)&  & & &\\[0.5ex]
+\hline
+\ch{^{241}Am} (59.7 KeV)&  & & &\\
+\hline
+\end{tabular}
+\caption{Estimation of injection capacitance of all flavors for different source emission peaks.}
+\label{tab:cap_mean}
+\end{table}
+
+
+
+
+
+%--------------------------------------------------------------------
+\subsection{Check on linearity of tot fit}
 
 
 
@@ -989,8 +1064,42 @@ $I_{RAM}$ & 50 \\
 \caption{Settings of the main registers used for the W14R12 chip, for the HV's flavors, during the Test Beam in Desy.}
 \label{tab:tb_hv_settings}
 \end{table}
+\end{comment}
 
+\begin{comment}
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.5]{all_HV_thdist_140}
+\caption{Threshold distributions of \textbf{HV} flavor for VH = 140 DAC}
+\label{fig:thdist_hv}
+\end{figure}
+\end{comment}
 
+\begin{comment}
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.5]{all_norm_thdist_140}
+\caption{Threshold distributions of \textbf{Normal} flavor for VH = 140 DAC}
+\label{fig:thdist_norm}
+\end{figure}
+\end{comment}
+
+\begin{comment}
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.5]{all_casc_thdist_140}
+\caption{Threshold distributions of \textbf{Cascode} flavor for VH = 140 DAC.}
+\label{fig:thdist_casc}
+\end{figure}
+\end{comment}
+
+\begin{comment}
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=.5]{all_HVc_thdist_140}
+\caption{Threshold distributions of \textbf{HV Cascode} flavor for VH = 140 DAC.}
+\label{fig:thdist_hvc}
+\end{figure}
 \end{comment}
 
 
@@ -1000,4 +1109,5 @@ $I_{RAM}$ & 50 \\
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %1. THESIS MUSTAKAS
-%2. GAMMA RAY SPECTRUM OF AM-241 IN A BACK SCATTERING GEOMETRY USING A HIGH PURITY GERMANIUM DETECTOR (for Am241)
+%2. GAMMA RAY SPECTRUM OF AM-241 IN A BACK SCATTERING GEOMETRY USING A HIGH PURITY GERMANIUM DETECTOR (for Am241) 
+%KOLANOSKI per converision factro 3.65

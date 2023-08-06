@@ -277,13 +277,10 @@ def main(input_file, overwrite=False):
                     #         1e-3*total_hits, 75, 5,
                     #         1e-3*total_hits, 90, 5))
                     plt.step(tot_xax, pixel_hits2[cut_x:fit_cut2], where='mid')
-                    plt.plot(tot_x2[fit_cut:fit_cut2], ff_Am241_HV(tot_x2[fit_cut:fit_cut2], *popt),
-                        label=f"fit {name}:\nmean1={ufloat(round(popt[3], 3), round(perr[3],3))}"
-                            f"\nsigma1={ufloat(round(popt[4], 3),round(perr[4],3))}"
-                            f"\nmean2={ufloat(round(popt[6], 3), round(perr[6],3))}"
-                                f"\nsigma2={ufloat(round(popt[7], 3),round(perr[7],3))}"
-                            f"\nmean3={ufloat(round(popt[9], 3), round(perr[9],3))}"
-                                f"\nsigma3={ufloat(round(popt[10], 3),round(perr[10],3))}")
+                    labelf = f"fit {name}:\nmean1={ufloat(round(popt[3], 3), round(perr[3],3))}\nsigma1={ufloat(round(popt[4], 3),round(perr[4],3))}\nmean2={ufloat(round(popt[6], 3), round(perr[6],3))}\nsigma2={ufloat(round(popt[7], 3),round(perr[7],3))}\nmean3={ufloat(round(popt[9], 3), round(perr[9],3))}\nsigma3={ufloat(round(popt[10], 3),round(perr[10],3))}"
+                    if name == "HV":
+                        labelf = f"fit {name}:\nmean1={ufloat(round(popt[3], 3), round(perr[3],3))}\nsigma1={ufloat(round(popt[4], 3),round(perr[4],3))}\nmean2={ufloat(round(popt[6], 3), round(perr[6],3))}\nsigma2={ufloat(round(popt[7], 3),round(perr[7],3))}"
+                    plt.plot(tot_x2[fit_cut:fit_cut2], ff_Am241_HV(tot_x2[fit_cut:fit_cut2], *popt), label=f"{labelf}")
                     plt.title("Time of acquisition: 10 minutes")
                     #plt.title(f"Pixel (col, row) = ({'all' if col is None else col}, {'all' if row is None else row})")
                     plt.suptitle(f"Am241 fit - {name}")

@@ -445,7 +445,7 @@ def main(input_file, overwrite=False):
             ns = noise_DAC[fc:lc+1,:]
             noise_mean = ufloat(np.mean(ns[ns>0]), np.std(ns[ns>0], ddof=1))
             bin_height_noise, bin_edge_noise, _ = plt.hist(ns.reshape(-1), bins=min(20*m, 100), range=[0, m],
-                     label=f"{name} ${noise_mean:L}$", histtype='step', color=f"C{i}")
+                     label=f"{name}", histtype='step', color=f"C{i}")
 
 
 ##############################################
@@ -466,7 +466,10 @@ def main(input_file, overwrite=False):
             print(*perr_noise)
 
             xb_noise = np.arange(bin_edge_noise[0], bin_edge_noise[-1], 0.005)
-            plt.plot(xb_noise, gauss(xb_noise, *popt_noise), "r-", label=f"fit {name}:\nmean1={ufloat(round(popt_noise[1], 3), round(perr_noise[1],3))}\nsigma1={ufloat(round(popt_noise[2], 3), round(perr_noise[2],3))}")
+            label_n = f"fit {name}:\nmean1={ufloat(round(popt_noise[1], 3), round(perr_noise[1],3))}\nsigma1={ufloat(round(popt_noise[2], 3), round(perr_noise[2],3))}"
+            if name=="HV Casc.":
+                label_n = f"fit {name}:\nmean1={ufloat(round(popt_noise[1], 4), round(perr_noise[1],4))}\nsigma1={ufloat(round(popt_noise[2], 4), round(perr_noise[2],4))}"
+            plt.plot(xb_noise, gauss(xb_noise, *popt_noise), "-", label=f"{label_n}")
             #Save results in a txt file
             with open(f"noise_fitresults_{the_vh}[{name}].txt", "w") as outf:
                 print("#A#mean1#sigma1:", file=outf)
@@ -485,6 +488,8 @@ def main(input_file, overwrite=False):
             set_integer_ticks(plt.gca().yaxis)
             plt.grid(axis='y')
             plt.xlim([0.1,6])
+            if name=="HV":
+                plt.ylim([0,2250])
             plt.legend()
             pdf.savefig();
             plt.savefig(f"Noise_hist_{name}_140_fit.png"); plt.clf()

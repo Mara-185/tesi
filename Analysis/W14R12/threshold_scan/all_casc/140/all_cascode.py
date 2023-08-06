@@ -362,7 +362,7 @@ def main(input_file, overwrite=False):
             ns = noise_DAC[fc:lc+1,:]
             noise_mean = ufloat(np.mean(ns[ns>0]), np.std(ns[ns>0], ddof=1))
             bin_height_noise, bin_edge_noise, _ = plt.hist(ns.reshape(-1), bins=min(20*m, 100), range=[0, m],
-                     label=f"{name} ${noise_mean:L}$", histtype='step', color=f"C{i}")
+                     label=f"{name}", histtype='step', color=f"C{i}")
 
 
 ##############################################
@@ -377,19 +377,19 @@ def main(input_file, overwrite=False):
                     )
 
             bin_center_noise = (bin_edge_noise[:-1]+bin_edge_noise[1:])/2
-            popt_noise, pcov_noise = curve_fit(gauss2, bin_center_noise, bin_height_noise)
+            popt_noise, pcov_noise = curve_fit(gauss, bin_center_noise, bin_height_noise)
             print(*popt_noise)
             perr_noise = np.sqrt(np.diag(pcov_noise))
             print(*perr_noise)
 
             xb_noise = np.arange(bin_edge_noise[0], bin_edge_noise[-1], 0.005)
-            plt.plot(xb_noise, gauss2(xb_noise, *popt_noise), "r-", label=f"fit {name}:\nmean1={ufloat(round(popt_noise[1], 3), round(perr_noise[1],3))}\nsigma1={ufloat(round(popt_noise[2], 3), round(perr_noise[2],3))}"
-                                                                        f"\nmean2={ufloat(round(popt_noise[4], 3), round(perr_noise[4],3))}\nsigma1={ufloat(round(popt_noise[5], 3), round(perr_noise[5],3))}")
+            plt.plot(xb_noise, gauss(xb_noise, *popt_noise), "r-", label=f"fit {name}:\nmean1={ufloat(round(popt_noise[1], 3), round(perr_noise[1],3))}\nsigma1={ufloat(round(popt_noise[2], 3), round(perr_noise[2],3))}")
+
             #Save results in a txt file
             with open(f"noise_fitresults_{the_vh}[all casc].txt", "w") as outf:
-                print("#A#mean1#sigma1#mean2#sigma2:", file=outf)
+                print("#A#mean1#sigma1:", file=outf)
                 print(*popt_noise, file=outf)
-                print("#SA#Smean1#Ssigma1#Smean2#Ssigma2:", file=outf)
+                print("#SA#Smean1#Ssigma1:", file=outf)
                 print(*perr_noise, file=outf)
 
 ###################################################
@@ -452,7 +452,7 @@ def main(input_file, overwrite=False):
             ns[ns>4] = 0
             noise_mean = ufloat(np.mean(ns[ns>0]), np.std(ns[ns>0], ddof=1))
             bin_height_noise, bin_edge_noise, _ = plt.hist(ns.reshape(-1), bins=min(20*m, 100), range=[0, m],
-                     label=f"{name} ${noise_mean:L}$", histtype='step', color=f"C{i}")
+                     label=f"{name}", histtype='step', color=f"C{i}")
 
 
         ##############################################
@@ -467,19 +467,18 @@ def main(input_file, overwrite=False):
                     )
 
             bin_center_noise = (bin_edge_noise[:-1]+bin_edge_noise[1:])/2
-            popt_noise, pcov_noise = curve_fit(gauss2, bin_center_noise, bin_height_noise)
+            popt_noise, pcov_noise = curve_fit(gauss, bin_center_noise, bin_height_noise)
             print(*popt_noise)
             perr_noise = np.sqrt(np.diag(pcov_noise))
             print(*perr_noise)
 
             xb_noise = np.arange(bin_edge_noise[0], bin_edge_noise[-1], 0.005)
-            plt.plot(xb_noise, gauss2(xb_noise, *popt_noise), "r-", label=f"fit {name}:\nmean1={ufloat(round(popt_noise[1], 3), round(perr_noise[1],3))}\nsigma1={ufloat(round(popt_noise[2], 3), round(perr_noise[2],3))}"
-                                                                        f"\nmean2={ufloat(round(popt_noise[4], 3), round(perr_noise[4],3))}\nsigma1={ufloat(round(popt_noise[5], 3), round(perr_noise[5],3))}")
+            plt.plot(xb_noise, gauss(xb_noise, *popt_noise), "r-", label=f"fit {name}:\nmean1={ufloat(round(popt_noise[1], 3), round(perr_noise[1],3))}\nsigma1={ufloat(round(popt_noise[2], 3), round(perr_noise[2],3))}")
             #Save results in a txt file
             with open(f"noise_fitresults_{the_vh}[all casc]_cut(4).txt", "w") as outf:
-                print("#A#mean1#sigma1#mean2#sigma2:", file=outf)
+                print("#A#mean1#sigma1:", file=outf)
                 print(*popt_noise, file=outf)
-                print("#SA#Smean1#Ssigma1#Smean2#Ssigma2:", file=outf)
+                print("#SA#Smean1#Ssigma1:", file=outf)
                 print(*perr_noise, file=outf)
 
         ###################################################

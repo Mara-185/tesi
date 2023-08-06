@@ -293,6 +293,7 @@ def main(input_file, overwrite=False):
         # sys.exit()
 
         # Analysis for each pixel
+
         peaks = np.full((512,512), np.nan)
         dpeaks = np.full((512,512), np.nan)
         sigma_p = np.full((512,512), np.nan)
