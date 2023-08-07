@@ -305,12 +305,59 @@ def main(input_file, overwrite=False):
 
                     print(th_140)
 
-                    def func_casc2(x,a,b,t):
-                        return np.where(x<mean[0]-29, 0, np.maximum(0, a*x+b-((((th_140)**2)*a-(a*t*th_140)+(b*th_140)-(t*b))/(x-t))))
+                    def mse(func, x, y, coefs):
+                        return np.mean((func(x, *coefs) - y)**2)
 
 
-                    def func_casc(x,a,b,c,t):
+                    ######################################
+                    #           NO CONSTRAINT
+                    ######################################
+                    #print(mean_b)
+                    def func_norm(x,a,b,c,t):
                         return np.where(x<mean[i-1]-29, 0, np.maximum(0, a*x+b-(c/(x-t))))
+
+
+                    ######################################
+                    #           CONSTRAINT ON C
+                    ######################################
+                    # (th_140-t)*(a*th_140 + b)
+                    def func_norm_c2(x,a,b,t):
+                        return np.where(x<mean[i-1]-29, 0, np.maximum(0, a*x+b-((((th_140)**2)*a-(a*t*th_140)+(b*th_140)-(t*b))/(x-t))))
+
+                    def func_norm_c(x,a,b,t):
+                        return np.where(x<mean[i-1]-29, 0, np.maximum(0, a*x+b-(((th_140-t)*(a*th_140 + b))/(x-t))))
+
+                    ######################################
+                    #           CONSTRAINT ON A
+                    ######################################
+                    # (c)/(th_140*(th_140-t)) - (b)/(th_140)
+                    def func_norm_a(x,b,c,t):
+                        return np.where(x<mean[i-1]-29, 0, np.maximum(0, ((c)/(th_140*(th_140-t)) - (b)/(th_140))*x+b-(c/(x-t))))
+
+
+                    ######################################
+                    #           CONSTRAINT ON B
+                    ######################################
+                    # (c)/(th_140-t) - a*th_140
+                    def func_norm_b(x,a,c,t):
+                        return np.where(x<mean[i-1]-29, 0, np.maximum(0, a*x+((c)/(th_140-t) - a*th_140)-(c/(x-t))))
+
+
+                    ######################################
+                    #           CONSTRAINT ON T
+                    ######################################
+                    # th_140 - (c)/(a*th_140 + b)
+                    def func_norm_t(x,a,b,c):
+                        return np.where(x<mean[i-1]-29, 0, np.maximum(0, a*x+b-(c/(x-(th_140 - (c)/(a*th_140 + b))))))
+
+
+                    #
+                    # def func_casc2(x,a,b,t):
+                    #     return np.where(x<mean[0]-29, 0, np.maximum(0, a*x+b-((((th_140)**2)*a-(a*t*th_140)+(b*th_140)-(t*b))/(x-t))))
+                    #
+                    #
+                    # def func_casc(x,a,b,c,t):
+                    #     return np.where(x<mean[i-1]-29, 0, np.maximum(0, a*x+b-(c/(x-t))))
 
                     tot_mean_shift = tot_mean
                     mask_tot = np.isfinite(tot_mean_shift)
@@ -318,7 +365,149 @@ def main(input_file, overwrite=False):
                     occu = occupancy_shift[:-1]
                     charge_dac_bins2 = occu[mask_tot]
 
-                    popt, pcov = curve_fit(func_casc2, charge_dac_bins2, tot_mean_shift,
+
+                    ######################################
+                    #       NO CONSTRAINT
+                    #####################################
+
+                    print("NO CONSTRAINT\n")
+
+                    popt, pcov = curve_fit(func_norm, charge_dac_bins2, tot_mean_shift,
+                        p0 = [0.15, 2, 100, -10],bounds=([0 , -100, 0, -40], [0.3, 100,1000, 80]),
+                        maxfev=10000)
+
+                    perr = np.sqrt(np.diag(pcov))
+
+
+                    plt.pcolormesh(
+                        occupancy_shift, np.linspace(-0.5, 127.5, 129, endpoint=True),
+                        hist.transpose(), vmin=1, cmap=VIRIDIS_WHITE_UNDER, rasterized=True)  # Necessary for quick save and view in PDF
+
+                    print(*popt)
+                    print(*perr)
+
+                    y = np.arange(mean[i-1]-29.01, 189, 1)
+                    plt.plot(y, func_norm(y, *popt), "r-", label=f"fit:\na ={ufloat(round(popt[0], 3), round(perr[0], 3))}\n"
+                        f"b = {ufloat(round(popt[1],3),round(perr[1],3))}\nc = {ufloat(np.around(popt[2],3),round(perr[2], 3))}\nt = {ufloat(np.around(popt[3],3),round(perr[3], 3))}")
+
+
+                    plt.xlim([0, 250])
+                    plt.ylim([0, 60])
+                    plt.suptitle(f"ToT curve ({name})")
+                    plt.xlabel("True injected charge [DAC]")
+                    plt.ylabel("ToT [25 ns]")
+                    set_integer_ticks(plt.gca().xaxis, plt.gca().yaxis)
+                    cb = integer_ticks_colorbar()
+                    cb.set_label("Hits / bin")
+                    plt.legend(loc="upper left")
+                    pdf.savefig();
+                    plt.savefig(f"Tot_fit_{name}(200).png"); plt.clf()
+
+                    mse_n = mse(func_norm, charge_dac_bins2, tot_mean_shift, popt)
+                    print(mse_n)
+
+
+
+                    ###################################
+                    #           CONSTRAINT ON A
+                    ###################################
+
+                    print("CONSTRAINT A\n")
+
+                    # CONSTRAINT ON A
+                    popt, pcov = curve_fit(func_norm_a, charge_dac_bins2, tot_mean_shift,
+                        p0 = [2, 100, -10],bounds=([-100,0,-40], [100,1000, 80]),
+                        maxfev=10000)
+                    perr = np.sqrt(np.diag(pcov))
+
+                    print(*popt)
+                    print(*perr)
+
+                    plt.pcolormesh(
+                        occupancy_shift, np.linspace(-0.5, 127.5, 129, endpoint=True),
+                        hist.transpose(), vmin=1, cmap=VIRIDIS_WHITE_UNDER, rasterized=True)  # Necessary for quick save and view in PDF
+
+                    aa = (popt[1])/(th_140*(th_140-popt[2])) - (popt[0])/(th_140)
+                    # daa =
+                    #a = (c)/(th_140*(th_140-t)) - (b)/(th_140)
+
+                    plt.plot(y, func_norm_a(y, *popt), "r-", label=f"fit:\na ={aa}\n"
+                        f"b = {ufloat(round(popt[0],3),round(perr[0],3))}\nc = {ufloat(np.around(popt[1],3),round(perr[1], 3))}\nt = {ufloat(np.around(popt[2],3),round(perr[2], 3))}")
+                    plt.xlim([0, 250])
+                    plt.ylim([0, 60])
+
+                    plt.title("Constraint on parameter a")
+                    plt.suptitle(f"ToT curve fit ({name})")
+                    plt.xlabel("True injected charge [DAC]")
+                    plt.ylabel("ToT [25 ns]")
+                    set_integer_ticks(plt.gca().xaxis, plt.gca().yaxis)
+                    cb = integer_ticks_colorbar()
+                    cb.set_label("Hits / bin")
+                    plt.legend(loc="upper left")
+                    plt.savefig(f"Tot_fit_{name}_a(200).png")
+                    pdf.savefig(); plt.clf()
+
+                    print(popt)
+                    mse_a = mse(func_norm_a, charge_dac_bins2, tot_mean_shift, popt)
+                    print(mse_a)
+
+
+
+                    ###################################
+                    #           CONSTRAINT ON B
+                    ###################################
+
+                    print("CONSTRAIN B\n")
+
+                    #p0 = [0.15, 2, 100, -10],bounds=([0 , -100, 0, -40], [0.3, 100,1000, 80]),
+
+                    # CONSTRAINT ON B
+                    popt, pcov = curve_fit(func_norm_b, charge_dac_bins2, tot_mean_shift,
+                        p0 = [0.15, 100, -10],bounds=([0,0,-40], [0.3,1000, 80]),
+                        maxfev=10000)
+                    perr = np.sqrt(np.diag(pcov))
+
+                    print(*popt)
+                    print(*perr)
+
+                    plt.pcolormesh(
+                        occupancy_shift, np.linspace(-0.5, 127.5, 129, endpoint=True),
+                        hist.transpose(), vmin=1, cmap=VIRIDIS_WHITE_UNDER, rasterized=True)  # Necessary for quick save and view in PDF
+
+
+                    # (c)/(th_140-t) - a*th_140
+                    bb = (popt[1])/(th_140-popt[2]) - popt[0]*th_140
+                    # dbb =
+
+
+                    plt.plot(y, func_norm_b(y, *popt), "r-", label=f"fit:\na ={ufloat(round(popt[0], 3), round(perr[0], 3))}\n"
+                        f"b = {bb}\nc = {ufloat(np.around(popt[1],3),round(perr[1], 3))}\nt = {ufloat(np.around(popt[2],3),round(perr[2], 3))}")
+                    plt.xlim([0, 250])
+                    plt.ylim([0, 60])
+
+                    plt.title("Constraint on parameter b")
+                    plt.suptitle(f"ToT curve fit ({name})")
+                    plt.xlabel("True injected charge [DAC]")
+                    plt.ylabel("ToT [25 ns]")
+                    set_integer_ticks(plt.gca().xaxis, plt.gca().yaxis)
+                    cb = integer_ticks_colorbar()
+                    cb.set_label("Hits / bin")
+                    plt.legend(loc="upper left")
+                    plt.savefig(f"Tot_fit_{name}_b(200).png")
+                    pdf.savefig(); plt.clf()
+
+                    mse_b = mse(func_norm_b, charge_dac_bins2, tot_mean_shift, popt)
+                    print(mse_b)
+
+
+                    ###################################
+                    #           CONSTRAINT ON C
+                    ###################################
+
+                    print("CONSTRAINT C\n")
+
+                    # CONSTRAINT ON C
+                    popt, pcov = curve_fit(func_norm_c, charge_dac_bins2, tot_mean_shift,
                         p0 = [0.15, 2, -10],bounds=([0 , -100, -40], [0.3, 100, 80]),
                         maxfev=10000)
                     perr = np.sqrt(np.diag(pcov))
@@ -330,12 +519,16 @@ def main(input_file, overwrite=False):
                         occupancy_shift, np.linspace(-0.5, 127.5, 129, endpoint=True),
                         hist.transpose(), vmin=1, cmap=VIRIDIS_WHITE_UNDER, rasterized=True)  # Necessary for quick save and view in PDF
 
-                    y = np.arange(mean[i-1]-29.01, 250, 1)
-                    plt.plot(y, func_casc2(y, *popt), "r-", label=f"fit {name}:\na ={ufloat(round(popt[0], 3), round(perr[0], 3))}\nb = {ufloat(round(popt[1],3),round(perr[1],3))}\nt = {ufloat(np.around(popt[2],3),round(perr[2], 3))}")
+                    #(th_140-t)*(a*th_140 + b)
+                    cc = (th_140-popt[2])*(popt[0]*th_140 + popt[1])
+                    #dcc =
+
+                    plt.plot(y, func_norm_c(y, *popt), "r-", label=f"fit:\na ={ufloat(round(popt[0], 3), round(perr[0], 3))}\n"
+                        f"b = {ufloat(round(popt[1],3),round(perr[1],3))}\nc = {cc}\nt = {ufloat(np.around(popt[2],3),round(perr[2], 3))}")
                     plt.xlim([0, 250])
                     plt.ylim([0, 60])
 
-                    plt.title(subtitle)
+                    plt.title("Constraint on parameter c")
                     plt.suptitle(f"ToT curve fit ({name})")
                     plt.xlabel("True injected charge [DAC]")
                     plt.ylabel("ToT [25 ns]")
@@ -343,55 +536,132 @@ def main(input_file, overwrite=False):
                     cb = integer_ticks_colorbar()
                     cb.set_label("Hits / bin")
                     plt.legend(loc="upper left")
-                    pdf.savefig();
-                    plt.savefig(f"tot_fit_{name}({the_vh}).png"); plt.clf()
+                    plt.savefig(f"Tot_fit_{name}_c(200).png")
+                    pdf.savefig(); plt.clf()
+
+                    mse_c = mse(func_norm_c, charge_dac_bins2, tot_mean_shift, popt)
+                    print(mse_c)
+
+
+
+                    ###################################
+                    #           CONSTRAINT ON T
+                    ###################################
+
+                    print("CONSTRAINT T\n")
+
+                    # p0 = [0.15, 2, 100, -10],bounds=([0 , -100, 0, -40], [0.3, 100,1000, 80]),
+
+                    # CONSTRAINT ON T
+                    popt, pcov = curve_fit(func_norm_t, charge_dac_bins2, tot_mean_shift,
+                        p0 = [0.15, 2, 100],bounds=([0 , -100, 0], [0.3, 100, 1000]),
+                        maxfev=10000)
+                    perr = np.sqrt(np.diag(pcov))
+
+                    print(*popt)
+                    print(*perr)
+
+                    plt.pcolormesh(
+                        occupancy_shift, np.linspace(-0.5, 127.5, 129, endpoint=True),
+                        hist.transpose(), vmin=1, cmap=VIRIDIS_WHITE_UNDER, rasterized=True)  # Necessary for quick save and view in PDF
+
+                    #  th_140 - (c)/(a*th_140 + b)
+                    tt = th_140 - (popt[2])/(popt[0]*th_140 + popt[1])
+                    #dtt =
+
+                    plt.plot(y, func_norm_t(y, *popt), "r-", label=f"fit:\na ={ufloat(round(popt[0], 3), round(perr[0], 3))}\n"
+                        f"b = {ufloat(round(popt[1],3),round(perr[1],3))}\nc = {ufloat(np.around(popt[2],3),round(perr[2], 3))}\nt = {tt}")
+                    plt.xlim([0, 250])
+                    plt.ylim([0, 60])
+
+                    plt.title("Constraint on parameter t")
+                    plt.suptitle(f"ToT curve fit ({name})")
+                    plt.xlabel("True injected charge [DAC]")
+                    plt.ylabel("ToT [25 ns]")
+                    set_integer_ticks(plt.gca().xaxis, plt.gca().yaxis)
+                    cb = integer_ticks_colorbar()
+                    cb.set_label("Hits / bin")
+                    plt.legend(loc="upper left")
+                    plt.savefig(f"Tot_fit_{name}_t(200).png")
+                    pdf.savefig(); plt.clf()
+
+                    mse_t = mse(func_norm_t, charge_dac_bins2, tot_mean_shift, popt)
+                    print(mse_t)
+
+                    # popt, pcov = curve_fit(func_casc2, charge_dac_bins2, tot_mean_shift,
+                    #     p0 = [0.15, 2, -10],bounds=([0 , -100, -40], [0.3, 100, 80]),
+                    #     maxfev=10000)
+                    # perr = np.sqrt(np.diag(pcov))
+
+                    # print(*popt)
+                    # print(*perr)
+                    #
+                    # plt.pcolormesh(
+                    #     occupancy_shift, np.linspace(-0.5, 127.5, 129, endpoint=True),
+                    #     hist.transpose(), vmin=1, cmap=VIRIDIS_WHITE_UNDER, rasterized=True)  # Necessary for quick save and view in PDF
+
+                    # y = np.arange(mean[i-1]-29.01, 250, 1)
+                    # plt.plot(y, func_casc2(y, *popt), "r-", label=f"fit {name}:\na ={ufloat(round(popt[0], 3), round(perr[0], 3))}\nb = {ufloat(round(popt[1],3),round(perr[1],3))}\nt = {ufloat(np.around(popt[2],3),round(perr[2], 3))}")
+                    # plt.xlim([0, 250])
+                    # plt.ylim([0, 60])
+                    #
+                    # plt.title(subtitle)
+                    # plt.suptitle(f"ToT curve fit ({name})")
+                    # plt.xlabel("True injected charge [DAC]")
+                    # plt.ylabel("ToT [25 ns]")
+                    # set_integer_ticks(plt.gca().xaxis, plt.gca().yaxis)
+                    # cb = integer_ticks_colorbar()
+                    # cb.set_label("Hits / bin")
+                    # plt.legend(loc="upper left")
+                    # pdf.savefig();
+                    # plt.savefig(f"tot_fit_{name}({the_vh}).png"); plt.clf()
 
 
             ################################### FIT #############
-                print(i, mean[i-1])
-                def func_casc(x,a,b,c,t):
-                    return np.where(x<mean[i-1], 0, np.maximum(0, a*x+b-(c/(x-t))))
-
-
-                mask_tot = np.isfinite(tot_mean)
-                tot_mean = tot_mean[mask_tot]
-                occu = occupancy_edges[2][:-1]
-                charge_dac_bins2 = occu[mask_tot]
-
-
-                if the_vh==140:
-                    popt, pcov = curve_fit(func_casc, charge_dac_bins2, tot_mean,
-                        p0 = [0.15, 2, 100, 1],bounds=([0 , -100, 0, 0], [0.2, 100,1000, 80]), maxfev=10000)
-                    #low = [0 , -100, 0, 0]
-                    #up = [0.2, 100,1000, 80]
-                elif the_vh==200:
-                    popt, pcov = curve_fit(func_casc, charge_dac_bins2, tot_mean,
-                        p0 = [0.15, 2, 100, 10],bounds=([0 , -100, 0, 0], [0.3, 100,10000, 80]), maxfev=10000)
-                else:
-                    print("Define new range.")
-                perr = np.sqrt(np.diag(pcov))
-
-                print(*popt)
-                print(*perr)
-
-                plt.pcolormesh(
-                    occupancy_edges[2], np.linspace(-0.5, 127.5, 129, endpoint=True),
-                    hist.transpose(), vmin=1, cmap=VIRIDIS_WHITE_UNDER, rasterized=True)  # Necessary for quick save and view in PDF
-
-                y = np.arange(mean[i-1]-0.01, 250, 1)
-                plt.plot(y, func_casc(y, *popt), "r-", label=f"fit {name}:\na ={ufloat(round(popt[0], 3), round(perr[0], 3))}\nb = {ufloat(round(popt[1],3),round(perr[1],3))}\nc = {ufloat(round(popt[2],3),round(perr[2], 3))}\nt = {ufloat(np.around(popt[3],3),round(perr[3], 3))}")
-                plt.xlim([0, 250])
-                plt.ylim([0, 60])
-
-                plt.title(subtitle)
-                plt.suptitle(f"ToT curve fit ({name})")
-                plt.xlabel("True injected charge [DAC]")
-                plt.ylabel("ToT [25 ns]")
-                set_integer_ticks(plt.gca().xaxis, plt.gca().yaxis)
-                cb = integer_ticks_colorbar()
-                cb.set_label("Hits / bin")
-                plt.legend(loc="upper left")
-                pdf.savefig(); plt.clf()
+                # print(i, mean[i-1])
+                # def func_casc(x,a,b,c,t):
+                #     return np.where(x<mean[i-1], 0, np.maximum(0, a*x+b-(c/(x-t))))
+                #
+                #
+                # mask_tot = np.isfinite(tot_mean)
+                # tot_mean = tot_mean[mask_tot]
+                # occu = occupancy_edges[2][:-1]
+                # charge_dac_bins2 = occu[mask_tot]
+                #
+                #
+                # if the_vh==140:
+                #     popt, pcov = curve_fit(func_casc, charge_dac_bins2, tot_mean,
+                #         p0 = [0.15, 2, 100, 1],bounds=([0 , -100, 0, 0], [0.2, 100,1000, 80]), maxfev=10000)
+                #     #low = [0 , -100, 0, 0]
+                #     #up = [0.2, 100,1000, 80]
+                # elif the_vh==200:
+                #     popt, pcov = curve_fit(func_casc, charge_dac_bins2, tot_mean,
+                #         p0 = [0.15, 2, 100, 10],bounds=([0 , -100, 0, 0], [0.3, 100,10000, 80]), maxfev=10000)
+                # else:
+                #     print("Define new range.")
+                # perr = np.sqrt(np.diag(pcov))
+                #
+                # print(*popt)
+                # print(*perr)
+                #
+                # plt.pcolormesh(
+                #     occupancy_edges[2], np.linspace(-0.5, 127.5, 129, endpoint=True),
+                #     hist.transpose(), vmin=1, cmap=VIRIDIS_WHITE_UNDER, rasterized=True)  # Necessary for quick save and view in PDF
+                #
+                # y = np.arange(mean[i-1]-0.01, 250, 1)
+                # plt.plot(y, func_casc(y, *popt), "r-", label=f"fit {name}:\na ={ufloat(round(popt[0], 3), round(perr[0], 3))}\nb = {ufloat(round(popt[1],3),round(perr[1],3))}\nc = {ufloat(round(popt[2],3),round(perr[2], 3))}\nt = {ufloat(np.around(popt[3],3),round(perr[3], 3))}")
+                # plt.xlim([0, 250])
+                # plt.ylim([0, 60])
+                #
+                # plt.title(subtitle)
+                # plt.suptitle(f"ToT curve fit ({name})")
+                # plt.xlabel("True injected charge [DAC]")
+                # plt.ylabel("ToT [25 ns]")
+                # set_integer_ticks(plt.gca().xaxis, plt.gca().yaxis)
+                # cb = integer_ticks_colorbar()
+                # cb.set_label("Hits / bin")
+                # plt.legend(loc="upper left")
+                # pdf.savefig(); plt.clf()
 
 
         #Threshold map
