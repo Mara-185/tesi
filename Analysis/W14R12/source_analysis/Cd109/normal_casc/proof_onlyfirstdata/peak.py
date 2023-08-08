@@ -156,7 +156,7 @@ def main(input_file, overwrite=False):
             #         1e-3*total_hits, 90, 5))
             plt.step(tot_x, pixel_hits, where='mid')
             plt.plot(tot_x[fit_cut:], ff_Cd109(tot_x[fit_cut:], *popt),
-                label=f"fit {name}:\nmean={ufloat(round(popt[3], 3), round(perr[3],3))}"
+                label=f"fit:\nmean={ufloat(round(popt[3], 3), round(perr[3],3))}"
                     f"\nsigma={ufloat(round(popt[4], 3),round(perr[4],3))}")
             plt.title(f"Normal & Cascode FE - Time of acquisition: 1 h + 45 minutes")
             plt.suptitle("Cd109 fit")
@@ -208,7 +208,7 @@ def main(input_file, overwrite=False):
                     plt.plot(tot_x2[fit_cut:], ff_Cd109(tot_x2[fit_cut:], *popt),
                         label=f"fit {name}:\nmean={ufloat(round(popt[3], 3), round(perr[3],3))}"
                             f"\nsigma={ufloat(round(popt[4], 3),round(perr[4],3))}")
-                    plt.title("Time of acquisition: 1 h + 45 minutes")
+                    plt.title("Time of acquisition: 1 h + 30 minutes")
                     #plt.title(f"Pixel (col, row) = ({'all' if col is None else col}, {'all' if row is None else row})")
                     plt.suptitle(f"Cd109 fit - {name}")
                     plt.xlabel("ToT [25 ns]")
@@ -268,9 +268,9 @@ def main(input_file, overwrite=False):
                                 plt.plot(tot_xp[fit_cut:], ff_Fe55(tot_xp[fit_cut:], *popt), "r-",
                                     label=f"fit {name}:\nmean={ufloat(round(popt[1], 3), round(perr[1],3))}"
                                         f"\nsigma={ufloat(round(popt[2], 3),round(perr[2],3))}")
-                                plt.title("Time of acquisition: 2.5 hours")
+                                plt.title("Time of acquisition: 1.5 hours")
                                 #plt.title(f"Pixel (col, row) = ({'all' if col is None else col}, {'all' if row is None else row})")
-                                plt.suptitle(f"Fe55 fit - {name} ({col,row})")
+                                plt.suptitle(f"Cd109 fit - {name} ({col,row})")
                                 plt.xlabel("ToT [25 ns]")
                                 plt.ylabel("Hits / bin")
                                 plt.legend()
