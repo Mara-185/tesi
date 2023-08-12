@@ -92,7 +92,7 @@ if __name__ == "__main__":
     def func_norm(x,a,b,c,t, th):
         return np.where(x<th, 0, np.maximum(0, a*x+b-(c/(x-t))))
 
-    MARKER = [".", "+", "*", "2"]
+    MARKER = [".", "P", "*", "v"]
     # COL = ["r", "b", "g", "orange"]
 
     dac = FRONTENDS_DAC1[0]
@@ -107,9 +107,9 @@ if __name__ == "__main__":
         print(thr)
         print(a, b, c, t)
 
-        plt.plot(dac, np.asarray(p), f"{point}")
+        plt.plot(dac, np.asarray(p), f"{point}", label="All sources peaks")
         y =  np.arange(thr, 1000, 10)
-        plt.plot(y, func_norm(y, a, b, c, t, thr), "--")
+        plt.plot(y, func_norm(y, a, b, c, t, thr), "--", label=f"{name}")
 
         plt.xlim([0, 1200])
         plt.ylim([0, 128])
@@ -117,6 +117,7 @@ if __name__ == "__main__":
         plt.title(f"{name} - C = 10.1 e-/DAC")
         plt.xlabel("True injected charge [DAC]")
         plt.ylabel("ToT [25 ns]")
+        plt.legend()
         plt.savefig(f"ToT_{name}_thesis.png")
         plt.clf()
         # set_integer_ticks(plt.gca().xaxis, plt.gca().yaxis)
@@ -132,9 +133,9 @@ if __name__ == "__main__":
         print(thr)
         print(a, b, c, t)
 
-        plt.plot(dac, np.asarray(p), f"{point}")
+        plt.plot(dac, np.asarray(p), f"{point}", label=f"{name} sources peaks")
         y =  np.arange(thr, 1000, 10)
-        plt.plot(y, func_norm(y, a, b, c, t, thr), "--")
+        plt.plot(y, func_norm(y, a, b, c, t, thr), "--", label=f"{name}")
 
 
     plt.xlim([0, 1200])
@@ -143,6 +144,7 @@ if __name__ == "__main__":
     plt.title(f"All FE - C = 10.1 e-/DAC")
     plt.xlabel("True injected charge [DAC]")
     plt.ylabel("ToT [25 ns]")
+    plt.legend()
     plt.savefig(f"Tot_linearity_thesis.png")
     plt.clf()
 
@@ -156,9 +158,9 @@ if __name__ == "__main__":
         print(thr)
         print(a, b, c, t)
 
-        plt.plot(np.asarray(dac), np.asarray(p), f"{point}")
+        plt.plot(np.asarray(dac), np.asarray(p), f"{point}", label="All sources peaks")
         y =  np.arange(thr, 1000, 1)
-        plt.plot(y, func_norm(y, a, b, c, t, thr), f"--")
+        plt.plot(y, func_norm(y, a, b, c, t, thr), f"--", label=f"{name}")
 
 
 
@@ -168,6 +170,7 @@ if __name__ == "__main__":
         plt.title(f"{name} - C = {calcap} e-/DAC (from Fe55)")
         plt.xlabel("True injected charge [DAC]")
         plt.ylabel("ToT [25 ns]")
+        plt.legend()
         plt.savefig(f"ToT_{name}_iron.png")
         plt.clf()
         # set_integer_ticks(plt.gca().xaxis, plt.gca().yaxis)
@@ -182,16 +185,17 @@ if __name__ == "__main__":
         print(thr)
         print(a, b, c, t)
 
-        plt.plot(np.asarray(dac), np.asarray(p), f"{point}")
+        plt.plot(np.asarray(dac), np.asarray(p), f"{point}", label=f"{name} sources peaks")
         y =  np.arange(thr, 1000, 1)
-        plt.plot(y, func_norm(y, a, b, c, t, thr), f"--")
+        plt.plot(y, func_norm(y, a, b, c, t, thr), f"--", label=f"{name}")
 
     plt.xlim([0, 1200])
     plt.ylim([0, 128])
     plt.suptitle(f"ToT curve linearity")
-    plt.title(f"All FE - C = {calcap} e-/DAC (from Fe55)")
+    plt.title(f"All FE - C from Fe55")
     plt.xlabel("True injected charge [DAC]")
     plt.ylabel("ToT [25 ns]")
+    plt.legend()
     plt.savefig(f"Tot_linearity_iron.png")
     plt.clf()
 
@@ -204,9 +208,9 @@ if __name__ == "__main__":
         print(thr)
         print(a, b, c, t)
 
-        plt.plot(np.asarray(dac), np.asarray(p), f"{point}")
+        plt.plot(np.asarray(dac), np.asarray(p), f"{point}", label="All sources peaks")
         y =  np.arange(thr, 1000, 1)
-        plt.plot(y, func_norm(y, a, b, c, t, thr), f"--")
+        plt.plot(y, func_norm(y, a, b, c, t, thr), f"--", label=f"{name}")
 
 
 
@@ -216,6 +220,7 @@ if __name__ == "__main__":
         plt.title(f"{name} - C = {calcap2} e-/DAC (from all sources)")
         plt.xlabel("True injected charge [DAC]")
         plt.ylabel("ToT [25 ns]")
+        plt.legend()
         plt.savefig(f"ToT_{name}_sources.png")
         plt.clf()
         # set_integer_ticks(plt.gca().xaxis, plt.gca().yaxis)
@@ -230,15 +235,16 @@ if __name__ == "__main__":
         print(thr)
         print(a, b, c, t)
 
-        plt.plot(np.asarray(dac), np.asarray(p), f"{point}")
+        plt.plot(np.asarray(dac), np.asarray(p), f"{point}", label=f"{name} sources peaks")
         y =  np.arange(thr, 1000, 1)
-        plt.plot(y, func_norm(y, a, b, c, t, thr), f"--")
+        plt.plot(y, func_norm(y, a, b, c, t, thr), f"--", label=f"{name}")
 
     plt.xlim([0, 1200])
     plt.ylim([0, 128])
     plt.suptitle(f"ToT curve linearity")
-    plt.title(f"All FE - C = {calcap2} e-/DAC (from all sources)")
+    plt.title(f"All FE - C from all sources")
     plt.xlabel("True injected charge [DAC]")
     plt.ylabel("ToT [25 ns]")
+    plt.legend()
     plt.savefig(f"Tot_linearity__sources.png")
     plt.clf()

@@ -671,37 +671,43 @@ By these steps, a value of the injection capacitance was estimated for each well
 
 %%%%%ADD SUMMARY TABLE
 
-[As expected the capacitance oh the HV's flavors is much higher than the Normal and Cascode FE. No! It's expected all the same?] 
+[As expected the capacitance oh the HV's flavors is much higher than the Normal and Cascode FE? No! It's expected all the same?] 
 
-Regarding the other sources, it was impossibile to fit the distributions for each pixel due to low statistics. For this reason only a mean value for all flavor could be extrapolate. In tabel \vpageref{tab:cap_mean} the results obtained with the same method used with the iron source.
+Regarding the other sources, it was impossibile to fit the distributions for each pixel due to low statistics. For this reason only a mean value for all flavor could be extrapolate. In table \vpageref{tab:cap_mean} the results obtained with the same method used with the iron source, but considering all pixels of each flavor.
 
 \begin{table}[h!]
 \centering
-\begin{tabular}{>{\columncolor{NavyBlue!70}} C{3cm}|C{2.4cm}|C{2.4cm}|C{2.4cm}|C{2.4cm}}
+\begin{tabular}{>{\columncolor{NavyBlue!70}} C{2.8cm}|C{1.7cm}|C{1.8cm}|C{1.7cm}|C{1.7cm}}
 \rowcolor{CornflowerBlue}
 Source peak & $C_{Normal}$ & $C_{Cascode}$ & $C_{HV Cascode}$ & $C_{HV}$\\[2ex]
 \hline
-\ch{^{55}Fe} (5.9 KeV) &  & & & \\[0.5ex]
+\ch{^{55}Fe} (5.9 KeV) & 9.37 & 9.00 & 19.33 & 18.56 \\[0.5ex]
 \hline
-\ch{^{241}Am} (13.9 KeV) &  & & &\\[0.5ex]
+\ch{^{241}Am} (13.9 KeV) & 8.94 & 8.91 & 19.23 & 18.22 \\[0.5ex]
 \hline
-\ch{^{241}Am} (17.7 KeV) &  & & &\\[0.5ex]
+\ch{^{241}Am} (17.7 KeV) & 9.16 & 8.84 & 19.59 & 18.63 \\[0.5ex]
 \hline
-\ch{^{241}Am} (20.7 KeV) &  & & &\\[0.5ex]
+\ch{^{241}Am} (20.7 KeV) & 9.15 & 10.11 & - & -\\[0.5ex]
 \hline
-\ch{^{109}Cd} (22 KeV)&  & & &\\[0.5ex]
+\ch{^{109}Cd} (22 KeV) & 9.32 & 9.39 & 20.16 & 19.6 \\[0.5ex]
 \hline
-\ch{^{241}Am} (26.4 KeV)&  & & &\\[0.5ex]
+\ch{^{241}Am} (26.4 KeV) & 9.60 & 9.61 & 19.25 & - \\[1.5ex]
 \hline
-\ch{^{241}Am} (59.7 KeV)&  & & &\\
-\hline
+\cellcolor{ForestGreen!80}Mean value & 9.26 & 9.31 & 19.51 & 18.75 \\[1.5ex]
 \end{tabular}
 \caption{Estimation of injection capacitance of all flavors for different source emission peaks.}
 \label{tab:cap_mean}
 \end{table}
 
 
-%%COMMENTA RISULTATI
+Bringing equation \vpageref{conversion_factor} back to mind, the conversion factors of the flavors are not those expected. In particular for the HV's flavors, this factor is almost the double and it could mean that the injection capacitance is greater than expected. As matter of fact, with respect to Tj-Monopix 1, the prototype under test was design in order to have the same injection capacitance for all flavor, equal to 230 aF.
+
+so? Loss of charge?
+
+It's necessary to consider that maybe some measurments were dona in different conditions of pressure and temperature?
+
+%CONTINUA%
+%%Può parametrizzare perdita di segnale? viene al 51-52% non 40 come previsto.
 
 
 
@@ -710,7 +716,49 @@ Source peak & $C_{Normal}$ & $C_{Cascode}$ & $C_{HV Cascode}$ & $C_{HV}$\\[2ex]
 %--------------------------------------------------------------------
 \subsection{Check on linearity of tot fit}
 
-In the end all emission peaks from the several sources have been plotted for each frontend in order to verify the agreement between their trend and the ToT-Q relationship studied by the internal injection. 
+In the end all emission peaks from the several sources have been plotted for each frontend in order to verify the agreement between their trend and the ToT-Q relationship studied by the internal injection. \\
+
+At first the charge corresponding to the electrons expected to be released for each peaks, has been calculated with the nominal conversion factor equal to 10.1 $\frac{e^{-}}{DAC}$. As it could be seen from results in figure \vpageref{fig:inj_cap_10} there isn't good agreement between data and ToT relationship obtained(learnt) in section \vpageref{tot_fit}.
+
+
+\begin{figure}
+\centering
+\subfigure[\textbf{Normal}]
+{\includegraphics[scale=0.35]{ToT_Normal_thesis}}\quad
+\subfigure[\textbf{Cascode}]
+{\includegraphics[scale=0.35]{ToT_Cascode_thesis}}\\
+\subfigure[\textbf{HV - Cascode}]
+{\includegraphics[scale=0.35]{ToT_HV Casc._thesis}}\quad
+\subfigure[\textbf{HV}]
+{\includegraphics[scale=0.35]{ToT_HV_thesis}}\\
+\caption{ToT linearity of all flavors assuming the nominal(expected) conversion factor equal to 10.1 $\frac{e^{-}}{DAC}$.}
+\label{fig:inj_cap_10}
+\end{figure} 
+
+After the calibration instead, assuming the average value of injection capacitance calculated in table \vpageref{tab:}, the charge corresponding to the emission peaks have been recalculated and results are shown in figure \vpageref{fig:inj_cap_sources}.
+
+\begin{figure}[h!]
+\centering
+\subfigure[\textbf{Normal}]
+{\includegraphics[scale=0.35]{ToT_Normal_sources}}\quad
+\subfigure[\textbf{Cascode}]
+{\includegraphics[scale=0.35]{ToT_Cascode_sources}}\\
+\subfigure[\textbf{HV - Cascode}]
+{\includegraphics[scale=0.35]{ToT_HV Casc._sources}}\quad
+\subfigure[\textbf{HV}]
+{\includegraphics[scale=0.35]{ToT_HV_sources}}\\
+\caption{ToT linearity of all flavors assuming the conversion factor obtained from calibration for each FE.}
+\label{fig:inj_cap_sources}
+\end{figure} 
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.7]{Tot_linearity__sources}
+\caption{Summary of trends.}
+\label{inj_cap_sum}
+\end{figure}
+
+After(through) the calibration a better agreement is therefore obtained. 
 
 
 
@@ -718,7 +766,9 @@ In the end all emission peaks from the several sources have been plotted for eac
 \section{Operation with low threshold}
 %\subsection{Mask (operation) and noisy pixels}
 
-%% VOGLIAMO OPERARE A BASSE THRESHOLD PER IREVARE EVENTI A BASSE CARICA A CAUSA DEL CHARGE TRAPPING AND CHARGE SHARING SOPRATTUTTO IN CASO DI THIN EPITAXIAL MATERIAL.
+
+
+%% VOGLIAMO OPERARE A BASSE THRESHOLD PER RILEVARE EVENTI A BASSE CARICA A CAUSA DEL CHARGE TRAPPING AND CHARGE SHARING SOPRATTUTTO IN CASO DI THIN EPITAXIAL MATERIAL.
 
 \begin{comment}
 Explain the function of the various registers used (see Eleonora thesis, and maybe can 		add also some scope picture). 
@@ -886,6 +936,18 @@ In the last plots of this section (\vpageref{fig:tot_vs_vcasp}) are reported the
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 %\subsection{Analog and digital readout}   %Alla fine del quarto??
 
 
@@ -966,7 +1028,7 @@ In order to enhance this type of analysis, other scans have been run increasing 
 \end{figure}
 \end{comment}
 
-%------------------------------------------------------------
+%----------------------------------------------------------------------------------------------------
 
 
 \begin{comment}
