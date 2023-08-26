@@ -40,6 +40,11 @@ Sections of this chapter could be:
 %%%%%AFOREMENTIONED
 %%%%%SHORTCOMINGS
 
+\begin{comment}
+%%%%%DC/AC COUPLED TO CHARGE COLLECTION ELECTRODE
+Normal/Cascode differ only by one transistor designed to increase gain
+\end{comment}
+
 
 \chapter{TJ-Monopix 2}
 
@@ -83,6 +88,8 @@ This well-structured study returned relevant results which have helped in TestBe
 Tj-Monopix 2 is the next generation small collection electrode DMAPS prototype in TowerJazz 180 nm. The need to create a sensor capable to mantain high efficiency even after irradiation, required improvements compared to Tj-Monopix 1 in two important fields: a lower operating threshold and different pixel layout to increase charge collection efficiency all over its area, expecially in the corners.\\
 
 To achieve these goals, a different front-end in pixel circuit was implemented and a lot of efforts have been focused on optimizing pixel layout in order to reduce its size which has been decreased to 33.04 x 33.04 $\mu m^{2}$. As a matter of fact we have seen in (REFERENCE) that pixel's diensions are critical to accomplish faster charge collection across all active area, increasing the lateral electric field. For this reason it was necessary a special effort to design and create a smaller pixel but still adequate to embody the full digital readout . All of this required to work at the technology density limit and also further modification at the circuit design, such as single ended data transmission in order to reduce the column-bus width.
+
+%Aggiungi thickness 200um, pixel pitch 33.04um
 
 
 %-----------------------------------------------------------------------------------------------%
@@ -370,6 +377,8 @@ At last in figure \vpageref{HVs_maps} the threshold and noise maps of the whole 
 \caption{HV's FE.}
 \label{fig:HVs_maps}
 \end{figure}
+
+As we will see in the following (section REFERENCE), the atypical s-curves in HVs flavors have been the first hint(evidence) of the cross-talk problem (section REFERENCE) tied to a lower global threshold in these sectors with TB settings. 
 
 
 \subsubsection{Summary Table}
@@ -764,28 +773,60 @@ After(through) the calibration a better agreement is therefore obtained.
 
 %--------------------------------------------------------------------
 \section{Operation with low threshold}
-%\subsection{Mask (operation) and noisy pixels}
+
+
+One of the most important target of the chip design is to keep high efficiency even after irradiation damage. All experimental environments in fact(indeed) are exposed to high doses of radiations, so it's crucial to make sure the functionality of the irradiated detectors.
+
+For this reason, many tests were done in order to understand the chip behaviour at lower threshold that allowed to keep(mantain) good value of efficiency.
+Moreover working at low threshold allowed to detect low charge events due to charge sharing or charge trapping (effect which increased after irradiation), expecially in case of thin epitaxial material. 
 
 
 
-%% VOGLIAMO OPERARE A BASSE THRESHOLD PER RILEVARE EVENTI A BASSE CARICA A CAUSA DEL CHARGE TRAPPING AND CHARGE SHARING SOPRATTUTTO IN CASO DI THIN EPITAXIAL MATERIAL.
+
+
 
 \begin{comment}
+4. Explored also different registers settings to operate the chip with lower THResholds
+ 	- important after radiation damage to run at low THR to keep the hit efficiency high
+5. Discovered & investigated an important issue with cross talk, due to digital signal from the redout, showing up when running the chip with THR below ~ 250 e- 
+hot pixel studied to understand which digital signal was responsible & mitigate the effect with different settings/bias
+
 Explain the function of the various registers used (see Eleonora thesis, and maybe can 		add also some scope picture). 
 	Register optimization (conversion???)
 	Comparison with simulation 
 	Can add at the end some nice picture of the optimized thr and tuning 
+
+
+boh:VOGLIAMO OPERARE A BASSE THRESHOLD PER RILEVARE EVENTI A BASSE CARICA A CAUSA DEL CHARGE TRAPPING AND CHARGE SHARING SOPRATTUTTO IN CASO DI THIN EPITAXIAL MATERIAL
+
 \end{comment}
+
 
 
 %--------------------------------------------------------------------
 \subsection{Register optimization}
 
+As we have seen in section (REFERENCE), there are a lot of registers which control the discriminator threshold and also the readout sequence. So preliminary it was necessary to run some tests exploring their settings in order to operate the chip at(or with) lower thresholds.\\
+
+Now we will go through the main registers used for this purpose, in order to explain their functionality. There are several dozens of registers but we focused on some of the most important and crucial to set the threshold:
+
+\begin{itemize}
+\item \textit{$I_{CASN}$} : this current is responsible of the output baseline signal[set the baseline of the FE output and change the thr] that goes to the input discriminator. In a few words, higher this value, higher the baseline, lower the threshold and also a little bit the gain. [Vice versa, decreasing this registr's value.]
+\item \textit{$I_{THR}$}: it controls the pre-amplifier feedback strenght and speed, so it's responsible for the output reset rate. Increasing $I_{THR}$ results to lower gain and faster return to baseline, so higher threshold. (This value is preferably set to 8nA in order to avoid high ToT slope).
+\item \textit{$I_{DB}$}: 
+\item \textit{$I_{TUNE}$}:
+\item \textit{$I_{BIAS}$}: 
+\item \textit{$V_{RESET}$}: 
+\end{itemize}
+
+\begin{comment}
+In section (...) some improvements of the readout with respect to TJ-Monopix 1 (analogical and digital part) have been mentioned. 
+\end{comment}
+
 
 
 %--------------------------------------------------------------------
 \subsection{Comparison between data and simulation}
-%\addcontentsline{toc}{subsection}{Confronto degli andamenti con le simulazioni}
 
 In the interest of understanding how the settings of the chip influence the threshold's value, several measurements have been taken varying the values of the main registers which are responsible for it.
 The results are compared with simulations done by Hung Pham (...). [???]
@@ -807,52 +848,6 @@ To verify the trend of threshold in particular, three different acquisition have
 
 The threshold distributions have been fitted with a gaussian function for each measurement,  in order to obtain the average values and their dispersion.
 
-\begin{itemize}
-\item[$I_{THR}=64$]:
-
-\begin{tabular}{c | c | c}
-$I_{CASN}$ [DAC] & THR [DAC] & THR Dispersion [DAC]\\
-\hline
-0 & 61.43 & 2.45\\
-5 & 53.42 & 2.45\\
-10 & 50.33 & 2.45\\
-15 & 48.21 & 2.41\\
-20 & 46.70 & 2.38\\
-25 & 45.49 & 2.52\\
-30 & 46.09 & 2.50
-\end{tabular}
-
-\item[$I_{THR}=40$]:
-
-\begin{tabular}{c | c | c}
-$I_{CASN}$ [DAC] & THR [DAC] & THR Dispersion [DAC]\\
-\hline
-0 & 47.28 & 2.12\\
-5 & 41.07 & 2.02\\
-10 & 38.39 & 2.03\\
-15 & 36.65 & 1.95\\
-20 & 35.53 & 1.91\\
-25 & NaN & NaN\\
-30 & 33.37 & 2.04
-\end{tabular}
-
-[Here we can see a particular setting, that is $I_{THR}=40$ AND $I_{CASN}$=25, for which the chip doesn't seem to work.
-PIXEL THAT FIRE UP??]
-
-\item[$I_{THR}=20$]:
-
-\begin{tabular}{c | c | c}
-$I_{CASN}$ [DAC] & THR [DAC] & THR Dispersion [DAC]\\
-\hline
-0 & 34.43 & 1.95\\
-5 & 28.10& 1.72\\
-10 & 26.59 & 1.75\\
-15 & 24.66 & 1.77\\
-\end{tabular}
-\medskip\\
-
-\end{itemize}
-
 In figure \vref{fig:alltrends_icasn} all trends obtained from these data are reported.
 
 [TREND OF DISPERSION?]
@@ -863,6 +858,7 @@ In figure \vref{fig:alltrends_icasn} all trends obtained from these data are rep
 \caption{Threshold vs. $I_{CASN}$ for $I_{THR}$= 20, 40, 64.}
 \label{fig:alltrends_icasn}
 \end{figure}
+
 
 \subsubsection{$I_{THR}$}
 
@@ -893,9 +889,9 @@ The last analysis done in order to make a comparison with the simulations, is ab
 \begin{figure}[h!]
 \centering
 \subfigure[ToT vs $I_{THR}$ ($I_{CASN}$=0 DAC) - Data (\textbf{Cascode})]
-{\includegraphics[scale=0.5]{tot_curves_icasn0}}\quad
+{\includegraphics[scale=0.45]{tot_curves_icasn0}}\quad
 \subfigure[ToT vs $I_{THR}$ ($I_{CASN}$=0 DAC) - Simulation]
-{\includegraphics[scale=0.4]{tot_curves_icasn0_simu}}\\
+{\includegraphics[scale=0.5]{tot_curves_icasn0_simu}}\\
 \caption{ToT vs $I_{THR}$}
 \label{fig:tot_vs_ithr}
 \end{figure}
@@ -911,26 +907,48 @@ The last analysis done in order to make a comparison with the simulations, is ab
 \end{figure}
 
 
-\begin{comment}
-In the last plots of this section (\vpageref{fig:tot_vs_vcasp}) are reported the trends of the ToT varying the value of $V_{CASP}$ for both Normal and Cascode FE, but there aren't simulations to make a comparison. 
+%--------------------------------------------------------------------
+\subsubsection{some nice picture of the optimized thr and tuning}
 
-\begin{figure}[h!]
-\centering
-\subfigure[ToT vs $V_{CASP}$ - Data (\textbf{Cascode})]
-{\includegraphics[scale=0.4]{tot_vcasp(cascode)}}\quad
-\subfigure[ToT vs $V_{CASP}$ - Data (\textbf{Normal})]
-{\includegraphics[scale=0.4]{tot_vcasp(normal)}}\\
-\caption{ToT vs $V_{CASP}$}
-\label{fig:tot_vs_vcasp}
-\end{figure}
-\end{comment}
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 
 
 
 \section{Cross talk issue and mitigation}
 
+\begin{comment}
+During this study an iportant issue with cross-talk(readout signal) was discovered. As it was already mentioned, also in the threshold analysis for the HVs flavors, there were something atypical in the s-curves, because some of them seem to have occupancy greater than 1!
+So in this section we will go through this effect and some attempt to mitigate the effect using different settings/bias. 
+
+\end{comment}
+
+\subsection{Hot pixel issue and strategy?}
+
+%VEDI SCREEN DI SLIDE 1. -----> INTRO DEL PROBLEMA
+% Explain why we can see hot pixel in HV and not other with TB SETTING, TIED TO THR.
+%
+
+
+\subsection{Readout sequence}    %NEL QUARTO
+
+\subsection{Hot pixel strategy (study)}
+
+\subsection{Cross-talk}
+
+\subsection{Mitigation}
+
+%PWELL
+%TUNING
+
+
 \section{Test Beam results}
 
+\begin{comment}
+So with this test we have fully characterized the main features of the chip W14R12, which are then used to interpret data from Test Beam in June 2022 in Desy.
+
+In the following some of the results obtained:
+\end{comment}
 
 
 
@@ -1168,6 +1186,69 @@ $I_{RAM}$ & 50 \\
 \end{figure}
 \end{comment}
 
+\begin{comment}
+In the last plots of this section (\vpageref{fig:tot_vs_vcasp}) are reported the trends of the ToT varying the value of $V_{CASP}$ for both Normal and Cascode FE, but there aren't simulations to make a comparison. 
+
+\begin{figure}[h!]
+\centering
+\subfigure[ToT vs $V_{CASP}$ - Data (\textbf{Cascode})]
+{\includegraphics[scale=0.4]{tot_vcasp(cascode)}}\quad
+\subfigure[ToT vs $V_{CASP}$ - Data (\textbf{Normal})]
+{\includegraphics[scale=0.4]{tot_vcasp(normal)}}\\
+\caption{ToT vs $V_{CASP}$}
+\label{fig:tot_vs_vcasp}
+\end{figure}
+\end{comment}
+
+
+\begin{comment}
+\begin{itemize}
+\item[$I_{THR}=64$]:
+
+\begin{tabular}{c | c | c}
+$I_{CASN}$ [DAC] & THR [DAC] & THR Dispersion [DAC]\\
+\hline
+0 & 61.43 & 2.45\\
+5 & 53.42 & 2.45\\
+10 & 50.33 & 2.45\\
+15 & 48.21 & 2.41\\
+20 & 46.70 & 2.38\\
+25 & 45.49 & 2.52\\
+30 & 46.09 & 2.50
+\end{tabular}
+
+\item[$I_{THR}=40$]:
+
+\begin{tabular}{c | c | c}
+$I_{CASN}$ [DAC] & THR [DAC] & THR Dispersion [DAC]\\
+\hline
+0 & 47.28 & 2.12\\
+5 & 41.07 & 2.02\\
+10 & 38.39 & 2.03\\
+15 & 36.65 & 1.95\\
+20 & 35.53 & 1.91\\
+25 & NaN & NaN\\
+30 & 33.37 & 2.04
+\end{tabular}
+
+[Here we can see a particular setting, that is $I_{THR}=40$ AND $I_{CASN}$=25, for which the chip doesn't seem to work.
+PIXEL THAT FIRE UP??]
+
+\item[$I_{THR}=20$]:
+
+\begin{tabular}{c | c | c}
+$I_{CASN}$ [DAC] & THR [DAC] & THR Dispersion [DAC]\\
+\hline
+0 & 34.43 & 1.95\\
+5 & 28.10& 1.72\\
+10 & 26.59 & 1.75\\
+15 & 24.66 & 1.77\\
+\end{tabular}
+\medskip\\
+
+\end{itemize}
+\end{comment}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1177,3 +1258,4 @@ $I_{RAM}$ & 50 \\
 %1. THESIS MUSTAKAS
 %2. GAMMA RAY SPECTRUM OF AM-241 IN A BACK SCATTERING GEOMETRY USING A HIGH PURITY GERMANIUM DETECTOR (for Am241) 
 %KOLANOSKI per converision factro 3.65
+% slide degli altri da vtx meeting
