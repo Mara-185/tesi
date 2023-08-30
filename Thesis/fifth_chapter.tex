@@ -446,6 +446,8 @@ For example if the 3-bit DAC are set to ''111'', the decimal representation is 8
 \label{fig:tdac}
 \end{figure}
 
+%MA COME AGISCE IDISC: 19.10 LOGBOOK increasing TDAC/IDISC, lower threshold
+
 \subsubsection{Results from fine tuning}
 
 It has been trying to apply the fine tuning method to level out the threshold of some pixels as much as possible. \\
@@ -827,11 +829,11 @@ Now we will go through the main registers used for this purpose, in order to exp
 \begin{itemize}
 \label{currents}
 \item \textit{$I_{CASN}$} : this current is responsible of the output baseline signal[set the baseline of the FE output and change the thr] that goes to the input discriminator. In a few words, higher this value, higher the baseline, lower the threshold and also a little bit the gain. [Vice versa, decreasing this registr's value.]
-\item \textit{$I_{THR}$}: it controls the pre-amplifier feedback strenght and speed, so it's responsible for the output reset rate. Increasing $I_{THR}$ results to lower gain and faster return to baseline, so higher threshold. (This value is preferably set to 8nA in order to avoid high ToT slope).
+\item \textit{$I_{THR}$}: it controls the pre-amplifier feedback strenght and speed, so it's responsible for the output reset rate. Increasing $I_{THR}$ results to lower gain and faster return to baseline, so higher threshold. In other words increasing this current increases the gain and the time the analog output takes to get back to the baseline and as consequence, it increase a lot the maximum value of the ToT. In fact is preferably set $I_{THR}$ to 8nA[in DAC?] in order to avoid high ToT slope.
 \item \textit{$I_{DB}$}: 
 \item \textit{$I_{TUNE}$}:
 \item \textit{$I_{BIAS}$}: 
-\item \textit{$V_{RESET}$}: 
+\item \textit{$V_{RESET}$}:  dispersion?
 \end{itemize}
 
 \begin{comment}
@@ -983,12 +985,13 @@ This info has allowed to verify if the hot pixel fires after the good injected o
 \item LE(hit) - TE(previous hit): this quantity measures the elapsed time between a hit and the previous one. This is a finer ingo than the $\Delta$TS because it allows to correlate the hit with the induced digital signal, originate from the readout cycle.
 \end{itemize}
 
-Moreover, since a 7-bit BCID is sent to the matrix during its activity, it was important to keep short (<128) the duration of the readout sequence and to not enable too many pixels in order to not extend too much the readout frame.  
+Moreover, since a 7-bit BCID is sent to the matrix during its activity, it was important to keep short (<128 clock cycle) the duration of the full readout sequence and to not enable too many pixels in order to not extend too much the readout frame. Otherwise the information on the leading edge of the pixel could not be correlated with the token of the previous hit. In other words, if the readout frame exceed 128 clock cycles, since the token could be raised if the matrix is \textbf{not} freeze, even if an hit is arrived before it could be read only in the next frame when it could rise again the token, but in this case it will have different TimeStamp. So in this case the TS is useless for our purpose.
 
 
 \subsection{Cross-talk (Results)}
 
 Referring to the readout sequence explained in section [REFERENCE], in order to understand which signal could induced cross talk, each register's value has been moved one by one.
+In table \vpageref{tab:ro_registers} just an example of the seravl settings tried.
 
 \begin{table}[h!]
 \centering
@@ -1017,22 +1020,53 @@ Doing so indeed, the LE-TE info has to shift by the same value, in correspondenc
 
 For example, if \textsc{FREEZE\_START\_CONF} is responsible for the cross talk signal, shifting is value by a certain amount, we expcted that the hot pixels start to fire after that this signal arises due to the hit on the injected pixel. So the value of LE-TE has to be \textsc{FREEZE\_START\_CONF} + some potential(possible, probable) delay. Same argument for the other registers. \\
 
-By this procedure, repeated
+By this procedure, repeated for each readout register, we have come to the conclusion that the cross-talk could be related to the raising and falling edge of the \textsc{FREEZE} signal.
+
+In figure %\vpageref{fig:xtalk} 
+which is the histogram of the time last between the leading edge of an hit and the trailing edge of the previous hit, and two pixels read. It's possible to see several peaks (reffering to the readout setting reported in table \vpageref{tab:ro_registers}):
+
+\begin{itemize}
+\item one at 0, that represent the situation in which both hits come from hot pixel firing simultanously after the injection. This means that they are activated by the same signal and so is the most important confirmation that is cross-talk and not random firing pixel signal;
+\item one at $\approx$ 18 equal to \textsc{FREEZE STAR} raising + 8 $\rightarrow$ first induced signal;
+\item one at $\approx$ 35 equal to \textsc{FREEZE STOP} falling + 4 $\rightarrow$ second induced signal;
+\item one at $\approx$ 55 equal to \textsc{FREEZE STOP} falling + 4 when two different pixels are read (specifically in this case after the first 30 time unit until the \textsc{LOAD CONF}, a distinct pixel reading starts and it last another 20 time unit (\textsc{LOAD} - \textsc{FREEZE START}) + 1 unit time to conclude the frame with the \textsc{FREEZE STOP} and so 51 + 4 unit time wrote above. So when two pixels are read, the \textsc{FREEZE STOP} falling after 51 clock cycles, and it is compatible with the last peak in the plot.
+\end{itemize}
+
+%%ReFIRING???
+
+%\begin{figure}
+%\label{fig:xtalk}
+%\end{figure}
+
+As already stated, we run several tests varying the number of pixels to read, the value of the readout registers, different combination of hot and good pixels and also different spatial location of them in the matrix to exclude the possibility that the problem was related to particular columns. All results are in agreement with the interpretation explained above.\\
+
+Furthermore it hase been tried to estimate the height of the induced signal from the threshold of the hot pixel. For this reason we have have tried different setting of the currents cited above to make a pixel \textit{hot} in order to understand when the induced signal went above the threshold. We have found that the signal could (may) correspond to 100/150 $e^{-}$.\\
+
+%the height of the cross talk signal from FREEZE was measured lowering gradually the THR of good pixels to monito when they become hot.
+
+In figure %\vpageref{fig:analog_xtalk}
+an analog acquistion of the readout signals taken by an oscilloscope.
 
 
-
-
-grafico dei picchi di cross talk\\
-FREEXE START STOP\\
-height of the induced signal\\
-analog images\\
+%\begin{figure}
+%\label{fig:analog_xtalk}
+%\end{figure}
 
 
 
 \subsection{Mitigation}
 
-%PWELL
-%TUNING
+As seen in the previous, the problem of the hot pixel is tied to the induction signal produced during the readout which cause cross-talk. It becomes more important(significant, serious) when there is grater dispersion threshold.\\
+
+Potentially every pixel could become \textit{hot} if its threshold is lower than the height of the cross-talk signal since the \textsc{FREEZE} in sent across the entire matrix. 
+For this reason, a possible treatment could be related to the threshold tuning, explained in section (reference) , which could allow to make the pixesl threshold more uniform (less threshold dispersion) and simultanously greater than the induced signals. \\
+
+%DEVI METTERE ESEMPIO???
+
+Moreover it has been tried to increase the voltage bias of the all matrix, too. We remember that all previous test has been run with $P_{WELL}/P_{SUB}$ set to -3 V. This value was increased to -6 V and indeed there were some improvements in threshold dispersion shown in the following. 
+
+
+%LOWERING ITHR DECREASED THE INDUCED SIGNAL, BUT MATRIX NOT GOOD FUNCTIONALITY?
 
 
 \section{Test Beam results}
@@ -1042,6 +1076,26 @@ So with this test we have fully characterized the main features of the chip W14R
 
 In the following some of the results obtained:
 \end{comment}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
