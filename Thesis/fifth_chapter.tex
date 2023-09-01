@@ -964,8 +964,6 @@ First of all we noticed that in the s-curves oh the HVs flavor, for example that
 From these first observations, we have reached the conclusion that the cross talk could be tied to the readout activity. So we have started investigating the timestamp of the hits (out of synch) not synchronize with the timestamp of the injection.
 
 
-\subsection{Readout sequence}    %NEL QUARTO
-
 \subsection{Hot pixel strategy (study)}
 
 At first, it has been lowered the threshold in order to ''create'' hot pixel also in the first two flavors of the matrix. In fact with TB settings the threshold was too high and the hypothetical induced signal didn't caused sporious hits. For this purpose ( to this end, to do this) different settings were tried, changing some fundamental registers responsible for the threshold like those listed and explained \vpageref{currents}. 
@@ -1059,14 +1057,65 @@ an analog acquistion of the readout signals taken by an oscilloscope.
 As seen in the previous, the problem of the hot pixel is tied to the induction signal produced during the readout which cause cross-talk. It becomes more important(significant, serious) when there is grater dispersion threshold.\\
 
 Potentially every pixel could become \textit{hot} if its threshold is lower than the height of the cross-talk signal since the \textsc{FREEZE} in sent across the entire matrix. 
-For this reason, a possible treatment could be related to the threshold tuning, explained in section (reference) , which could allow to make the pixesl threshold more uniform (less threshold dispersion) and simultanously greater than the induced signals. \\
+
+As an example in figure \vpageref{making_hot} it si possible to compare the behaviour of pixel (218, 123) changing(modifying) some registers' values in order to reduce the threshold.
+
+\begin{figure}[h!]
+\centering
+\subfigure[$I_{DB}$=100, $I_{TUNE}$=53 - Good behavior]
+{\includegraphics[scale=0.45]{making_hot1}}\quad
+\subfigure[$I_{DB}$=60, $I_{TUNE}$=150 - Pixel starts to misbehave]
+{\includegraphics[scale=0.45]{making_hot3}}\\
+\subfigure[$I_{DB}$=55, $I_{TUNE}$=150 - Pixel becomes \textit{hot}]
+{\includegraphics[scale=0.45]{making_hot2}}\\
+\caption{S-curve of the pixel (218, 123) for different register settings.}
+\label{fig:making_hot}
+\end{figure}
+
+ 
+For this reason, a possible treatment could be related to the threshold tuning, explained in section (reference) , which could allow to make the pixesl threshold more uniform (less threshold dispersion) and simultanously targeting a value greater than the induced signals. \\
 
 %DEVI METTERE ESEMPIO???
+%DAC tuning kaje threshold more uniform, threat hot pixel and so also the peak at zero tot in source acquisition is reduced
 
-Moreover it has been tried to increase the voltage bias of the all matrix, too. We remember that all previous test has been run with $P_{WELL}/P_{SUB}$ set to -3 V. This value was increased to -6 V and indeed there were some improvements in threshold dispersion shown in the following. 
+Moreover it has been tried to increase the voltage bias of the all matrix, too. We remember that all previous test has been run with $P_{WELL}/P_{SUB}$ set to -3 V. This value was increased to -6 V and indeed there were some improvements. In fact increasing the bias, we expected a decrease of the diode capacitance thus higher gain and lower thresold dispersion.\\
+In figure %\vpageref{fig:bias_comp} 
+a comparison between the threshold dispersion respectively at -3 V and -6 V.
 
 
+%reduce the tail of threshold distribution
+%explanation: diminuendo la C, diminuisce l'accoppiamento e quindi l'altezza del segnale in corsstalk
 %LOWERING ITHR DECREASED THE INDUCED SIGNAL, BUT MATRIX NOT GOOD FUNCTIONALITY?
+
+%VRESET(agisce sulla dispersione) AND IBIAS(aumenta gain e diminuisce dispersion ma aumenta power consumption)
+
+
+
+\begin{comment}
+Suggestions from OBELIX meeting.
+
+Probably the coupling is linked to digital power. 
+Not from the bulk: +4 clk seems to be the indication for not a direct coupling
+
+Since the distribution of the power is from the edge,  first and last column should be more solid against this effect and hot pixel should be more present in the center? 
+They asked if we have a  map of the hot pixels
+
+Also suggested to change the clock and see if the delay from the FREEZE edge is at the same delay or not. 
+
+\end{comment}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\subsection{Readout sequence}    %NEL QUARTO
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
 
 
 \section{Test Beam results}
