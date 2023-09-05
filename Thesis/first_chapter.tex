@@ -106,10 +106,19 @@ In these last two areas, $\tau$ and dark sectors physics, the aim is to probe fo
 
 
 \subsection{B meson decay vertices} \label{vertex_decay}
-\begin{comment}
-IMPORTANZA DEI VERTICI SECONDARI
 
-\end{comment}
+In the topology of the B meson decay vertices, lie the combined great efforts employed to be able to build a fast, high-granularity and radiation hardness detector. As a matter of fact the main task of VXD is the reconstruction of the production and decay vertices of the particle produced in the collision. It is crucial to perform time-dependent measurements, core of the Belle II physics program.\\
+
+The center of mass energy of Belle II experiment has its peak at the $\Upsilon(4S)$ resonance, such as $\sqrt{s}$ = 10.58 GeV, which decays into two B mesons ($B^{0}$ $\bar{B}^{0}$) in nearly 100\% of all cases. The choice of the asymmetric configuration of the beams, relies precisely in the requirement to boost the mesons in order to measure their life-time, exploiting the information on the distance between their decay vertices. More precisely, the investigation of CP Violating processes requires to measure the decay time difference of the two B mesons, and its uncertainty is dominated by that of decay vertex measurement (order of hundreds microns). 
+
+
+
+
+The six-layer VXD allows to determine the position of the vertices with a precision better than 100 µm
+, allowing to reconstruct secondary vertices, i.e. the decay position of the particles coming from B decays, and also the tau and D mesons vertices, widening the Belle II physics program to charm and tau physics.  ??
+
+
+
 
 
 
@@ -262,40 +271,63 @@ These layers are mainly used for tracking/vertexing and also for particle identi
 \subsection{Central Drift Chamber (CDC)}
 
 It is the central tracking device, with a large-volume drift chamber and small drift cells. The chamber gas is composed of a \ch{He-C_{2}H_{6}} 50:50 mixture with an average drift velocity of 3.3 $\mu s^{-1}$ and a maximum drift time of about 350 ns for a 17 mm cell size.
-The CDC contains 14336 wires arranged in 56 layers either in \textit{axial}  (so aligned with the solenoidal magnetic field) or \textit{stereo} (skewed with respect to the axial wires) orientation. In fact by combining information from both the axial and the stereo layers it is possible to reconstruct a full three-dimensional helix charged tracks and measures their momenta.
-It also provides dE/dx information for particle identification, which is particularly useful for low-momentum particles that cannot reach the outer particle identification subdetectors.
+The CDC contains 14336 wires  arranged in 56 layers either in \textit{axial}  (so aligned with the solenoidal magnetic field) or \textit{stereo} (skewed with respect to the axial wires) orientation. In fact by combining information from both the axial and the stereo layers it is possible to reconstruct a full three-dimensional helix charged tracks and measures their momenta.
+It also provides information for particle identification by measuring ionization energy loss, which is particularly useful for low-momentum particles that cannot reach the outer particle identification subdetectors.
 
-%immagine
-
+%IMMAGINE?
 
 \subsection{Particle identification system (TOP e ARICH)}
 
-\begin{comment}
-\textbf{TOP} is a special kind of Cherenkov detector where the two-dimensional information of a Cherenkov ring image is given by the time of arrival and impact position of Cherenkov photons at the photodetector at one end of a 2.6 m quartz bar. It is composed by 16 detector module and each one (of them) consists of a 45 cm wide and 2 cm thick quartz bar with a small expansion volume (about 10 cm long) at the sensor of the bar. At the exit window of the wedge, two rows of sixteen fast multi-anode photon detectors are mounted. This detector requires microchannel plate (MCP) photomultiplier tubes (PMT) and specially dveloped for this purpose.\\
+\textbf{TOP (Time Of Propagation)} is a special kind of Cherenkov detector used for particle identification in the barrel region. It employs the two-dimensional information of a Cherenkov ring image, such as the time of arrival and impact position of Cherenkov photons at the photodetector at one end of a 2.6 m quartz bar. It is composed by 16 detector modules, each one consisted in a 45 x 2 cm quartz bar (Cherenkov radiator) with a small expansion volume (about 10 cm long) at the sensor end of the bar. In order to achieve a single-photon time resolution of about 100 ps (required for a good PID), 16-channel microchannel plate photomultiplier tubes (MCP-PMT), specially developed for this purpose, are employed.\\
 
-\textbf{ARICH} is used to identify charged particle and it is placed in the forward endcap region. It is a proximity focusing Cherenkov ring imagine detector with aerogel as Cherenkov radiator. The number of detected Cherenkov photons is a key parameter of the RICH and in this experiment it is increased by a novel method. Two 2 cm-thock layers of aerogel with different refractive indices (n = 1.045 upstream, n= 1.055 downstream) are used to increase the yield without degrading the Cherenkov angle resolution.
-As the single-photon-sensitive high-granularoty sensor, a hybrid avalanche photon detector (HAPD) is used.  
+\begin{figure}
+\centering
+\subfigure[A schematic view of the TOP radiator.]{\includegraphics[scale=0.4]{TOP_quartz_radiator}}\quad
+\subfigure[A side view of the TOP radiator.]{\includegraphics[scale=0.4]{TOP_side_view}}\\
+\caption{TOP detector.}
+\label{TOP}
+\end{figure}
+
+\textbf{ARICH (Aerogel Ring Imaging CHerenkov)} is used to identify charged particle and it is placed in the forward endcap region. It is a proximity focusing Cherenkov ring imagine detector which adopts aerogel as Cherenkov radiator. In particular this detector employs a novel method to increase the number of detected Cherenkov photons: two 2 cm-thock layers of aerogel with different refractive indices ($n_{1}$ = 1.045 upstream, $n_{2}$= 1.055 downstream) that increase the yield without degrading the Cherenkov angle resolution.
+A hybrid avalanche photon detector (HAPD) are exploited as single-photon-sensitive high-granularity sensor. Here photo-electrons are accelerated over a potential difference of about 8 KV and are detected in avalanches pyotodiodes (APD).\\
+
+\begin{figure}
+\centering
+\includegraphics[scale=.55]{ARICH}
+\caption{ARICH detector.}
+\label{ARICH}
+\end{figure}
+
+The main task of these detector is to improve the K/$\pi$ separation until 3.5 and 4 GeV/c of momentum, respectively.
 
 \subsection{Electromagnetic calorimeter (ECL)}
 
-The \textbf{ECL} is a highly segmented array of tallium-doped caesium iodide CsI(Tl) crystals assembled in a (projective geometry). THis detector is used to detect gamma rays and to identify electrons, and in particular to separate electrons from hadrons (expecially pions). All three detector regions (barrel, forward and backward endcaps) are instrumented with a total of 8736 crystal, covering about 90 \% of the solid angle in center-of-mass system.
+The \textbf{ECL} is a highly segmented array of tallium-doped caesium iodide CsI(Tl) crystals assembled in a 3 m long barrel section with a radius of 1.25m, and two endcaps discs located at 2 m (forward) and 1 m (backward). All of them are instrumented with a total of 8736 crystal, covering about 90 \% of the solid angle in center-of-mass system. This detector is used to detect gamma rays and to identify electrons in order to separate the latter from hadrons, expecially pions.
 
 \subsection{$K_{L}$ muon detector (KLM)}
 
-It consists of an alternating sandwich of 4.7 cm-thick iron plates and active detector elements located outside the superconducting solenoid. The iron plates serve as the magnetic flux return joke for the solenoid. They also provide 3.9 interaction lenghts or more of material, beyond the 0.8 interaction lenghts of the calorimeter, in chich $K_{L}^{0}$ mesons can shower hadronically. The active detector elements have been chosen in order to cope with the reduction of the detector efficiency under the SuperKEKB background rates. Layers of scintillator strips with wavelenght-shifting fibers are used, the readout instead relies on silicon photomultipliers (SiPMs, Geiger mode operated APDs(...)) as light sensors.
+It consists of an alternating sandwich of 4.7 cm-thick iron plates and active detector elements located outside the volume of the superconducting solenoid that provides a 1.5 T magnetic field. The iron plates serve as the magnetic flux return joke for the solenoid. They also provide 3.9 interaction lenghts or more of material, beyond the 0.8 interaction lenghts of the calorimeter, in which $K_{L}^{0}$ mesons can shower hadronically. The active detector elements have been chosen in order to cope with the reduction of the detector efficiency under the SuperKEKB background rates: resistive plate chambers (RPCs) for the outermost active layers, and scintillator strip, with wavelenght-shifting fibers, readout by silicon photomultipliers (SiPMs) in the two innermost layers of the barrel region and for the endcaps regions.
 
 \subsection{Trigger system}
 
-The trigger system of Belle II has a non-trivial role to identify eventsof interest during data-taking. It must work efficiently in the presence of high background rates, while respecting (satisfying) the limitations of the DAQ (?).
-This system is composed of two levels: a hardware-based low-level trigger (L1) and a software-based high-level trigger (HLT). 
+The trigger system of Belle II has a non-trivial role to identify events of interest during data-taking at SuperKEKB, where high background rate are expected. 
+This system is composed of two levels: a hardware-based low-level trigger (L1) and a software-based high-level trigger (HLT), implemented in the data acquisition (DAQ) system. 
 
 \begin{itemize}
 \item \textbf{L1}: has a latency of 5 $\mu$s and a maximum trigger output rate of 30 kHz, limited by the read-in rate of the DAQ.
-\item \textbf{HLT}: is a key component of the DAQ and it has to reduce online event rates to 10 kHz for offline storage, and it must identify track regions of interest for PXD readout in order to reduce data flux. It reconstructs events with offline reconstruction algorithms, using all detectors infromation except for the PXD.
+\item \textbf{HLT}: is a key component of the DAQ, used to fully reconstruct events that passed the L1 trigger selection. It has to reduce online event rates to 10 kHz for offline storage and it must identify track regions of interest for PXD readout in order to reduce data flux. It fully recreates events with offline reconstruction algorithms, using all detectors infromation except for the PXD.
 \end{itemize}
 
-%VEDI ANCHE ARTICOLO GIULIANA
-%TABELLA CON SUMMARY DA PHYSICS BOOK?
+%SUMMARY IMAGE?
+
+\begin{comment}
+\begin{figure}
+\centering
+\includegraphics[scale=.4]{detector_summary}
+\caption{}
+\label{}
+\end{figure}
+\end{comment}
 
 
 %---------------------------------------------
@@ -303,13 +335,20 @@ This system is composed of two levels: a hardware-based low-level trigger (L1) a
 %---------------------------------------------
 \section{Current state and perspectives of data taking}
 
-At the time of writing...
+As we already said, Belle II has reach the world record luminosity with $\textit{L}_{MAX}$ = \num{0.47e-35} $cm^{-2}s^{-1}$ in June 2022. In further perspectives, the target is to achieve a new record with \textit{L} = \num{6e-35} $cm^{-2}s^{-1}$ and to increase the integrated luminosity from 428 $fb^{-1}$ (actual value, starting in 2019) to 50 $fb^{-1}$. \\
 
+In order to accomplish the fixed(estabilished) goals mentioned above, an upgrade not only of the vertex detector but of the whole experiment is necessary, among several reasons, to cope with a more complex circumstances due to the increased luminosity, which undermine its proper functioning.
 
-\end{comment}
+Therefore a three-phase program is envisaged (considered):
 
-%%%% 	Luminosità raggiunte e statistica?
-%%Belle II online luminosity & record luminosità istantanea
+\begin{itemize}
+\item \textbf{short term}: year 2022. Long Shutdown 1 (LS1) is planned for approximately 15 months starting in July 2022, to install a complete pixel detector (PXD). Was it done?
+\item \textbf{short term}: approximately year 2026-27. Long Shutdown 2 (LS2) will probably be needed for the upgrade of the Interaction Region (IR) to reach a new luminosity target $\textit{L}_{peak}$ = \num{6.5e-35} $cm^{-2}s^{-1}$. A new Vertex Detector might be required to accommodate the new IR design, and other sub-detector upgrades are possible.
+\item \textbf{long term}: years > 2032. Studies have started to explore upgrades beyond the currently planned program, such as beam polarization and ultra-high luminosity, such as $\textit{L}_{peak}$ in excess of \num{1e-36} $cm^{-2}s^{-1}$. While the beam polarization has a concrete proposal, for ultra-high luminosity studies have just started.
+\end{itemize}
+
+At time of writing we are in the period of a long shut-down (LS1), last since June 2022 and the restart of data taking is planned at the beginning of 2024.
+
 %% doev si vuole arrivare 50 abinv e come??
 %% cose achved nelle previsioni parametri di macchina dell'articolo B
 
@@ -319,55 +358,17 @@ At the time of writing...
 
 
 
-%--------------------------------------------------
-%		bibliography
-%--------------------------------------------------
+
+
+%-------------------------------------------------------------------------
+%				bibliography
+%-------------------------------------------------------------------------
 % 1. 	PHYSICS BOOK
 %2. 	UPGRADE ARTICLE
 %3. 	Background SuperKEKB article (A)
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{comment}
-
-\subsection{Alcune ulteriori modifiche rispetto a KEKB}
-
-L'upgrade da KEKB a SuperKEKB, come in parte visto, ha richiesto importanti cambiamenti nei fasci e nello schema di collisione, tutto volto a raggiungere nuove vette di luimnosità. Altre fondamentali modifiche sono state fatte lungo l'anello di collisione, tra cui:
-
-\begin{item}
-\item rifacimento della regione d'interazione, che comprende 4 m intorno al PI, in modo da poter ospitare il nuovo detector Belle II, il sistema di focusing finale dei fasci e le due beam pipes;
-\item il sistema a radiofrequenza è stato modificato per permettere una corrente maggiore dei fasci;
-\item l'aggiunta di alcuni collimatori lungo entrambi gli anelli (11 nel LER  e 20 nel HER) per poter limitare il danno da radiazione sul rivelatore e i ''quenches'' dei magneti superconduttori, cioè un surriscaldamento dei suoi avvolgimenti che genericamente causa la perdità della superconduttività, dissipando la corrente circolante.
-\item anche il sistema di vuoto è stato migliorato per limitare alcuni effetti collegati alla perdita di potenza del fascio, allungando quindi la vita media del fascio stesso.
-\end{item}
-
-\end{comment}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{comment}
-
-\subsection{Background monitoring system} [?]
-%% Per le sorgenti di rumore si rimanda al capitolo 2 o lo metti nel capitolo 2?
-
-Background is one of the most important problem for a particle detector, both for precision measurements of physics and for the performance of the different layer detector which constitute (make up) Belle II. For this reason several detectors are used to obtain measurements of radiation dose on both detector and delicate regions of the accelerator, to intervene as soon as possible in case of too high levels are reached. Indeed large doses of radiation could cause accidental damages on the detector, decreasing its performance.
-
-In the chapter 2 (reference) we will go through the main (primary, leading) reasons of background. For now we mention some of the monitoring devices for the backgorund in SuperKEKB.
-
-
-\begin{itemize}
-\item Diamonds detector (called ''Diamonds') which control the rate of the radiation dose in the interaction region of the beam pipe. These also are part (take part) of the ''fast beam abort system'', which is a control system that collect (consider) data from different detector to evalute (valutare nel senso di decidere) the beam ''turning off'', in order to avoid that events out of control could cause damage (harm) to the whole structure.
-\item CLAWS (sCintillation Light And Waveform Sensors), made by scintillator of plastic material and silicon photomultipliers, and used to monitor the Belle II background in the nearby (proximity) of the beam injection (main ring). Together with diamonds it takes part to the beam-abort system.
-\item TPC's (Time Projection Chambers) which provides measurements (better) on the direction of the neutron flux in the tunnel which hosts (that houses) the accelerator.
-\item $He^{3}$ tubes for the counting of thermal neutrons (which are those with a kinetic energy lower than 1/10 of eV, generally about 0.025 eV) around the Belle II detector.
-\end{itemize}
-
-
-
-\end{comment}
 %-------------------------------------------------------------------------
 %				COMMENT
 %-------------------------------------------------------------------------
@@ -422,4 +423,41 @@ Therefore to increase the $\beta$ function in the IP, the value of d has to dimi
 Belle II detector is a general-purpose spectrometers, optimized in precision measurements of B mesons and their decay products. Compared to its predecessor Belle, it have to preserve (mantain) good performance despite having smaller boost in the center of mass and suffering greater levels of backgrounds and so of radiations, which are one of the main causes of premature degradation of performance and expected mean life of the detector itself.\\
 
 Belle II consists of a series of nested subdetectors, which surrounds the IP of the two beams, placed around the berillium beam pipe of 1 cm(10 mm??) of radius. Now we will go trough a briefly description of the several subdetectors. 
+\end{comment}
+
+
+
+\begin{comment}
+
+\subsection{Alcune ulteriori modifiche rispetto a KEKB}
+
+L'upgrade da KEKB a SuperKEKB, come in parte visto, ha richiesto importanti cambiamenti nei fasci e nello schema di collisione, tutto volto a raggiungere nuove vette di luimnosità. Altre fondamentali modifiche sono state fatte lungo l'anello di collisione, tra cui:
+
+\begin{item}
+\item rifacimento della regione d'interazione, che comprende 4 m intorno al PI, in modo da poter ospitare il nuovo detector Belle II, il sistema di focusing finale dei fasci e le due beam pipes;
+\item il sistema a radiofrequenza è stato modificato per permettere una corrente maggiore dei fasci;
+\item l'aggiunta di alcuni collimatori lungo entrambi gli anelli (11 nel LER  e 20 nel HER) per poter limitare il danno da radiazione sul rivelatore e i ''quenches'' dei magneti superconduttori, cioè un surriscaldamento dei suoi avvolgimenti che genericamente causa la perdità della superconduttività, dissipando la corrente circolante.
+\item anche il sistema di vuoto è stato migliorato per limitare alcuni effetti collegati alla perdita di potenza del fascio, allungando quindi la vita media del fascio stesso.
+\end{item}
+
+\end{comment}
+
+
+\begin{comment}
+
+\subsection{Background monitoring system} [?]
+%% Per le sorgenti di rumore si rimanda al capitolo 2 o lo metti nel capitolo 2?
+
+Background is one of the most important problem for a particle detector, both for precision measurements of physics and for the performance of the different layer detector which constitute (make up) Belle II. For this reason several detectors are used to obtain measurements of radiation dose on both detector and delicate regions of the accelerator, to intervene as soon as possible in case of too high levels are reached. Indeed large doses of radiation could cause accidental damages on the detector, decreasing its performance.
+
+In the chapter 2 (reference) we will go through the main (primary, leading) reasons of background. For now we mention some of the monitoring devices for the backgorund in SuperKEKB.
+
+
+\begin{itemize}
+\item Diamonds detector (called ''Diamonds') which control the rate of the radiation dose in the interaction region of the beam pipe. These also are part (take part) of the ''fast beam abort system'', which is a control system that collect (consider) data from different detector to evalute (valutare nel senso di decidere) the beam ''turning off'', in order to avoid that events out of control could cause damage (harm) to the whole structure.
+\item CLAWS (sCintillation Light And Waveform Sensors), made by scintillator of plastic material and silicon photomultipliers, and used to monitor the Belle II background in the nearby (proximity) of the beam injection (main ring). Together with diamonds it takes part to the beam-abort system.
+\item TPC's (Time Projection Chambers) which provides measurements (better) on the direction of the neutron flux in the tunnel which hosts (that houses) the accelerator.
+\item $He^{3}$ tubes for the counting of thermal neutrons (which are those with a kinetic energy lower than 1/10 of eV, generally about 0.025 eV) around the Belle II detector.
+\end{itemize}
+
 \end{comment}
