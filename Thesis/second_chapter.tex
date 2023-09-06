@@ -1,65 +1,68 @@
 \chapter{Belle II Upgrade}
 
-In this chapter we want to present (expose, introduce) the main reasons in favor of the upgrade of Belle II and in particular of its vertex detector. We will go through the primary sources of background in the experiment and other aspects that make the upgrade necessary. Eventually we will also introduce some of the proposes made for the vertex detector, which is the focus of this thesis.
+This second chapter wants to adress some of the main reasons in favor of the upgrade of Belle II. We will give an overview of the primary background sources in the experiment to understand how to mitigate them to be able to achieve a better performance of the whole detector, even increasing the luminosity. Eventually we will also introduce some of the proposes made for the vertex detector, which is the focus of this thesis.
+
 
 %---------------------------------------------
 %			2.1
 %---------------------------------------------
-\section{Background sources and limits in Belle II (limits, limitations)??}
+\section{Background sources and limitations in Belle II}
 
-SuperKEKB is already the world's highest-luminosity collider and it aims to reach a new peaks luminosity [of 6.3 $\dot 10^{35}$ $cm^{-2}s^{-1}$] in the future by further increasing the beam-currents and reducing the beam-size at the interaction point by squeezing the betatron function down to $\beta^{*}_{y}$ = 0.3 mm (mentioned in section REFERENCE). For this reason, it's necessary to understand how to mitigate the beam backgrounds where possible and how to cope with the consequent challenges. 
+SuperKEKB is already the world's highest-luminosity collider and it aims to reach a new luminosity peak and to increase the statistics in the future, to become more sensitive to rare process and precise measurements of Belle II physics program. 
+But to be able to do this without loosing the good functionality of the entire detector, it's necessary to understand how to mitigate the beam backgrounds where possible and how to cope with the consequent challenges.
 
-In order to estimate the future machine scearios, several simulations and measurements of beam background have be done. This is necessary to study the vulnerability of the subdetectors (and more generally of the machine) and so to design the countermeasures to adopt (against the deterioration of performance and material). 
+Several simulations and measurements of beam background are still being done in order to guess possible future machine scenarios, under new luminosity conditions.
+This is necessary to study the vulnerability of the subdetectors (and more generally of the machine) and so to design the countermeasures to adopt against the deterioration of performance and material.
+
 
 \subsection{Beam-induced background sources}
 
-Here we want to give an overview of the main beam background sources at SuperKEKB. 
-
-[We include also luminosity-dependent background such as radiative Bhabha scattering and production of two-photon events.]
+Making clear that even the interaction of the beams is a source of noise for the measurements, in the following are listed some of the \textit{beam-induced} and \textit{luminosity-dependent} background sources.
 
 
 \begin{description}
 \item[Touschek effect]: 
-	It is an intra-bunches scattering process, where the Coulomb scattering of two particles in the same beam bunch changes the particles' energies, increasing the value of one and lowering(decreasing) that of the other respect to the nominal value. This process(effect) is the first beam background source (at SuperKEKB).
+	It is an intra-bunches scattering process, where the Coulomb scattering of two particles in the same beam bunch causes a variation of their energies, increasing the value of one of them and lowering that of the other from the nominal value. This interaction among the bunch particles is the first beam background source at SuperKEKB.
 \item[Beam-gas scattering]: 
-	this represents the scattering of beam particles by residual gas molecules in the beam pipe. It's the second beam background source and it can occur via two processes: Coulomb interactions, which changes the direction of the beam particle, and bremsstrahlung scattering, which decreases the energy of the beam particles. 
+	this represents the collision of beam particles with residual gas molecules in the beam pipe. It's the second beam background source and it can occur via two processes: Coulomb interactions, which changes the direction of the beam particles, and bremsstrahlung scattering, which instead decreases their energy. 
 \end{description}
 	
-These two processes lead to the scattered particle to falling out the stable orbit and to hitting the beam pipe while they propagate around the ring. This cause EM shower that could reach the detector if the loss position is close to it.
+Because of these two processes, the scattered particle fall out the stable orbit and hit the beam pipe while they move around the ring. This causes electromagnetic showers that could reach the detector if their origin (loss position) is close to it.
+
 
 \begin{description}
 \item[Radiative Bhabha scattering and two-photon processes]:
-	There are several undesirable collision processes at IP, which have very high cross sections but only little interest for the physics under study in the experiment. Two of them are \textbf{Bhabha scattering} ($e^{+}e^{-} \rightarrow e^{+}e^{-} \lambda$) and \textbf{Two-photon processes} ($e^{+}e^{-} \rightarrow e^{+}e^{-}e^{+}e^{-} $). The photon produced in the first, interacts with the iron magnets and produce a very large amounts of neutrons via the photo-nuclear resonance mechanism. [Such neutrons are the main background source for the outermost Belle II detector, the $K_{L}$ and muon detector (KLM).] The electrons-positrons pairs of the latter instead, can spiral around the solenoid field lines and leave multiple hits in hte inner Belle II detectors.\\
+	There are several undesirable collision processes at IP, which have very high cross sections but only little interest for the physics studied in the experiment. Two of them are \textbf{Bhabha scattering} ($e^{+}e^{-} \rightarrow e^{+}e^{-} \lambda$) and \textbf{Two-photon processes} ($e^{+}e^{-} \rightarrow e^{+}e^{-}e^{+}e^{-} $). 
+	In the first effect the emitted photon interacts with the iron magnets and produces a very large amounts of neutrons via the photo-nuclear resonance mechanism. [Such neutrons are the main background source for the outermost Belle II detector, the $K_{L}$ and muon detector (KLM).] The electrons-positrons pairs of the latter instead, can spiral around the solenoid field lines and leave multiple hits in the inner Belle II detectors.\\
 	
-These processes increase the Belle II occupancy and radiation dose, and they are reffered as \textit{Luminosity background}. In fact the rate of this type background is proportional to the luminosity. [The future further increasing of luminosity in the experiment, makes the upgrade necessary to deal with with this problem.]
+These processes increase the Belle II occupancy and radiation dose, and they are reffered as \textit{Luminosity background} because their strenght is proportional to the luminosity. The future upgrade intends to deal with this problem in order to keep occupancy low.
 
 \item[Synchrotron Radiation (SR)]:
-	X-rays emitted from the beam, when electrons and positrons pass through the strong magnetic field near the IP. The HER beam is the main source of this type of background, because SR power is proportional to the beam energy squared and magnetic field squared.
-SR can potentially dammage the inner layers of the vertex detector. [...]
+	X-rays emitted from the beam when electrons and positrons pass through the strong magnetic field near the IP. The HER beam is the main source of this type of background, because SR power is proportional to the square of beam energy and magnetic field.
+SR can potentially damage the inner layers of the vertex detector due to an higher radiation dose. As a matter of fact, many current studies aim to enhance radiation hardness detector.
 \end{description}
 
-There are also other sources of background beyond those mentioned and during the last decade a well-structured set of countermeasures have been developed, to suppresse (mitigate) each of them.
+There are also other  background sources beyond those mentioned aboce and during the last decade a well-structured set of countermeasures have been developed trying to ease each one of them.
+
 
 \subsection{Current background status and future implications (predictions)}
 
-[So it is a of a great importance simulate and measure the background to check on the state of the detector and the machine but also to predict how the conditions could change.]
-In figure .... the Belle II background level measured in..... is shown. Current background rates in the experiment are acceptable and above all in most cases well below the limits (listed??). 
+Several monitoring devices are located all along the accelerator to keep under control radiation doses on both detector and delicate regions of the ring, to intervene as soon as possible in case too high levels are reached. Indeed large doses of radiation could cause accidental damages on the detector, decreasing its performance.
 
-As we have already seen in the previous (ref?) SR is the main background source which could  damage(deteriorate) the vertex dector.Event though, the current level is of no concern in terms of occupancy for the innermost layers of the vertex detector, in the case of a large increase, SR may cause inhomogenities in PXD module irradiation, which would make it more difficult to compensate by adjusting the operation voltages of the affected modules.
+Event though, the current level is of no concern in terms of occupancy for the innermost layers of the vertex detector, in the case of a larger amount, SR may cause inhomogenities in PXD module irradiation, which would make it more difficult to compensate by adjusting the operation voltages of the affected modules.
+
+Until now it can be said that SuperKEKB and Belle II are operating stably. Beam-induced backgorund rates are well below the limits of the detector and do not prevent from increasing further tha current and hence the luminosity.  
+Despite that, there are several other difficulties that can limit beam currents and so the possibility to move the luminosity frontier at towards higher levels, allowing Belle II reaserchers to study rare physics processes. 
+
 
 %SEU??
-
-Until now it can be said that SuperKEKB and Belle II are operating stably. Beam-induced backgorund rates are well below the limits of the detector and do not prevent from increasing further tha current and hence the luminosity (at the same time).  
-But altough background levels are now under control, there are several other difficulties that can limit beam currents and so the possibility to move the luminosity frontier at towards higher levels, allowing Belle II reaserchers to study rare physics processes. 
-
-The aim of the experiment is to reach an integrated luminosity of the order of 50 $ab^{-1}$ by 2030. In order to achieve this goal, the upgrades of the experiment togheter with several machine operation schemes, instability and background conutermeasures must be considered and studied (??).
-
 
 %---------------------------------------------
 %			2.2
 %---------------------------------------------
 \section{Purposes of the upgrade}
 
+\begin{comment}
 We have seen that SuperKEKB is expected to be able to reach.... with the existing accelerator complex, but in order to achieve higher luminosity, an upgrade (enhancement) of the interaction region will (probably) be required.\\
 Belle II is also designed to operate efficiently under the high levels of backgrounds extrapolated to target luminosity, but safety margins are not large. Moreover in the case of a redesign of the interaction region large uncertainties in the background extrapolations are unavoidable. \\
 The upgrade program is therefore motivated by many considerations:
@@ -91,7 +94,7 @@ In regards to the Vertex Detector (in particular), all proposed upgrades aim to:
 %% Degradazione dei componenti del rivelatore
 %% Occupancy e radiation hardness
 %% Riduzione del materiale interposto (dei rivelatori) per permettere maggiore risoluzione a bassi impulsi
-
+\end{comment}
 
 \begin{comment}
 In particular there are three fundamental aspects in physics performance (concern) in regards to VXD and its upgrade:
@@ -103,10 +106,9 @@ In particular there are three fundamental aspects in physics performance (concer
 \item Triggers.
 \end{itemize}
 
-\end{comment}
 
 
-\newpage
+
 
 
 %---------------------------------------------
@@ -123,3 +125,23 @@ In particular there are three fundamental aspects in physics performance (concer
 \subsection{Ne manca una?}
 
 \subsection{SOI}
+
+\end{comment}
+
+
+
+
+
+%---------------------------------------------
+%			COMMENT
+%---------------------------------------------
+ %2.1
+\begin{comment}
+SuperKEKB is already the world's highest-luminosity collider and it aims to reach a new peaks luminosity [of 6.3 $\dot 10^{35}$ $cm^{-2}s^{-1}$] in the future by further increasing the beam-currents and reducing the beam-size at the interaction point by squeezing the betatron function down to $\beta^{*}_{y}$ = 0.3 mm (mentioned in section REFERENCE). For this reason, it's necessary to understand how to mitigate the beam backgrounds where possible and how to cope with the consequent challenges. 
+\end{comment}
+
+
+\begin{comment}
+[So it is a of a great importance simulate and measure the background to check on the state of the detector and the machine but also to predict how the conditions could change.]
+In figure .... the Belle II background level measured in..... is shown. Current background rates in the experiment are acceptable and above all in most cases well below the limits (listed??). 
+\end{comment}
