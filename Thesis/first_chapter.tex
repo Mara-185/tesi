@@ -107,20 +107,47 @@ In these last two areas, $\tau$ and dark sectors physics, the aim is to probe fo
 
 \subsection{B meson decay vertices} \label{vertex_decay}
 
-In the topology of the B meson decay vertices, lie the combined great efforts employed to be able to build a fast, high-granularity and radiation hardness detector. As a matter of fact the main task of VXD is the reconstruction of the production and decay vertices of the particle produced in the collision. It is crucial to perform time-dependent measurements, core of the Belle II physics program.\\
+The main task of VXD is the reconstruction of the production and decay vertices of the particles originated from the collisions and it is crucial to perform time-dependent measurements, core of the Belle II physics program.\\
 
-The center of mass energy of Belle II experiment has its peak at the $\Upsilon(4S)$ resonance, such as $\sqrt{s}$ = 10.58 GeV, which decays into two B mesons ($B^{0}$ $\bar{B}^{0}$) in nearly 100\% of all cases. The choice of the asymmetric configuration of the beams, relies precisely in the requirement to boost the mesons in order to measure their life-time, exploiting the information on the distance between their decay vertices. More precisely, the investigation of CP Violating processes requires to measure the decay time difference of the two B mesons, and its uncertainty is dominated by that of decay vertex measurement (order of hundreds microns). 
+The center of mass energy of Belle II experiment has its peak at the $\Upsilon(4S)$ resonance, such as $\sqrt{s}$ = 10.58 GeV, which decays almost instantaneously into two B mesons ($B^{0}$ $\bar{B}^{0}$) in nearly 96\% of all cases. The choice of the asymmetric configuration of the beams, relies precisely in the requirement to boost the mesons in order to measure their life-time, exploiting the information on the distance between their decay vertices. In fact in a beam symmetric situation, they would have been produced at rest, decaying roughly at the same point or in any case at undetectable distances. The investigation of CP Violating processes instead, requires to measure the decay time difference of the two B mesons, and its uncertainty is dominated by that of decay vertex measurement (order of hundreds microns). 
 
+SuperKEKB collides an electrons beam of 7 GeV with a positrons beam of 4 GeV, chosen in order to have the center mass energy equal to 10.58 GeV. Indeed it must be valid:
 
+\begin{equation}
+s = (p_{{e}^{-}}^{\mu} + p_{{e}^{+}}^{\mu})^{2} = m^{2}_{\Upsilon(4S)},\ \ with\  m_{e^{+/-}} \ll E_{{e}^{+/-}}  \Rightarrow 4E_{{e}^{-}}E_{{e}^{+}} = m^{2}_{\Upsilon(4S)}
+\end{equation}
 
+So it's possible to compute the Lorentz boost of the mass center:
 
-The six-layer VXD allows to determine the position of the vertices with a precision better than 100 µm
-, allowing to reconstruct secondary vertices, i.e. the decay position of the particles coming from B decays, and also the tau and D mesons vertices, widening the Belle II physics program to charm and tau physics.  ??
+\begin{equation}
+\vec{P}_{\Upsilon(4S)} = \vec{p}_{{e}^{-}} + \vec{p}_{{e}^{+}} = (\beta\gamma)_{\Upsilon(4S)}m_{\Upsilon(4S)} \approx 3 GeV \  \Rightarrow \  (\beta\gamma)_{\Upsilon(4S)} = \frac{4 GeV}{10.58 GeV} \approx 0.28
+\end{equation}
 
+which is the same boost acquired by mesons, because they are produced almost at rest ($m_{\Upsilon(4S)}$ - $m_{2B_{0}}\approx$ 19 MeV). Moreover knowing that $\tau_{B}\simeq $\num{1.5e-12} s ans so c$\tau_{B}\simeq$ 450 $\mu$m, we can compute the average flight distance travelled before decaying:
 
+\begin{equation}
+\textit{l} = (\beta\gamma)_{\Upsilon(4S)}c\tau_{B} \approx 126 \mu m  
+\end{equation} 
 
+This value must be within the vertex detector sensitivity in order to distinguish the vertex decay and as consequence a precision measurements of lifetimes, mixing parameters and CP violation. The six-layer VXD could determine the position of the vertices with a precision better than 100 $\mu$m, allowing to reconstruct secondary vertices, i.e. the decay position of the particles coming from B decays, and also the tau and D mesons vertices.
+[In the topology of the B meson decay vertices, lie the combined great efforts employed to be able to build a fast, high-granularity and radiation hardness detector]
 
+Let's take a closer look at the event kinematics (e.g. \vpageref{fig:decay_vertex}). The two B mesons are produced in an entangled quantum state, so from the decay products of the first it's possible to assign its flavor (for example $B^{0}$, identifyed as $B_{tag}^{0}$) and as consequence that of the second, which will be the opposite ($\bar{B}^{0}$, called $\bar{B}_{phys}^{0}$).
 
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=.7]{vertex_decay_1}
+\caption{Example of hte kinematics of the golden channel of Belle II experiment.}
+\label{fig:decay_vertex}
+\end{figure}
+
+After this reconstruction, both B decay vertex positions $\textit{z}_{1}$ and $\textit{z}_{2}$ are evaluated, in order to compute their difference:
+
+\begin{equation}
+\Delta \textit{z} = \textit{z}_{1} - \textit{z}_{2} = (\beta\gamma)_{\Upsilon(4S)}c\Delta t
+\end{equation}
+
+where $\Delta t$ is the proper time decay difference. Therefore this topology allows to transform a temporal information in a spatial one that we are able to measure. Without the boosted center of mass none of it could be possible, and this is a main feature of an asymmetric B-factory.
 
 
 
@@ -335,7 +362,7 @@ This system is composed of two levels: a hardware-based low-level trigger (L1) a
 %---------------------------------------------
 \section{Current state and perspectives of data taking}
 
-As we already said, Belle II has reach the world record luminosity with $\textit{L}_{MAX}$ = \num{0.47e-35} $cm^{-2}s^{-1}$ in June 2022. In further perspectives, the target is to achieve a new record with \textit{L} = \num{6e-35} $cm^{-2}s^{-1}$ and to increase the integrated luminosity from 428 $fb^{-1}$ (actual value, starting in 2019) to 50 $fb^{-1}$. \\
+As we already said, Belle II has reach the world record luminosity with $\textit{L}_{MAX}$ = \num{0.47e-35} $cm^{-2}s^{-1}$ in June 2022. In further perspectives, the target is to achieve a new record with \textit{L} = \num{6e-35} $cm^{-2}s^{-1}$ and to increase the integrated luminosity from 428 $fb^{-1}$ (actual value, starting in 2019) to 50 $fb^{-1}$, in order to increase the statistics and also the hope to give an insight in some the opened questions of SM.\\
 
 In order to accomplish the fixed(estabilished) goals mentioned above, an upgrade not only of the vertex detector but of the whole experiment is necessary, among several reasons, to cope with a more complex circumstances due to the increased luminosity, which undermine its proper functioning.
 
