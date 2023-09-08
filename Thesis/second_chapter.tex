@@ -154,17 +154,67 @@ The basic idea of the proposal is to replace the whole VXD detector employing a 
 
 \subsubsection{Concept}
 
-\subsubsection{Sensor design and mechanical structure}
+SOI technology has been chosen as baseline for the new pixel design thanks to its monolithic structure, thinness, low power consumption and low parasitic capacitance. In addition it's resistant aginst neutron and single event upset (SEU, explained??), even though an important issue is TID effect on which efficient solutions have been studied.?
+
+To cope with higher background environment indeed, DuTiP was invented to fullfil the requirements of a new vertex detector with faster readout, lower occupancy, smaller data size and smaller data transfer. In particular its concept rest on the concern to store at least two hits during Belle II trigger latency of 4.5 $\mu$m, to avoid loss information of the inner part of the detector at high background level. \\
+The analog part is quite standard for a binary detector and consists of a sequence of preamplifier, shaper and comparator. Digital part is equipped with two timers (7 bit counters) to store at least two hits. When a processed hit signal arrive to the digital part it is stored and one of the timers start to counting down from a starting time set to trigger latency plus one clock, waiting for trigger signal. If the trigger signal is received when the time is 1 (it could be also 2/0), the signal is readout as current (Next/Previous respectively) timing (PreviousCurrentNext, PCN timings?). If the trigger is not received at the PCN timings in the pixel, the timer is reset. 
+
+This complicated digital circuit has to be assembled on each pixel and Lapis semiconductor 2.0 $\mu$m FD-SOI CMOS technology has been chosen, based on the experience gained in the successful development of other detectors like pixel detectors for the future ILC and CEPC.?
+
+\begin{figure}[h!]
+\centering
+\subfigure[Analog, Digital and Scan blocks for DuTiP detector.]{\includegraphics[scale=0.3]{SOI1}}\quad
+\subfigure[Operational sketch.]{\includegraphics[scale=0.4]{SOI2}}\\
+\caption{Schematic of DuTiP circuits.}
+\label{SOI}
+\end{figure}
+
+\subsubsection{Sensor design and and features}
+
+The size fo the new designed pixel is 45 $\mu$m and the sensor layer thickness of 50 $\mu$m, which gives about 11 $\mu$m of intrinsic resolution on \textit{z} direction averaging over incident polar angle. ALPIDE was choosen as analog circuit with some modification to adapt it to SOI technology. 
+
+DuTiP pixel detector is designed to cover the current VXD acceptance with 7 layer: 1-3 with S (smaller size chip) type sensors, 4-7 with L(larger size) type instead (\vpageref{fig:SL_SOI}).
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1]{SL_SOI}
+\caption{The size of Small (S) and Large (L) DuTiP chips.}
+\label{fig:SL_SOI}
+\end{figure}
+
+In order to minimize the dead region between chips in the ladder, stitching technique allows to produce longer chips in the \textit{z} direction, but the structure of the ladders has not be decided yet. For the inner layer of the detector might be possible the cooling with airflow at room temperature; for the outer layers instead, a combination of air and water flows.
+
+For layer 1, which is expected to work in more severe condition of background, the pixel occupancy has been estimated with the trigger latency of 8.0 $\mu$s and both (L and S?) are small enough, O($10^{14}$) or less, thus stabòe tracking and vertexing are contemplated. Moreover without using two timers for layer 1, the signal loss probability with the trigger latency of 4.5 (8.0) $\mu$s is about 0.2 (0.4)\% and so not negligible. In fact if the background rate is higher and the latency is longer, the signal loss probability increases. 
+
+A first prototype of this new desgin has been delivered in June 2021, with all in-pixel functionalitites except for the scan block and the fast readout system. the chip is a matrix of 64x64 pixels and size of 6x6 $mm^{2}$. Its characterization is ongoing and it seems to work fine, aslo with radioactive sources and red laser. A second prototype had been submitted in December 2021, with 64x320 pixels and size of 18x6 $mm^{2}$ (\vpageref{fig:dutip_matrix}). 
+
+
+\begin{figure}[h!]
+\centering
+\subfigure[DuTip first prototype.]{\includegraphics[scale=0.5]{DuTiP1}}\quad
+\subfigure[DuTip second prototype.]{\includegraphics[scale=0.5]{DuTiP2}}\\
+\caption{DuTiP prototypes.}
+\label{fig:dutip_matrix}
+\end{figure}
 
 
 
-
-\begin{comment}
 \subsection{CMOS MAPS}
 
-\end{comment}
+The last proposal is the one that we will analyze in more details in the next chapters. Like the previous one, it aims to replace the entire current VXD detector using a new technology, in this case the CMOS MAPS, that is Monolithic Active Pixel Sensor CMOS (Complementary Metal-Oxide Semiconductor). \\
+The program hopes to solve some of the issues discussed in the previous chapters, with a new system of two inner layers and three outermost, for a total of 5 stages equipped with the same pixel type, called \textbf{VTX} (\vpageref{VTX_layout}). Also the machanical structure had been redesigned but it is expceted that the all system could work at room temperature, so as consequence an important reduction of services is also contemplated.\\
+The new pixel design is called OBELIX, based on the pixel matrix of the TJ-Monopix 2 chip, whose characterization is the main topic of this work. 
 
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=.6]{VTX_layout}
+\caption{Overall VTX layout.}
+\label{VTX_layout}
+\end{figure}
 
+At the current state of art, intense R\&D(Research and Development) is being carried out, taking advantage from other experiments experiences, like ALICE, with tha same type of sensor.
+
+After a briefly review of the main upgrade proposals, we can now deepen into this last one in the following chapter.
 
 
 
