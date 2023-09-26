@@ -63,7 +63,7 @@ Voltage step applied trough injection capacitor
 \chapter{TJ-Monopix 2}
 
 In the previous chapter we have seen the fundamental steps that had lead to the development of the CMOS MAPS sensors thechnology and the history of their many different prototypes. \\
-Here we will go through the main features of TJ-Monopix 2, which represents the improvement of its predecessor TJ-Monopix 1, conceived(designed) to address efficiency degradation after irradiation. The characterization of the chip has crucial consequences in the VTX upgrade program and therefore in the evolution of the OBELIX (sensor).\\
+Here we will go through the main features of TJ-Monopix 2, which represents the improvement of its predecessor TJ-Monopix 1, designed to address efficiency degradation after irradiation. The characterization of the chip has crucial consequences in the VTX upgrade program and therefore in the evolution of the next OBELIX chip.\\
 The chip W14R12 (\vref{fig:w14r12}) wihch is one of the matrices tested during the Test Beam in Desy (July 2022) has been fully characterize in Pisa and in particular several aspects have been analyzed, among which:
 
 \begin{itemize}
@@ -73,7 +73,9 @@ The chip W14R12 (\vref{fig:w14r12}) wihch is one of the matrices tested during t
 \item investigation of an important issue with cross talk, due to digital signal from the readout, discovered operating at lower threshold (below 250 $e^{-}$).
 \end{itemize}
 
-This well-structured study returned relevant results which have helped in TestBeam data reconstruction and in the simulations SW(???) of the upgraded VTX with CMOS MAPS devices.
+This well-structured study returned relevant results which have helped in TestBeam data reconstruction and in the simulations of the upgraded VTX detector with CMOS MAPS devices.
+
+%SW(???)
 
 %%METTI I TIPI E CHE IL NOSTRO è CZ (SPIEGA NEL QUARTO LE DIFFERENZE)
 
@@ -101,7 +103,7 @@ This well-structured study returned relevant results which have helped in TestBe
 
 Tj-Monopix 2 is the next generation small collection electrode DMAPS prototype in TowerJazz 180 nm. The need to create a sensor capable to mantain high efficiency even after irradiation, required improvements compared to Tj-Monopix 1 in two important fields: a lower operating threshold and different pixel layout to increase charge collection efficiency all over its area, expecially in the corners.\\
 
-To achieve these goals, a different front-end in pixel circuit was implemented and a lot of efforts have been focused on optimizing pixel layout in order to reduce its size which has been decreased to 33.04 x 33.04 $\mu m^{2}$. As a matter of fact we have seen in (REFERENCE) that pixel's diensions are critical to accomplish faster charge collection across all active area, increasing the lateral electric field. For this reason it was necessary a special effort to design and create a smaller pixel but still adequate to embody the full digital readout . All of this required to work at the technology density limit and also further modification at the circuit design, such as single ended data transmission in order to reduce the column-bus width.
+To achieve these goals, a different front-end in pixel circuit was implemented and a lot of efforts have been focused on optimizing pixel layout in order to reduce its size which has been decreased to 33.04 x 33.04 $\mu m^{2}$. As a matter of fact we have seen in (REFERENCE) that pixel's dimensions are critical to accomplish faster charge collection across all active area, increasing the lateral electric field. For this reason it was necessary a special effort to design and create a smaller pixel but still adequate to embody the full digital readout. All of this required to work at the technology density limit and also for further modifications at the circuit design, such as single ended data transmission, in order to reduce the column-bus width.
 
 %Aggiungi thickness 200um, pixel pitch 33.04um
 
@@ -115,13 +117,13 @@ The protype is a 2 x 2 $cm^{2}$ pixel matrix which consists of 512x512 pixels an
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=.6]{Tj1pix_cov}
-\caption{Detection efficiency map of a TJ-Monopix1 chip with 25 $mu$m p-epitaxial layer that has been irradiated to $10^{15}$ $n_{\textit{eq}}$/$cm^{2}$ NIEL.}
+\caption{Detection efficiency map of a TJ-Monopix1 chip with 25 $\mu$m p-epitaxial layer that has been irradiated to $10^{15}$ $n_{\textit{eq}}$/$cm^{2}$ NIEL.}
 \label{fig:tj1pix_cov}
 \end{figure}
 
-As we can see in figure \vref{fig:tj2matrix}, the matrix is divided in four sectors, named \textbf{flavors} that implement different variation of the front-end circuit. In the first two flavors the collection electrode is DC-coupled directly with the readout electronics,  the continuous baseline reset is implemented by a forward bias diode and they differ for the pre-amplifier circuit design. The second flavor, named \textbf{Cascode FE}, includes an extra cascode transistor that increase the pre-amplifier gain and results in 50\% reduction of the threshold dispersion compared to the first flavor, the \textbf{Normal FE}. The other two flavors consist of AC-coupled pixels (through a metal-oxide-metal MOM capacitor) [with front-side HV biasing] and in particular the \textbf{HV-Cascode FE} also incorporate the aforementioned pre-amplifier variation. AC-coupling allows to apply an high positive bias voltage (HV) to the collection electrode, but at the same time it also causes signal losses mainly due to the additional parasitic capacitance introduced at the sensitive input node.\\
+As we can see in figure \vref{fig:tj2matrix}, the matrix is divided in four sectors, named \textbf{flavors} that implement different variation of the front-end circuit. In the first two flavors the collection electrode is DC-coupled directly with the readout electronics,  the continuous baseline reset is implemented by a forward bias diode and they differ for the pre-amplifier circuit design. The second flavor, named \textbf{Cascode FE}, includes an extra cascode transistor that increase the pre-amplifier gain and results in 50\% reduction of the threshold dispersion compared to the first flavor, the \textbf{Normal FE}. The other two flavors consist of AC-coupled pixels (through a metal-oxide-metal MOM capacitor) and in particular the \textbf{HV-Cascode FE} also incorporate the aforementioned pre-amplifier variation. AC-coupling allows to apply an high positive bias voltage (HV) to the collection electrode, but at the same time it also causes signal losses mainly due to the additional parasitic capacitance introduced at the sensitive input node.\\
 The BCID bus width has been increased  to 7-bits due to higher gain and ToT slope with respect to Tj-Monopix 1. \\
-It's worth mentioning here that the large column height (approx. 17 mm) due to large matrix area and the aggressive column-bus routing (which refers to the minimum line width and spacing) because of the smaller pixel size (always with respect to TJ-Monopix 1) generated a significant signal transmission delay due to the RC low pass filtering effect of the long metal wires. Consequently a special circuit has been planned(designed) that adds a variable delay to the hit pulse across the column that matches that of the BCID signal.
+It's worth mentioning here that the large column height (approx. 17 mm) due to large matrix area and the aggressive column-bus routing (which refers to the minimum line width and spacing) because of the smaller pixel size (always with respect to TJ-Monopix 1), generated a significant signal transmission delay due to the RC low pass filtering effect of the long metal wires. Consequently a special circuit has been studied that adds a variable delay to the hit pulse across the column that matches that of the BCID signal.
 
 
 %%%PERIPHERY PAG 138
@@ -141,7 +143,7 @@ It's worth mentioning here that the large column height (approx. 17 mm) due to l
 
 VEDI\\ 
 
-The 2 x 2 pixel core layout, shown in figure \vref{tj2core} is fully optimized and is designed in order to share as much functionality as possible between the four pixels. The analog area incorporate the front-end circuit, the 3-bit threshold tuning DAC and the pixel configuration registers. The digital region is composed by the 7-bit LE and TE memory (14 SRAM cells per pixel), the 10 bit address ROM (2 bit for the pixel position inside the core and 8 for the group address), the readout control logic and the hit delay circuit that is used to correct for the BCID propagation delay. Two different token signal are used to set the priority of the pixels during the readout: the fast one that propagates across the double column estabilished the priority between the cores and the local one, which arbitrates the reading order of the four pixels inside each core.
+The 2x2 pixel core layout, shown in figure \vref{fig:tj2core} is fully optimized and is designed in order to share as much functionality as possible between the four pixels. The analog area incorporates the front-end circuit, the 3-bit threshold tuning DAC and the pixel configuration registers. The digital region is composed by the 7-bit LE and TE memory (14 SRAM cells per pixel), the 10 bit address ROM (2 bit for the pixel position inside the core and 8 for the group address), the readout control logic and the hit delay circuit that is used to correct the BCID propagation delay. Two different token signals are used to set the priority of the pixels during the readout: the \textit{fast} one that propagates across the double column estabilished the priority between the cores and the \textit{local} one, which arbitrates the reading order of the four pixels inside each core.
 
 \begin{figure}[h!]
 \centering
@@ -156,10 +158,12 @@ The 2 x 2 pixel core layout, shown in figure \vref{tj2core} is fully optimized a
 \subsubsection{Improved front-end circuit design}
 
 As we have seen above, there are two variations of the front-end circuit,  ''normal'' and ''cascode'' type. The latter in particular includes an extra cascode transistor which increases the pre-amplifier gain and consequently reduces the threshold dispersion.\\
-Moreover in TJ-Monopix 2 it was preferred to incorporate a simple diode to reset the input node instead of a PMOS transistor, which was the techonology implemented in TJ- Monopix 1. A side effect of this choice is that the relationship between charge injected and the ToT of the detected signal is not linear anymore, because the diode is a not linear element and its discharge rate also depends on the collected charge. Indeed in the following analysis it was necessary to fit the ToT trend with a more complex function. But at the same time, the advantages are its simplicity ($p^{+}$ diffusion within the n-well collection electrode) and also the fact that it allows to increase radiation tolerance to TID effects, which was one of the key working area in the upgrade of the sensor, in order to design a final(conclusive) prototype to employ in the experiments subjected to high radiation doses.[pag 153???] \\
+Moreover in TJ-Monopix 2 it was preferred to incorporate a simple diode to reset the input node instead of a PMOS transistor, which was the techonology implemented in TJ- Monopix 1. A side effect of this choice is that the relationship between charge injected and the ToT of the detected signal is not linear anymore, because the diode is a not linear element and its discharge rate also depends on the collected charge. Indeed in the following analysis it was necessary to fit the ToT trend with a more complex function. But at the same time, the advantages are its simplicity ($p^{+}$ diffusion within the n-well collection electrode) and also the fact that it allows to increase radiation tolerance to TID effects, which was one of the key working area in the upgrade of the sensor.
+
+% in order to design a final(conclusive) prototype to employ in the experiments subjected to high radiation doses.[pag 153???] \\
 
 
-In the last two AC-coupled flavors are implemented the same improvements, but here the different coupling provokes an important loss in the collected charge, as verified during the testing phase of TJ-Monopix 1 (50\% losses), due at most to additional parassitic capacitances. Thus (THerefore) a lot of (many) efforts have been made to improve this aspect, working on the coupling capacitor values. It is reach a signal loss of 41.5\%, which is an enhancement(progress) with respect to the predecessor.
+In the last two AC-coupled flavors are implemented the same improvements, but here the different coupling provokes an important loss in the collected charge, as verified during the testing phase of TJ-Monopix 1 (50\% losses), due at most to additional parassitic capacitances. Thus a lot of efforts have been made to improve this aspect, working on the coupling capacitor values. A signal loss of 41.5\% has been reached, which is a relevant enhancement with respect to the predecessor.
 
 
 
@@ -171,8 +175,8 @@ In the last two AC-coupled flavors are implemented the same improvements, but he
 \section{Threshold and noise}
 
 In order to achieve the absolute calibration of the whole matrix, the response of each pixel has been characterize by means of the internal charge injection. \\
-?????\\
-The hit injection circuit included in TJ-Monopix 2 is similar to the one of TJ-Monopix 1, shown in figure(????). It allows to inject artificial hits through an injection capacitance \textbf{$C_{inj}$} connected at the collection electrode, which is equal to 230 aF for both the DC and AC coupling FE. The injected charge is almost linear with the injection pulse amplitude (set by the two registers ''\textbf{$V_{L}$}'' and ''\textbf{$V_{H}$}'', like $\Delta V_{inj}$ = \textbf{$V_{H}-V_{L}$}). Moreover the injection step is finer compare to the one of TJ1 because of the higher voltage DAC resolution, in fact LSB (\textit{Least Significatn Bit})=7.03 mV. The injected charge $Q_{inj}$ can be calculated from:
+
+The hit injection circuit included in TJ-Monopix 2 is similar to the one of TJ-Monopix 1, shown in figure(????). It allows to inject artificial hits through an injection capacitance \textbf{$C_{inj}$} connected at the collection electrode, which is equal to 230 aF for both the DC and AC coupling FE. The injected charge is almost linear with the injection pulse amplitude (set by the two registers ''\textbf{$V_{L}$}'' and ''\textbf{$V_{H}$}'', like $\Delta V_{inj}$ = \textbf{$V_{H}-V_{L}$}). Moreover the injection step is finer compare to the one of TJ1 because of the higher voltage DAC resolution, in fact it is LSB (\textit{Least Significant Bit})=7.03 mV. The injected charge $Q_{inj}$ can be calculated from:
 
 \begin{equation}
 \small
@@ -182,21 +186,21 @@ Q_{inj} = \frac{230 \, aF}{q_{{e}^{-}}} \cdot \Delta V_{inj} = 1.4375 \frac{e^{-
 
 Eventually this value has been used to convert the information of the injected charge from DAC unit to electrons unit useful for further analysis.
 \\
-The four flavors have been separatly analyzed to be able to study their main difference concerning their performance and features, but the same method, called \textit{s-curve method}, explained below has been used. 
+The four flavors have been separatly analyzed to be able to study their main difference concerning their performance and features, but the same method, called \textit{s-curve method} and explained below, has been used. 
 
 
 %--------------------------------------------------------------------
 \subsection{S-Curve method} \label{threshold_subsection}
 
-In order to obtain the thresold and noise values for all pixels, each one of them has to be injected an arbitrary number of times (100 times in this work) for each value of the injection pulse between a minimum voltage (value), chosen setting the chip register ''\textbf{VL}'' and a maximum volatge (value) set by the ''\textbf{VH}'' register, with a step of 1 DAC unit this is also adjustable). These two levels are provided by the voltage DAC.
+In order to obtain the thresold and noise values for all pixels, each one of them has to be injected an arbitrary number of times (100 times in this work) for each value of the injection pulse between a minimum voltage value, chosen setting the chip register ''\textbf{VL}'' and a maximum volatge set by the ''\textbf{VH}'' register, with a step of 1 DAC unit (this is also adjustable). These two levels are provided by the voltage DAC.
 
-So for each injection pulse height, the mean of 100 injection output are considered and it represents one data in the plot.  In this way plotting the average number of detected hits in function of the injected charge, the typical curve better known as ''\textit{S-curve}'' is reconstructed. It can be fit with the \textit{Cumulative Distribution Function (CDF)}:
+So for each injection pulse height, the mean of 100 injection output are considered and it represents one data (marker) in the plot.  In this way, plotting the average number of detected hits in function of the injected charge, the typical curve better known as ''\textit{S-curve}'' is reconstructed. It can be fit with the \textit{Cumulative Distribution Function (CDF)}:
 
 \begin{equation}
  CDF(Q) = \frac{1}{2} \cdot \bigg(1 + \textit{erf}\bigg(\frac{Q-\mu}{\sigma \sqrt{2}}\bigg)\bigg)
 \end{equation}
 
-from which the value of the threshold is evaluated considering the value of the injected charge at half of the curve's maximum height, so the parameter $\mu$ obtained from the fit and the noise instead is evaluated from the fit parameter $\sigma$. \textit{erf(x)} is the Gauss error function. 
+from which the value of the threshold is evaluated considering the value of the injected charge at half of the curve's maximum height, so the parameter $\mu$ obtained from the fit and the noise is evaluated from the fit parameter $\sigma$. The ''\textit{erf(x)}'' is the Gauss error function. 
 
 Specifically plotting the number of hits observed on each pixel divided by the total number of injections, for each injected charge, the half height corresponds to a charge value for which the pixel detects 50 hits of 100 injected and so when it has an occupancy of 0.5. In figure \vref{ex_scurve} is shown an example. \\
 

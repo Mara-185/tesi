@@ -158,6 +158,10 @@ As consequence also the design of the mechanical support system, data cables and
 As we already seen, the VTX detector is designed with a single type sensor taylored to the specific need of Belle II, called OBELIX (Optimized BELle II pIXel sensor) and currently under development, based on fast and high granular Depleted Monolithic Active Pixel Sensor (DMAPS). This new sensor design comes from an evolution of TJ-Monopix 2, whose characterization is the main topic of this thesis, and which will be discussed in (reference) and both of them relie on the CIS? 180 $\mu$m process by TowerJazz Semiconductor.
 As a matter of fact its predecessor is equipped with four different flavors (reference), and for now the final decision on which to use for Obelix has not been made. \\
 
+\subsection{Sensor specification}
+
+A schematic layout of the chip is shown in figure \vpageref{fig:obelix_scheme}. The size of the sensor is expected to be 3 x 1.9 $cm^{2}$, with an active area of 3 x 1.6 $cm^{2}$ and an additional part in the periphery of about 3 x 0.3 $cm^{2}$ dedicated to data pre-processing and triggering. The pixel pitches are designed to be from 30 $\mu$m to 40 $\mu$m in both direction. As a matter of fact stay in this range is necessary in order to achieve a spatial resolution below 15 $\mu$m. 
+
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=.7]{obelix_schematic}
@@ -165,12 +169,15 @@ As a matter of fact its predecessor is equipped with four different flavors (ref
 \label{fig:obelix_scheme}
 \end{figure}
 
-A schematic layout of the chip is shown in figure \vpageref{fig:obelix_features}. The size of the sensor is expected to be 3 x 2 $cm^{2}$, with an active area of 3 x 1.5 $cm^{2}$ and an additional part in the periphery of about 3 x 0.3 $cm^{2}$ dedicated to data pre-processing and triggering. The pixel pitches are designed to be from 30 $\mu$m to 40 $\mu$m in both direction. 
-To deal with the target hit rate of 120 MHz/$cm^{2}$, the timestamp clock signal can reach down to 25 ns, even if studies have demonstrated that a window of 100 ns is enough to limit to 320 Mbps the data throughput at the same expected hit rate.
-With respect to TJ-Monopix 2, which is equipped with a triggerless column-drain readout without memory at the periphery, OBELIX must have a triggered readout architecture, in order to satisfy the needs of Belle II. Moreover the latency is fixed to 5 $\mu$s and it might operate up to 30 KHz trigger rate.
-The expected power consumption instead, is expected to be about 200 mW/$cm^{2}$. 
+Moreover the sensor thickness has to be below 100 $\mu$m to respect the material budget constraint of 0.2\%$X_{0}$ and as consequence the depleted sensitive region should be lower than 50 $\mu$m, perfectly in agreement with the available thickness of MAPS (on the market?). 
+To deal with the target hit rate of 120 MHz/$cm^{2}$, the timestamp clock signal can reach down to 25 ns, even if studies have demonstrated that a window of 100 ns (\textit{integration time}) is enough to limit to 320 Mbps the data throughput at the same expected hit rate. 
+All topics faced above allow to realize a sensor with high granularity in both space and time.\\
 
-Its main design features are summarised in \vpageref{fig:obelix_scheme}.
+With respect to TJ-Monopix 2, which is equipped with a triggerless column-drain readout without memory at the periphery, OBELIX must have a triggered readout architecture, in order to satisfy the needs of Belle II. Moreover the latency is fixed to 5 $\mu$s and it might operate up to 30 KHz trigger rate.
+
+The expected power consumption instead, is expected to be about 200 mW/$cm^{2}$, a value which should allow air-cooling for the small area corresponding to the two inner layers and liquid coolant for the outer ones. 
+
+Its main design features are summarised in \vpageref{fig:obelix_features}.
 
 
 \begin{figure}[h!]
@@ -180,8 +187,18 @@ Its main design features are summarised in \vpageref{fig:obelix_scheme}.
 \label{fig:obelix_features}
 \end{figure}
 
+\subsection{Sensor implementation}
 
 
+
+
+\begin{comment}
+The chip should then feature a pad ring facilitating the connection
+with a single light cable. 
+For the sake of the simplicity of the system integration, it is also specified that
+the sensor is powered through on-chip voltage regulators and features a single
+rather low data bandwidth (< 200MHz).
+\end{comment}
 
 
 \begin{comment}
