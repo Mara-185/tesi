@@ -63,7 +63,7 @@ Voltage step applied trough injection capacitor
 \chapter{TJ-Monopix 2}
 
 In the previous chapter we have seen the fundamental steps that had lead to the development of the CMOS MAPS sensors technology and the history of their many different prototypes. \\
-Here we will go through the main features of TJ-Monopix 2 designed to address efficiency degradation after irradiation, one of the issues of its predecessor Tj-Monopix 1. The characterization of the chip has crucial consequences in the VTX upgrade program and therefore in the evolution of the next OBELIX chip.\\
+Here we will go through the main features of TJ-Monopix 2 designed to address efficiency degradation after irradiation, one of the main issues of its predecessor Tj-Monopix 1. The characterization of the chip has crucial consequences in the VTX upgrade program and therefore in the evolution of the next OBELIX chip.\\
 The chip W14R12 (figure \vref{fig:w14r12}) which is one of the matrices tested during the Test Beam in Desy (July 2022) has been fully characterized in Pisa and in particular several aspects have been analyzed, among which:
 
 \begin{itemize}
@@ -73,7 +73,7 @@ The chip W14R12 (figure \vref{fig:w14r12}) which is one of the matrices tested d
 \item investigation of an important issue with cross-talk, due to digital signal from the readout, discovered trying to operate the matrix at low threshold (below 250 $e^{-}$).
 \end{itemize}
 
-This well-structured study returned relevant results which have helped in TestBeam data reconstruction and in the simulations of the upgraded VTX detector with CMOS MAPS devices.
+This well-structured study returned relevant results which have helped in Test Beam data reconstruction and in the simulations of the upgraded VTX detector with CMOS MAPS devices.
 
 %This articulate (well-structured) study(analysis)
 %SW(???)
@@ -107,7 +107,7 @@ Tj-Monopix 2 is the next generation small collection electrode DMAPS prototype i
 To achieve these goals, a different in-pixel front-end circuit was implemented and a lot of efforts have been focused on optimizing pixel layout in order to reduce its size, which has been decreased to 33.04 x 33.04 $\mu m^{2}$ (pixel \textit{pitch}). As a matter of fact we have seen (REFERENCE) that pixel dimensions are critical to accomplish faster charge collection across all active area, increasing the lateral electric field. For this reason it was necessary a special effort to design and create a smaller pixel but still adequate to embody the full digital readout. All of this required to work at the technology density limit and also to study for further modifications at the circuit design, such as single ended data transmission, in order to reduce the column-bus width.
 
 The BCID bus width has been increased  to 7-bits because of higher gain and higher ToT slope with respect to Tj-Monopix 1. \\
-It's worth mentioning here that the large column height (approx. 17 mm) caused by large matrix area and the aggressive column-bus routing (which refers to the minimum line width and spacing) due to the smaller pixel size, generated a significant signal transmission delay due to the RC low pass filtering effect of the long metal wires. Consequently a special circuit has been studied that adds a variable delay to the hit pulse across the column that matches that of the BCID signal.
+It's worth mentioning here that the large column height (approx. 17 mm) caused by large matrix area and the aggressive column-bus routing (which refers to the minimum line width and spacing) due to the smaller pixel size, generate a significant signal transmission delay due to the RC low pass filtering effect of the long metal wires. Consequently a special circuit has been studied that adds a variable delay to the hit pulse across the column that matches that of the BCID signal.
 
 
 %Aggiungi thickness 200um, p-epi layer?
@@ -158,7 +158,7 @@ The 2x2 pixel core layout, shown in figure \vref{fig:tj2core}, is fully optimize
 
 \subsubsection{Improved front-end circuit design}
 
-As we have seen above, there are two variations of the front-end circuit (figure \vpageref{fig:tj2_circuit}),  ''normal'' and ''cascode'' type. The latter in particular includes an extra cascode transistor which increases the pre-amplifier gain and consequently reduces the threshold dispersion.\\
+As we have seen above, there are two variations of the front-end circuit (figure \vpageref{fig:tj2_circuit}), such as \textit{normal} and \textit{cascode} type. The latter in particular includes an extra cascode transistor which increases the pre-amplifier gain and consequently reduces the threshold dispersion.\\
 Moreover in TJ-Monopix 2 it was preferred to incorporate a simple diode to reset the input node instead of a PMOS transistor, which was the techonology implemented in TJ- Monopix 1. A side effect of this choice is that the relationship between charge injected and the ToT of the detected signal is not linear anymore, because the diode is a not linear element and its discharge rate also depends on the collected charge. Indeed in the following analysis it was necessary to fit the ToT trend with a more complex function. But at the same time, the advantages are its simplicity ($p^{+}$ diffusion within the n-well collection electrode) and also the fact that it allows to increase radiation tolerance to TID effects, which was one of the key working area in the upgrade of the sensor.
 
 % in order to design a final(conclusive) prototype to employ in the experiments subjected to high radiation doses.[pag 153???] \\
@@ -182,38 +182,40 @@ In the last two AC-coupled flavors are implemented the same improvements, but he
 
 \section{Threshold and noise}
 
-In order to achieve the absolute calibration of the whole matrix, the response of each pixel has been characterize by means of the internal charge injection. \\
+In order to achieve the absolute calibration of the whole matrix, the response of each pixel has been characterized by means of the internal charge injection. \\
 
-The hit injection circuit included in TJ-Monopix 2 is similar to the one of TJ-Monopix 1, shown in figure(????). It allows to inject artificial hits through an injection capacitance \textbf{$C_{inj}$} connected at the collection electrode, which is equal to 230 aF for both the DC and AC coupling FE. The injected charge is almost linear with the injection pulse amplitude (set by the two registers ''\textbf{$V_{L}$}'' and ''\textbf{$V_{H}$}'', so that $\Delta V_{inj}$ = \textbf{$V_{H}-V_{L}$}). Moreover the injection step is finer compare to the one of Tj Monopix 1 because of the higher voltage DAC resolution, which is indeed LSB (\textit{Least Significant Bit}) = 7.03 mV. 
-The injected charge $Q_{inj}$ resolution can be calculated by:
+The hit injection circuit included in TJ-Monopix 2 is similar to the one of TJ-Monopix 1. It allows to inject artificial hits through an injection capacitance \textbf{$C_{inj}$} connected at the collection electrode, which is equal to 230 aF for both the DC and AC coupling FEs. The injected charge is almost linear with the injection pulse amplitude (set by the two registers ''\textbf{$V_{L}$}'' and ''\textbf{$V_{H}$}'', so that $\Delta V_{inj}$ = \textbf{$V_{H}-V_{L}$}). Moreover the injection step is finer compare to the one of Tj Monopix 1 because of the higher voltage DAC resolution, which is indeed LSB (\textit{Least Significant Bit}) = 7.03 mV. 
+The injected charge resolution $Q_{res}$ can be calculated by:
 
 \begin{equation}
 \small
-Q_{inj,res} = Q_{inj} \cdot LSB= \frac{230 \, aF}{q_{{e}^{-}}} \cdot \Delta V_{inj} = 1.4375 \frac{e^{-}}{mV} \cdot 7.03 \frac{mV}{DAC \, unit} \approx 10.1 \frac{e^{-}}{DAC \, unit}  
+Q_{res} = Q_{inj} \cdot LSB= \frac{230 \, aF}{q_{{e}^{-}}} \cdot \Delta V_{inj} = 1.4375 \frac{e^{-}}{mV} \cdot 7.03 \frac{mV}{DAC \, unit} \approx 10.1 \frac{e^{-}}{DAC \, unit}  
 \label{conversion_factor}
 \end{equation}
 
 Eventually this conversion factor has been used to convert the information of the injected charge from DAC unit to electrons unit, useful for further analysis.
 \\
-The four flavors have been separately analyzed to be able to study their main differences concerning their performance and features, but the same method has been used, called \textit{s-curve method} and explained below. 
+The four flavors have been separately analyzed to be able to study their main differences concerning their performance and features. The same method has been used for all of them, called \textit{s-curve method} and explained below. 
 
 
 %--------------------------------------------------------------------
 \subsection{S-Curve method} \label{threshold_subsection}
 
-In order to obtain the thresold and noise values for all pixels, each one of them has to be injected an arbitrary number of times (100 times in this work) for each value of the injection pulse between a minimum voltage value, chosen setting the chip register ''\textbf{VL}'' and a maximum volatge set by the ''\textbf{VH}'' register, moving gradually with a step of 1 DAC unit (this is also adjustable). These two levels are provided by the voltage DAC.
+In order to obtain the thresold and noise values for all pixels, each one of them has to be injected an arbitrary number of times (100 times in this work) for each value of the injection pulse between a minimum voltage value, chosen setting the chip register ''\textbf{VL}'' and a maximum voltage set by the ''\textbf{VH}'' register, moving gradually with a step of 1 DAC unit (this is also adjustable). These two levels are provided by the voltage DAC.
 
-So for each injection pulse height, the mean of 100 injection output are considered and it represents one data (marker) in the plot.  In this way, plotting the average number of detected hits in function of the injected charge, the typical curve better known as ''\textit{S-curve}'' is reconstructed. It can be fit with the \textit{Cumulative Distribution Function (CDF)}:
+So for each injection pulse height, the mean of 100 injection outputs are considered and it is represented as one marker in the plot.  In this way, plotting the average number of detected hits in function of the injected charge, the typical curve better known as ''\textit{S-curve}'' is reconstructed. It can be fit with the \textit{Cumulative Distribution Function (CDF)}:
 
 \begin{equation}
  CDF(Q) = \frac{1}{2} \cdot \bigg(1 + \textit{erf}\bigg(\frac{Q-\mu}{\sigma \sqrt{2}}\bigg)\bigg)
 \end{equation}
 
-from which the value of the threshold is evaluated considering the value of the injected charge at half of the curve's maximum height, so the parameter $\mu$ obtained from the fit and the noise is evaluated from the fit parameter $\sigma$. The ''\textit{erf(x)}'' is the Gauss error function. 
-
-Specifically plotting the number of hits observed on each pixel divided by the total number of injections, for each injected charge, the half height corresponds to a charge value for which the pixel detects 50 hits of 100 injected and so when it has an occupancy of 0.5. In figure \vref{ex_scurve} is shown an example. \\
+from which the value of the threshold is evaluated considering the value of the injected charge at half of the curve's maximum height. Specifically the half height corresponds to a charge value for which the pixel detects 50 hits of 100 injected and so when it has an occupancy of 0.5. This information is represented by the parameter $\mu$ obtained from the fit and the noise is evaluated from the fit parameter $\sigma$. The ''\textit{erf(x)}'' is the Gauss error function.  In figure \vref{ex_scurve} is shown an example. \\
 
 This method allows to study the noise and threshold of all pixels and also the threshold dispersion across an entire FE.
+
+\begin{comment}
+ plotting the number of hits observed on each pixel divided by the total number of injections, for each injected charge,
+\end{comment}
 
 %%%%SPIEGARE METODO DI LUDOVICO???? 
 
@@ -225,7 +227,7 @@ This method allows to study the noise and threshold of all pixels and also the t
 \label{ex_scurve}
 \end{figure}
 
-In the following are reported the results of this study for the flavors of all matrix, injected a charge gradually increasing from 0 to 140 DAC ($\approx$ 1414 $e^{-}$ adopting the conversion factor in equation \ref{conversion_factor})
+In the following are reported the results of this study for the flavors of all matrix, gradually injecting a charge from 0 to 140 DAC ($\approx$ 1414 $e^{-}$ adopting the conversion factor in equation \ref{conversion_factor})
 
 
 %THRESHOLD PATTERN EACH 32
@@ -233,9 +235,8 @@ In the following are reported the results of this study for the flavors of all m
 
 \subsubsection{Normal FE}
 
-%PSUB/PWELL
 
-The first flavor of the matrix is the \textbf{Normal FE}, which consist of 512 rows and 224 columns for a total of 114.688 pixels. The chip registers have been set with the same values used during the Test Beam at Desy (July 2022) which are different for the DC and AC-coupling case. They are known as ''\textbf{GOE settings}'' and they are reported in table \vref{tab:tb_settings}, where are also added the different biasing voltages used to power (up) the chip.
+The first flavor of the matrix is the \textbf{Normal FE}, which consist of 512 rows and 224 columns for a total of 114.688 pixels. The chip registers have been set with the same values used during the Test Beam at Desy (July 2022) which are different for the DC and AC-coupling case. They are called for simplicity ''\textbf{GOE settings}'' and they are reported in table \vref{tab:tb_settings}, where the different biasing voltages used to power up the chip are also added.
 
 \begin{table}[h!]
 \centering
@@ -276,14 +277,14 @@ $I_{RAM}$ & 50 & 50\\
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=.6]{all_norm_thscan_140}
-\caption{S-curves of all pixels of the Normal FE with an injection pulse of 140 DAC.}
+\caption{S-curves of all pixels of the Normal FE with a maximum injection pulse of 140 DAC.}
 \label{fig:norm_scurve_140}
 \end{figure}
 
-Using this setting, none of the pixels were noisy and so it wasn't necessary to use any mask.
-In figure \vref{fig:norm_scurve_140} are plotted all the s-curves of the all well-functioning Normal flavor pixels. The width of the plot is a first indication (manifestation, symptom) of the threshold dispersion of the whole flavor.\\
+Adopting this setting, none of the pixels were noisy and so it wasn't necessary to use any mask (?).
+In figure \vref{fig:norm_scurve_140} are plotted all the s-curves of the all well-functioning Normal flavor pixels. The width of the plot is a first indication of the threshold dispersion of the whole flavor.\\
 
-The threshold and noise distributions obtained injecting all pixels as explained above, have been fitted with a gaussian distribution and they are shown in figure \pageref{fig:thdist_norm} with their maps, too.
+The threshold and noise distributions obtained injecting all pixels as explained above, have been fitted with a gaussian distribution and they are shown in figure \vpageref{fig:thdist_norm} with their maps, too.
 
 \begin{figure}[h!]
 \centering
@@ -296,24 +297,24 @@ The threshold and noise distributions obtained injecting all pixels as explained
 \subfigure[Noise map]
 {\includegraphics[scale=0.37]{Noise_map_norm_140}}\\
 \caption{Normal FE.}
-\label{fig:norm}
+\label{fig:thdist_norm}
 \end{figure}
 
 
 
 \subsubsection{Cascode FE}
 
-\textbf{Cascode FE} is the second flavor and like \textbf{Normal FE} it consists of 512 rows and 224 columns for a number of total pixels equal to 114.688. For this flavor the same procedure of Normale FE has been followed and also the same values' registers (table \vref{tab:tb_settings}) have been used. There were not find noisy pixels. 
-In figure \vref{fig:casc_curve140} the S-curves of all pixels are shown.
+\textbf{Cascode FE} is the second flavor and like the previous one, it consists of 512 rows and 224 columns for a number of total pixels equal to 114.688. For this flavor the same procedure of Normale FE has been followed and also the same registers' values (table \vref{tab:tb_settings}) have been used. There were not find noisy pixels. 
+In figure \vpageref{fig:casc_scurve140} the s-curves of all pixels are shown.
 
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=.5]{all_casc_thscan_140}
-\caption{S-curves of all pixels in the \textbf{Cascode} flavor with an injection pulse of 140 DAC.}
+\caption{S-curves of all pixels in the \textbf{Cascode} flavor with a maximum injection pulse of 140 DAC.}
 \label{fig:casc_scurve140}
 \end{figure}
 
-The fit of the threshold and noise distributions and maps instead, are shown in figure \vref{fig:thdist_casc}.
+The maps and the fit of the threshold and noise distributions instead, are shown in figure \vref{fig:thdist_casc}.
 
 
 \begin{figure}[h!]
@@ -327,27 +328,25 @@ The fit of the threshold and noise distributions and maps instead, are shown in 
 \subfigure[Noise map]
 {\includegraphics[scale=0.37]{Noise_map_casc_140}}\\
 \caption{Cascode FE.}
-\label{fig:norm}
+\label{fig:thdist_casc}
 \end{figure}
 
 %%NO DIFFERENCE CUTTING NOISE >4 IN THE DISTRIBUTION. DIFFERENT FROM NORMAL
 
 
-
 \subsubsection{HV-Cascode FE}
 
-%PSUB/PWELL
 
-The third flavor is \textbf{HV-Cascode FE} where HV stands for \textbf{High Voltage} and it is formed (counts) of 512 rows and 32 columns for a total number of pixel equal to 16384. Also for these last two flavors, the main chip registers are set with the same values tested and used during the Test Beam (@Desy) (but different from those used for the first two flavors). They are reported in table \vpageref{tab:tb_hv_settings} .
+The third flavor is \textbf{HV-Cascode FE} where HV stands for \textbf{High Voltage} and it is composed by 512 rows and 32 columns for a total number of pixel equal to 16384. Also for these last two flavors, the main chip registers are set with the same values tested and used during the Test Beam (@Desy) (but different from those used for the first two flavors). They are reported in table \vpageref{tab:tb_settings} .
 
-As we can see from the plot of the alle S-curves in figure \vpageref{fig:hvc_scurve_140}, there were a lot of noisy pixels with these choices of values' registers, but at this stage of measurements they were not masked.
-As a matter of fact along the y-axis of this plot is displayed the occupancy and when this values becomes higher than 1, it means that the pixel detects more hits than the injected ones, so it could be identified as ''\textit{noisy pixel} (because it results active regardless of the charge injection)''.
+As we can see from the plot of the alle s-curves in figure \vpageref{fig:hvc_scurve_140}, there were a lot of noisy pixels with this choice of register settings, but at this stage of measurements they were not masked.
+As a matter of fact along the y-axis of this plot is displayed the occupancy and when this value becomes higher than 1, it means that the pixel detects more hits than the injected ones, so it could be identified as ''\textit{noisy pixel}'' (because it results active regardless of the charge injection).
 
 
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=.5]{all_HVc_thscan_140}
-\caption{S-curves of all pixels in \textbf{HV Cascode} flavor with an injection pulse of 140 DAC.}
+\caption{S-curves of all pixels in \textbf{HV Cascode} flavor with a maximum injection pulse of 140 DAC.}
 \label{fig:hvc_scurve_140}
 \end{figure}
 
@@ -366,9 +365,9 @@ In figure \vref{fig:thdist_hvc} are shown the fit of the threshold and noise dis
 
 \subsubsection{HV-Normal FE}
 
-The fourth and last flavor is the \textbf{HV-Normal FE} which consists of 512 rows and 32 columns for a total number of pixel equal to 16.384. The main registers have been set with the values reported in table \vpageref{tab:tb_hv_settings}.
-In figure \vpageref{fig:hv_scurve_140}, the S-curves of all pixel in the flavor. Also here we can see that there were some noisy pixels unmasked.
-Moreover, in this final flavor, the last 16 columns were not working (visible in the maps in figure \vpageref{HVs_maps}) and as a matter of fact they had return a peak of threshold near the value 0, which is excluded from the threshold distributions plots.
+The fourth and last flavor is the \textbf{HV-Normal FE} which has the same layout and so the same number of pixel of the previous FE. The main registers have been set with the values reported in table \vpageref{tab:tb_settings}.
+In figure \vpageref{fig:hv_scurve_140}, the s-curves of all pixel in this flavor. Also here we can see that there were some noisy pixels unmasked.
+Moreover the last 16 columns were not working (visible in the maps in figure \vpageref{fig:HVs_maps}) and as a matter of fact they had return a peak of threshold near the value 0, which is excluded from the threshold distributions plots.
 
 So actually in this part of the matrix, the real number of pixel studied was the half of the total, such as 8192 pixels.
 
@@ -393,7 +392,7 @@ In figure \vref{fig:thdist_hv} the fit of the threshold and noise distributions.
 \end{figure}
 
 
-At last in figure \vpageref{HVs_maps} the threshold and noise maps of the whole HV flavor.
+At last in figure \vpageref{fig:HVs_maps} the threshold and noise maps of the whole HV flavor.
 
 \begin{figure}[h!]
 \centering
@@ -405,12 +404,12 @@ At last in figure \vpageref{HVs_maps} the threshold and noise maps of the whole 
 \label{fig:HVs_maps}
 \end{figure}
 
-As we will see in the following (section REFERENCE), the atypical s-curves in HVs flavors have been the first hint(evidence) of the cross-talk problem (section REFERENCE) tied to a lower global threshold in these sectors with TB settings. 
+As we will see in the following (section \vpageref{xtalk}), the atypical s-curves in HVs flavors have been the first hint of the cross-talk problem, tied to a global low threshold in these sectors with TB settings. 
 
 
 \subsubsection{Summary Table}
 
-In table \vpageref{th_noise_all} a summary of results for threshold, noise and threshold dispersion of all FE.
+In table \vpageref{tab:th_noise_all} a summary of results for threshold, noise and threshold dispersion of all FE.
 
 \begin{table}[h!]
 \centering
@@ -438,19 +437,19 @@ HV & 31.70 $\pm$ 0.10 & 2.30 $\pm$ 0.10 & 1.080 $\pm$ 0.033\\
 
 %CITAZIONE 8BIT BIASING DAC NEL PRECEDENTE???
 
-Despite its predecessor, Tj-Monopix 2 is equipped with a circuit which allows the \textit{threshold tuning}. In other words it can adjust every pixel threshold, even if only by few DAC, in order to have a global threshold on the matrix as uniform as possible, or in any case a dispersion as small as possible, expecially after irradiation. We have already noticed that ( took a look to) (\vref{fig:tj2core}) the analog part of the in-pixel front-end that includes the 3-bit threshold tuning DAC, which not only improves the global threshold dispersion across the pixels, but also solves the issue with the unintentionally masked ghost pixels, reducing the noise even more. This system has been design in order to decrease the some effects that affected the threshold disperision like systemstics (for example, related to biasing), process and temperature variations and radiation damage. \\
+Despite its predecessor, Tj-Monopix 2 is equipped with a circuit which allows the \textit{threshold tuning}. We have already mentioned that the analog part of the in-pixel front-end (figure \vref{fig:tj2core}) includes the 3-bit threshold tuning DAC, which not only improves the global threshold dispersion across the pixels, but also solves the issue with the unintentionally masked pixels (ghost), reducing the noise even more. In other words it can adjust every pixel threshold, even if only by few DAC, in order to have a global threshold on the matrix as uniform as possible, or in any case a dispersion as small as possible, expecially after irradiation.  This system has been design in order to counteract some negative effects that affect the threshold dispersion like systematics (for example related to biasing), process and temperature variations and radiation damage. \\
 
-Threshold trimming of each (individual) pixel is performed with the help of a tuning DAC (TDAC), shown in figure \vref{fig:tdac}. In particular this component controls the discriminator active load (comparison?) current $I_{DISC}$ which is partly(?) responsible of the pixel threshold. It works as an analog multiplexer (consisting of simple PMOS transistor switches), which selects one of seven $I_{DISC, n}$ lines generated by the main 8-bit biasing DAC. So the possbile vaue of the final $I_{DISC}$ is given by the sum of two contributions:
+Specifically the TDAC circuit, shown in figure \vref{fig:tdac}, helps to make threshold trimming of each pixel. This component controls the discriminator active load current $I_{DISC}$ which is partially responsible of the pixel threshold. It works as an analog multiplexer (consisting of simple PMOS transistor switches), which selects one of seven $I_{DISC, n}$ lines generated by the main 8-bit biasing DAC. So the possbile vaue of the final $I_{DISC}$ is given by the sum of two contributions:
 
 \begin{equation}
 I_{DISC} = I_{DISC, coarse} + (TCODE - 1) \cdot I_{DISC,fine},  \hspace{.5cm}	where \hspace{.5cm} 1 \leq TDAC \leq 7
 \end{equation}
 
-\textbf{$I_{DISC, coarse}$} is the current sets by the main(raw?) value of threshold, resulting by the setting of the main registers which are responsible for it. 
-\textbf{$I_{DISC, fine}$} is the current selected by the fine tuning step (TDAC) and it depends on the 3-bit tunning code that is stored in the in-pixel tuning memory latch (the in-pixel configuration memoty).
+\textbf{$I_{DISC, coarse}$} is the current set by the primary value of threshold, resulting by the setting of the main registers which are responsible for it (mentioned after?). 
+\textbf{$I_{DISC, fine}$} is the current selected by the fine tuning step (TDAC) and it depends on the 3-bit tunning code that is stored in the in-pixel tuning memory latch (the in-pixel configuration memory).
 \textbf{TCODE} is the decimal representation of the TDAC code. 
 
-For example if the 3-bit DAC are set to ''111'', the decimal representation is 8 and the fine tuning provide a current $I_{DISC,7}$, which corresponds to the highest threshold. If the 3-bit are set to ''010'' the corresponding TCODE is 2 and the current $I_{DISC,1}$ is provided that set the lowest threshold possible around the central value $I_{DISC,coarse}$. The particular combnation ''000'' instead (TCODE = 0) masks the pixel by disabling the discriminator, without affects the functioning(operation) of the others.
+For example if the 3-bit DAC are set to ''111'', the decimal representation is 8 and the fine tuning provide a current $I_{DISC,7}$, which corresponds to the highest threshold. If the 3-bit are set to ''010'' the corresponding TCODE is 2 and the current $I_{DISC,1}$ is provided,  which set the lowest threshold possible around the central value $I_{DISC,coarse}$. The particular combination ''000'' instead (TCODE = 0) masks the pixel by disabling the discriminator, without affecting the operation of the others.
 
 \begin{figure}
 \centering
@@ -461,12 +460,41 @@ For example if the 3-bit DAC are set to ''111'', the decimal representation is 8
 
 %MA COME AGISCE IDISC: 19.10 LOGBOOK increasing TDAC/IDISC, lower threshold
 
-\subsubsection{Results from fine tuning}
+\subsubsection{First results from fine tuning}
 
-It has been trying to apply the fine tuning method to level out the threshold of some pixels as much as possible. \\
+It has been trying to apply the fine tuning method to level out the threshold of some pixels as much as possible. We have considered about 12.000 pixels of the \textbf{Cascode FE} and in figure \vpageref{fig:casc_tuning} are shown the results before and after the threshold trimming for the s-curves and threshold distributions.
 
-Results from measurements done later (Ludovico talk TREDI) pre and post
 
+\begin{figure}[h!]
+\centering
+\subfigure[Cascode FE s-curves untuned]
+{\includegraphics[scale=0.5]{casc_untuned}}\quad
+\subfigure[Cascode FE s-curves tuned]
+{\includegraphics[scale=0.5]{casc_tuned}}\quad
+\subfigure[Cascode FE threshold distribution]
+{\includegraphics[scale=0.8]{casc_th_tuned_untuned}}\quad
+\caption{Cascode FE before tuning and after tuning comparison.}
+\label{fig:casc_tuning}
+\end{figure}
+
+As we can see the dispersion has been reduced of the 42\% after the tuning and as consequence also the estimation of the threshold is more precise. In figure \vpageref{fig:casc_maps_tune} are displayed the maps of the threshold and of the TDAC values, such as the value of TCODE assigned at each pixel, in order to obtain a global threshold as uniform as possible. \\
+In more details, there are three step for tuning:
+
+\begin{itemize}
+\item launch a first threshold scan through the internal charge injection, with a TDAC value equal for all pixels (usually default value is TDAC= 4).
+\item start a TDAC analysis which allows to choose a desire target threshold. During this phase a tool tries to assign the optimized value of TDAC at each pixel in several steps, in order to get as close as possible to the set threshold. At the end it returns a map of the final TDAC values for all selected pixels.
+\item At last another scan is launched setting the TDAC of each pixel passing the TDAC map values obtained from the previous. 
+\end{itemize}
+
+\begin{figure}[h!]
+\centering
+\subfigure[Map of TDAC value with target threshold of $\approx$ 250 $e^{-}$]
+{\includegraphics[scale=0.35]{tdac_map}}\quad
+\subfigure[Threshold map of tuned Cascode FE]
+{\includegraphics[scale=0.55]{th_map_tuned}}\quad
+\caption{Maps of tuned Cascode FE.}
+\label{fig:casc_maps_tune}
+\end{figure}
 
 
 %--------------------------------------------------------------------
@@ -476,7 +504,7 @@ Results from measurements done later (Ludovico talk TREDI) pre and post
 
 %TOT VS Q_INJ CALIBRATION CURVE
 
-As it has been pointed out in the previous, choosing to use a simple diode instead a PMOS transistor as reset input baseline element, increases the tolerance to TID radiation but at the same time it implicates a non-linear relationship between the injected charge and the ToT.  For this reason, one of the target of this analysis consisted to fit the trend (?) $Q_{inj}$ vs. ToT, in order to obtain the absolute calibration of the whole matrix.
+As it has been pointed out in the previous, the choice to use a simple diode instead a PMOS transistor as reset input baseline element, increases the tolerance to TID radiation but at the same time it implicates a non-linear relationship between the injected charge and the ToT.  For this reason, one of the goal of this analysis consisted to fit the trend of $Q_{inj}$ vs. ToT, in order to obtain the absolute calibration of the whole matrix.
 
 
 %--------------------------------------------------------------------
@@ -946,7 +974,7 @@ The last analysis done in order to make a comparison with the simulations, is ab
 
 
 
-\section{Cross talk issue and mitigation}
+\section{Cross talk issue and mitigation} \label{xtalk}
 
 As it was already pointed out, during the measurements of the average threshold of all FE (section REFERENCE), there were something atypical in the s-curves of the HVs flavor, because some of pixels seem to have occupancy greater than 1. This behavior threatens the good functionality of the overall matrix response, because some pixels flood the readout, giving floating results.(all readout process)\\
 
