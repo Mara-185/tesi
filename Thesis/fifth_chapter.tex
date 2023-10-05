@@ -433,7 +433,7 @@ HV & 31.70 $\pm$ 0.10 & 2.30 $\pm$ 0.10 & 1.080 $\pm$ 0.033\\
 
 
 %--------------------------------------------------------------------
-\subsection{Threshold dispersion and tuning}
+\subsection{Threshold dispersion and tuning} \label{tuning}
 
 %CITAZIONE 8BIT BIASING DAC NEL PRECEDENTE???
 
@@ -443,6 +443,7 @@ Specifically the TDAC circuit, shown in figure \vref{fig:tdac}, helps to make th
 
 \begin{equation}
 I_{DISC} = I_{DISC, coarse} + (TCODE - 1) \cdot I_{DISC,fine},  \hspace{.5cm}	where \hspace{.5cm} 1 \leq TDAC \leq 7
+\label{tuning_eq}
 \end{equation}
 
 \textbf{$I_{DISC, coarse}$} is the current set by the primary value of threshold, resulting by the setting of the main registers which are responsible for it (mentioned after?). 
@@ -580,7 +581,7 @@ In table \vref{tab:th_fe} are reported the results of the fits for all parameter
 
 %06/10/2022 LOGBOOK
 
-The absolute calibration of the matrix consists in characterizing the response of each pixel to a known signal, like the emission peaks of radioactive sources. By the means of the $Q_{inj}$ - ToT fit (section \ref{tot_fit}), it is posible to extrapolate the ToT signal value induced for whatever collected charge.\\
+The absolute calibration of the matrix consists in characterizing the response of each pixel to a known signal, like the emission peaks of radioactive sources. By the means of the $Q_{inj}$ - ToT fit (section \ref{tot_fit}), it is possible to extrapolate the ToT signal value induced for whatever collected charge.\\
 At this point then, three different X-rays radioactive sources were used to study the signal spectrum and the response time of the matrix, with emission lines from 6 to 60 KeV (corresponding approximately to 1600 and 16000 e- respectively).
 In fact the knowledge of the sources emission spectrum (in other words, the charge released in the matrix from particles emitted in decays) allows to compare the spectra obtained irradiating the chip, with the expected value of their peaks. It is worth mentioning that only the events in which all charge inducted is collected in a single pixel are part of the peaks reconstructed by the chip.\\
 In addition these radioactive sources allowed to extend the ToT calibration at higher values with respect to the limit imposed by the saturation of the internal injection circuit (section \ref{inj_issue}). In table \vref{tab:radio_sources} are shown the emission energies of the employed sources, that it was possible to see with the chip under test.\\
@@ -768,27 +769,22 @@ Source peak & $C_{Normal}$ & $C_{Cascode}$ & $C_{HV Cascode}$ & $C_{HV}$\\[2ex]
 \end{table}
 
 
-Bringing equation \vpageref{conversion_factor} back to mind, the conversion factors of the flavors are not those expected. In particular for the HV's flavors, it is almost the double and it could mean that the injection capacitance is greater than expected. As mentioned in section \vpageref{thresh_noise}, the prototype under test was designed in order to have the same injection capacitance for all flavor, equal to 230 aF (despite this doesn't seem to be the case).
-But actually, the cause of the different results for the conversion factors is due to the expected loss of the collected charge for HV FEs (section \vpageref{improved_circuit}).
+Bringing equation \vpageref{conversion_factor} back to mind, the conversion factors of the flavors are not those expected. In particular for the HV's flavors, they are almost the double and it could mean that the injection capacitance is greater than expected. But as mentioned in section \vpageref{thresh_noise}, the prototype under test was designed in order to have the same injection capacitance for all flavor, equal to 230 aF (despite this doesn't seem to be the case).
+In fact the cause of the different results for the conversion factors might be due also to the expected loss of the collected charge for HV FEs (section \vpageref{improved_circuit}).
 
-\bigskip
-VEDI APPUNTI
-We can anyway use these values to interpret data, and also to estimate the charge loss assuming a default conversion factor for all FE.
 
-\bigskip
-[It's necessary to consider that maybe some measurments were done in different conditions of pressure and temperature?]
-
-%CONTINUA%
+%VEDI APPUNTI\\
+%We can anyway use these values to interpret data, and also to estimate the charge loss assuming a default conversion factor for all FE.
 %%Può parametrizzare perdita di segnale? viene al 51-52% non 40 come previsto.
 
-
+%[It's necessary to consider that maybe some measurments were done in different conditions of pressure and temperature?]
 
 %--------------------------------------------------------------------
 \subsection{Check on linearity of tot fit}
 
-In the end the mean of all emission peaks from the several sources have been plotted for each frontend in order to verify the agreement between their trend and the ToT-Q relationship studied by the internal injection. \\
+Eventually the value of all emission peaks (obtained by the fit) from the several sources have been plotted for each frontend in order to verify the agreement between their trend and the ToT-Q relationship studied by the internal injection. \\
 
-At first the charge corresponding to the electrons expected to be released for each peaks, has been calculated with the nominal conversion factor equal to 10.1 $\frac{e^{-}}{DAC}$. As it could be seen from results in figure \vpageref{fig:inj_cap_10} there isn't good agreement between data and ToT relationship studied in section \vpageref{tot_fit}.
+Initially the average quantity of electrons expected to be released for each peak, has been calculated with the nominal conversion factor equal to 10.1 $\frac{e^{-}}{DAC}$. As it could be seen from results in figure \vpageref{fig:inj_cap_10} there isn't good agreement between data and ToT relationship studied in section \vpageref{tot_fit}.
 
 \begin{figure}
 \centering
@@ -804,7 +800,7 @@ At first the charge corresponding to the electrons expected to be released for e
 \label{fig:inj_cap_10}
 \end{figure} 
 
-After the calibration instead, assuming the average value of injection capacitance (\textit{Mean value}) calculated in table \vpageref{tab:cap_mean}, the charge corresponding to the emission peaks have been recalculated and results are shown in figure \vpageref{fig:inj_cap_sources}.
+After the calibration instead, assuming the average value of injection capacitance (\textit{Mean value}) reported in table \vpageref{tab:cap_mean}, the charge corresponding to the emission peaks have been recalculated and results are shown in figure \vpageref{fig:inj_cap_sources}.
 
 \begin{figure}[h!]
 \centering
@@ -820,6 +816,8 @@ After the calibration instead, assuming the average value of injection capacitan
 \label{fig:inj_cap_sources}
 \end{figure} 
 
+As we can see, a better agreement is therefore obtained and this shows that through calibration we are now able to interpret data with greater precision, which was the main purpose of this analysis.
+
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=0.6]{Tot_linearity__sources}
@@ -827,24 +825,14 @@ After the calibration instead, assuming the average value of injection capacitan
 \label{inj_cap_sum}
 \end{figure}
 
-\begin{comment}
-Through the calibration a better agreement is therefore obtained. As we already said, this was the purpose of all this study: to obtain optimized conversion factor for all frontends to interpret results from TB, characterizing them with the conversion factor.
-\end{comment}
-
-
 
 %--------------------------------------------------------------------
 \section{Operation with low threshold}
 
+One of the most important target in sensor design is to keep high efficiency even after irradiation damages. All experimental environments indeed, are exposed to high doses of radiations, so it's crucial to ensure the functionality of the detectors, even after being irradiated.
 
-One of the most important target of the chip design is to keep high efficiency even after irradiation damage. All experimental environments in fact(indeed) are exposed to high doses of radiations, so it's crucial to make sure the functionality of the irradiated detectors.
-
-For this reason, many tests were done in order to understand the chip behaviour at lower threshold that allowed to keep(mantain) good value of efficiency.
-Moreover working at low threshold allowed to detect low charge events due to charge sharing or charge trapping (effect which increased after irradiation), expecially in case of thin epitaxial material. 
-
-
-
-
+For this reason, many tests were done in order to understand the chip behaviour at low threshold where a good value of efficiency could be preserved.
+Moreover working at low threshold allowed to detect low charge events due to charge sharing or charge trapping (effect which increases after irradiation), expecially in case of thin epitaxial material. 
 
 
 \begin{comment}
@@ -858,78 +846,75 @@ Explain the function of the various registers used (see Eleonora thesis, and may
 	Comparison with simulation 
 	Can add at the end some nice picture of the optimized thr and tuning 
 
-
-boh:VOGLIAMO OPERARE A BASSE THRESHOLD PER RILEVARE EVENTI A BASSE CARICA A CAUSA DEL CHARGE TRAPPING AND CHARGE SHARING SOPRATTUTTO IN CASO DI THIN EPITAXIAL MATERIAL
-
 \end{comment}
-
 
 
 %--------------------------------------------------------------------
 \subsection{Register optimization}
 
-As we have seen in section (REFERENCE), there are a lot of registers which control the discriminator threshold and also the readout sequence. So preliminary it was necessary to run some tests exploring their settings in order to operate the chip at(or with) lower thresholds.\\
+As we have seen in section (REFERENCE), there are a lot of registers which control the discriminator threshold and also the readout sequence. So preliminary it was necessary to explore their possible settings in order to operate the chip at low threshold.\\
 
-Now we will go through the main registers used for this purpose, in order to explain their functionality. There are several dozens of registers but we focused on some of the most important and crucial to set the threshold:
+Now we will go through the main registers used for this purpose, in order to explain their functionality. There are several dozens of registers but we focused on some of the most important and crucial to set the threshold and its dispersion:
 
 \begin{itemize}
 \label{currents}
-\item \textit{$I_{CASN}$} : this current is responsible of the output baseline signal[set the baseline of the FE output and change the thr] that goes to the input discriminator. In a few words, higher this value, higher the baseline, lower the threshold and also a little bit the gain. [Vice versa, decreasing this registr's value.]
-\item \textit{$I_{THR}$}: it controls the pre-amplifier feedback strenght and speed, so it's responsible for the output reset rate. Increasing $I_{THR}$ results to lower gain and faster return to baseline, so higher threshold. In other words increasing this current increases the gain and the time the analog output takes to get back to the baseline and as consequence, it increase a lot the maximum value of the ToT. In fact is preferably set $I_{THR}$ to 8nA[in DAC?] in order to avoid high ToT slope.
-\item \textit{$I_{DB}$}: 
-\item \textit{$I_{TUNE}$}:
-\item \textit{$I_{BIAS}$}: 
-\item \textit{$V_{RESET}$}:  dispersion?
+\item \textit{$I_{CASN}$} : this current is responsible of the output baseline signal. In particular it sets the baseline of the FE output that goes to the input discriminator. In a few words, higher this value, higher the baseline, lower the threshold and also a little bit the gain and vice versa by decreasing it.
+\item \textit{$I_{THR}$}: it controls the pre-amplifier feedback strenght and speed, so it is responsible for the output reset rate. Increasing $I_{THR}$ results to lower gain and faster return to baseline, so higher threshold. In other words increasing this current increases the gain and the time that the analog output takes to get back to the baseline and as consequence, it increases a lot the maximum value of the ToT. In fact it is recommend to set $I_{THR}$ to low value (e.g. 8 nA[ref]) in order to avoid high ToT slope.
+\item \textit{$I_{DB}$}: this current corresponds to \textbf{$I_{DISC,coarse}$} explained in section \vpageref{tuning}. So it represents the primary current that sets the discriminator threshold, to which another current is added by the the tuning.
+\item \textit{$I_{TUNE}$}: it corresponds to \textbf{$I_{DISC,fine}$} instead (always section \vpageref{tuning}). Remembering the equation \vpageref{tuning_eq}, this is the current to multiply by the TDAC value, which is added to $I_{DB}$, during the tuning process. %richiama l'equzione nelle noteeeee
+\item \textit{$I_{BIAS}$}: this current acts on the pre-amplifier input transistor and influences the threshold dispersion and the gain. In particular increasing this value, the dispersion decreases and the gain becomes greater. Nevertheless it can't be increased a lot because it affects the power consumption, too. %higher rise time? pre-ampl output rise time??
+\item \textit{$V_{RESET}$}: this register influences the threshold dispersion. Lowering its value, the dispersion decreases and vice versa.
 \end{itemize}
 
 \begin{comment}
-In section (...) some improvements of the readout with respect to TJ-Monopix 1 (analogical and digital part) have been mentioned. 
+pag.97 tesi
+This modification has significant consequences in several design aspects such as the bandwidth, gain, noise and threshold dispersion resulting in a different front-end behavior
 \end{comment}
 
-
+%ITHR : on chat hung said instead ITHR=64 corresponds to 25 nA and ITHR=20 to 8 nA
+%https://confluence.desy.de/pages/viewpage.action?spaceKey=BI&title=VTX+Lab+Set+Up+Operation
 
 %--------------------------------------------------------------------
 \subsection{Comparison between data and simulation}
 
-In the interest of understanding how the settings of the chip influence the threshold's value, several measurements have been taken varying the values of the main registers which are responsible for it.
-The results are compared with simulations done by Hung Pham (...). [???]
+In the interest of understanding how the registers' setting of the chip influences the threshold, several measurements have been taken with different configuration of their values.
+The results are compared with simulations done by Hung Pham.  (...). [???]
 
-\subsubsection{$I_{CASN}$}
-
-This current is responsible of the output baseline. In a few words, higher this value, higher the baseline, lower the threshold and also a little bit the gain.
+\begin{description}
+\item[\textbf{$I_{CASN}$}] 
+\end{description}
 
 In figure \vref{fig:icasn_sim}, we can see the simulated behaviour of the threshold and the gain, increasing the value o $I_{CASN}$.
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=.9]{thr_gain_icasn(sim)}
+\includegraphics[scale=.8]{thr_gain_icasn(sim)}
 \caption{Trends of Gain and Threshold increasing $I_{CASN}$.}
 \label{fig:icasn_sim}
 \end{figure}
 
-To verify the trend of threshold in particular, three different acquisition have been taken by fixing $I_{THR}$ = 20, 40, 64 and increasing $I_{CASN}$ from 0  to 30 DAC, with a step of 5 DAC. We have done this enabling 200 pixels in the Cascode FE (rows: 472 - 512, cols: 225 - 230).[??]\\
+To verify the trend of threshold as this current varies, three different acquisitions have been taken by fixing $I_{THR}$ = 20, 40, 64 and increasing $I_{CASN}$ from 0  to 30 DAC, with a step of 5 DAC. We have done this enabling 200 pixels in the Cascode FE (rows: 472 - 512, cols: 225 - 230).[??]\\
 
-The threshold distributions have been fitted with a gaussian function for each measurement,  in order to obtain the average values and their dispersion.
+Each threshold distribution has been fitted with a gaussian function in order to obtain the average threshold value and its dispersion.
 
-In figure \vref{fig:alltrends_icasn} all trends obtained from these data are reported.
-
-[TREND OF DISPERSION?]
+In figure \vref{fig:alltrends_icasn} are reported all trends obtained.
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=.7]{all_trends(ICASN)}
+\includegraphics[scale=.5]{all_trends(ICASN)}
 \caption{Threshold vs. $I_{CASN}$ for $I_{THR}$= 20, 40, 64.}
 \label{fig:alltrends_icasn}
 \end{figure}
 
+\begin{description}
+\item[\textbf{$I_{THR}$}]
+\end{description}
 
-\subsubsection{$I_{THR}$}
-
-Reusing the same data of the previous measurements, the trend of the threshold have been studied, changing the value of $I_{THR}$ and fixing that of $I_{CASN}$. In this case only $I_{CASN}$ from 0 to 15 DAC is considered, because for higher values we don't have enough measures of the threshold (specifically only two for $I_{THR}$=40, 64). The results are shown in figure \vref{fig:alltrends_ithr}.
+Reusing the same data of the previous measurements, the trend of the threshold have been studied bt changing the value of $I_{THR}$ and fixing that of $I_{CASN}$. In this case only $I_{CASN}$ from 0 to 15 DAC is considered, because for higher values we don't have enough measures of the threshold (specifically only two for $I_{THR}$=40, 64). The results are shown in figure \vref{fig:alltrends_ithr}.
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=.7]{all_trends(ITHR)}
+\includegraphics[scale=.5]{all_trends(ITHR)}
 \caption{Threshold vs. $I_{THR}$ for $I_{CASN}$= 0, 5, 10, 15.}
 \label{fig:alltrends_ithr}
 \end{figure}
@@ -938,16 +923,16 @@ We can compare them with the simulation done by Hung Pham in figure \vref{fig:it
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=.7]{ithr_simulation}
+\includegraphics[scale=.6]{ithr_simulation}
 \caption{Trends of Gain and Threshold increasing $I_{CASN}$.}
 \label{fig:ithr_sim}
 \end{figure}
 
+\begin{description}
+\item[\textbf{Time over Threshold (ToT)}]
+\end{description}
 
-
-\subsubsection{Time over Threshold (ToT)}
-
-The last analysis done in order to make a comparison with the simulations, is about the trend of the ToT changing the value of $I_{CASN}$ for a fixed value of $I_{THR}$ and vice versa. In particular we consider the data obtained with $I_{CASN}$ fixed to 0 DAC and $I_{THR}$ to 64 DAC, which are the values studied and used for this registers during the Test Beam in Desy.
+The last analysis done to make a comparison with the simulations, is about the trend of the ToT changing the value of $I_{CASN}$ for a fixed value of $I_{THR}$ and vice versa. In particular we consider the data obtained with $I_{CASN}$ fixed to 0 DAC and $I_{THR}$ to 64 DAC, which are the values studied and used for these registers during the Test Beam in Desy.
 
 \begin{figure}[h!]
 \centering
@@ -974,8 +959,7 @@ The last analysis done in order to make a comparison with the simulations, is ab
 \subsubsection{some nice picture of the optimized thr and tuning}
 
 
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
+!!!!
 
 
 
