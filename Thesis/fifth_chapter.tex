@@ -156,7 +156,7 @@ The 2x2 pixel core layout, shown in figure \vref{fig:tj2core}, is fully optimize
 
 %-----------------------------------------------------------------------------------------------%
 
-\subsubsection{Improved front-end circuit design}
+\subsubsection{Improved front-end circuit design}\label{improved_circuit}
 
 As we have seen above, there are two variations of the front-end circuit (figure \vpageref{fig:tj2_circuit}), such as \textit{normal} and \textit{cascode} type. The latter in particular includes an extra cascode transistor which increases the pre-amplifier gain and consequently reduces the threshold dispersion.\\
 Moreover in TJ-Monopix 2 it was preferred to incorporate a simple diode to reset the input node instead of a PMOS transistor, which was the techonology implemented in TJ- Monopix 1. A side effect of this choice is that the relationship between charge injected and the ToT of the detected signal is not linear anymore, because the diode is a not linear element and its discharge rate also depends on the collected charge. Indeed in the following analysis it was necessary to fit the ToT trend with a more complex function. But at the same time, the advantages are its simplicity ($p^{+}$ diffusion within the n-well collection electrode) and also the fact that it allows to increase radiation tolerance to TID effects, which was one of the key working area in the upgrade of the sensor.
@@ -180,7 +180,7 @@ In the last two AC-coupled flavors are implemented the same improvements, but he
 %	5.2 THRESHOLD AND NOISE
 %---------------------------------------------
 
-\section{Threshold and noise}
+\section{Threshold and noise} \label{thresh_noise}
 
 In order to achieve the absolute calibration of the whole matrix, the response of each pixel has been characterized by means of the internal charge injection. \\
 
@@ -482,16 +482,16 @@ In more details, there are three step for tuning:
 
 \begin{itemize}
 \item launch a first threshold scan through the internal charge injection, with a TDAC value equal for all pixels (usually default value is TDAC= 4).
-\item start a TDAC analysis which allows to choose a desire target threshold. During this phase a tool tries to assign the optimized value of TDAC at each pixel in several steps, in order to get as close as possible to the set threshold. At the end it returns a map of the final TDAC values for all selected pixels.
+\item start a TDAC analysis which allows to choose a target threshold. During this phase, a tool tries to assign the optimized value of TDAC at each pixel in several steps, in order to get as close as possible to the set threshold. At the end it returns the final TDAC values for all selected pixels.
 \item At last another scan is launched setting the TDAC of each pixel passing the TDAC map values obtained from the previous. 
 \end{itemize}
 
 \begin{figure}[h!]
 \centering
 \subfigure[Map of TDAC value with target threshold of $\approx$ 250 $e^{-}$]
-{\includegraphics[scale=0.35]{tdac_map}}\quad
+{\includegraphics[scale=0.33]{tdac_map}}\quad
 \subfigure[Threshold map of tuned Cascode FE]
-{\includegraphics[scale=0.55]{th_map_tuned}}\quad
+{\includegraphics[scale=0.53]{th_map_tuned}}\quad
 \caption{Maps of tuned Cascode FE.}
 \label{fig:casc_maps_tune}
 \end{figure}
@@ -504,7 +504,7 @@ In more details, there are three step for tuning:
 
 %TOT VS Q_INJ CALIBRATION CURVE
 
-As it has been pointed out in the previous, the choice to use a simple diode instead a PMOS transistor as reset input baseline element, increases the tolerance to TID radiation but at the same time it implicates a non-linear relationship between the injected charge and the ToT.  For this reason, one of the goal of this analysis consisted to fit the trend of $Q_{inj}$ vs. ToT, in order to obtain the absolute calibration of the whole matrix.
+As it has been pointed out in the previous, the choice to use a simple diode instead of a PMOS transistor as reset input baseline element, increases the tolerance to TID radiation but at the same time it implicates a non-linear relationship between the injected charge and the ToT.  For this reason, one of the goal of this analysis consisted to fit the trend of $Q_{inj}$ vs. ToT, in order to obtain the absolute calibration of the whole matrix.
 
 
 %--------------------------------------------------------------------
@@ -512,17 +512,15 @@ As it has been pointed out in the previous, the choice to use a simple diode ins
 
 %SATURATION INJECTION CIRCUIT
 
-In carrying out the measurements mentioned above, we started to noticed some issues with the injection circuit, which seemed to limit its working range. As a matter of fact the height of the injection pulse is expected to grow linearly increasing the value of charge to be injected.
-It actually happened up to a value of (about) $\approx$ 140 DAC, but for higher quantities of injected charge, the circuit seemed to increase not only the height of the signal, but also the threshold by a certain amount of $\Delta V$ (or equivalently of $\Delta Q$, related by the conversion factor reported in REFERENCE). Moreover, for injection height grater than 200 DAC, only the threshold grows, without increasing the actual injected charge in any way.\\
-We come to the conclusion that the grows of the threshold was artificial and due to the failure of the injection circuit.[?]
+In carrying out the measurements mentioned above, we started to notice some issues with the injection circuit, which seemed to limit its working range. As a matter of fact the height of the injection pulse is expected to grow linearly increasing the value of charge to be injected.
+It actually happened up to a value of (about) $\approx$ 140 DAC, but for higher quantities the circuit seemed to increase not only the height of the signal, but also the threshold by a certain amount of $\Delta V$ (or equivalently of $\Delta Q$, related by the conversion factor \vpageref{conversion_factor}). Moreover, for injection heights grater than 200 DAC, only the threshold grows, without increasing the actual injected charge in any way.\\
+However as we have seen in the previous section, the threshold depends on the settings of the chip registers and it can't be influenced by the injected charge, otherwise the whole response of the chip would be chaotic and it would not be reliable to take precise measurement of the impinging particles. \\
 
-However as we have seen in the previous section (reference), the threshold depends on the settings of the chip registers and it can't be influenced by the injected charge, otherwise the whole response of the chip would be chaotic and it would not be reliable to take precise measurement of the impinging particles. \\
-
-A method (recipe) has been therefore devised to obtain a reliable values of threshold and ToT up to a value of 170 DAC of effective (actual) charge injected. Moreover the characterization of the function to describe the $Q_{inj}$ - ToT relationship has allowed also to extrapolated ToT values in the forbidden region of charge by the internal injection circuit issue (above $\approx$ 1717 $e^{-}$), that usually corresponds to the emission peaks of the radioactive sources available in the laboratory.
+A method has been therefore devised to obtain reliable values of threshold and ToT up to a value of 170 DAC of effective charge injected. Moreover the characterization of the function used to describe the $Q_{inj}$ - ToT relationship has allowed also to extrapolate ToT values in the forbidden region of charge (above $\approx$ 1717 $e^{-}$), where the emission peaks of the radioactive sources available in the laboratory (usually) are.
 
 
 %--------------------------------------------------------------------
-\subsection{Time Over Threshold (TOT) curves and fit} \label{tot_fit}
+\subsection{Time Over Threshold (TOT) curves and fit [CHECK]} \label{tot_fit}
 
 The function chosen for this purpose is:
 
@@ -533,44 +531,45 @@ y(x) = a\cdot x +b -\frac{c}{x-t}
 
 with \textit{a}, \textit{b}, \textit{c} and \textit{t} free parameters and where the \textit{y} represents the ToT corresponding to a precise value of collected charge, express by \textit{x}. 
 
-Actually we know that the ToT distribution starts to grow near the threshold, so a random parameter among them, could be computed in function of the threshold value estimated from the previous measurements, explained (shown, described) in section \ref{threshold_subsection}.
+Actually we know that the ToT distribution starts to grow near the threshold, so a random parameter among them could be computed in function of the threshold value estimated from the previous measurements reported in section \ref{threshold_subsection}.
 
-In particular knowing that y($x_{th}$) must be equal to 0, that is the ToT at the value of the threshold, it can be imposed:
+In more details, knowing that y($x_{th}$) must be equal to 0 that is the ToT value at the threshold, it can be imposed for example:
 
 \begin{equation}
 0 = a\cdot x_{th} + b - \frac{c}{x_{th}-t}  \hspace{.4cm}	\Rightarrow  \hspace{.4cm}	c = x_{th}^{2}\cdot a + x_{th}\cdot (b-a\cdot t) - t\cdot b
 \end{equation}
 
-In this way the number of parameters to fit is reduced.
+In this way the number of parameters to fit is reduced. In principle a similar equation could be equivalently solved for \textit{a}, \textit{b} and \textit{t}. 
 
-So the same data collected in the previous measurements of thresholds have been used to fit the ToT curves of all pixels for each frontend, so the registers are set in according to the ''GOE'' settings (\vref{tab:tb_settings} for Normal and Cascode FE and \vref{tab:tb_hv_settings} for HV's).
-In table \vref{tab:th_fe} are reported the value of the threshold considered for each one of them (so that) to extrapolate the value of the parameter \textit{c} and the results of the fit for all parameters. In figure \vref{fig:tot_fe} the results obtained for all Normal, Cascode and HVs FE. The parameter \textit{c} is chosen only for simplicity of calculation.
+So five different fits have been made: four imposing a constraint in turn on each free parameter (like shown above) and the last one leaving all parameters free. For all of them the value of $\chi^{2}$ (MSE) have been computed and for all flavors it had its minimum when no parameters were fixed. So in the following the results from these last fits have been considered.\\
+
+The same data collected in the previous measurements of thresholds have been used to fit the ToT curves of all pixels for each frontend. As a matter of fact we want to fully characterized the chip response with ''GOE'' settings (table \vpageref{tab:tb_settings}), in order to use results for analyzing TB data.
+In table \vref{tab:th_fe} are reported the results of the fits for all parameters. In figure \vref{fig:tot_fe} the plots obtained for all Normal, Cascode and HVs FE.
 
 \begin{table}[h!]
 \centering
 \begin{tabular}{c|c|c|c|c}
  & \textbf{Normal} & \textbf{Cascode} & \textbf{HV Cascode} & \textbf{HV} \\
 \hline
-\textit{threshold [DAC unit]} & 53.62 & 60.19 & 35.34 & 31.70 \\
-\textit{a} & & & & \\
-\textit{b} & & & & \\
-\textit{c} & & & & \\
-\textit{t} & & & & \\
+\textit{a$\pm\Delta$a [$\frac{ToT}{DAC}$]} & 0.12$\pm$0.07 & 0.12$\pm$0.01 & 0.257$\pm$0.007 & 0.275$\pm$0.008 \\
+\textit{b$\pm\Delta$b [ToT]} & 4$\pm$18 & 1.4$\pm$3.1 & 3.2$\pm$1.4 & 2.3$\pm$1.6 \\
+\textit{c$\pm\Delta$c [ToT$\cdot$DAC]} & 200$\pm$1100 & 140$\pm$130 & 160$\pm$70 & 140$\pm$80 \\
+\textit{t$\pm\Delta$d [DAC]} & 20$\pm$90 & 40$\pm$15 & 17$\pm$6 & 13$\pm$8 \\
 \end{tabular}
-\caption{Threshold and parameters obtained from the fit of ToT curve for each frontend.}
+\caption{Parameters obtained from the fit of ToT curve for each frontend.}
 \label{tab:th_fe}
 \end{table}
 
 \begin{figure}[h!]
 \centering
 \subfigure[\textbf{Normal}]
-{\includegraphics[scale=0.35]{tot_fit_normal(200)}}\quad
+{\includegraphics[scale=0.35]{Tot_fit_normal(200)}}\quad
 \subfigure[\textbf{Cascode}]
-{\includegraphics[scale=0.35]{tot_fit_cascode(200)}}\\
+{\includegraphics[scale=0.35]{Tot_fit_cascode(200)}}\\
 \subfigure[\textbf{HV Cascode}]
-{\includegraphics[scale=0.35]{tot_fit_HV_Casc.(200)}}\quad
+{\includegraphics[scale=0.35]{Tot_fit_HV Casc.(200)}}\quad
 \subfigure[\textbf{HV}]
-{\includegraphics[scale=0.35]{tot_fit_HV(200)}}\\
+{\includegraphics[scale=0.35]{Tot_fit_HV(200)}}\\
 \caption{ToT curves fit for all frontend.}
 \label{fig:tot_fe}
 \end{figure}
@@ -581,16 +580,17 @@ In table \vref{tab:th_fe} are reported the value of the threshold considered for
 
 %06/10/2022 LOGBOOK
 
-The absolute calibration of the matrix consists in characterizing the signal response (conversion gain?) of pixels for each FE. By the means of the $Q_{inj}$ - ToT fit (section \ref{tot_fit}), it is posible to extrapolate (deduce, estimate) the value of the ToT of the signal induced for whatever collected charge. At this point then, three (or four) different X-rays radioactive sources were used to study the signal spectrum and the response time of the matrix, with emission lines from 6 to 60 KeV (1600 to 16000 e-).??? 
-In fact the known energies of the sources emission spectrum (so that the charge released in the matrix from particles emitted in decays) allow to compare the spectra obtained irradiating the chip, with the expected value of their peaks. [Only the events in which all charge inducted is collected in a single pixel are a part of the peaks reconstructed by the chip.]\\
-Moreover these radioactive sources allowed to extend the ToT calibration for(at) higher value with respect to the limit imposed by the saturation of the internal injection circuit (section \ref{inj_issue}). In table \vref{tab:radio_sources} are shown the emission energies of the sources employed, that it was possible to see with the chip under test.
-
-[Considering that the average energy necessary to produce an electron/hole pair in silicon is 3.65 eV, it is possible to convert the peak energies in a mean value of electrons released by the means of equation \vpageref{energy_electron_conv}. So in the table are reported also the equivalent emission in electrons, which will be useful further.]
+The absolute calibration of the matrix consists in characterizing the response of each pixel to a known signal, like the emission peaks of radioactive sources. By the means of the $Q_{inj}$ - ToT fit (section \ref{tot_fit}), it is posible to extrapolate the ToT signal value induced for whatever collected charge.\\
+At this point then, three different X-rays radioactive sources were used to study the signal spectrum and the response time of the matrix, with emission lines from 6 to 60 KeV (corresponding approximately to 1600 and 16000 e- respectively).
+In fact the knowledge of the sources emission spectrum (in other words, the charge released in the matrix from particles emitted in decays) allows to compare the spectra obtained irradiating the chip, with the expected value of their peaks. It is worth mentioning that only the events in which all charge inducted is collected in a single pixel are part of the peaks reconstructed by the chip.\\
+In addition these radioactive sources allowed to extend the ToT calibration at higher values with respect to the limit imposed by the saturation of the internal injection circuit (section \ref{inj_issue}). In table \vref{tab:radio_sources} are shown the emission energies of the employed sources, that it was possible to see with the chip under test.\\
+Considering that the average energy necessary to produce an electron/hole pair in silicon is 3.65 eV, it is possible to convert the peak energies in a mean value of electrons released using the equation \vpageref{energy_electron_conv}. So in the table are reported also the equivalent emission in electrons, which will be useful later.
 
 \begin{equation}
 N_{e^{-}} = \frac{E \, [eV]}{3.65 [\frac{eV}{e/h \, pair}]}
 \label{energy_electron_conv}
 \end{equation}
+
 %%CONVERSIONE IN ELETTRONI
 %SR90 BETA SOURCE???
 
@@ -620,11 +620,13 @@ Source & Energy $\gamma$ [KeV] & Equivalent charge [$e^{-}$]\\[2ex]
 \label{tab:radio_sources}
 \end{table}
 
+
+Now we can go through the resuts obtained from three different sources: \ch{^{55}Fe}, \ch{^{241}Am} and \ch{^{109}Cd}.
 %--------------------------------------------------------------------
 \subsection{\ch{^{55}Fe}}
 
 The \ch{^{55}Fe} source decays by \textbf{electron capture} to \ch{^{55}Mn}. One of the photons emitted in this transistion has an energy of 5.9 KeV ($K_{\alpha}$) and it produces in turn a photo-electron which deposits a inization charge of about 1616 $e^{-}$ in the sensor. 
-All flavors were irradiate with a \ch{^{55}Fe} source available in the laboratory (scrivi caratteristiche). In figure \vref{fig:fe_all} are shown the results obtianed. Each peak were fitted by a gaussian function, limited in the region of the peak itself. The hump (shoulder, bump) for smaller ToT is a consequence of charge sharing among pixels. 
+All flavors were irradiate with a \ch{^{55}Fe} source available in the laboratory (18 MBq). In figure \vref{fig:fe_all} are shown the results. Each peak were fitted by a gaussian function, limited in the region of the peak itself. The shoulder visible for smaller ToT is a consequence of charge sharing among pixels. 
 
 \begin{figure}[h!]
 \centering
@@ -640,7 +642,7 @@ All flavors were irradiate with a \ch{^{55}Fe} source available in the laborator
 \label{fig:fe_all}
 \end{figure}
 
-As it can be seen for the HV's FE a cut has been applied only to make clearly visible the emission line beacuse a lot of noisy pixels caused a sharp peak at 0 ToT. As a matter of fact in this flavors there were several column of not-functioning pixels. In the box of each plot are also reported the results of the fit that will be crucial in the following.
+As it can be seen for the HV's FE a cut has been applied only to make clearly visible the emission line, indeed a lot of noisy pixels caused a sharp peak at 0 ToT. As a matter of fact in this flavors there were several columns of not-functioning pixels. In the box of each plot are also reported the results of the fit that will be crucial in the following.
 
 
 %--------------------------------------------------------------------
@@ -649,8 +651,7 @@ As it can be seen for the HV's FE a cut has been applied only to make clearly vi
 %AGGIUNGI REFERENZA IMMAGINE (Measurements of gamma-ray emission probabilities of 241, 243Am and 239Np)
 %AGGIUNGI REFERENZA (GAMMA RAY SPECTRUM OF AM-241 IN A BACK SCATTERINGGEOMETRY USING A HIGH PURITY GERMANIUM DETECTOR)
 
-The \ch{^{241}Am} source has a more complex spectrum (figure \vref{fig:am241_spectrum}) and not all its peaks can be revealed (detected) by the chip (because of the limited range of ToT available, depending on the bit dedicated to it). The spectrum shows other minor peaks besides the usual intense gamma peaks (59.5 and 26.3 keV) and several characteristic L X-rays from \ch{^{237}Np} (20.7, 17.7 and 13.9 keV).\\ 
-Results are reported in figure \vref{fig:am_all}. In the case of the first two flavors, it could be possible to fit four peaks of the emission lines. In case of the HV's flavors instead, only three peaks for the HV-Cascode FE and two for the HV. As a matter of fact the AC-copuling causes about 41\% of signal loss (reference), so they are much less evident and more difficult to fit as isolated peak.
+The \ch{^{241}Am} source has a more complex spectrum (figure \vref{fig:am241_spectrum}) and not all its peaks can be detected by the chip (because of the limited range of ToT available, depending on the numer of bit dedicated to it). The spectrum shows other minor peaks besides the usual intense gamma peaks (59.5 and 26.3 keV) and several characteristic L X-rays from \ch{^{237}Np} (20.7, 17.7 and 13.9 keV).\\ 
 
 \begin{figure}[h!]
 \centering
@@ -659,6 +660,7 @@ Results are reported in figure \vref{fig:am_all}. In the case of the first two f
 \label{fig:am241_spectrum}
 \end{figure}
 
+Results are reported in figure \vref{fig:am_all}. 
 
 \begin{figure}[h!]
 \centering
@@ -674,10 +676,13 @@ Results are reported in figure \vref{fig:am_all}. In the case of the first two f
 \label{fig:am_all}
 \end{figure}
 
+In the case of the first two flavors, it could be possible to fit four peaks of the emission lines. In case of the HV's flavors instead, only three peaks for the HV-Cascode FE and two for the HV. As already discussed (section \vpageref{improved_circuit}) the AC-copuling causes about 41.5\% of signal loss, so they are much less evident and more difficult to fit as isolated peak.
+
+
 %--------------------------------------------------------------------
 \subsection{\ch{^{109}Cd}}
 
-The third source employed was the \ch{^{109}Cd}. This isotope decay in \ch{^{109}Ag} by electronic capture, producing a photon of 22 KeV in the transistion. In figure \vref{cd_all} the results obtained irradiating all FE. 
+The third source employed was the \ch{^{109}Cd}. This isotope decay in \ch{^{109}Ag} by electronic capture, producing a photon of 22 KeV in the transition. In figure \vpageref{fig:cd_all} the results obtained irradiating all FEs. 
 
 \begin{figure}[h!]
 \centering
@@ -700,9 +705,9 @@ The third source employed was the \ch{^{109}Cd}. This isotope decay in \ch{^{109
 
 \subsection{Injection capacitance calibration}
 
-Here it's necessary to point out that for iron source more statistics were collected so in this case a complete analysis of each pixel could be done. For the other sources instead, there weren't enough statistics on every pixel so the injection capacitance has been estimate only as a mean value for the whole front-end, just to compare with the results obtained from the iron analysis.  
+Here it is necessary to point out that for iron source more statistics were collected so in this case a complete analysis of each pixel has been done. For the other sources instead, there weren't enough statistics on every pixel so the injection capacitance has been estimate only as a mean value for the whole front-end, just to compare with the results obtained from the iron analysis.  
 
-In case of \ch{^{55}FE} source, we managed to fit the emission peak for each working pixel of the whole matrix. The value of the charge corresponding to the ToT peak of the emission line was extrapolate considering the parameters' values obtained by fitting the $Q_{inj}$ - ToT relationship (section \vpageref{tot_fit}). \\
+In case of \ch{^{55}Fe} source, we managed to fit the emission peak for each working pixel of the whole matrix. The value of the charge corresponding to the ToT peak of the emission line was extrapolate considering the parameters' values obtained by fitting the $Q_{inj}$ - ToT relationship (section \vpageref{tot_fit}). \\
 
 Specifically the fit function \vpageref{fit_function} was inverted obtaining:
 
@@ -712,7 +717,7 @@ x(y) = \bigg(\frac{t}{2} - \frac{b}{2a} + \frac{y}{2a}\bigg) \pm \sqrt{\bigg(\fr
 
 where \textit{x} represents the charge corresponding to the ToT labeled by \textit{y}.
 
-As shown in table \vpageref{tab:radio_sources}, the charge released in the sensor (considering that collected from only one pixel) corresponds roughly ($\approx$, approximately) to 1616 $e^{-}$. Therefore it was possible to calculate (estimate) the conversion factor for each pixel as follows:
+As shown in table \vpageref{tab:radio_sources}, the charge released in the sensor (considering that collected from only one pixel) corresponds roughly to 1616 $e^{-}$. Therefore it was possible to estimate the conversion factor for each pixel as follows:
 
 \begin{equation}
 C_{f}\bigg[\frac{e^{-}}{DAC}\bigg] = \frac{1616 \, e^{-}}{ToT \, \frac{DAC}{ToT unit}}
@@ -734,10 +739,7 @@ By these steps, a value of the injection capacitance was estimated for each well
 \caption{Injection capacitance distributions of all FE.}
 \label{fig:cap_dist}
 \end{figure} 
-
 %%%%%ADD SUMMARY TABLE
-
-[As expected the capacitance oh the HV's flavors is much higher than the Normal and Cascode FE? No! It's expected all the same?] 
 
 Regarding the other sources, it was impossibile to fit the distributions for each pixel due to low statistics. For this reason only a mean value for all flavor could be extrapolate. In table \vpageref{tab:cap_mean} the results obtained with the same method used with the iron source, but considering all pixels of each flavor.
 
@@ -766,26 +768,27 @@ Source peak & $C_{Normal}$ & $C_{Cascode}$ & $C_{HV Cascode}$ & $C_{HV}$\\[2ex]
 \end{table}
 
 
-Bringing equation \vpageref{conversion_factor} back to mind, the conversion factors of the flavors are not those expected. In particular for the HV's flavors, this factor is almost the double and it could mean that the injection capacitance is greater than expected. As matter of fact, with respect to Tj-Monopix 1, the prototype under test was design in order to have the same injection capacitance for all flavor, equal to 230 aF.
+Bringing equation \vpageref{conversion_factor} back to mind, the conversion factors of the flavors are not those expected. In particular for the HV's flavors, it is almost the double and it could mean that the injection capacitance is greater than expected. As mentioned in section \vpageref{thresh_noise}, the prototype under test was designed in order to have the same injection capacitance for all flavor, equal to 230 aF (despite this doesn't seem to be the case).
+But actually, the cause of the different results for the conversion factors is due to the expected loss of the collected charge for HV FEs (section \vpageref{improved_circuit}).
 
-so? Loss of charge?
+\bigskip
+VEDI APPUNTI
+We can anyway use these values to interpret data, and also to estimate the charge loss assuming a default conversion factor for all FE.
 
-It's necessary to consider that maybe some measurments were dona in different conditions of pressure and temperature?
+\bigskip
+[It's necessary to consider that maybe some measurments were done in different conditions of pressure and temperature?]
 
 %CONTINUA%
 %%Può parametrizzare perdita di segnale? viene al 51-52% non 40 come previsto.
 
 
 
-
-
 %--------------------------------------------------------------------
 \subsection{Check on linearity of tot fit}
 
-In the end all emission peaks from the several sources have been plotted for each frontend in order to verify the agreement between their trend and the ToT-Q relationship studied by the internal injection. \\
+In the end the mean of all emission peaks from the several sources have been plotted for each frontend in order to verify the agreement between their trend and the ToT-Q relationship studied by the internal injection. \\
 
-At first the charge corresponding to the electrons expected to be released for each peaks, has been calculated with the nominal conversion factor equal to 10.1 $\frac{e^{-}}{DAC}$. As it could be seen from results in figure \vpageref{fig:inj_cap_10} there isn't good agreement between data and ToT relationship obtained(learnt) in section \vpageref{tot_fit}.
-
+At first the charge corresponding to the electrons expected to be released for each peaks, has been calculated with the nominal conversion factor equal to 10.1 $\frac{e^{-}}{DAC}$. As it could be seen from results in figure \vpageref{fig:inj_cap_10} there isn't good agreement between data and ToT relationship studied in section \vpageref{tot_fit}.
 
 \begin{figure}
 \centering
@@ -801,7 +804,7 @@ At first the charge corresponding to the electrons expected to be released for e
 \label{fig:inj_cap_10}
 \end{figure} 
 
-After the calibration instead, assuming the average value of injection capacitance calculated in table \vpageref{tab:}, the charge corresponding to the emission peaks have been recalculated and results are shown in figure \vpageref{fig:inj_cap_sources}.
+After the calibration instead, assuming the average value of injection capacitance (\textit{Mean value}) calculated in table \vpageref{tab:cap_mean}, the charge corresponding to the emission peaks have been recalculated and results are shown in figure \vpageref{fig:inj_cap_sources}.
 
 \begin{figure}[h!]
 \centering
@@ -819,12 +822,14 @@ After the calibration instead, assuming the average value of injection capacitan
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.7]{Tot_linearity__sources}
+\includegraphics[scale=0.6]{Tot_linearity__sources}
 \caption{Summary of trends.}
 \label{inj_cap_sum}
 \end{figure}
 
-After(through) the calibration a better agreement is therefore obtained. 
+\begin{comment}
+Through the calibration a better agreement is therefore obtained. As we already said, this was the purpose of all this study: to obtain optimized conversion factor for all frontends to interpret results from TB, characterizing them with the conversion factor.
+\end{comment}
 
 
 
