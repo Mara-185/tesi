@@ -69,15 +69,13 @@ The chip W14R12 (figure \vref{fig:w14r12}) which is one of the matrices tested d
 \begin{itemize}
 \item TOT calibration by internal charge injection;
 \item characterization with radioactive sources;
-\item systematic study of different registers' settings in order to operate the chip at lower thresholds;
+\item systematic study of different registers' settings in order to operate the chip at low thresholds;
 \item investigation of an important issue with cross-talk, due to digital signal from the readout, discovered trying to operate the matrix at low threshold (below 250 $e^{-}$).
 \end{itemize}
 
-This well-structured study returned relevant results which have helped in Test Beam data reconstruction and in the simulations of the upgraded VTX detector with CMOS MAPS devices.
+This detailed analsys returned relevant results which have helped in Test Beam data reconstruction and in the simulations of the upgraded VTX detector with CMOS MAPS devices.
 
-%This articulate (well-structured) study(analysis)
 %SW(???)
-
 %%METTI I TIPI E CHE IL NOSTRO è CZ (SPIEGA NEL QUARTO LE DIFFERENZE)
 
 
@@ -104,29 +102,29 @@ This well-structured study returned relevant results which have helped in Test B
 
 Tj-Monopix 2 is the next generation small collection electrode DMAPS prototype in TowerJazz 180 nm. The need to create a sensor capable to mantain high efficiency even after irradiation, required improvements compared to Tj-Monopix 1 in two important fields: a lower operating threshold and different pixel layout to increase charge collection efficiency all over its area, expecially in the corners.\\
 
-To achieve these goals, a different in-pixel front-end circuit was implemented and a lot of efforts have been focused on optimizing pixel layout in order to reduce its size, which has been decreased to 33.04 x 33.04 $\mu m^{2}$ (pixel \textit{pitch}). As a matter of fact we have seen (REFERENCE) that pixel dimensions are critical to accomplish faster charge collection across all active area, increasing the lateral electric field. For this reason it was necessary a special effort to design and create a smaller pixel but still adequate to embody the full digital readout. All of this required to work at the technology density limit and also to study for further modifications at the circuit design, such as single ended data transmission, in order to reduce the column-bus width.
+To achieve these goals, a different in-pixel front-end circuit was implemented and a lot of efforts have been focused on optimizing pixel layout in order to reduce its size, which has been decreased to 33.04 x 33.04 $\mu m^{2}$ (pixel \textit{pitch}). As a matter of fact we have seen (REFERENCE) that pixel dimensions are critical to accomplish faster charge collection across all active area, increasing the lateral electric field. For this reason it was necessary a special effort to design and create a smaller pixel but still adequate to embody the full digital readout. All of this required to work at the technology density limit and also to study for further modifications at the circuit design.%, such as single ended data transmission, in order to reduce the column-bus width.
 
 The BCID bus width has been increased  to 7-bits because of higher gain and higher ToT slope with respect to Tj-Monopix 1. \\
-It's worth mentioning here that the large column height (approx. 17 mm) caused by large matrix area and the aggressive column-bus routing (which refers to the minimum line width and spacing) due to the smaller pixel size, generate a significant signal transmission delay due to the RC low pass filtering effect of the long metal wires. Consequently a special circuit has been studied that adds a variable delay to the hit pulse across the column that matches that of the BCID signal.
-
-
-%Aggiungi thickness 200um, p-epi layer?
+It's worth mentioning here that both the large column height ($\approx$ 17 mm) caused by large matrix area and the aggressive column-bus routing (which refers to the minimum line width and spacing) due to the smaller pixel size, generate a significant signal transmission delay due to the RC low pass filtering effect of the long metal wires. Consequently a special circuit has been studied that adds a variable delay to the hit pulse across the column that matches that of the BCID signal.
 
 
 %-----------------------------------------------------------------------------------------------%
 
-\subsection{Flavors}
+\subsection{Flavors} \label{flavors}
 
-The protype is a 2 x 2 $cm^{2}$ pixel matrix which consists of 512x512 pixels and all of them are designed with a reduced deep p-well geometry (RDPW) because, as it was demonstrated during the testing of TJ-Monopix1, this type of arrangement has superior charge collection properties compared to full deep p-well coverage (FDPW) (figure \vref{fig:tj1pix_cov}). The total active area of the matrix is approximately 286 $mm^{2}$. 
+The protype is a 2 x 2 $cm^{2}$ pixel matrix which consists of 512x512 pixels and all of them are designed with a reduced deep p-well geometry (RDPW) because, as it was demonstrated during the testing of TJ-Monopix1, this type of arrangement has superior charge collection properties compared to full deep p-well coverage (FDPW) (figure \vref{fig:tj1pix_cov}). The total active area of the matrix is approximately 286 $mm^{2}$ and it is 300 $\mu$m thick.
 
-\begin{figure}[h!]
+
+%Aggiungi thickness 200um, p-epi layer?
+
+\begin{figure}[h!]S
 \centering
 \includegraphics[scale=.6]{Tj1pix_cov}
 \caption{Detection efficiency map of a TJ-Monopix1 chip with 25 $\mu$m p-epitaxial layer that has been irradiated to $10^{15}$ $n_{\textit{eq}}$/$cm^{2}$ NIEL.}
 \label{fig:tj1pix_cov}
 \end{figure}
 
-As we can see in figure \vref{fig:tj2matrix}, the matrix is divided in four sectors, named \textbf{flavors} that implement different variation of the front-end circuit. In the first two flavors the collection electrode is DC-coupled directly with the readout electronics,  the continuous baseline reset is implemented by a forward bias diode and they differ for the pre-amplifier circuit design. The second flavor indeed, named \textbf{Cascode FE}, includes an extra-cascode transistor that increases the pre-amplifier gain which in turn leads to a 50\% reduction of the threshold dispersion compared to the first flavor, the \textbf{Normal FE}. The other two flavors consist of AC-coupled pixels (through a metal-oxide-metal MOM capacitor) and in particular, the \textbf{HV-Cascode FE} also incorporates the aforementioned pre-amplifier variation. AC-coupling allows to apply an high positive bias voltage (HV) to the collection electrode, but at the same time it also causes signal losses mainly due to the additional parasitic capacitance introduced at the sensitive input node.\\
+As we can see in figure \vref{fig:tj2matrix}, the matrix is divided in four sectors, named \textbf{flavors} that implement different variation of the front-end circuit. In the first two flavors the collection electrode is DC-coupled directly with the readout electronics,  the continuous baseline reset is implemented by a forward bias diode and they differ for the pre-amplifier circuit design. The second flavor indeed, named \textbf{Cascode FE}, includes an extra-cascode transistor that increases the pre-amplifier gain which in turn leads to a 50\% reduction of the threshold dispersion compared to the first flavor, the \textbf{Normal FE}. The other two flavors consist of AC-coupled pixels (through a metal-oxide-metal MOM capacitor) and in particular, the \textbf{HV-Cascode FE} also incorporates the aforementioned pre-amplifier variation. AC-coupling allows to apply an high positive bias voltage (HV stands for High Voltage indeed) to the collection electrode which potentially enlarges the depleted region, but at the same time it also causes signal losses mainly due to the additional parasitic capacitance introduced at the sensitive input node.\\
 
 
 %%%PERIPHERY PAG 138
@@ -281,8 +279,8 @@ $I_{RAM}$ & 50 & 50\\
 \label{fig:norm_scurve_140}
 \end{figure}
 
-Adopting this setting, none of the pixels were noisy and so it wasn't necessary to use any mask (?).
-In figure \vref{fig:norm_scurve_140} are plotted all the s-curves of the all well-functioning Normal flavor pixels. The width of the plot is a first indication of the threshold dispersion of the whole flavor.\\
+%Adopting this setting, none of the pixels were noisy and so it wasn't necessary to use any mask (?).
+In figure \vref{fig:norm_scurve_140} are plotted all the s-curves of the all well-functioning Normal flavor pixels. The width of the figure is a first indication of the threshold dispersion of the whole flavor.\\
 
 The threshold and noise distributions obtained injecting all pixels as explained above, have been fitted with a gaussian distribution and they are shown in figure \vpageref{fig:thdist_norm} with their maps, too.
 
@@ -304,7 +302,7 @@ The threshold and noise distributions obtained injecting all pixels as explained
 
 \subsubsection{Cascode FE}
 
-\textbf{Cascode FE} is the second flavor and like the previous one, it consists of 512 rows and 224 columns for a number of total pixels equal to 114.688. For this flavor the same procedure of Normale FE has been followed and also the same registers' values (table \vref{tab:tb_settings}) have been used. There were not find noisy pixels. 
+\textbf{Cascode FE} is the second flavor and like the previous one, it consists of 512 rows and 224 columns for a number of total pixels equal to 114.688. For this flavor the same procedure of Normale FE has been followed and also the same registers' values (table \vref{tab:tb_settings}) have been used. %There were not find noisy pixels. 
 In figure \vpageref{fig:casc_scurve140} the s-curves of all pixels are shown.
 
 \begin{figure}[h!]
@@ -337,7 +335,7 @@ The maps and the fit of the threshold and noise distributions instead, are shown
 \subsubsection{HV-Cascode FE}
 
 
-The third flavor is \textbf{HV-Cascode FE} where HV stands for \textbf{High Voltage} and it is composed by 512 rows and 32 columns for a total number of pixel equal to 16384. Also for these last two flavors, the main chip registers are set with the same values tested and used during the Test Beam (@Desy) (but different from those used for the first two flavors). They are reported in table \vpageref{tab:tb_settings} .
+The third flavor is \textbf{HV-Cascode FE} and it is composed by 512 rows and 32 columns for a total number of pixel equal to 16384. Also for these last two flavors, the main chip registers are set with the same values tested and used during the Test Beam (@Desy) (but different from those used for the first two flavors). They are reported in table \vpageref{tab:tb_settings} .
 
 As we can see from the plot of the alle s-curves in figure \vpageref{fig:hvc_scurve_140}, there were a lot of noisy pixels with this choice of register settings, but at this stage of measurements they were not masked.
 As a matter of fact along the y-axis of this plot is displayed the occupancy and when this value becomes higher than 1, it means that the pixel detects more hits than the injected ones, so it could be identified as ''\textit{noisy pixel}'' (because it results active regardless of the charge injection).
@@ -392,7 +390,7 @@ In figure \vref{fig:thdist_hv} the fit of the threshold and noise distributions.
 \end{figure}
 
 
-At last in figure \vpageref{fig:HVs_maps} the threshold and noise maps of the whole HV flavor.
+At last, in figure \vpageref{fig:HVs_maps} the threshold and noise maps of the whole HV flavor.
 
 \begin{figure}[h!]
 \centering
@@ -404,7 +402,7 @@ At last in figure \vpageref{fig:HVs_maps} the threshold and noise maps of the wh
 \label{fig:HVs_maps}
 \end{figure}
 
-As we will see in the following (section \vpageref{xtalk}), the atypical s-curves in HVs flavors have been the first hint of the cross-talk problem, tied to a global low threshold in these sectors with TB settings. 
+As we will see in the following (section \vpageref{xtalk}), the atypical s-curves in HVs flavors have been the first hint of the cross-talk problem, tied to a global lower threshold in these sectors with TB settings, compared with the first two. 
 
 
 \subsubsection{Summary Table}
@@ -446,7 +444,7 @@ I_{DISC} = I_{DISC, coarse} + (TCODE - 1) \cdot I_{DISC,fine},  \hspace{.5cm}	wh
 \label{tuning_eq}
 \end{equation}
 
-\textbf{$I_{DISC, coarse}$} is the current set by the primary value of threshold, resulting by the setting of the main registers which are responsible for it (mentioned after?). 
+\textbf{$I_{DISC, coarse}$} is the current set by the primary value of threshold, resulting by the setting of the main registers which are responsible for it (listed in ...). 
 \textbf{$I_{DISC, fine}$} is the current selected by the fine tuning step (TDAC) and it depends on the 3-bit tunning code that is stored in the in-pixel tuning memory latch (the in-pixel configuration memory).
 \textbf{TCODE} is the decimal representation of the TDAC code. 
 
@@ -542,9 +540,11 @@ In more details, knowing that y($x_{th}$) must be equal to 0 that is the ToT val
 
 In this way the number of parameters to fit is reduced. In principle a similar equation could be equivalently solved for \textit{a}, \textit{b} and \textit{t}. 
 
-So five different fits have been made: four imposing a constraint in turn on each free parameter (like shown above) and the last one leaving all parameters free. For all of them the value of $\chi^{2}$ (MSE) have been computed and for all flavors it had its minimum when no parameters were fixed. So in the following the results from these last fits have been considered.\\
+%in turn
 
-The same data collected in the previous measurements of thresholds have been used to fit the ToT curves of all pixels for each frontend. As a matter of fact we want to fully characterized the chip response with ''GOE'' settings (table \vpageref{tab:tb_settings}), in order to use results for analyzing TB data.
+Thus different fits have been made: one imposing a constraint on a free parameter (like shown above) and the other one leaving all parameters free. For all of them the value of $\chi^{2}$ (MSE) have been computed and for all flavors it had its minimum when no parameters were fixed. So in the following the results from these last fits have been considered.\\
+
+The same data collected in the previous measurements of thresholds have been used to fit the ToT curves of all pixels for each frontend. As a matter of fact we want to fully characterized the chip response with ''GOE'' settings (table \vpageref{tab:tb_settings}), in order to use the results for analyzing TB data.
 In table \vref{tab:th_fe} are reported the results of the fits for all parameters. In figure \vref{fig:tot_fe} the plots obtained for all Normal, Cascode and HVs FE.
 
 \begin{table}[h!]
@@ -622,12 +622,12 @@ Source & Energy $\gamma$ [KeV] & Equivalent charge [$e^{-}$]\\[2ex]
 \end{table}
 
 
-Now we can go through the resuts obtained from three different sources: \ch{^{55}Fe}, \ch{^{241}Am} and \ch{^{109}Cd}.
+Now we can go through the results obtained from three different sources: \ch{^{55}Fe}, \ch{^{241}Am} and \ch{^{109}Cd}.
 %--------------------------------------------------------------------
 \subsection{\ch{^{55}Fe}}
 
 The \ch{^{55}Fe} source decays by \textbf{electron capture} to \ch{^{55}Mn}. One of the photons emitted in this transistion has an energy of 5.9 KeV ($K_{\alpha}$) and it produces in turn a photo-electron which deposits a inization charge of about 1616 $e^{-}$ in the sensor. 
-All flavors were irradiate with a \ch{^{55}Fe} source available in the laboratory (18 MBq). In figure \vref{fig:fe_all} are shown the results. Each peak were fitted by a gaussian function, limited in the region of the peak itself. The shoulder visible for smaller ToT is a consequence of charge sharing among pixels. 
+All flavors were irradiate with a \ch{^{55}Fe} source available in the laboratory (with activity of 18 MBq). In figure \vref{fig:fe_all} are shown the results. Each peak were fitted by a gaussian function, limited in the region of the peak itself. The shoulder visible for smaller ToT is a consequence of charge sharing among pixels. 
 
 \begin{figure}[h!]
 \centering
@@ -770,7 +770,7 @@ Source peak & $C_{Normal}$ & $C_{Cascode}$ & $C_{HV Cascode}$ & $C_{HV}$\\[2ex]
 
 
 Bringing equation \vpageref{conversion_factor} back to mind, the conversion factors of the flavors are not those expected. In particular for the HV's flavors, they are almost the double and it could mean that the injection capacitance is greater than expected. But as mentioned in section \vpageref{thresh_noise}, the prototype under test was designed in order to have the same injection capacitance for all flavor, equal to 230 aF (despite this doesn't seem to be the case).
-In fact the cause of the different results for the conversion factors might be due also to the expected loss of the collected charge for HV FEs (section \vpageref{improved_circuit}).
+The cause of the different results for the conversion factors might be due also to the expected loss of the collected charge for HV FEs (section \vpageref{improved_circuit}).
 
 
 %VEDI APPUNTI\\
@@ -832,7 +832,7 @@ As we can see, a better agreement is therefore obtained and this shows that thro
 One of the most important target in sensor design is to keep high efficiency even after irradiation damages. All experimental environments indeed, are exposed to high doses of radiations, so it's crucial to ensure the functionality of the detectors, even after being irradiated.
 
 For this reason, many tests were done in order to understand the chip behaviour at low threshold where a good value of efficiency could be preserved.
-Moreover working at low threshold allowed to detect low charge events due to charge sharing or charge trapping (effect which increases after irradiation), expecially in case of thin epitaxial material. 
+Moreover working at low threshold allows to detect low charge events due to charge sharing or charge trapping (effect which increases after irradiation), expecially in case of thin epitaxial material. 
 
 
 \begin{comment}
@@ -854,7 +854,7 @@ Explain the function of the various registers used (see Eleonora thesis, and may
 
 As we have seen in section (REFERENCE), there are a lot of registers which control the discriminator threshold and also the readout sequence. So preliminary it was necessary to explore their possible settings in order to operate the chip at low threshold.\\
 
-Now we will go through the main registers used for this purpose, in order to explain their functionality. There are several dozens of registers but we focused on some of the most important and crucial to set the threshold and its dispersion:
+Now we will go through the main registers used for this purpose, in order to explain their functionality. There are several dozens of registers but we focused on some of the most important and crucial to set the threshold and its dispersion.
 
 \begin{itemize}
 \label{currents}
@@ -971,7 +971,7 @@ Results are reported in figure \vpageref{fig:tot_vs_ithr} and \vpageref{fig:tot_
 
 As it was already pointed out, during the measurements of the average threshold of all FEs, there were something atypical in the s-curves of the HV flavors (subsection \vref{first_xtalk}), indeed some pixels seem to have occupancy greater than 1. This behavior threatens the good functionality of the overall matrix response, because these \textit{noisy pixels} flood the readout, giving unreliable results.
 
-Also the systematic study of different registers' configurations has revealed the presence of the hot pixels which has prevented to use certain settings and as consequence to reach lower global thresholds. \\
+Also the systematic study of different register configurations has revealed the presence of the hot pixels which prevent to use certain settings and as consequence to reach lower global thresholds. \\
 
 For this reason an investigation has been conducted in order to understand the reasons why they start to fire and how to cure them as far as possible.
 In the meantime an important issue with cross-talk of the readout signals was discovered, and so in this section we examine this effect and some attempts to mitigate it using different settings/bias.
@@ -979,12 +979,12 @@ In the meantime an important issue with cross-talk of the readout signals was di
 
 \subsection{Hot pixel issue}
 
-First of all we noticed that in the s-curves oh the HV flavors (e.g. that of HV-Cascode reported in figure \vpageref{fig:hot first}), the atypical behavior could be triggered by a digital signal sent to the matrix during the readout activity at low threshold. This consideration is based on two main reasons:
+First of all we noticed that in the s-curves oh the HV flavors (e.g. that of HV-Cascode reported in figure \vpageref{fig:hot_first}), the atypical behavior could be triggered by a digital signal sent to the matrix during the readout activity at low threshold. This consideration is based on two main reasons:
 
 \begin{itemize}
 \item when the matrix has high threshold, like for Normal and Cascode FE, all pixels seem to behave as expected, without \textit{hot pixels}.\\ Lowering the threshold and running some source acquisitions without any source, no strange behaviour was observed. Acquiring data with a radioactive source instead, even Normal and Cascode FE seem to reveal the same problem. This led to thinking that during the readout of good pixels an induced signal is created which couples with some other pixels, in particular with those at lower threshold with respect to the average value. If the height of this signal exceeds the threshold of the single pixel, it causes some spurious hits, making the pixel ''\textbf{hot}''.
 
-\item Moreover, always considering the HV Cascode s-curves, it could be noticed that in the region before the threshold ($Q_{inj}$<threshold, pointed by the blue arrow) there isn't an anomalous activity which means tha the induced signal is not due to the BCID tha is always sent to the matrix during the injection or an acquisition with the source, regardless of being above or below the  threshold. The atypical behaviour indeed, is in the region above the threshold ($Q_{inj}$>threshold, pointed by the red arrow) where the occupancy of some pixels becomes greater than 1. This means that these \textit{hot pixels} detect more hits of those injected.
+\item Moreover, always considering the HV Cascode s-curves, it could be noticed that in the region before the threshold ($Q_{inj}$<threshold, pointed by the blue arrow) there isn't an anomalous activity which means that the induced signal is not due to the BCID tha is always sent to the matrix during the injection or an acquisition with the source, regardless of being above or below the  threshold. The atypical behaviour indeed, is in the region above the threshold ($Q_{inj}$>threshold, pointed by the red arrow) where the occupancy of some pixels becomes greater than 1. This means that these \textit{hot pixels} detect more hits of those injected.
 
 \end{itemize} 
 
@@ -1000,7 +1000,7 @@ From these first observations, we have reached the conclusion that the cross tal
 
 \subsection{Hot pixel strategy (study)}
 
-At first, it has been lowered the threshold in order to ''create'' hot pixel also in the first two flavors of the matrix. In fact with TB settings the threshold was too high and the hypothetical induced signal didn't caused sporious hits. For this purpose different settings were tried, changing some fundamental registers responsible for the threshold like those listed and explained \vpageref{currents}. 
+At first, it has been lowered the threshold in order to ''create'' hot pixel also in the first two flavors of the matrix. In fact with TB settings the threshold was too high and the hypothetical induced signal did not cause sporious hits. For this purpose different settings were tried, changing some fundamental registers responsible for the threshold like those listed and explained \vpageref{currents}. 
 
 Then several tests have been run under controlled conditions:
 \begin{itemize}
@@ -1009,7 +1009,7 @@ Then several tests have been run under controlled conditions:
 \item the all matrix except these pixels was disabled.
 \end{itemize}
 
-In this way (remembering the readout sequence [REFERENCE]) the readout cycle had a known duration and two different timing info (and some precautions) had been used to study the induced signal with greater precision:
+In this way (remembering the readout sequence [REFERENCE]) the readout cycle has a known duration and two different timing info has been used to study the induced signal with greater precision:
 
 \begin{itemize}
 \item \textbf{$\Delta$TS} (TimeStamp) between two consecutive hits: the TimeStamp is assigned from the FPGA when the \textsc{token} rises on the TE of the first hit to read, but only if the previous readout frame is completed. So, if the hit coming from a \textit{hot pixel} is after the hit from the injected one, the minimum $\Delta TS$ has to be equal to the readout time of 1 pixel and so to the duration of the \textsc{FREEZE\_STOP} signal .\\
@@ -1050,7 +1050,7 @@ Register & Value \\
 
 Doing so indeed, the LE-TE info has to shift by the same value with which the signal that cause the cross talk has been changed. This step of the procedure is tied with the necessity to keep the readout sequence within the maximum 128 BCID range.\\
 
-For example, if \textsc{FREEZE\_START\_CONF} is responsible for the cross talk signal, we expcted that shifting its value by a certain amount, the hot pixels start to fire after that this signal arises due to the hit on the injected pixel. So the value of LE-TE has to be \textsc{FREEZE\_START\_CONF} + some potential delay. Same argument for the other registers. \\
+For example, if \textsc{FREEZE\_START\_CONF} is responsible for the cross talk signal, we expct that shifting its value by a certain amount, the hot pixels start to fire after that this signal arises due to the hit on the injected pixel. So the value of LE-TE has to be \textsc{FREEZE\_START\_CONF} + some potential delay. Same argument for the other registers. \\
 
 By this procedure, repeated for each readout register, we have come to the conclusion that the cross-talk could be related to the raising and falling edge of the \textsc{FREEZE} signal.
 
@@ -1077,9 +1077,9 @@ In figure \vpageref{fig:xtalk} an example of some results obtained. It is the hi
 
 As already stated, we run several tests varying the number of pixels to read, the value of the readout registers, different combination of hot and good pixels and also different spatial location of them in the matrix to exclude the possibility that the problem was related to particular columns. All results are in agreement with the interpretation explained above.\\
 
-MAH...\\
+?????...\\
 Furthermore it hase been tried to estimate the height of the induced signal from the threshold of the hot pixel. For this reason we have have tried different setting of the currents cited above to make a pixel \textit{hot} in order to understand when the induced signal went above the threshold. We have found that the signal could (may) correspond to 100/150 $e^{-}$.\\
-
+??????
 %the height of the cross talk signal from FREEZE was measured lowering gradually the THR of good pixels to monito when they become hot.
 
 In figure \vpageref{fig:analog_xtalk} an analog acquistion of the readout signals taken by an oscilloscope.
@@ -1092,7 +1092,7 @@ In figure \vpageref{fig:analog_xtalk} an analog acquistion of the readout signal
 \label{fig:analog_xtalk}
 \end{figure}
 
-In these tests one pixel was injected from 0 to 140 DAC (in the acquisition it can be seen in the increasing signal height). There are two different group of spikes, the first which smaller and represent the cross-talk from the raising of the \textsc{FREEZE} signal and the second, larger and corresponding to the cross talk from the falling edge of the same signal.
+In these tests one pixel was injected from 0 to 140 DAC (in the acquisition it can be seen in the increasing signal height). There are two different group of spikes: the first which is smaller and represent the cross-talk from the raising of the \textsc{FREEZE} signal and the second, larger and corresponding to the cross talk from the falling edge of the same signal.
 Moreover it's possible to see that in the two different pictures, the cross talk signals move according to the different settings of the \textsc{FREEZE START/STOP} edge.
 
 %meglio una lista??
@@ -1100,15 +1100,15 @@ Moreover it's possible to see that in the two different pictures, the cross talk
 
 \subsection{Mitigation}
 
-As seen in the previous, the problem of the hot pixel is tied to the induction signal produced during the readout which cause cross-talk. It becomes more important(significant, serious) when there is grater dispersion threshold.\\
+As seen in the previous, the problem of the hot pixel is tied to the induction signal produced during the readout, which cause cross-talk. It becomes even more serious when there is a grater dispersion threshold.\\
 
-Potentially every pixel could become \textit{hot} if its threshold is lower than the height of the cross-talk signal since the \textsc{FREEZE} in sent across the entire matrix. 
+Potentially every pixel could become \textit{hot} if its threshold is lower than the height of the cross-talk signal, since the \textsc{FREEZE} in sent across the entire matrix. 
 
-As an example in figure \vpageref{making_hot} it si possible to compare the behaviour of pixel (218, 123) changing(modifying) some registers' values in order to reduce the threshold.
+As an example, in figure \vpageref{fig:making_hot} it si possible to compare the behaviour of pixel (218, 123) for different register settings adopted in order to reduce the threshold.
 
 \begin{figure}[h!]
 \centering
-\subfigure[$I_{DB}$=100, $I_{TUNE}$=53 - Good behavior]
+\subfigure[$I_{DB}$=100, $I_{TUNE}$=53 - Good behavior (the red one)]
 {\includegraphics[scale=0.35]{making_hot1}}\quad
 \subfigure[$I_{DB}$=60, $I_{TUNE}$=150 - Pixel starts to misbehave]
 {\includegraphics[scale=0.35]{making_hot3}}\\
@@ -1119,7 +1119,11 @@ As an example in figure \vpageref{making_hot} it si possible to compare the beha
 \end{figure}
 
  
-For this reason, a possible treatment could be related to the threshold tuning, explained in section (reference) , which could allow to make the pixesl threshold more uniform (less threshold dispersion) and simultanously targeting a value greater than the induced signals. \\
+\begin{description}
+\item \textbf{Threshold trimming}
+\end{description}
+ 
+Therefore a possible treatment could be related to the threshold tuning, explained in section (\vref{tuning}) , which could allow to make the pixel threshold more uniform (less threshold dispersion) and simultanously to target a value greater than the induced signals. \\
 
 In figure \vpageref{fig:tuning_hot} an example of the results obtained.
 
@@ -1133,11 +1137,15 @@ In figure \vpageref{fig:tuning_hot} an example of the results obtained.
 \label{fig:tuning_hot}
 \end{figure} 
 
-It' evident the reduction of the tail in the threshold distribution, in fact the dispersion is reduced by 56\%. Also the hot pixels decrease from 18\% to 1.2\% of the total number of pixels studied. [We can noticed indeed that the peak at 0 threshold disappears.]
+It' evident the reduction of the tail in the threshold distribution, in fact the dispersion is reduced by 56\%. Also the hot pixels decrease from 18\% to 1.2\% of the total number of pixels studied. We can also notice that the peak at 0 threshold disappears.
 
 %It was effectively done managing to obtin lower threshold
 %DEVI METTERE ESEMPIO???
 %DAC tuning kaje threshold more uniform, threat hot pixel and so also the peak at zero tot in source acquisition is reduced
+
+\begin{description}
+\item \textbf{Bias Voltage}
+\end{description}
 
 Moreover it has been tried to increase the voltage bias of the all matrix, too. We remember that all previous test has been run with $P_{WELL}/P_{SUB}$ set to -3 V. This value was increased to -6 V and indeed there were some improvements. In fact increasing the bias, we expected a decrease of the diode capacitance thus higher gain and lower thresold dispersion. In addition the coupling with the cross talk signal is reduced too and so the induced signal height. \\
 In figure \vpageref{fig:bias_comp} a comparison between the threshold distribution respectively at -3 V and -6 V, with same registers setting and without tuning.
@@ -1152,7 +1160,7 @@ In figure \vpageref{fig:bias_comp} a comparison between the threshold distributi
 \label{fig:bias_comp}
 \end{figure}
 
-At higher bias voltage not only is the threshold lower (higher gain), but also its dispersion, as expected. And despite that there are fewer hot pixels: 1.3\% at -6V against 17\% at -3 V. Also here it's clear a reduction of the threshold distribution tail. 
+At higher bias voltage not only is the threshold lower (higher gain), but also its dispersion, as expected. And despite that there are fewer hot pixels: 1.3\% at -6V against 17\% at -3 V. Also here there is clear a reduction of the threshold distribution tail. 
 
 \subsubsection{Final results?}
 
@@ -1168,7 +1176,7 @@ Eventually the final results obtained with both threshold tuning and a bias volt
 \label{fig:bias_tuning}
 \end{figure}
 
-As we can see in figure \vpageref{fig:bias_tuning}, the threshold dispersion decreases with the number of hot pixels. In fact without tuning there are 1.3\% of them, instead with tuning procedure there are none at all.
+As we can see in figure \vpageref{fig:bias_tuning}, the threshold dispersion decreases together with the number of the hot pixels. In fact without the tuning, there are 1.3\% of them, instead with tuning procedure there are none at all.
 
 
 
@@ -1206,13 +1214,113 @@ Also suggested to change the clock and see if the delay from the FREEZE edge is 
 
 \section{Test Beam results}
 
-Hit detection efficiency from bespin article
+This full characterization of the chip allowed to interpret data collected during the Test Beam done in Desy in June 2022. Several measurements have been taken, among which: pixel response, noise level, cluster signal, full depletion depth, voltage scan and angular scan. In particular the aim was to study electrical characteristics and hit detection effciency of unirradiated modules.
+
+
+
+\subsection{Experimental apparatus and DUTs }
+
+The measurements have been performed in a 4 (o 5) GeV electron beam at DESY II testbeam facility at DESY, Hamburg. The experimental apparatus consisted of a beam telescope, a Trigger Logic Unit to provide trigger and control signals employed during test beams, a scintillator trigger and a rotation-translation stage on which install the device under test. (figure \vpageref{fig:tb}).
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=.7]{TBJUNE22_2}
+\caption{Test Beam experimental apparatus.}
+\label{fig:tb}
+\end{figure}
+
+
 
 \begin{comment}
-So with this test we have fully characterized the main features of the chip W14R12, which are then used to interpret data from Test Beam in June 2022 in Desy.
-
-In the following some of the results obtained:
+\begin{figure}[h!]
+\centering
+\subfigure[Test beam apparatus.]
+{\includegraphics[scale=0.8]{TBJUNE22_PHOTO}}\quad
+\subfigure[Test beam schematics.]
+{\includegraphics[scale=0.8]{TBJUNE22}}\\
+\caption{Test Beam setting at DESY.}
+\label{fig:tb}
+\end{figure}
 \end{comment}
+
+Three different modules have been tested with different sensor geometry, among which the chip W14R12 that we have studied in depth through laboratory measurements. All results described in previous sections have been crucial to interpret data obtained during these tests.
+
+In the following we will briefly mention the results obtained.
+
+
+\subsection{Hit detection efficiency measurements}
+
+Initially a depletion depth study have been done and with a voltage bias of -3 V (Normal and Cascode FE), for the chip W14R12 resulted 33$\mu$m $\pm$ 0.04 (stat.) $\pm$ 2.53 (sys.).
+
+Voltage scan measurements have been performed for both the two type of pixel couplings, such as DC and AC coupled. For the latter, only some first results have been obtained. 
+
+\begin{description}
+\item[Normal FE]
+\end{description}
+
+In figure \vpageref{fig:tb_NF} are reported results obtained for \textbf{Normal FE} of all modules. As expected, efficiency and clusters grow as the bias voltage is increased. 
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=.7]{tb_NF_res}
+\caption{Cluster size and efficiency results for Normal FE.}
+\label{fig:tb_NF}
+\end{figure}
+
+
+\begin{description}
+\item[Cascode FE]
+\end{description}
+
+Same trends for \textbf{Cascode FE} are shown in figure \vpageref{fig:tb_CASC}.
+
+\begin{figure}[h!]
+\centering
+\subfigure
+{\includegraphics[scale=0.8]{tb_CASC_cluster}}\quad
+\subfigure
+{\includegraphics[scale=0.8]{tb_CASC_eff}}\\
+\caption{Cluster size and efficiency results for Cascode FE.}
+\label{fig:tb_CASC}
+\end{figure}
+
+
+In particular in figure \vpageref{fig:tb_DC_Cz} are reported the hit map efficiency for DC-coupled pixels for the W14R12 chip, which includes Normal and Cascode FE.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=.7]{tb_DC_eff}
+\caption{Efficiency for DC-coupled pixel of W14R12 chip: (99.79 $\pm$ 0.10) \%}
+\label{fig:tb_DC_Cz}
+\end{figure}
+
+
+
+\begin{description}
+\item[HV Casc. FE]
+\end{description}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=.7]{tb_HVC_res}
+\caption{Cluster size and efficiency results for HV Cascode FE.}
+\label{fig:tb_HVC}
+\end{figure}
+
+
+\begin{description}
+\item[HV FE]
+\end{description}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=.7]{tb_HV_res}
+\caption{Cluster size and efficiency results for HV FE.}
+\label{fig:tb_HV}
+\end{figure}
+
+
+
 
 
 
