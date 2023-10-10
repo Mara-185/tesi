@@ -4,7 +4,7 @@
 \chapter{VTX detector}
 
 
-This chapter focuses on one of the four proposals for the vertex detector upgrade of Belle II, that is VTX. After a brief reference to the reasons behind the vertex detector upgrade, we will go trough VTX concept and layout, designed with a new geometry with respect VXD and also with a different mechanical structure and new pixel sensors, needed to fullfil the new requirements dictated by new environment conditions. Moreover all ongoing studies are supported by continual tests and simulations that we will also take a look at.
+This chapter focuses on one of the four proposals for the vertex detector upgrade of Belle II, that is VTX. After a brief reference to the reasons behind the vertex detector upgrade, we will go trough VTX concept and layout, designed with a new geometry with respect VXD and also with a different mechanical structure and new pixel sensors (OBELIX), needed to fullfil the new requirements dictated by new environment conditions. Moreover all ongoing studies are supported by continual tests and simulations that we will also take a look at.
 
 
 %---------------------------------------------
@@ -70,7 +70,7 @@ Moreover it has been demonstrated that air at the temperature of $15^{\circ}$ an
 Through very first estimates it is expected that an equivalent section of 6 tubes with 10 mm of diameter is necessary to expel the heat from the inner layers, roughly equal to 65 W. So it's necessary to design a mechanical structure which forseens the space needed to the tubes in order to bring the air at the IP and also compatible with the new interaction region.
 
 
-\subsection{oVTX}
+\subsection{oVTX} \label{oVTX}
 
 The \textbf{\textit{outer}VTX} consists of three layers respectively at radii of 39 or 69, 89 and 140 mm from the beam pipe and because of the larger distance required to cover the acceptance, they are not self-support. They follow a more traditional approach, strongly inspired by the designed developed for the ALICE ITS2. Each ladder is water cooled and made of a light carbon fiber support structure, called \textit{truss}, which provide the mechanical integrity. Its structural design is showed in figure \vpageref{fig:oVTX}: 70 cm long and 5.8 g of weight, it is able to support more than 40 sensors in two rows next to each other with a small overlap, earning a material budget of 0.3\% $X_{0}$ for the first two layer and 0.8\%$X_{0}$  for the outermost one.
 
@@ -152,6 +152,57 @@ As consequence also the design of the mechanical support system, data cables and
 \section{Performance simulation}
 %richiesta sensitivity di 150 um ? VTX article, betagamma
 
+%Accennare a problemi CDC?
+%\ref{} to chapter 2
+
+As we have seen in chapter 2, the experiment aims to reach a new peak of luminosity in further future, but it has to face also the consequences, like the higher level of machine related background and so larger doses of radiation, expecially in the inner layers of the whole detector. 
+For this reason a lot of simulations and studies are focusing on ensuring that the main physics goals of the experiment will be achieved despite the more severe conditions to which it wuold be subjected. 
+
+The VTX upgrade program wich foresees for a new silicon vertex detector with high granularity in both space and time, could bring significant improvements in tracking efficiency expecially at low momentum, in the impact parameter resolution and in the robustness against backgrounds. 
+
+%Improvements in the vertexing capabilities do not only mean better precision on time dependent analyses of B and D mesons, but provide also handles for discriminating among different decay topologies. Moreover, the parameters at the point
+
+\subsection{Potential VTX geometries}
+
+As we have already mentioned in the description of the possible VTX layout (section \vref{oVTX}), two different VTX geometries are currently under study, which differ only in the position of the third layer (figure \vref{fig:ladders}).  
+
+The \textit{\textbf{nominal}} geometry is expected to maximize the track impact parameter resolution and it places the third layer at 3.9 cm from the IP.
+The \textit{\textbf{alternative}} geometry instead, aims to improve the $K_{S}^{0}$ reconstruction efficiency and the third layer is located at 6.9 cm from the IP.\\
+
+Several simulations and investigations are ongoing and they are comparing performance of these two different layout with that of the current Belle II detector (utilizing a full Geant4 simulation of the detector in the study of specific decay modes of interest?). Moreover, the machine backgrounds predictions (section \vref{sec:bkg_predictions}) are also taken included in order to consider all effects and correlations. 
+
+\subsection{Tracking efficiency at low momentum and impact parameter resolution}
+
+Tracking efficiency at low momentum is one of the areas where the VTX upgrade scenarios show more promising results, particularly for the \textit{soft pions} originated from the decays of $D^{*\pm}$ mesons.
+
+Studies are based on the reconstruction of the decay chain $B^{0} \rightarrow D^{*-}l^{+}\nu$, with $D^{*-} \rightarrow \bar{D}^{0} \pi^{-}_{soft}$ and $\bar{D}^{0} \rightarrow K^{+} \pi^{-}$ or $K^{+} \pi^{-} \pi^{+} \pi^{-}$. All background scenarios metioned in section (REF) are considered in the evaluation of the \textit{nominal} VTX performance and they are compared with the nominal Belle II geometry in the intermediate (v2) background hypothesis. In table \vref{fig:simulation_low_mom} what has been obtained is shown.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=.9]{simulation_low_mom}
+\caption{Reconstruction efficiency and purity for the the decay chain $B^{0} \rightarrow D^{*-}l^{+}\nu$, with $D^{*-} \rightarrow \bar{D}^{0} \pi^{-}_{soft}$ and $\bar{D}^{0} \rightarrow K^{+} \pi^{-}$, for the nominal Belle II detector at the intermediate background conditions and the nominal configuration of VTX in all three background scenarios.}
+\label{fig:simulation_low_mom}
+\end{figure}
+
+We can see that the VTX reconstruction efficiency\footnote{Efficiency is defined as the ration between the number of correctly reconstructed signal events and the total number of candidates.}  in all three background hypotheses, results to be improved of almost a factor 1.7 with respect to the nominal Belle II, with comparable purity\footnote{}. Moreover efficiency remains practically stable in all background conditions, even in the most severe one.
+
+This enhancement in tracking efficiency relies in particular on improved tracking efficiency for the $\pi_{soft}^{-}$ mesons, like we can see in figure \vref{fig:simulation_soft_pi}.
+
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=.6]{simulation_soft_pi}
+\caption{Reconstruction efficiency of $B^{0} \rightarrow D^{*-}l^{+}\nu$ as a function of the transverse momentum of the $\pi_{soft}^{-}$ (from  $D^{*-} \rightarrow \bar{D}^{0} \pi^{-}_{soft}$) in the plot on the left and of the polar angle of the $\pi_{soft}^{-}$ on the right. 
+The shaded blue histograms represents the momentum spectrum of the  $\pi_{soft}^{-}$.
+The nominal Belle II geometry efficiency in the intermediate background scenario (\textbf{v2}) is represents by black dots and it is compared with the nominal VTX configuration in the optimistic (\textbf{v1}, green squares), medium (\textbf{v2}, blue upward pointing triangles) and pessimistic (\textbf{v3}, red downward
+pointing triangles) background hypotheses. The bottom plots show the ration between nominale Belle II and nominal VTX in the \textbf{v2} background scenario.}
+\label{fig:simulation_soft_pi}
+\end{figure}
+
+%spiega grafico
+%At high momentum?
+
+\subsection{Vertexing resolution}
 
 
 
