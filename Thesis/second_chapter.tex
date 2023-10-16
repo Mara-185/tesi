@@ -42,7 +42,7 @@ Because of these two processes, the scattered particles fall out the stable orbi
 These processes increase the Belle II occupancy and radiation dose and they are reffered as \textit{Luminosity background} because their strenght is proportional to the luminosity. The future upgrade intends to deal with this problem in order to keep occupancy low, even with higher radiation levels.
 
 \item[Synchrotron Radiation (SR)]:
-	i.e. X-rays emitted from the beam when electrons and positrons pass through the strong magnetic field near the IP. The HER beam is the main source of this type of background, because SR power is proportional to the square of beam energy and magnetic field.
+	X-rays emitted from the beam when electrons and positrons pass through the strong magnetic field near the IP. The HER beam is the main source of this type of background, because SR power is proportional to the square of beam energy and magnetic field.
 SR can potentially damage the inner layers of the vertex detector due to an higher radiation dose in that region. As a matter of fact, many current studies aim to enhance radiation hardness of the detector.
 \end{description}
 
@@ -124,7 +124,7 @@ In regards to the Vertex Detector, all proposed improvements aim to:
 The Vertex Detector is particularly sensitive to machine background because it is the closest to the beam pipe and therefore subject to high doses of radiation.
 As we have already seen, current studies are trying to extrapolate how it could be affected by reaching the future luminosity target, but there are a lot of uncertainties due to models and still not well defined design of the interaction region. Moreover a completely new detector might be required, in event of a considerable redesing of the IR. However in this case, also the physics performance could be improved, taking advantage of the more recent technology developments.\\
 
-In the following we will present in a few words the four main proposal for future upgrade: DEPFET pixel, thin sensor, CMOS MAPS pixel and SOI technology.
+In the following we will present in a few words the four main proposal for future upgrade: Depleted Field Effect Transistor (DEPFET) pixel, thin sensor, CMOS Monolithic Active Pixel Sensor and SOI technology.
 The first two are more conservative and try to exploit as much as possible of the existing detector, making some appropriate adjustments to the sensor type, readout or mechanical structure. The last ones instead, plan to build an entirely new detector.\\
 
 During the design of all of them, some reference radiation levels have been considered to ensure that the background robustness of the innermost layers is suitable:
@@ -145,14 +145,14 @@ Some of the main improvements are listed below:
 \begin{itemize}
 \item improve signal trasmission on the pixel matrix and the signal processing in the read-out, in order to reduce the read-out time per row from the current 100 ns to 50 ns. In this way the frame time and the background occupancy might be reduce by factor 2, while leaving unchanged the optimized size and number of PXD pixels as it stands;
 \item increase the robustness against beam losses which could make inefficient or even inoperative gate lines on almost all PXD modules. This reaction seems to be due to a high photocurrent on the chip because of the high istantaneous dose. It could be mitigated by adding protection circuits on-chip;
-\item TID effect on the chip provokes an unexpected avalanche current that does not compromise the sensor performance but requires more power supply to provide ennough current. This issue might be solved by bringing some changes in the DEPFET pixel layout.
+\item Total Ionizing Dose (TID) effect on the chip provokes an unexpected avalanche current that does not compromise the sensor performance but requires more power supply to provide ennough current. This issue might be solved by bringing some changes in the DEPFET pixel layout.
 \end{itemize}
 
 
 \subsection{Thin and Fine-Pitch SVD}
 
 The Thin and Fine-Pitch SVD (\textbf{TFP-SVD}) is a new detector concept that aims to improve not only SVD, but also the inner part of the CDC, whose functionality could be threatened by future beam background condition.
-This proposal takes into accout the Double-sided Silicon Strip Detector (DSSD) as a prime candidate for a tracking device in the inner and middle detector volume since a single sensor can cover a large dimension of about 100x100 $mm^{2}$. In the current detector the DSSD technology is already used in the SVD, which deals with vertex reconstruction and low momentum tracking, togheter with PXD.\\
+This proposal takes into accout the Double-sided Silicon Strip Detector (DSSD) as a prime candidate for a tracking device in the inner and middle detector volume since a single sensor can cover a large dimension of about \numproduct{100 x 100} $mm^{2}$. In the current detector the DSSD technology is already used in the SVD, which deals with vertex reconstruction and low momentum tracking, togheter with PXD.\\
 
 One of the major improvements of this technology is the reduction of the material budget.
 Currently SVD has about 0.7\%$X_{0}$ material budget per layer. TFP-SVD instead, decreasing the sensor thickness to 140 $\mu$m, intend to reduce it to 0.41\%$X_{0}$. 
@@ -162,7 +162,7 @@ The front-end thought for TFP-SVD (SNAP128) has 128 input channels and a 127 MHz
 
 Some concerns about TFP-SVD are the feasibility and efficiency of the final sensor production and the small signal charge due to the short path lenght of the particles through the sensor.
 
-In any case a first prototype has been produced by Micron-Semiconductor Ltd (UK), with a size of 52.6x59.0 $mm^{2}$. The characterization studies are in agreement with the expectation and also a lower full depletion voltage is confirmed. It is planned to increase the dimensions to 100x100 $mm^{2}$ in the further prototype.
+In any case a first prototype has been produced by Micron-Semiconductor Ltd (UK), with a size of \numproduct{52.6 x 59.0} $mm^{2}$. The characterization studies are in agreement with the expectation and also a lower full depletion voltage is confirmed. It is planned to increase the dimensions to \numproduct{100 x 100} $mm^{2}$ in the further prototype.
 
 
 \subsection{Silicon On Insulator (SOI)}
@@ -194,7 +194,7 @@ This complicated digital circuit has to be assembled on each pixel and Lapis sem
 \item \textbf{Sensor design and and features}
 \end{description}
 
-The size fo the new designed pixel is 45 $\mu$m and the sensor layer thickness of 50 $\mu$m, which gives an intrinsic resolution better than 15 $\mu$m on \textit{z} direction averaging over incident polar angle. ALPIDE was choosen as analog circuit with some modification to adapt it to SOI technology. 
+The size of the new designed pixel is 45 $\mu$m and the sensor layer thickness of 50 $\mu$m, which gives an intrinsic resolution better than 15 $\mu$m on \textit{z} direction averaging over incident polar angle. ALPIDE was choosen as analog circuit with some modification to adapt it to SOI technology. 
 
 DuTiP pixel detector is designed to cover the current VXD acceptance with 7 layers: 1-3 with S (smaller size chip) type sensors, 4-7 with L(larger size) type (\autoref{fig:SL_SOI}).
 
@@ -209,9 +209,9 @@ Stitching technique allows to produce longer chips in the \textit{z} direction, 
 
 For layer 1, which is expected to work in more severe condition of background, the pixel occupancy has been estimated with the trigger latency of 8.0 $\mu$s and for both L and S type it is small enough, O($10^{14}$) or less, thus stable tracking and vertexing are contemplated. Moreover without using two timers for layer 1, the signal loss probability with the trigger latency of 4.5 (8.0) $\mu$s is about 0.2 (0.4)\% and so not negligible. In fact if the background rate is higher and the latency is longer, the signal loss probability increases.\\ 
 
-A first prototype of this new desgin has been delivered in June 2021, with all in-pixel functionalitites except for the scan block and the fast readout system. The chip is a matrix of 64x64 pixels and size of 6x6 $mm^{2}$. Its characterization is ongoing and it seems to work fine, aslo with radioactive sources and red laser tests. \\
-A second prototype DuTiP2 had been delivered in 2022, with 32x320 pixels and size of 17.2x6 $mm^{2}$. It has all functionalities except for fast hit data collection to periphery. The phase of testing is ongoing.
-The third prototype has been submitted in 2023 and will be delivered in 2024 (all prototypes shown in~\autoref{fig:dutip_matrix}).
+The first prototype of this new chip has been delivered in June 2021, with all in-pixel functionalitites except for the scan block and the fast readout system. The chip is a matrix of \numproduct{64 x 64} pixels and size of \numproduct{6 x 6} $mm^{2}$. Its characterization is ongoing and it seems to work fine, aslo with radioactive sources and red laser tests. \\
+The second prototype DuTiP2 had been delivered in 2022, with \numproduct{32 x 320} pixels and size of \numproduct{17.2 x 6} $mm^{2}$. It has all functionalities except for fast hit data collection to periphery. The phase of testing is ongoing.
+A third prototype has been submitted in 2023 and will be delivered in 2024 (all prototypes shown in~\autoref{fig:dutip_matrix}).
 
 
 \begin{figure}[h!]
@@ -226,7 +226,7 @@ The third prototype has been submitted in 2023 and will be delivered in 2024 (al
 \subsection{CMOS Monolithic Active Pixels Sensor}
 
 The last proposal is the one that we will analyze in more details in the next chapter. Like the previous one, it aims to replace the entire current VXD detector using a new technology, in this case the Monolithic Active Pixel Sensor CMOS (Complementary Metal-Oxide Semiconductor). \\
-The program hopes to solve some of the issues discussed in the previous chapters, with a new system of two inner layers and three outermost, for a total of 5 stages equipped with a single sensro type, called \textbf{VTX} (layout in~\autoref{fig:VTX_layout}). Also the machanical structure has been redesigned but it is expected that the all system could work at room temperature, so as consequence an important reduction of services is also contemplated.\\
+The program hopes to solve some of the issues discussed in the previous chapters, with a new system of two inner layers and three outermost, for a total of 5 stages equipped with a single sensro type, called \textbf{VTX} (layout in~\autoref{fig:VTX_layout}). Also the mechanical structure has been redesigned but it is expected that the all system could work at room temperature, so as consequence an important reduction of services is also contemplated.\\
 The new pixel design is called OBELIX (Optimized BELle II pIXel sensor), based on the pixel matrix of the TJ-Monopix 2 chip, whose characterization is the main topic of this work (Chapter 5). 
 
 \begin{figure}[h!]
@@ -247,7 +247,7 @@ The VTX solution intends to reduce the current PXD integration time by at least 
 
 At the current state of art intense R\&D (Research and Development) is being carried out, taking advantage from other experiments experiences like ALICE, with the same type of sensor.\\
 
-Among all these options that we sift through, the latter has been chosen for the future upgrade of the vertex detector. The first two proposals have now been abandoned, the one that contemplates the use of the SOI technology instead, is considered as a backup option. \\
+Among all these options that we sift through, the last one has been chosen for the future upgrade of the vertex detector. The first two proposals have now been abandoned, the one that contemplates the use of the SOI technology instead, is considered as a backup option. \\
 
-After a briefly review of the main upgrade proposals, we can now deepen into this last one in the following chapter.
+After this briefly review of the main upgrade proposals, we can now deepen into the VTX program in the following chapter.
 
