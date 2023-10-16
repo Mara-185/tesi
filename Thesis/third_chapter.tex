@@ -169,13 +169,13 @@ As we have already mentioned in the description of the possible VTX layout (\aut
 The \textit{\textbf{nominal}} geometry is expected to maximize the track impact parameter resolution and it places the third layer at 3.9 cm from the IP.
 The \textit{\textbf{alternative}} geometry instead, aims to improve the $K_{S}^{0}$ reconstruction efficiency and the third layer is located at 6.9 cm from the IP.\\
 
-Several simulations and investigations are ongoing and they are comparing performance of these two different layout with that of the current Belle II detector (utilizing a full Geant4 simulation of the detector in the study of specific decay modes of interest?). Moreover, the machine backgrounds predictions (\autoref{sec:bkg_predictions}) are also taken included in order to consider all effects and correlations. 
+Several simulations and investigations are ongoing and they are comparing performance of these two different layout with that of the current Belle II detector (utilizing a full Geant4 simulation of the detector in the study of specific decay modes of interest?). Moreover, the different machine backgrounds predictions are also examined in order to consider all effects and correlations. 
 
 \subsection{Tracking efficiency at low momentum and impact parameter resolution}
 
 Tracking efficiency at low momentum is one of the areas where the VTX upgrade scenarios show more promising results, particularly for the \textit{soft pions} originated from the decays of $D^{*\pm}$ mesons.
 
-Studies are based on the reconstruction of the decay chain $B^{0} \rightarrow D^{*-}l^{+}\nu$, with $D^{*-} \rightarrow \bar{D}^{0} \pi^{-}_{soft}$ and $\bar{D}^{0} \rightarrow K^{+} \pi^{-}$ or $K^{+} \pi^{-} \pi^{+} \pi^{-}$. All background scenarios metioned in section (REF) are considered in the evaluation of the \textit{nominal} VTX performance and they are compared with the nominal Belle II geometry in the intermediate (v2) background hypothesis. In table~\ref{fig:simulation_low_mom} what has been obtained is shown.
+Studies are based on the reconstruction of the decay chain $B^{0} \rightarrow D^{*-}l^{+}\nu$, with $D^{*-} \rightarrow \bar{D}^{0} \pi^{-}_{soft}$ and $\bar{D}^{0} \rightarrow K^{+} \pi^{-}$ or $K^{+} \pi^{-} \pi^{+} \pi^{-}$. All background scenarios metioned in~\autoref{sec:bkg_predictions} are considered in the evaluation of the \textit{nominal} VTX performance and they are compared with the nominal Belle II geometry in the intermediate (v2) background hypothesis. In table~\ref{fig:simulation_low_mom} what has been obtained is shown.
 
 \begin{figure}[h!]
 \centering
@@ -184,14 +184,14 @@ Studies are based on the reconstruction of the decay chain $B^{0} \rightarrow D^
 \label{fig:simulation_low_mom}
 \end{figure}
 
-We can see that the VTX reconstruction efficiency\footnote{Efficiency is defined as the ration between the number of correctly reconstructed signal events and the total number of candidates.}  in all three background hypotheses, results to be improved of almost a factor 1.7 with respect to the nominal Belle II, with comparable purity\footnote{}. Moreover efficiency remains practically stable in all background conditions, even in the most severe one.
+We can see that the VTX reconstruction efficiency\footnote{Efficiency is defined as the ration between the number of correctly reconstructed signal events and the total number of candidates.}  in all three background hypotheses, results to be improved of almost a factor 1.7 with respect to the nominal Belle II, with comparable purity\footnote{} . Moreover efficiency remains practically stable in all background conditions, even in the most severe one.
 
-This enhancement in tracking efficiency relies in particular on improved tracking efficiency for the $\pi_{soft}^{-}$ mesons, like we can see in~\autoref{fig:simulation_soft_pi}.
+This enhancement in tracking efficiency relies in particular on improved tracking efficiency for the $\pi_{soft}^{-}$ mesons, as we can see in~\autoref{fig:simulation_soft_pi}.
 
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=.6]{simulation_soft_pi}
+\includegraphics[scale=.53]{simulation_soft_pi}
 \caption{Reconstruction efficiency of $B^{0} \rightarrow D^{*-}l^{+}\nu$ as a function of the transverse momentum of the $\pi_{soft}^{-}$ (from  $D^{*-} \rightarrow \bar{D}^{0} \pi^{-}_{soft}$) in the plot on the left and of the polar angle of the $\pi_{soft}^{-}$ on the right. 
 The shaded blue histograms represents the momentum spectrum of the  $\pi_{soft}^{-}$.
 The nominal Belle II geometry efficiency in the intermediate background scenario (\textbf{v2}) is represents by black dots and it is compared with the nominal VTX configuration in the optimistic (\textbf{v1}, green squares), medium (\textbf{v2}, blue upward pointing triangles) and pessimistic (\textbf{v3}, red downward
@@ -199,10 +199,48 @@ pointing triangles) background hypotheses. The bottom plots show the ration betw
 \label{fig:simulation_soft_pi}
 \end{figure}
 
-%spiega grafico
-%At high momentum?
+For all scenarios with nominal VTX, there is a powerful improvement for transverse momenta below 0.05 GeV/c, with respect to the nominal Belle II. Only for $p_{T}$ greater than 0.2 GeV/c the reconstruction efficiency of Belle II approach those of the VTX.\\
+
+For $p_{T}$ higher than 0.3 GeV/c instead, the momentum resolution is dominated by the CDC and there is not a significant enhancement in track momentum resolution in the preceding example.
 
 \subsection{Vertexing resolution}
+
+The studies on vertexing performance have been conducted considering samples of one million $B^{0} \rightarrow J/\psi K_{S}^{0}$ events generated and reconstructed with all the aforementioned combinations.
+The distributions of the decay vertex resolution $\sigma_{z}$ (i.e. the width of the distribution obtained considering the differences between the measured and the true simulated positions) along the \textit{z} axis of the B decay signal, are shown in~\autoref{fig:simulation_vertex}.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=.65]{simulation_vertex}
+\caption{On the left: comparison of the B decay vertex resolution along the \textit{z} axis in $B^{0} \rightarrow J/\psi K_{S}^{0}$ events for the nominal Belle II (solid line), nominal VTX (dotted line) and alternative VTX geometry (filled grey histogram). The bottom plot shows the ratio between the VTX geometries (empty squares the nominal one and filled triangles the alternative) and nominal Belle II. \\
+On the right:  B decay vertex resolution along the \textit{z} axis for the nominal VTX geometry in the three background scenarios: optimistic \textbf{v1} (green solid line), intermediate \textbf{v2} (blue dotted line) and pessimistic \textbf{v3} (red filled histogram). The bottom plot represents the ratio between the two higher background scenarios and the optimistic one.}
+\label{fig:simulation_vertex}
+\end{figure}
+
+In table~\ref{fig:simulation_vertex_table} a summary of the results that shows that the new geometries achieve a better resolution on the B decay vertex of about 35\% on average and they also do not suffer of any significant degradation as the background conditions varies, unlike the nominal Belle II configuration.
+
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=.8]{simulation_vertex_table}
+\caption{$B_{sig}$ vertex resolution along the \textit{z} axis for the three detector geometry and the three background scenarios.}
+\label{fig:simulation_vertex_table}
+\end{figure}
+
+The VTX geometries have been demonstrated to achieve better performance also for the vertexing resolution along the \textit{x} and \textit{y} axes. Also in these directions they turn out to be almost insensitive to the different levels of background.\\
+
+Similar studies for the $K_{S}^{0}$ decay vertex resolution are displayed in~\autoref{fig:simulation_vertex_K} and in the same way, the upgraded geometries reach a better vertexing resolution with respect to the nominal Belle II detector without any sginifcant degradation as the backgrounds increase.
+It is importan to notice that in the right plot there is a spurious effect that cause an apparent improvement of performance in the worst case scenario among those considered. This is due to the loss of reconstruction efficiency for candidates with large flight distance (thus affected by poorer vertex resolution).
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=.65]{simulation_vertex_K}
+\caption{On the left: comparison of the $K_{S}^{0}$ decay vertex resolution along the \textit{z} axis in $B^{0} \rightarrow J/\psi K_{S}^{0}$ events for the nominal Belle II (solid line), nominal VTX (dotted line) and alternative VTX (filled grey histogram). Thebottom plot shows the rattio between the VTX geometries (empty squares for the nominal and filled triangles for the alternative) and nominal Belle II detector. 
+On the right: $K_{S}^{0}$ decay vertex resolution along the \textit{z} axis for the nominal VTX in the three background scenarios: optimistic \textbf{v1} (green solid line), intermediate \textbf{v2} (blue dotted line) and pessimistic \textbf{v3} (red filled histogram). The bottom plot represents the ratio between the two higher background scenarios and the optimistic one.}
+\label{fig:simulation_vertex_K}
+\end{figure}
+
+
+\subsection{$K_{S}^{0}$ reconstruction efficiency}
 
 
 
