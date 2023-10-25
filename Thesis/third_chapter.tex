@@ -53,7 +53,7 @@ A redistribution layer for power and data is also added to the demonstrator, in 
 \item \textbf{R\&D}
 \end{description}
 
-The R\&D is ongoing and the full-silicon ladder concept is currently being assessed with industrial partners. First thinned ladders have been produced and characterised with different thickness and geometry.%, revealing a homogeneous thickness over an area of 10 $cm^{2}$. 
+The R\&D is ongoing and the full-silicon ladder concept is currently being assessed with industrial partners. First thinned ladders have been produced and characterised with different thickness and geometry.
 
 Furthermore several tests are focused on evaluating power delivery efficiency, the quality of the signals which travel through the ladder and also the process used to fully assembly it. 
 In~\autoref{fig:iVTX_eye} are shown eye diagrams from simulation with a transfer rate of 640 Mbps, which may imply that 320 Mbps of data rate will be possible.
@@ -152,15 +152,12 @@ As consequence also the design of the mechanical support system, data cables and
 \section{Performance simulation}
 %richiesta sensitivity di 150 um ? VTX article, betagamma
 
-%Accennare a problemi CDC?
-%\ref{} to chapter 2
 
-As we have seen in chapter 2, to reach a new peak of luminosity the experiment has to face also the consequences, like the higher level of machine related background and so larger doses of radiation, expecially in the inner layers of the whole detector. 
+As we have seen in~\autoref{ch:upgrade}, to reach a new peak of luminosity the experiment has to face also the consequences, like the higher level of machine related background and so larger doses of radiation, expecially in the inner layers of the whole detector. 
 For these reasons a lot of simulations and studies are focusing on ensuring that the main physics goals of the experiment will be achieved despite the more severe conditions to which it wuold be subjected. 
 
-The VTX upgrade program wich foresees for a new silicon vertex detector with high granularity in both space and time, could bring significant improvements in tracking efficiency expecially at low momentum, in the impact parameter resolution and in the robustness against backgrounds. 
+The VTX upgrade program wich foresees for a new silicon vertex detector with high granularity in both space and time, could bring significant improvements in tracking efficiency expecially at low momentum, in the impact parameter resolution and in the robustness against backgrounds. Moreover, better vertexing performance entails not only improved time-dependent analyses of B and D mesons, but also an enhanced capacbility to distinguish among different decay topologies.
 
-%Improvements in the vertexing capabilities do not only mean better precision on time dependent analyses of B and D mesons, but provide also handles for discriminating among different decay topologies. Moreover, the parameters at the point
 
 \subsection{Potential VTX geometries}
 
@@ -245,12 +242,11 @@ On the right: $K_{S}^{0}$ decay vertex resolution along the \textit{z} axis for 
 %---------------------------------------------
 \section{OBELIX chip design}
 
-The VTX detector is designed with a single type sensor taylored to the specific needs of Belle II, called OBELIX (Optimized BELle II pIXel sensor) and currently under development, based on fast and high granular Depleted Monolithic Active Pixel Sensor (DMAPS). This new sensor design comes from an evolution of TJ-Monopix 2, whose characterization is the main topic of this thesis, and which will be discussed in chapter 5. Both of them are fabricated in a modified TowerJazz Semiconductor 180 $\mu$m CMOS process, that matches particularly well the Belle II requirements.
-In particular TJ-Monopix 2 is equipped with four different flavors (\autoref{sec:flavors}), which stand out for different type of collection electrode coupling and some small differences in the circuit design. For now their characterization are ongoing and the final decision on which to use for OBELIX has not been made. \\
+The VTX detector is designed with a single type sensor taylored to the specific needs of Belle II, called OBELIX (Optimized BELle II pIXel sensor) and currently under development, based on fast and high granular Depleted Monolithic Active Pixel Sensor (DMAPS). This new sensor design comes from an evolution of TJ-Monopix 2, whose characterization is the main topic of this thesis, and which will be discussed in~\autoref{ch:TJ2}. Both of them are fabricated in a modified TowerJazz Semiconductor 180 $\mu$m CMOS process, that matches particularly well the Belle II requirements.\\ In particular TJ-Monopix 2 is equipped with four different flavors (\autoref{sec:flavors}), which stand out for different type of collection electrode coupling and some small differences in the circuit design. For now their characterization are ongoing and the final decision on which to use for OBELIX has not been made. \\
 
 \subsection{Sensor specification}
 
-A schematic layout of the chip is shown in~\autoref{fig:obelix_scheme} . The size of the sensor is expected to be \numproduct{3 x 1.9} $cm^{2}$, with an active area of \numproduct{3 x 1.6} $cm^{2}$ and an additional part in the periphery of about \numproduct{3 x 0.3} $cm^{2}$ dedicated to data pre-processing and triggering. The pixel pitches\footnote{The distance between the centers of two contiguous pixels.} are designed to be from 30 $\mu$m to 40 $\mu$m in both direction. As a matter of fact staying in this range is necessary in order to achieve a spatial resolution below 15 $\mu$m, wihch is a requirement of the VTX upgrade program.
+A schematic layout of the chip is shown in~\autoref{fig:obelix_scheme} . The size of the sensor is expected to be \numproduct{3 x 1.9} $cm^{2}$, with an active area of \numproduct{3 x 1.6} $cm^{2}$ and an additional part in the periphery of about \numproduct{3 x 0.3} $cm^{2}$, dedicated to data pre-processing and triggering. The pixel pitches\footnote{The distance between the centers of two contiguous pixels.} are designed to be from 30 $\mu$m to 40 $\mu$m in both directions. As a matter of fact staying in this range is necessary in order to achieve a spatial resolution below 15 $\mu$m, wihch is a requirement of the VTX upgrade program.
 %reference: REQUIRED RESOLUTION FROM CDR 15UM
 
 \begin{figure}[h!]
@@ -260,28 +256,15 @@ A schematic layout of the chip is shown in~\autoref{fig:obelix_scheme} . The siz
 \label{fig:obelix_scheme}
 \end{figure}
 
-Moreover the sensor thickness has to be below 100 $\mu$m to respect the material budget constraint of 0.2\%$X_{0}$ and as consequence the depleted sensitive region should be lower than 50 $\mu$m, perfectly in agreement with the available thickness of MAPS  technology. 
+Moreover the sensor thickness has to be below 100 $\mu$m to respect the material budget constraint of 0.2\% $X_{0}$ and as consequence the depleted sensitive region should be lower than 50 $\mu$m, perfectly in agreement with the available thickness of MAPS  technology. 
 To deal with the target hit rate of 120 MHz/$cm^{2}$, the timestamp clock signal can reach down to 25 ns, even if studies have demonstrated that a window of 100 ns (\textit{integration time}) is enough to limit to 320 Mbps the data throughput at the same expected hit rate. 
-All topics faced above allow to realize a sensor with high granularity in both space and time.\\
+All characteristics inspected above allow to realize a sensor with high granularity in both space and time.\\
 
-With respect to TJ-Monopix 2, which is equipped with a triggerless column-drain readout without memory at the periphery, OBELIX must have a triggered readout architecture, in order to satisfy the needs of Belle II. Moreover the latency is fixed to 5(10) $\mu$s and it might operate up to 30 KHz trigger rate.
+With respect to TJ-Monopix 2, which is equipped with a triggerless column-drain readout without memory at the periphery, OBELIX must have a triggered readout architecture, in order to satisfy the needs of Belle II. Moreover the latency is fixed to 5 (10) $\mu$s and it might operate up to 30 KHz trigger rate.
 
-The expected power consumption instead, is expected to be about 200 mW$cm^{-2}$, a value which should allow air-cooling for the small area corresponding to the two inner layers and liquid coolant for the outer ones. 
+Single Event Upset~\autoref{foo:SEU} is a concern for the operation of the future detector but its size has not yet been quantified. Therefore an important feature of the chip must be to ensure that the control system is able to reset the sensor registers to default operational values at least every minutes. The reset frequency will be chosen after the measurement of the SEU cross section with OBELIX and the comparison to the occurence distribution of large energy loss in the experiment.
 
-%It is wort to mention that one of the specification of the sensor 
-
-\begin{comment}
-Tolerance to Total Ionizing Dose (TID) and Non Ionizing Energy Loss (NIEL)
-fluence have been discussed already. But Single Event Effects (SEE) generated
-by radiation might affect the sensor. Since no latchup (SEL) were observed in the
-past operation years of Belle II, no specification is given. However Single Event
-Upset (SEU) were observed and will be a concern to some extent, but are not yet
-35 quantified. Consequently, the first specification is to ensure that the control system
-allows resetting the sensor registers to the operational values at least every
-few minutes. The actual frequency will be chosen after the measurement of the
-SEU cross section with the OBELIX sensor and the comparison to the occurrence
-distribution of large energy loss in the experiment.
-\end{comment}
+The expected power consumption instead, is expected to be about 200 mW$cm^{-2}$, a value which should allow air-cooling for the small areas corresponding to the two inner layers and liquid coolant for the outer ones. 
 
 Its main design features are summarised in~\autoref{fig:obelix_features}.
 
@@ -303,18 +286,18 @@ Its main design features are summarised in~\autoref{fig:obelix_features}.
 \subsection{Sensor implementation}
 
 The technical implementation of the OBELIX sensor have to match all main features listed in table \ref{fig:obelix_features} .
-As mentioned above, this new sensor is the development of Tj-Monopix 2, whose characteristics fit the Belle II requirements.\\
+As mentioned above, this new sensor is the development of TJ-Monopix 2, whose characteristics fit already the Belle II requirements.\\
 
-From Tj-Monopix 2 design, the pixel pitch of \numproduct{33 x 33} $\mu m^{2}$ is maintained, as well as the layout of both digital and analogue parts. Also the Time-Over-Threshold method to digitized the signal is preserved, with a bus width of 7 bit, togheter with the column-drain readout architecture implemented for pairs of columns. Other features which will be explained in depth in chapter 5, have been conserved in the new design like the 3-bit register dedicated to the threshold tuning, but with a larger range of correction. 
-Moreover to aim at the integration time of 100 $\mu$s, the clock frequency which defines the precision of ToT and BCID (that is the timestamp), has been decreased from 40 to 20 MHz. So the current baseline for OBELIX timestamp precision is 50 ns.
+From TJ-Monopix 2 design, the pixel size of \numproduct{33 x 33} $\mu m^{2}$ is maintained, as well as the layout of both digital and analogue parts (REFERENCE TO FOURTH). Also the Time-Over-Threshold method to digitize the signal is preserved, with a bus width of 7 bit, togheter with the column-drain readout architecture implemented for pairs of columns. Other features, which will be explained in depth in~\autoref{ch:TJ2}, have been conserved in the new design like the 3-bit register dedicated to the threshold tuning, but with a larger range of correction for the last bit. 
+Moreover to aim at the integration time of 100 ns, the clock frequency which defines the precision of ToT and BCID (that is the timestamp), has been decreased from 40 to 20 MHz. So the current baseline for OBELIX timestamp precision is 50 ns.
 
-However two new modules are added to the implementation, related to the Belle II trigger: the Trigger Logic Unit (TRU) and the Track Trigger Transmitter (TTT). %that we will described in a few words.
+Additionally two new modules have been added to the implementation, related to the Belle II trigger: the Trigger Logic Unit (TRU) and the Track Trigger Transmitter (TTT). 
 
 \begin{description}
 \item \textbf{Trigger Logic Unit (TRU)}
 \end{description}
 
-The TRU has to select the fired pixel information from the matrix, which are in-time with the triggers sent by the Belle II system. In more details, this module employs two stages of memory in order to manage the data coming from the pixel matrix (\autoref{fig:obelix_tru}). These components are design in order to minimize power dissipation and to optimize the efficiency even in severe operating conditions: maximum hit rate of 120 MHz$cm^{-2}$, 30 KHz of trigger rate and 10 $\mu$s of trigger delay.
+The TRU has the task to select the fired pixel information from the matrix which are in-time with the triggers sent by the Belle II system. In more details, this module employs two stages of memory in order to manage the data coming from the pixel matrix (\autoref{fig:obelix_tru}). These components are design in order to minimize power dissipation and to optimize the efficiency even in severe operating conditions: maximum hit rate of 120 MHz$cm^{-2}$, 30 KHz of trigger rate and 10 $\mu$s of trigger delay.
 
 \begin{figure}[h!]
 \centering
@@ -323,9 +306,8 @@ The TRU has to select the fired pixel information from the matrix, which are in-
 \label{fig:obelix_tru}
 \end{figure}
 
-The first stage has to store the pixel information during the trigger delay (10 $\mu$s). The second memory instead, has the task to compare the BCID of the fired pixel with each trigger time information buffered in a dedicated global memory which keeps track of received triggers. When they have a match, the pixel data is transferred to the Transmission Unit (TXU). Considering the BCID precision time, the time integration of the OBELIX sensor becomes 100 ns.
-
-%This strategy accounts for the possibility that a physics hit associated to a trigger is timestamped with a later BCID due for instance to timewalk effect.
+The first stage has to store the pixel information during the trigger delay (10 $\mu$s). The second memory instead, has the function to compare the BCID of the fired pixel with each trigger time information buffered in a dedicated global memory which keeps track of received triggers. When they have a match, the pixel data is transferred to the Transmission Unit (TXU). In this way, the physics hits associated to a trigger but timestamped with a later BCID, for example due to timewalk effect, are also considered for further analysis.
+Considering the BCID precision time, the time integration of the OBELIX sensor becomes 100 ns.
 
 
 \begin{description}
@@ -340,7 +322,7 @@ This component behaviour is still under study and it needs of further simulation
 \item \textbf{Control Unit (CRU) and power dissipation}
 \end{description}
 
-The OBELIX sensor, as well as TJ-Monopix 2, is configured by several registers which allow to set crucial features for its operation like threshold settings, masked pixels, time response of the pixel and so on but also define its power consumption. The Control Unit is responsible for receiving these instructions about the configuration and the trigger information and at the same time sending out data coming from TXU module.
+The OBELIX sensor, as well as TJ-Monopix 2, is configured by several registers which allow to set crucial features for its operation like threshold settings, masked pixels, time response of the pixels and so on, but they also define its power consumption. The Control Unit is responsible for receiving these instructions about the configuration and the trigger information and at the same time sending out data coming from TXU module.
 
 For what concern power dissipation, there are three main features which have the greatest impact: the biasing current flowing into the in-pixel amplifier (i.e. \textit{$I_{BIAS}$}), the BCID clock frequency (on which depends the timestamping precision) and the hit rate. In~\autoref{fig:obelix_power_cons} is shown the estimations of power dissipation as these parameters vary.
 
@@ -352,8 +334,13 @@ For what concern power dissipation, there are three main features which have the
 \label{fig:obelix_power_cons}
 \end{figure}
 
-As we can see, the power consumption at the maximum hit rate of 120 MHz$cm^{-2}$ exceeds by little more than 10\% the power budget of 200 mW$cm^{-2}$ considering the higher precision for the timestamp of 50 ns. Therefore to stay within the power budget it is necessary to find a compromise: reducing timing precision by worsening the BCID precision to 100 ns or decreasing the pre-amplifier biasing current causing a degradation of the time walk.
+As we can see, the power consumption at the maximum hit rate of 120 MHz$cm^{-2}$ exceeds by little more than 10\% the power budget of 200 mW$cm^{-2}$, considering the higher precision for the timestamp of 50 ns. Therefore to stay within the power budget it is necessary to find a compromise: reducing timing precision by worsening the BCID precision to 100 ns or decreasing the pre-amplifier biasing current causing a degradation of the time walk.
 
 
-The first version of the sensor, called OBELIX-1, is being designed and the submission for fabrication is planned in the last month of 2023. A second improved version, OBELIX-2, will be designed based on performance studies on the first version and it is expected that it will be the final sensor needed for the experiment.
+The first version of the sensor, called OBELIX-1, is being designed and the submission for fabrication is planned in the last month of 2023. A second improved version, OBELIX-2, will be designed based on performance studies on the first version and it is expected that it will be the final sensor needed for the experiment.\\
+
+\bigskip
+
+Here we have therefore introduced some of the peculiar aspects and features of the proposed VTX upgrade, suppported by continuous studies and simulations. In the following we will see in more details the technology on which the whole proposal is based: the CMOS Monolithic Active Pixel Sensor.
+
 
