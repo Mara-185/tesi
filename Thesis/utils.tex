@@ -1,10 +1,12 @@
 \usepackage[T1]{fontenc}
 \usepackage[italian,english]{babel}
+\usepackage{hyperref}
+\addto\extrasenglish{%
+	\def\chapterautorefname{Chapter}}
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{listings}
 \usepackage[printonlyused,withpage]{acronym}
-\usepackage{hyperref}
 \usepackage{frontespizio}
 \usepackage{imakeidx}
 \usepackage{comment}
@@ -53,3 +55,6 @@
 
 %COMMAND TO DEFINE NEW TYPE OF COLUMN(per andare a capo e centrare il testo)
 \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+
+
