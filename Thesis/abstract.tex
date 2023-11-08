@@ -1,10 +1,19 @@
 % --------------------------------------------
-%		INTRODUCTION
+%		ABSTRACT
 %---------------------------------------------
 
+\documentclass[10pt,a4paper,twoside]{report}
+\input{utils}
 
-\chapter*{Introduction}
-\addcontentsline{toc}{chapter}{Introduction}
+\begin{document}
+
+\begin{center} \bfseries
+\LARGE Study of monolithic CMOS pixel sensors in the Belle II experiment upgrade\\
+
+\vspace{5mm}
+\textsc{\large abstract}
+\end{center}
+%\chapter*{\centering \Large Study of monolithic CMOS pixel sensors in the Belle II experiment upgrade}
 
 Belle II is a particle physics experiment located at the KEK laboratory in Tsukuba (Japan). The detector is a general-purpose spectrometer to study electron-positron collisions produced by the SuperKEKB accelerator, a second generation flavor-factory which operates at the luminosity frontier, holding the world record of instantaneous luminosity with $L_{peak}$ = \num{4.7e34} $cm^{-2} s^{-1}$. 
 
@@ -30,19 +39,4 @@ Additionally, different register settings have been examined in the interest of 
 During this investigation, a cross-talk issue has been discovered and therefore studied to understand its causes and possible solutions to mitigate this effect.
 
 
-
-
-
-
-
-\autoref{ch:BelleII} briefly introduces some of the open questions in the Standard Model, in order to depict the background of the Belle II physics program. Then a short description of the SuperKEKB accelerator and Belle II detector is given, too. 
-
-\autoref{ch:upgrade} presents the fundamental reasons behind the choice of an upgrade. The primary sources of the experiment background are summarized, to understand the limitation of the detector and the accelerator, for increasingly higher luminosity values. Eventually a summary of the four main upgrade proposals for the vertex detector is presented, which are distinguished by the different type of sensors employed: Depleted Field Effect Transistor (DEPFET), Thin and Fine-Pitch SVD, Silicon On Insulator (SOI) and CMOS Monolithic Active Pixels Sensors.
-
-
-\autoref{ch:VTX} examines in depth the VerTeX detector (VTX) upgrade program, which involves the CMOS Monolithic Active Pixel Sensors as fundamental components of the five layers of the final vertex detector. Studies and simulations are ongoing to test the performance, and some of them are shown here. The specifications and the implementation of the new chip (OBELIX) under design for this proposal are described. The innovative sensor has to fulfill the requirements of Belle II experiment, even in extreme environment due to higher doses of radiation and backgrounds.
-
-\autoref{ch:CMOS} describes the principles underlying the operation of semiconductor detectors and some different type of sensors which use this technology, like the hybrid and monolithic pixel sensors. In particular the CMOS Monolithic Active Pixel Sensors technology is presented, on which the entire developments of the OBELIX chip is based. In the end, the history of the developments that led to the TJ-Monopix chip series is retraced, in order to better understand the main features of the last one, TJ-Monopix 2, which reperesents the starting point for OBELIX desing, and whose characterization is the work of this thesis.
-
-\autoref{ch:TJ2} lastly shows the results obtained from laboratory measurements and tests conducted on the TJ-Monopix 2 chip. The response of the matrix has been studied in different working conditions, in order to analyzed the behaviour at high and low threshold. The absolute calibration of the all front-end circuits implemented in the chip, has been done too.
-Moreover a cross-talk issue have been discovered and analyzed, in order to understand its causes and a possible mitigation of this effect since it prevented from using the matrix at low threshold.
+\end{document}
