@@ -2,10 +2,6 @@
 
 This second chapter wants to adress some of the main reasons in favor of the upgrade of Belle II. We will give an overview of the primary background sources in the experiment to understand how to mitigate them in order to achieve a better performance of the whole detector, even ramping up the luminosity. Eventually we will also introduce some of the proposes made for the enhancement of the vertex detector.
 
-%INTRODUCTION FROM CDR
-[INTRODUCTION FROM CDR - OVERVIEW]
-%%ACCENNARE UPGRADE DI TUTTI E METTERE TABELLA DEL CDR?
-
 
 %---------------------------------------------
 %			2.1
@@ -19,9 +15,9 @@ Several simulations and measurements of beam background are still being done in 
 This is necessary to study the vulnerability of the subdetectors (and more generally of the machine) and so to design the countermeasures to adopt against the deterioration of performance and materials.
 
 
-\subsection{Major background sources}
+\subsection{Main background sources}
 
-In the following some of the primary \textit{beam-induced} and \textit{luminosity-dependent} background sources are listed.
+In the following some of the primary \textit{single-beam} and \textit{luminosity-dependent} background sources are discussed.
 
 
 \begin{description}
@@ -31,29 +27,31 @@ In the following some of the primary \textit{beam-induced} and \textit{luminosit
 	this represents the collision of beam particles with residual gas molecules in the beam pipe. It is the second beam background source and it can occur via two processes: \emph{Coulomb interaction}, which changes the direction of the beam particles and \emph{bremsstrahlung scattering}, which instead decreases their energy. 
 \end{description}
 	
-Because of these two processes, the scattered particles fall out the stable orbit and hit the beam pipe while they move around the ring. This mechanism causes electromagnetic showers that could reach the detector if their origin (loss position) is close to it.
+In these two processes, the scattered particles fall out the stable orbit and hit the beam pipe while they move around the ring. This mechanism causes electromagnetic showers that can reach the detector if their origin (loss position) is near the interaction region. Collimators are in place to reduce these backgrounds by absorbing the off-orbit particles. These backgrounds are present even if the beams are not colliding and are therefore called \textit{single-beam} backgrounds.
 
 
 \begin{description}
-\item[Radiative Bhabha scattering and two-photon processes]:
-	There are several undesirable collision processes at the IP which have very high cross sections but only little interest for the physics studied in the experiment. Two of them are \textbf{Bhabha scattering} ($e^{+}e^{-} \rightarrow e^{+}e^{-} \lambda$) and \textbf{two-photon processes} ($e^{+}e^{-} \rightarrow e^{+}e^{-}e^{+}e^{-} $). 
-	In the first channel the emitted photon interacts with the iron magnets and produces a very large amounts of neutrons via the photo-nuclear resonance mechanism (such neutrons are the main background source for the outermost Belle II detector). The electrons-positrons pairs of the latter instead, can spiral around the solenoid field lines and leave multiple hits in the inner layers of the detector.\\
+\item[Radiative Bhabha scattering]:
+	It is the electron-positron scattering process $e^{+}e^{-} \rightarrow e^{+}e^{-} \gamma$, an undesirable collision processes at the IP which have very high cross sections but only little interest for the physics studied in the experiment.
+	The emitted photon can interact with the magnets near the detector producing a large amounts of neutrons via the photo-nuclear resonance mechanism (such neutrons are the main background source for the outermost Belle II detector).\\
 	
-These processes increase the Belle II occupancy and radiation dose and they are reffered as \textit{Luminosity background} because their strenght is proportional to the luminosity. The future upgrade intends to deal with this problem in order to keep occupancy low, even with higher radiation levels.
+\item[Two-photon process]:
+	it consists in the process $e^{+}e^{-} \rightarrow e^{+}e^{-}e^{+}e^{-} $. The produced electron-positron pairs can spiral around the solenoid field lines and leave multiple hits in the inner layers of the detector.\\
+	
+These backgrounds are called \textit{Luminosity backgrounds} because their strenght is proportional to the luminosity. They can be reduced with a careful design of the interaction region including neutron shielding.
 
 \item[Synchrotron Radiation (SR)]:
 	X-rays emitted from the beam when electrons and positrons pass through the strong magnetic field near the IP. The HER beam is the main source of this type of background, because SR power is proportional to the square of beam energy and magnetic field.
-SR can potentially damage the inner layers of the vertex detector due to an higher radiation dose in that region. As a matter of fact, many current studies aim to enhance radiation hardness of the detector.
+SR can potentially damage the inner layers of the vertex detector due to an higher radiation dose in that region. Absorbing structures have been implemented inside the beam pipe to protect the detector from SR.
 \end{description}
 
-Making clear that even the intentional interaction of the beams is a source of noise for the measurements, there are also other background sources beyond those mentioned above and during the last decade a well-structured set of countermeasures have been developed trying to ease each one of them.
-
+The rate of these processes is relatively high for small beams and high currents, leading to a beam lifetime in the order of only few minutes. This requires a continuous injection mechanism, in which particles are added to individual bunches to keep the charge constant. While this is essential for high luminosity operation, it is also the source of an additional background, since the perturbed bunches are noisy for a number of turns. The injection background is particularly hard to model and estimate.
 
 \subsection{Current background status and future predictions}\label{sec:bkg_predictions}
 
-Several monitoring devices are located all along the accelerator to keep under control radiation doses on both detector and delicate regions of the ring, in such a way to intervene as soon as possible in case too high levels are reached. Indeed large doses of radiation could cause accidental damages on the detector, decreasing its performance.
+Several monitoring devices are located all along the accelerator to measure radiation doses on both detector and delicate regions of the ring, in such a way to intervene as soon as possible in case too high levels are reached.
 
-A lot of dedicated beam background studies have been performed and for example, in~\autoref{fig:bkg_plot} are shown rates measured in June 2021 with a betatron function at the IP of $\beta_{y}^{*}$ = 1 mm and a collision luminosity of \textit{L} = \num{2.6e34} $cm^{-2} s^{-1}$. Current background rates in Belle II are acceptable and in most cases, well below the limits listed in table~\ref{fig:bkg_table}.\\
+Dedicated beam background studies have been performed and for example, in~\autoref{fig:bkg_plot} are shown rates measured in June 2021 with a betatron function at the IP of $\beta_{y}^{*}$ = 1 mm and a collision luminosity of \textit{L} = \num{2.6e34} $cm^{-2} s^{-1}$. Current background rates in Belle II are acceptable and in most cases, well below the limits listed in table~\autoref{tab:bkg_table}.\\
 
 \begin{figure}[h!]
 \centering
@@ -63,14 +61,38 @@ A lot of dedicated beam background studies have been performed and for example, 
 \end{figure}
 
 
+\begin{table}[htb]
+\centering
+    \begin{tabular}{lccc}
+    \hline\hline
+    Detector & \multicolumn{2}{c}{BG rate limit} & Measured BG\\
+    \hline
+    Diamonds & \multicolumn{2}{c}{\SIrange{1}{2}{rad/s}} & $<\SI{132}{mrad/s}$\\
+    PXD & \multicolumn{2}{c}{\SI{3}{\%}} & \SI{0.1}{\%}\\
+    SVD L3, L4, L5, L6 & \multicolumn{2}{c}{\SI{4.7}{\%}, \SI{2.4}{\%}, \SI{1.8}{\%}, \SI{1.2}{\%}} & $<\SI{0.22}{\%}$\\
+    CDC & \multicolumn{2}{c}{\SI{200}{kHz/wire}} & \SI{22.3}{kHz/wire}\\
+    ARICH & \multicolumn{2}{c}{\SI{10}{MHz/HAPD}} & \SI{0.5}{MHz/HAPD}\\
+    Barrel KLM L3 & \multicolumn{2}{c}{\SI{50}{MHz}} & \SI{4}{MHz}\\
+    & \multicolumn{2}{c}{non-luminosity BG} &\\\cline{2-3}
+    & Before LS1 & After LS1 &\\\cline{2-3}
+    TOP ALD & \SI{3}{MHz/PMT} & \SI{5}{MHz/PMT} & \SI{1.8}{MHz/PMT}\\
+    & \multicolumn{2}{c}{+ luminosity BG} &\\
+    \hline\hline
+    \end{tabular}
+    \caption{Background rate limits for Belle II detector sub-systems. The third column shows the total measured background rate in June 2021}
+    \label{tab:bkg_table}
+\end{table}
+
+\begin{comment}
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=.7]{bkg_table}
 \caption{Background rate limits for Belle II detector sub-systems. The third column shows the total measured background rate in June 2021.}
 \label{fig:bkg_table}
 \end{figure}
+\end{comment}
 
-Event though the current level is of no concern in terms of occupancy for the innermost layers of the vertex detector, in the case of a larger amount of SR, for example, it may cause inhomogenities in PXD module, which would make more difficult to compensate them by adjusting the operation voltages of the affected ones.\\
+Event though the current level is of no concern in terms of occupancy for the innermost layers of the vertex detector, a larger amount of localized SR, for example, could cause inhomogenities in PXD modules, which would be very difficult to compensate by adjusting the operation voltages of the affected ones.\\
 
 Until now it can be said that SuperKEKB and Belle II are operating stably. Beam-induced background rates are well below the limits of the detector and do not prevent from increasing further the current and hence the luminosity, as demonstrated by the predictions for the background rates \textit{before LS2} with a known machine configuration. 
 For what concern the predictions at \textit{$L_{ist}$} = \num{3e35} $cm^{-2}s^{-1}$ instead, called \textit{after LS2} operation, there are several uncertainties tied to the machine configuration. In fact at the moment, the \emph{working machine lattice} to reach the target luminosity is not known and in addition the final design of the IR and beam pipes is not concluded yet.
@@ -83,6 +105,7 @@ Therefore an alternative solution is employed to roughly estimated the backgroun
 \item \textbf{x10} - \textbf{conservative Scenario-3(v3)}, an arbitrary factor assuming that all single-beam backgrounds will be increased by a order of magnitude After LS2.
 \end{itemize}
 
+The luminosity background sources are instead scaled with luminosity ratio.
 These are then used to simulate the behaviour of the whole detector in future perspectives, as we will see in the following.
 
 %---------------------------------------------
@@ -96,7 +119,7 @@ Belle II detector is also designed to operate efficiently under the high levels 
 Therefore the global upgrade program is justified by many considerations, among them:
 
 \begin{itemize}
-\item improve detector's resistance to higher levelss of background;
+\item improve detector's resistance to higher levels of background;
 \item make each subdetectors long-lived against radiation damage;
 \item push forward safety margins for running at higher luminosity;
 \item develop the technology to cope with different future paths;
@@ -104,15 +127,15 @@ Therefore the global upgrade program is justified by many considerations, among 
 \end{itemize}
 
 
-In particular all different upgrade ideas of the whole Belle II detector intend to ensure its proper functioning at the higher level of luminosity, condering also further improvements of the lattice machine and so of the colliding beams. Indeed current detector configuration is not expected to maintain its performance level when facing higher beam background level or higher rates.\\
+In particular all different upgrade ideas of the whole Belle II detector intend to ensure its proper functioning at the higher level of luminosity, condering also further improvements of the lattice machine and so of the colliding beams. The current detector configuration is not expected to maintain its performance level when facing higher beam background level or higher rates.\\
 
-In regards to the Vertex Detector, all proposed improvements aim to:
+Concerning the Vertex Detector, all proposed improvements aim to:
 
 \begin{itemize}
-\item reduce occupancy level by employing fully pixelated and fast detector (nowadays CMOS technology has been chosen);
+\item reduce occupancy level by employing fully pixelated and fast detector (CMOS technology has been chosen);
 \item increase robustness against tracking efficiency and resolution losses from beam background;
-\item improve radiation hardness for delaying detector ageing effects and so performance degradation;
-\item reduce the inserted material budget between subdetectors in order to achieve good resolution by lessening the multiple scattering, above all at lower momenta.
+\item improve radiation hardness to reduce detector ageing effects and performance degradation;
+\item reduce the inserted material budget between subdetectors in order to achieve good resolution by lessening the multiple scattering, especially important at lower momenta.
 \end{itemize}
 
 
@@ -122,12 +145,12 @@ In regards to the Vertex Detector, all proposed improvements aim to:
 \section{Summary of possible VXD upgrade}
 
 The Vertex Detector is particularly sensitive to machine background because it is the closest to the beam pipe and therefore subject to high doses of radiation.
-As we have already seen, current studies are trying to extrapolate how it could be affected by reaching the future luminosity target, but there are a lot of uncertainties due to models and still not well defined design of the interaction region. Moreover a completely new detector might be required, in event of a considerable redesing of the IR. However in this case, also the physics performance could be improved, taking advantage of the more recent technology developments.\\
+As we have already seen, current studies are trying to extrapolate how it could be affected by reaching the future luminosity target, but there are a lot of uncertainties due to models and still not well defined design of the interaction region. Moreover a completely new detector might be required, in the event of a considerable redesing of the IR. However in this case, also the physics performance could be improved, taking advantage of the more recent technology developments.\\
 
-In the following we will present in a few words the four main proposal for future upgrade: Depleted Field Effect Transistor (DEPFET) pixel, thin sensor, CMOS Monolithic Active Pixel Sensor and SOI technology.
+In the following we will present in a few words the four main proposals for future upgrade: Depleted Field Effect Transistor (DEPFET) pixel, thin strip sensor, CMOS Monolithic Active Pixel Sensor and SOI technology.
 The first two are more conservative and try to exploit as much as possible of the existing detector, making some appropriate adjustments to the sensor type, readout or mechanical structure. The last ones instead, plan to build an entirely new detector.\\
 
-During the design of all of them, some reference radiation levels have been considered to ensure that the background robustness of the innermost layers is suitable:
+The reference background levels determining radiation robustness requirements of the innermost layers are the following:
 
 \begin{itemize}
 \item Hit rate capability: 120 MHz/$cm^{2}$;
@@ -135,10 +158,12 @@ During the design of all of them, some reference radiation levels have been cons
 \item NIEL fluence: \num{5e13}$n_{eq}$/$cm^{2}$/year.
 \end{itemize}
 
+At this time, the main effort is focused in the development of the CMOS MAPS system, with the SOI as a possible backup option, although still requiring significant R\&D. The DEPFET and thin strip sensors are substantially abandoned, but we present the, here to provide the full picture.
+
 
 \subsection{Depleted Field Effect Transistor (DEPFET)}
 
-This first proposal intend to minimize risks and costs of the project, preserving the general layout of the PXD system. The upgrade consists to improve the sensor above all, in order to provide higher safety factor for the allowed occupancy and to prevent some issues that at the moment weaken the good functionality of the detector.
+This first proposal intend to minimize risks and costs of the project, preserving the general layout of the PXD system. The upgrade consists to improve the sensor to provide higher safety factor for the allowed occupancy and to prevent some issues that at the moment weaken the good functionality of the detector.
 
 Some of the main improvements are listed below:
 
@@ -148,27 +173,106 @@ Some of the main improvements are listed below:
 \item Total Ionizing Dose (TID) effect on the chip provokes an unexpected avalanche current that does not compromise the sensor performance but requires more power supply to provide ennough current. This issue might be solved by bringing some changes in the DEPFET pixel layout.
 \end{itemize}
 
+The DEPFET improvement R\&D is currently inactive because of lack of person power and dedicated funding.
 
 \subsection{Thin and Fine-Pitch SVD}
 
-The Thin and Fine-Pitch SVD (\textbf{TFP-SVD}) is a new detector concept that aims to improve not only SVD, but also the inner part of the CDC, whose functionality could be threatened by future beam background condition.
-This proposal takes into accout the Double-sided Silicon Strip Detector (DSSD) as a prime candidate for a tracking device in the inner and middle detector volume since a single sensor can cover a large dimension of about \numproduct{100 x 100} $mm^{2}$. In the current detector the DSSD technology is already used in the SVD, which deals with vertex reconstruction and low momentum tracking, togheter with PXD.\\
+The Thin and Fine-Pitch SVD (\textbf{TFP-SVD}) is a new detector concept that aims to improve not only SVD, but potentially also the inner part of the CDC, whose functionality could be threatened by future beam background condition.
+This proposal uses Double-sided Silicon Strip Detectors (DSSDs) for the inner and middle detector volume since a single sensor can cover a large dimension. In the current detector the DSSD technology is already used in the SVD. \\
 
-One of the major improvements of this technology is the reduction of the material budget.
-Currently SVD has about 0.7\%$X_{0}$ material budget per layer. TFP-SVD instead, decreasing the sensor thickness to 140 $\mu$m, intend to reduce it to 0.41\%$X_{0}$. 
+The major improvement of this proposal would be the reduction of the material budget.
+Currently SVD has about 0.7\%$X_{0}$ material budget per layer. TFP-SVD instead, decreasing the sensor thickness to 140 $\mu$m, intends to reduce it to 0.41\%$X_{0}$. 
 
-Moreover small sensor thickness is expected to reduce the voltage needed to reach the full depletion, even after radiation damage. 
-The front-end thought for TFP-SVD (SNAP128) has 128 input channels and a 127 MHz clock in each of them, to generate the binary hit information sampled. It also offers a reduction of the amount cables.
+Moreover, a reduced sensor thickness is expected to reduce the voltage needed to reach the full depletion, even after radiation damage. 
+The front-end developed for TFP-SVD, the SNAP128 chip, has 128 input channels with a 127 MHz clock binary hit information sampled. It also offers a reduction of the amount of cables.
 
 Some concerns about TFP-SVD are the feasibility and efficiency of the final sensor production and the small signal charge due to the short path lenght of the particles through the sensor.
 
-In any case a first prototype has been produced by Micron-Semiconductor Ltd (UK), with a size of \numproduct{52.6 x 59.0} $mm^{2}$. The characterization studies are in agreement with the expectation and also a lower full depletion voltage is confirmed. It is planned to increase the dimensions to \numproduct{100 x 100} $mm^{2}$ in the further prototype.
+A first prototype has been produced by Micron-Semiconductor Ltd (UK), with a size of \numproduct{52.6 x 59.0} $mm^{2}$. The characterization studies are in agreement with the expectation and also a lower full depletion voltage is confirmed. \\
+The development of the TFP-SVD option has been abandoned because of the small signal to noise ratio (10 or less) and difficulties in the chip design optimization.
+
+
+\subsection{CMOS Monolithic Active Pixels Sensor}
+
+The VTX proposal, that we will analyze in more details in the next chapter, aims to replace the entire current VXD detector using Monolithic Active Pixel Sensors (MAPS) based on CMOS (Complementary Metal-Oxide Semiconductor) technology. \\
+In CMOS MAPS the basic commercial CMOS technology is minimally modified to allow the collection of the charge released by a charged particle traversing the epitaxial layer where the readout electronics is fabricated. There are many technological variant sharing this same concept.
+
+\begin{comment}
+The program hopes to solve some of the issues discussed in the previous chapters, with a new system of two inner layers and three outermost, for a total of 5 stages equipped with a single sensro type, called \textbf{VTX} (layout in~\autoref{fig:VTX_layout}). Also the mechanical structure has been redesigned but it is expected that the all system could work at room temperature, so as consequence an important reduction of services is also contemplated.\\
+\end{comment}
+
+The Belle II chip is called OBELIX (Optimized BELle II pIXel sensor), based on the pixel matrix of the TJ-Monopix 2 chip, whose characterization is the main topic of this work (Chapter 5) and is developed with the technology of the TowerJazz company with a minimum feature size of 180 nm. 
+The size of the sensor is expected to be \numproduct{3 x 1.9} $cm^{2}$ with a pixel pitch between 30 $\mu$m and 40 $\mu$m, achieving a spatial resolution below 15 $\mu$m, required by the VTX upgrade program. The timestamp clock signal have to reach down to 25 ns, in order to deal with the target hit rate of 120 MHz/$cm^{2}$. All these characteristics allow to obtain a sensor with high granularity in time and space.
+
+The VTX detector consists in 5 concentric layers of monolithic sensors with a barrel geometry. The target thickness of the ladders is 0.1\% for the air-cooled two inner layers and ...\% for the water-cooled three outer layers.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=.6]{VTX_layout}
+\caption{Overall VTX layout.}
+\label{fig:VTX_layout}
+\end{figure}
+
+The VTX solution intends to reduce the current PXD integration time by at least two order of magnitude introducing other improvements:
+
+\begin{itemize}
+\item lower detector occupancy which allows to cope with higher background and to mitigate data-transmission bottlenecks.
+\item Better tracking efficiency and improved momentum resolution and impact parameter resolution at low transverse momentum.
+\item Smaller data cables cross sections and less complex cooling system which might lighten the needed services.
+\item Simplified control and power systems due to the employment of a single sensor chip for all layers.
+\end{itemize}
+
+At the current state of art intense R\&D is being carried out, taking advantage from other experiments experiences like ALICE, with the same type of sensor.\\
+
+After this briefly review of the main upgrade proposals, we can now elaborate the VTX program in the following chapter.
+
+\begin{comment}
+Among all these options that we sift through, the last one has been chosen for the future upgrade of the vertex detector. The first two proposals have now been abandoned, the one that contemplates the use of the SOI technology instead, is considered as a backup option. \\
+\end{comment}
 
 
 \subsection{Silicon On Insulator (SOI)}
 
-The basic idea of the proposal is to replace the whole VXD detector employing a new design of pixel, called Dual Timer Pixel (DuTiP), based on SOI technology. This new sensor concept has been invented to cope with the expected higher background accordingly to higher value of luminosity ever achieved.
+An alternative proposal employs a new pixel design, called Dual Timer Pixel (DuTiP), based on SOI technology. In Silicon-On-Insulator (SOI) technology, electronics is fabricated in a silicon layer separated by a $SiO_{2}$ isolation layer from the main detector substrate.
+This new sensor concept has been developed to fullfil the requirements of a new vertex detector with faster readout, lower occupancy, smaller data size and smaller data transfer. In particular, it aims to store at least two hits during Belle II trigger latency (5 $\mu$s), to avoid loss information in higher background environment. \\
 
+The size of the new designed pixel is 45 $\mu$m and the sensor layer thickness of 50 $\mu$m, which gives an intrinsic resolution better than 15 $\mu$m. The analog part is quite standard for a binary detector and consists of a sequence of preamplifier, shaper and comparator.  ALPIDE was choosen as analog circuit with some modification to adapt it to SOI technology. 
+The quite complex digital circuit has to be assembled on each pixel, and Lapis semiconductor 2.0 $\mu$m FD-SOI CMOS technology has been chosen, based on the experience gained in the successful development of other detectors like the pixel detector for the future ILC (SOFIST).
+
+DuTiP pixel detector is designed to cover the current VXD acceptance with 7 layers. For the inner layer of the detector might be possible the cooling with airflow at room temperature; for the outer layers instead, a combination of air and water flows.
+
+The DuTiP R\&D are ongoing and the chip prototypes seems to work fine, in agreement with the expectation. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{comment}
+
+on \textit{z} direction averaging over incident polar angle
 
 \begin{description}
 \item \textbf{Concept}
@@ -176,11 +280,7 @@ The basic idea of the proposal is to replace the whole VXD detector employing a 
 
 SOI technology has been chosen as baseline for the new pixel design thanks to its monolithic structure, thinness, low power consumption and low parasitic capacitance. In addition it is resistant aginst neutron and single event upset (SEU\footnote{A Single Event Upset (SEU or SEE, Single Event Error) occurs when a ionizing particle deposits charge close to a storage node (e.g. RAM cell, register) causing a bit value to flip leading to corrupt information. This effect could be mitigated by using, for example, redundant memory. It is not a permanent damage. \label{foo:SEU}}), even though an important issue is TID effect on which efficient solutions have been studied.
 
-DuTiP has been invented to fullfil the requirements of a new vertex detector with faster readout, lower occupancy, smaller data size and smaller data transfer. In particular its concept rest on the concern to store at least two hits during Belle II trigger latency (5 $\mu$s), to avoid loss information of the inner part of the detector in higher background environment. \\
-
-The analog part is quite standard for a binary detector and consists of a sequence of preamplifier, shaper and comparator. Digital part is equipped with two timers (7 bit counters) to store at least two hits. When a processed hit signal arrive to the digital part it is stored and one of the timers start to counting down from a starting time set to trigger latency plus one clock, waiting for trigger signal. If the trigger signal is received when the time is 1 (it could be also 2 or 0), the signal is readout as \emph{Current} (\emph{Next} or \emph{Previous} respectively) timing (\emph{PCN timings}). If the trigger is not received at the PCN timings in the pixel, the timer is reset. 
-
-This complicated digital circuit has to be assembled on each pixel and Lapis semiconductor 2.0 $\mu$m FD-SOI CMOS technology has been chosen, based on the experience gained in the successful development of other detectors like pixel detectors for the future ILC (SOFIST) and CEPC.
+When a processed hit signal arrive to the digital part it is stored and one of the timers start to counting down from a starting time set to trigger latency plus one clock, waiting for trigger signal. If the trigger signal is received when the time is 1 (it could be also 2 or 0), the signal is readout as \emph{Current} (\emph{Next} or \emph{Previous} respectively) timing (\emph{PCN timings}). If the trigger is not received at the PCN timings in the pixel, the timer is reset. 
 
 \begin{figure}[h!]
 \centering
@@ -190,11 +290,10 @@ This complicated digital circuit has to be assembled on each pixel and Lapis sem
 \label{SOI}
 \end{figure}
 
+
 \begin{description}
 \item \textbf{Sensor design and and features}
 \end{description}
-
-The size of the new designed pixel is 45 $\mu$m and the sensor layer thickness of 50 $\mu$m, which gives an intrinsic resolution better than 15 $\mu$m on \textit{z} direction averaging over incident polar angle. ALPIDE was choosen as analog circuit with some modification to adapt it to SOI technology. 
 
 DuTiP pixel detector is designed to cover the current VXD acceptance with 7 layers: 1-3 with S (smaller size chip) type sensors, 4-7 with L(larger size) type (\autoref{fig:SL_SOI}).
 
@@ -205,14 +304,13 @@ DuTiP pixel detector is designed to cover the current VXD acceptance with 7 laye
 \label{fig:SL_SOI}
 \end{figure}
 
-Stitching technique allows to produce longer chips in the \textit{z} direction, but the structure of the ladders has not be decided yet. Anyway the target is to minimize the dead region between chips in the ladder. For the inner layer of the detector might be possible the cooling with airflow at room temperature; for the outer layers instead, a combination of air and water flows.
+Stitching technique allows to produce longer chips in the \textit{z} direction, but the structure of the ladders has not be decided yet. Anyway the target is to minimize the dead region between chips in the ladder. 
 
 For layer 1, which is expected to work in more severe condition of background, the pixel occupancy has been estimated with the trigger latency of 8.0 $\mu$s and for both L and S type it is small enough, O($10^{14}$) or less, thus stable tracking and vertexing are contemplated. Moreover without using two timers for layer 1, the signal loss probability with the trigger latency of 4.5 (8.0) $\mu$s is about 0.2 (0.4)\% and so not negligible. In fact if the background rate is higher and the latency is longer, the signal loss probability increases.\\ 
 
 The first prototype of this new chip has been delivered in June 2021, with all in-pixel functionalitites except for the scan block and the fast readout system. The chip is a matrix of \numproduct{64 x 64} pixels and size of \numproduct{6 x 6} $mm^{2}$. Its characterization is ongoing and it seems to work fine, aslo with radioactive sources and red laser tests. \\
 The second prototype DuTiP2 had been delivered in 2022, with \numproduct{32 x 320} pixels and size of \numproduct{17.2 x 6} $mm^{2}$. It has all functionalities except for fast hit data collection to periphery. The phase of testing is ongoing.
 A third prototype has been submitted in 2023 and will be delivered in 2024 (all prototypes shown in~\autoref{fig:dutip_matrix}).
-
 
 \begin{figure}[h!]
 \centering
@@ -221,33 +319,4 @@ A third prototype has been submitted in 2023 and will be delivered in 2024 (all 
 \caption{DuTiP prototypes.}
 \label{fig:dutip_matrix}
 \end{figure}
-
-
-\subsection{CMOS Monolithic Active Pixels Sensor}
-
-The last proposal is the one that we will analyze in more details in the next chapter. Like the previous one, it aims to replace the entire current VXD detector using a new technology, in this case the Monolithic Active Pixel Sensor CMOS (Complementary Metal-Oxide Semiconductor). \\
-The program hopes to solve some of the issues discussed in the previous chapters, with a new system of two inner layers and three outermost, for a total of 5 stages equipped with a single sensro type, called \textbf{VTX} (layout in~\autoref{fig:VTX_layout}). Also the mechanical structure has been redesigned but it is expected that the all system could work at room temperature, so as consequence an important reduction of services is also contemplated.\\
-The new pixel design is called OBELIX (Optimized BELle II pIXel sensor), based on the pixel matrix of the TJ-Monopix 2 chip, whose characterization is the main topic of this work (Chapter 5). 
-
-\begin{figure}[h!]
-\centering
-\includegraphics[scale=.6]{VTX_layout}
-\caption{Overall VTX layout.}
-\label{fig:VTX_layout}
-\end{figure}
-
-The VTX solution intends to reduce the current PXD integration time by at least two order of magnitude and also other advantages are expected:
-
-\begin{itemize}
-\item lower detector occupancy which allows to cope with higher background and to mitigate any data-transmission bottleneck.
-\item Better tracking efficiency and improved momentum resolution and impact parameter resolution at low transverse momentum.
-\item Smaller data cables cross sections and less complex cooling system which might lighten the needed services.
-\item Control and power systems become unique due to the employment of a single sensor chip for all layers.
-\end{itemize}
-
-At the current state of art intense R\&D (Research and Development) is being carried out, taking advantage from other experiments experiences like ALICE, with the same type of sensor.\\
-
-Among all these options that we sift through, the last one has been chosen for the future upgrade of the vertex detector. The first two proposals have now been abandoned, the one that contemplates the use of the SOI technology instead, is considered as a backup option. \\
-
-After this briefly review of the main upgrade proposals, we can now deepen into the VTX program in the following chapter.
-
+\end{comment}

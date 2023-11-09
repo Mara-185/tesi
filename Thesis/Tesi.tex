@@ -1,4 +1,4 @@
-\documentclass[10pt,a4paper,twoside]{report}
+\documentclass[10pt,a4paper]{report}
 
 %LOAD PACKAGES
 \input{utils.tex}
@@ -8,26 +8,13 @@
 %		INFO
 %------------------------------------
 
+\begin{comment}
 \title{Study of monolithic CMOS pixel sensors in the Belle II experiment upgrade}
 %\author{Mara Stefania Calò}
 \date{\today}
 %\newcommand{\institution}{Università di Pisa}
 %\newcommand{\department}{Dipartimento di Fisica}
-
-
-%--------------------------------------
-%		TITLE
-%--------------------------------------
-
-\begin{document}
-\maketitle
-
-
-%Contenuti
-\doublespacing
-\tableofcontents
-\singlespacing
-
+\end{comment}
 
 \begin{comment}
 \begin{frontespizio}
@@ -42,12 +29,67 @@
 \end{frontespizio}
 \end{comment}
 
+
+%--------------------------------------
+%		TITLE
+%--------------------------------------
+
+\begin{document}
+
+
+\begin{titlepage}
+    \begin{center}
+        \includegraphics[scale=.4]{logo2}
+        \vspace*{1.2cm}
+
+        \LARGE
+
+        \textbf{ \large Dipartimento di Fisica E. Fermi \\ Corso di Laurea Magistrale in Fisica}
+
+        \vspace*{2.5cm}
+        
+        \huge
+        Study of monolithic CMOS pixel sensors in the Belle II experiment upgrade
+
+        \normalsize
+        \vspace*{4cm}
+
+        
+        
+        \begin{minipage}[t]{0.47\textwidth}
+	       {Candidato:} \hspace{-0.9em} \vspace{0.3em} \\
+              {\large \textbf{Mara Stefania Calò}} % \\
+              % {\footnotesize mat. 123456}
+        \end{minipage}
+        \hfill
+        \begin{minipage}[t]{0.47\textwidth}\raggedleft
+	       {Relatore:} \vspace{0.3em} \\
+              {\large \textbf{Prof. Francesco Forti}} \vspace{1em}  \\
+              {Correlatore:} \vspace{0.3em} \\
+              {\large \textbf{Dott. Nome Cognome}}
+        \end{minipage}
+
+        \vfill
+        Anno accademico 2022/2023
+            
+    \end{center}
+\end{titlepage}
+
+
+%\maketitle
+
+
+%Contenuti
+\doublespacing
+\tableofcontents
+\singlespacing
+
 \newpage
 
 % --------------------------------------------
 %		ABSTRACT 
 %---------------------------------------------
-\input{Intro}
+%\input{Intro}
 
 
 
@@ -72,7 +114,7 @@
 % --------------------------------------------
 %		CAPITOLO 4
 %---------------------------------------------
-%\input{fourth_chapter}
+\input{fourth_chapter}
 
 
 % --------------------------------------------
@@ -97,7 +139,7 @@
 %		INDICE 
 %---------------------------------------------
 
-\printindex
+%\printindex
 
 % --------------------------------------------
 %		BIBLIOGRAFIA 

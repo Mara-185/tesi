@@ -33,14 +33,14 @@ Despite the undeniable success of the SM in providing predictions for all known 
 
 \begin{itemize}
 \item Three generations of quark and leptons have been discovered, but it is not known whether they are the only ones and why.
-\item Moreover, the reasons behind quark and leptons mass hierarchy is unknown.
+\item The reasons behind quark and leptons mass hierarchy are unknown.
 \item Although the Higgs mechanism is able to explain the cause of elementary particles' masses through spontaneous electro-weak symmetry breaking, it is not clear whether neutrinos can get their non-zero but very small masses through the interaction with the Higgs boson.
 \item Another open question is the matter-antimatter asymmetry in the Universe. Charge-Parity (CP) violation is necessary to explain the asymmetry, but the SM mechanism wuold predict a value several orders of magnitude smaller than what is needed to explain the matter domination over antimatter, which allowed the evolution of the universe as we know it today.
 \item The flavour-changing currents are phenomenologically described with two mixing matrices: the Cabibbo-Kobayashi-Maskawa (CKM) matrix for the quarks and the Pontecorvo-Maki-Nakagawa-Sakata (PMNS) matrix for the neutrinos. The SM fails to provide any explanation neither for the structure of the matrices (only charged for the quarks, only neutral for the neutrinos), nor for the values of their elements (nearly diagonal for the quarks, highly non diagonal for the neutrinos).
 \item Astrophysical observations indicate the existance of dark matter, but its origin and nature have not been explained yet.
 \end{itemize}
 
-All these open questions stimulate the research for new particles and processes that could provide more fundamental explanations.\\
+All these open questions stimulate the search for new particles and processes that could provide more fundamental explanations.\\
 At the energy frontier, experiments at the Large Hadron Collider (LHC) at CERN (CH) are looking for new particles created from the proton-proton collision with a center mass energy up to 14 TeV.\\
 At the luminosity frontier, instead, new particles and interactions are searched through precision measurements of suppressed reactions or deviations from SM. The discrepancies could be interpreted as a clue of new physics beyond SM. The Belle II experiment at the SuperKEKB is following this last approach .\\
 
@@ -101,9 +101,6 @@ Belle II sensitivity in the precision measurements is feasible expecially thanks
 SuperKEKB (\autoref{fig:superkekb}) is an asymmetric $e^{+}e^{-}$ collider with a circumference of 3 km and a center of mass energy peak equal to  $\sqrt{s}$ = 10.58 GeV, which corresponds to the mass of the $\Upsilon(4S)$ resonance.
 Compared to its predecessor KEKB (which started its operation in 1998 and concluded it in 2010), the current accelerator has allowed to obtain the highest luminosity ever achieved, equal to \num{4.7e34} $cm^{-2}s^{-1}$ in July 2022. This target was possible using a new scheme to accelerate and collide the beams, the so called \textit{nano-beam scheme} (\autoref{sec:nano_beam}). 
 
-\begin{comment}
-Furthermore a new upgrade of the machine, still under study, will also include other interventions expecially to cope with higher background levels, in view of a future increase in luminosity.
-\end{comment}
 
 \begin{figure}[h!]
 \centering
@@ -117,7 +114,7 @@ Furthermore a new upgrade of the machine, still under study, will also include o
 
 \textbf{Luminosity}\\
 
-Istantaneous luminosity is one of the key parameters of any accelerator and it represents the interaction rate per unit of cross section between colliding particles. Inverting this equation is possible to obtain N, namely the number of the physical events produced in the interaction with a given luminosity:
+Instantaneous luminosity is one of the key parameters of any accelerator and it represents the interaction rate per unit of cross section between colliding particles. Inverting this equation is possible to obtain N, namely the number of the physical events produced in the interaction with a given luminosity:
 
 \begin{equation}
 L =\frac{1}{\sigma}\frac{dN}{dt}  \qquad   \Rightarrow \qquad  N = \int_{0}^{T} L\sigma dt
@@ -125,23 +122,29 @@ L =\frac{1}{\sigma}\frac{dN}{dt}  \qquad   \Rightarrow \qquad  N = \int_{0}^{T} 
 
 where T is the duration of the experiment and $\sigma$ the cross section of the physical process of interest. Luminosity is dependent from both machine and beam parameters. With respect to this, it can be expressed as:
 
+\begin{equation}
+L = \frac{N_{-} N_{+}}{2\pi\sqrt{\sigma_{x_{-}}^{2} + \sigma_{x_{+}}^{2}} \sqrt{\sigma_{y_{-}}^{2} + \sigma_{y_{+}}^{2}}} n_{b}f_{rev}R
+\end{equation}
+
+where ''$\pm$'' denotes respectively positrons and electrons beam, $\sigma_{x,y_{\pm}}$ represent the horizontal and vertical beam size, $N_{+,-}$  are the number of particles in a bunch, $n_{b}$ the number of bunches, $f_{rev}$ the revolution frequency, and R the geometrical loss factor. In the interaction region, where the beam-beam interaction becomes important, the following formula is commonly used:
+
 \begin{equation} \label{eq:luminosity_eq}
 L = \frac{\gamma_{\pm}}{2er_{e}} \bigg(1 + \frac{\sigma_{y}^{*}}{\sigma_{x}^{*}} \bigg) \bigg(\frac{I_{\pm}\xi_{y\pm}}{\beta^{*}_{y}} \bigg) \bigg(\frac{R_{L}}{R_{\xi_{y\pm}}} \bigg)
 \end{equation}
 
-where ''$\pm$'' denotes respectively positrons and electrons beam, $\sigma_{x,y}^{*}$ is the beam size at the Interaction Point (IP) in the horizontal and vertical plane, $I$ is the beam current, $\beta_{y}^{*}$ the vertical beta function at the IP. $\xi_{y\pm}$ is the vertical beam parameter which include the horizontal beta function at the IP, the horizontal emittance, the bunch lenght and the crossing angle between the beams. $R_{L}$ and $R_{\xi_{y\pm}}$ are the reduction factors due to geometrical loss such as the hourglass effect and finite crossing.\\
+where the starred parameters refer to their value at the Interaction Point (IP).  $I$ is the beam current, $\beta_{y}^{*}$ the vertical beta function at the IP. $\xi_{y\pm}$ is the vertical beam parameter which include the horizontal beta function at the IP, the horizontal emittance, the bunch lenght and the crossing angle between the beams. $R_{L}$ and $R_{\xi_{y\pm}}$ are the reduction factors due to geometrical loss such as the hourglass effect and finite crossing.\\
 
-As already mentioned, SuperKEKB holds the current world record in luminosity (with $\beta^{*}_{y}$= 1.0 mm) and in the future the target will be to reach \num{6e35} $cm^{-2} s^{-1}$ (by the 2030s), by increasing currents beam and reducing their size at the IP, through the decrease of the betatron function down to $\beta^{*}_{y}= 0.3$ mm. But this process makes the beam-induced background increase significantly, risking deterioration and poor functioning of the detector.
-
-For these reasons the control of the beam backgrounds becomes crucial: right now it has been estimated that the background should remain accettable up to a luminosity value equal to \num{2.8e35} $cm^{-2} s^{-1}$ with $\beta^{*}_{y}$= 0.6 mm.
-So the chance to achieve higher luminosity is closely related to an upgrade plan of both the whole detector and the accelerator.
+As already mentioned, SuperKEKB holds the current world record in luminosity (with $\beta^{*}_{y}$= 1.0 mm) and in the future the target will be to reach \num{6e35} $cm^{-2} s^{-1}$ (by the 2030s), by increasing currents beam and reducing their size at the IP, through the decrease of the betatron function down to $\beta^{*}_{y}= 0.3$ mm. 
+However, the increase in charge in the bunch, causes a reduction of the Touschek lifetime and the injection system is unable to compensate for the loss.
+This process makes also the beam-induced background increase significantly, risking deterioration and poor functioning of the detector.
+It has been estimated that the background should remain accettable up to a luminosity value equal to \num{2.8e35} $cm^{-2} s^{-1}$ with $\beta^{*}_{y}$= 0.6 mm. So the chance to achieve higher luminosity is closely related to an upgrade plan of both the whole detector and the accelerator.
 
 
 \subsection{''Nano-beam'' scheme} \label{sec:nano_beam}
 
 We have seen that the \textit{beta function} $\beta$ at the IP ($\beta^{*}$) is a decisive factor to define the luminosity. To be able to ramp the luminosity up, it is necessary to reduce the value of $\beta$ depending also, but not only, on the variation of the other machine parameters that appear in the~\autoref{eq:luminosity_eq}.
 
-The mechanism used in SuperKEKB is called \textit{nano-beam scheme}, and it allowes to obtain luminosity 40 times greater than that of KEKB, managing to decrease the $\beta^{*}$ by a factor 20 compared to KEKB.\\
+The mechanism used in SuperKEKB is called \textit{nano-beam scheme}, and it allows to obtain luminosity 40 times greater than that of KEKB, managing to decrease the $\beta^{*}$ by a factor 20 compared to KEKB.\\
 
 This new scheme, originally designed by P. Raimondi\cite{Raimondi}, dictates that the beam bunches have to collide with sufficiently small $\sigma_{x}^{*}$ and at large angle. In case of SuperKEKB the angle is equal to 83 mrad at the IP (larger with respect to the crossing angle used in KEKB) with the beam size of 50 nm in the vertical direction and 100 $\mu$m in the horizontal direction (in~\autoref{fig:beam_scheme_comparison} a simplified representation of the differences).
 
@@ -188,6 +191,37 @@ The Belle II detector is a general-purpose spectrometer which consists of a conc
 
 In Table~\ref{detector_summary} a summary of the main characteristics of all subdetectors.
 
+\begin{sidewaystable*}
+\centering
+\caption{Summary of the detector components.}
+\label{tab:detector_summary}
+\small
+\begin{tabularx}{1.0\linewidth}{lcXXXX} 
+\hline
+Purpose & Name & Component & Configuration & Readout channels & $\theta$ coverage \\%& Performance\\
+\hline
+Beam pipe & Beryllium& & Cylindrical, inner radius 10 mm, 10 $\mu$m Au, 0.6 mm Be,
+1 mm paraffin, 0.4 mm Be \\
+\hline
+Tracking 	& PXD& Silicon Pixel (DEPFET)& Sensor size: 15$\times$(L1 136, L2 170) mm$^2$, Pixel size: 50$\times$(L1a 50, L1b 60, L2a 75, L2b 85) $\mu$m$^2$; two layers at radii: 14, 22 mm & 10M & [17$^\circ$;150$^\circ$]\\ 
+ 	   	& SVD& Silicon Strip& Rectangular and trapezoidal, strip pitch: 50(p)/160(n) - 75(p)/240(n) $\mu$m, with one floating intermediate strip; four layers at radii: 38, 80, 115, 140 mm  & 245k& [17$^\circ$;150$^\circ$]\\  
+		& CDC& Drift Chamber with He-C$_2$H$_6$ gas& 14336 wires in 56 layers, inner radius of 160mm outer radius of 1130 mm & 14k & [17$^\circ$;150$^\circ$]\\ 
+\hline
+Particle ID & TOP& RICH with quartz radiator &  16 segments in $\phi$ at $r\sim120$ cm, 275 cm long, 2cm thick quartz bars with 4$\times$4 channel MCP PMTs& 8k& [31$^\circ$;128$^\circ$] \\
+				& ARICH& RICH with aerogel radiator & $2\times$2 cm thick focusing radiators with different $n$, HAPD photodetectors & 78k & [14$^\circ$;30$^\circ$]\\
+\hline
+Calorimetry& ECL&  CsI(Tl)& Barrel: $r=125-162$cm, end-cap: $z=-102-+196$cm & 6624~(Barrel), 1152~(FWD), 960~(BWD) & [12.4$^\circ$;31.4$^\circ$], [32.2$^\circ$;128.7$^\circ$], [130.7$^\circ$;155.1$^\circ$]\\% & $\frac{\sigma E}{E}=\frac{0.2\%}{E}\oplus\frac{1.6\%}{\sqrt[4]{E}}\oplus1.2\%\sim 1.7\%$\\
+\hline
+Muon ID & KLM& barrel:RPCs and scintillator strips 			& 2 layers with scintillator strips  and 12 layers with 2 RPCs& $\theta$ 16k, $\phi$ 16k & [40$^\circ$;129$^\circ$] \\
+			& KLM& end-cap: scintillator strips 	& 12 layers of (7-10)$\times$40 mm$^2$ strips & 17k & [25$^\circ$;40$^\circ$], [129$^\circ$;155$^\circ$]\\		
+%\hline
+%Trigger \\
+\hline
+\end{tabularx}
+\end{sidewaystable*}
+
+
+\begin{comment}
 \begin{table}[h!]
 %\renewcommand*{\figurename}{Table} 
 \centering
@@ -195,6 +229,7 @@ In Table~\ref{detector_summary} a summary of the main characteristics of all sub
 \caption{Summary of the main characteristics of all subdetectors.}
 \label{detector_summary}
 \end{table}
+\end{comment}
 
 
 \subsection{Vertex Detector (VXD)}
@@ -295,7 +330,7 @@ SuperKEKB accelerator reached a peak luminosity of \num{4.7e34} $cm^{-2}s^{-1}$ 
 \label{fig:total_luminosity}
 \end{figure}
 
-The target of SuperKEKB is to achieve a \textit{$L_{ist}$} = \num{6e35} $cm^{-2}s^{-1}$ and to increase the integrated luminosity from 428 $fb^{-1}$ (current value, starting in 2019) to 50 $ab^{-1}$ (as shown in the projection plot in~\autoref{fig:lumy_projection}).\\
+The target of SuperKEKB is to achieve a \textit{$L_{inst}$} = \num{6e35} $cm^{-2}s^{-1}$ and to increase the integrated luminosity from 428 $fb^{-1}$ (current value, starting in 2019) to 50 $ab^{-1}$ (as shown in the projection plot in~\autoref{fig:lumy_projection}).\\
 
 \begin{figure}
 \centering
