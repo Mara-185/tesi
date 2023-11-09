@@ -95,7 +95,7 @@ Dedicated beam background studies have been performed and for example, in~\autor
 Event though the current level is of no concern in terms of occupancy for the innermost layers of the vertex detector, a larger amount of localized SR, for example, could cause inhomogenities in PXD modules, which would be very difficult to compensate by adjusting the operation voltages of the affected ones.\\
 
 Until now it can be said that SuperKEKB and Belle II are operating stably. Beam-induced background rates are well below the limits of the detector and do not prevent from increasing further the current and hence the luminosity, as demonstrated by the predictions for the background rates \textit{before LS2} with a known machine configuration. 
-For what concern the predictions at \textit{$L_{ist}$} = \num{3e35} $cm^{-2}s^{-1}$ instead, called \textit{after LS2} operation, there are several uncertainties tied to the machine configuration. In fact at the moment, the \emph{working machine lattice} to reach the target luminosity is not known and in addition the final design of the IR and beam pipes is not concluded yet.
+For what concern the predictions at \textit{$L_{inst}$} = \num{3e35} $cm^{-2}s^{-1}$ instead, called \textit{after LS2} operation, there are several uncertainties tied to the machine configuration. In fact at the moment, the \emph{working machine lattice} to reach the target luminosity is not known and in addition the final design of the IR and beam pipes is not concluded yet.
 
 Therefore an alternative solution is employed to roughly estimated the background rates. The background predicted Before LS2 phase is considered as a starting point and then different scaling factors are applied for single-beam background component, considering three different possible scenarios:
 
@@ -169,7 +169,7 @@ Some of the main improvements are listed below:
 
 \begin{itemize}
 \item improve signal trasmission on the pixel matrix and the signal processing in the read-out, in order to reduce the read-out time per row from the current 100 ns to 50 ns. In this way the frame time and the background occupancy might be reduce by factor 2, while leaving unchanged the optimized size and number of PXD pixels as it stands;
-\item increase the robustness against beam losses which could make inefficient or even inoperative gate lines on almost all PXD modules. This reaction seems to be due to a high photocurrent on the chip because of the high istantaneous dose. It could be mitigated by adding protection circuits on-chip;
+\item increase the robustness against beam losses which could make inefficient or even inoperative gate lines on almost all PXD modules. This reaction seems to be due to a high photocurrent on the chip because of the high instantaneous dose. It could be mitigated by adding protection circuits on-chip;
 \item Total Ionizing Dose (TID) effect on the chip provokes an unexpected avalanche current that does not compromise the sensor performance but requires more power supply to provide ennough current. This issue might be solved by bringing some changes in the DEPFET pixel layout.
 \end{itemize}
 
@@ -234,7 +234,7 @@ Among all these options that we sift through, the last one has been chosen for t
 \subsection{Silicon On Insulator (SOI)}
 
 An alternative proposal employs a new pixel design, called Dual Timer Pixel (DuTiP), based on SOI technology. In Silicon-On-Insulator (SOI) technology, electronics is fabricated in a silicon layer separated by a $SiO_{2}$ isolation layer from the main detector substrate.
-This new sensor concept has been developed to fullfil the requirements of a new vertex detector with faster readout, lower occupancy, smaller data size and smaller data transfer. In particular, it aims to store at least two hits during Belle II trigger latency (5 $\mu$s), to avoid loss information in higher background environment. \\
+This new sensor concept has been developed to fulfill the requirements of a new vertex detector with faster readout, lower occupancy, smaller data size and smaller data transfer. In particular, it aims to store at least two hits during Belle II trigger latency (5 $\mu$s), to avoid loss information in higher background environment. \\
 
 The size of the new designed pixel is 45 $\mu$m and the sensor layer thickness of 50 $\mu$m, which gives an intrinsic resolution better than 15 $\mu$m. The analog part is quite standard for a binary detector and consists of a sequence of preamplifier, shaper and comparator.  ALPIDE was choosen as analog circuit with some modification to adapt it to SOI technology. 
 The quite complex digital circuit has to be assembled on each pixel, and Lapis semiconductor 2.0 $\mu$m FD-SOI CMOS technology has been chosen, based on the experience gained in the successful development of other detectors like the pixel detector for the future ILC (SOFIST).
