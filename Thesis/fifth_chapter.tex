@@ -33,14 +33,14 @@ This detailed characterization returned crucial results (1, 2) for the Test Beam
 
 \section{Matrix and flavors}
 
-%DEVI SPIEGARE COSA è UGUALE A TJMONOPIX 1 SPIEGATO NEL QUARTO. QUI LE DIFFERENZE E LO STUDIO DELLE CARATTERISTICHE.
-%%%RIFERIMENTO AL 4 SULLE implicazioni delle DIMENSIONI.
 
 TJ-Monopix2 is the next generation small collection electrode DMAPS prototype in TowerJazz 180 nm. The need to create a sensor capable to mantain high efficiency even after irradiation, required improvements compared to TJ-Monopix1 in two important fields: a lower operating threshold to keep a good efficiency with the reduced charge collected after irradiation and smaller pixel pitch to increase charge collection efficiency all over its area, expecially in the corners.\\
 
-To achieve these goals, a different in-pixel front-end circuit was implemented and a lot of efforts have been focused on optimizing pixel layout in order to reduce its size, which has been decreased from \numproduct{36 x 40}~\unit{\micro m^{2}} in TJ-Monopix1 to \numproduct{33.04 x 33.04}~\unit{\micro m^{2}} (pixel \textit{pitch}). As a matter of fact we have seen (REFERENCE) that pixel dimensions are critical to accomplish faster charge collection across all active area, increasing the lateral electric field. For this reason it was necessary a special effort to design and create a smaller pixel but still adequate to embody the full digital readout. All of this required to work at the technology density limit and also to study for further modifications at the circuit design.
+To achieve these goals, a different in-pixel front-end circuit was implemented and a lot of efforts have been focused on optimizing pixel layout in order to reduce its size, which has been decreased from \numproduct{36 x 40}~\unit{\micro m^{2}} in TJ-Monopix1 to \numproduct{33.04 x 33.04}~\unit{\micro m^{2}} (pixel \textit{pitch}). The pixel dimensions are critical to accomplish faster charge collection across all active area, increasing the lateral electric field. For this reason it was necessary a special effort to design and create a smaller pixel but still adequate to embody the full digital readout. All of this required to work at the technology density limit and also to study for further modifications at the circuit design.
 
-In order to operate with a lower threshold TJ-Monopix2 incorporates an improved front-end circuit that reduces the noise by $\approx$ 40\% and the threshold dispersion by about 80-90\% with respect to TJ-Monopix1. Furthermore, in-pixel threshold tuning has been integrated in order to achieve a more uniform threshold distribution across the pixel matrix, particularly after irradiation. [Pixel masking is also improved by employing individual in-pixel configuration memory that eliminates the issue of unintentionally masked ghost pixels and allows for a more efficient configuration of the pixel matrix and reduced noise hit rate.] As a result of these improvements, the operating threshold was expected to be at $\approx$ 100 $e^{-}$, three times lower than in TJ-Monopix1.
+In order to operate with a lower threshold TJ-Monopix2 incorporates an improved front-end circuit that reduces the noise by $\approx$ 40\% and the threshold dispersion by about 80-90\% with respect to TJ-Monopix1. Furthermore, in-pixel threshold tuning has been integrated in order to achieve a more uniform threshold distribution across the pixel matrix, particularly after irradiation. As a result of these improvements, the operating threshold was expected to be at $\approx$ 100 $e^{-}$, three times lower than in TJ-Monopix1.
+
+%[Pixel masking is also improved by employing individual in-pixel configuration memory that eliminates the issue of unintentionally masked ghost pixels and allows for a more efficient configuration of the pixel matrix and reduced noise hit rate.]
 
 
 %-----------------------------------------------------------------------------------------------%
@@ -73,9 +73,7 @@ As we can see in~\autoref{fig:tj2matrix}, the matrix is divided in four sectors,
 
 \subsection{Pixel design}
 
-The \numproduct{2 x 2} pixel core layout, shown in~\autoref{fig:tj2core}, is fully optimized and is designed in order to share as much features as possible between the four pixels. The analog area incorporates the front-end circuit, the 3-bit threshold tuning DAC and the pixel configuration registers. The digital region is composed by the 7-bit LE and TE memory (14 SRAM cells per pixel), the 10 bit address ROM (2 bit for the pixel position inside the core and 8 for the group address) and the readout control logic.
-
-% the readout control logic and the hit delay circuit that is used to correct the BCID propagation delay. 
+The \numproduct{2 x 2} pixel core layout, shown in~\autoref{fig:tj2core}, is fully optimized and is designed in order to share as much features as possible between the four pixels. The analog area incorporates the front-end circuit, the 3-bit threshold tuning DAC and the pixel configuration registers. The digital region is composed by the 7-bit LE and TE memory (14 SRAM cells per pixel), the 10 bit address ROM (2 bit for the pixel position inside the core and 8 for the group address) and the readout control logic. 
 
 \begin{comment}
 Two different token signals are used to set the priority of the pixels during the readout: the \textit{fast} one that propagates across the double column estabilishing the priority between the cores and the \textit{local} one, which arbitrates the reading order of the four pixels inside each core.
@@ -438,7 +436,7 @@ In more details, there are three step for tuning:
 %%SIGLA TOT per la prima volta devi aggiungere, come anche PMOS .
 %TOT VS Q_INJ CALIBRATION CURVE
 
-The analog information on the signal height is provided by the Time Over Threshold (\autoref{fig:ToT}) digitized with a \SI{25}{ns} clock (the BCID clock). 
+The analog information on the signal height is provided by the Time Over Threshold (\autoref{fig:ToT}) digitized with a \SI{25}{ns} clock (BCID clock-frequency is \SI{40}{MHz}). 
 
 \begin{figure}
 \centering
@@ -860,7 +858,7 @@ I_{DISC} = I_{DISC, coarse} + (TCODE - 1) \cdot I_{DISC,fine},  \hspace{.5cm}	wh
 \end{equation}
 } (\vpageref{tuning_eq}), this is the current to multiply by the TDAC value, which is added to $I_{DB}$, during the tuning process.
 \item \textit{$I_{BIAS}$}: this current acts on the pre-amplifier input transistor and influences the threshold dispersion and the gain. In particular increasing this value, the dispersion decreases and the gain becomes greater. Nevertheless it can't be increased a lot because it affects the power consumption, too. %higher rise time? pre-ampl output rise time??
-\item \textit{$V_{RESET}$}: this register influences the threshold dispersion. Lowering its value, the dispersion decreases and vice versa.
+%\item \textit{$V_{RESET}$}: this register influences the threshold dispersion. Lowering its value, the dispersion decreases and vice versa
 \end{itemize}
 
 \begin{comment}
