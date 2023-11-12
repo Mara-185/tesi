@@ -1,14 +1,14 @@
 \chapter{CMOS MAPS sensors} \label{ch:CMOS}
 
-The fourth chapter aims to introduce the essential features of the semiconductor detector technology, going through the history of its advancements, which have led to the currently most promising sensors based on CMOS logic structure, the Monolithic Active Pixel Sensors (MAPS). As we have seen in the previous chapter, the VTX program wants to make the most of the technologies that have already proven reliable in precision measurements, like the TJ-Monopix development line, with also fast readout and high radiation tolerance. We will briefly present it, mentioning the peculiarities of its prototypes, to better understand how they could fulfill the Belle II requirements.
+The fourth chapter aims to introduce the essential features of the semiconductor detector technology, going through the history of its advancements, which have led to the currently most promising sensors based on CMOS logic structure, the Monolithic Active Pixel Sensors (MAPS). The VTX program wants to make the most of the technologies that have already proven reliable in precision measurements, ensuring fast readout and high radiation tolerance, like the TJ-Monopix development line. We will briefly present it, mentioning the peculiarities of its prototypes, to better understand how they could fulfill the Belle II requirements.
 
 
 \section{Semiconductor detectors} 
 
-The detection of elementary particles, nuclei and radiations occurs through their interactions with matter. In particular, charged particles are often detected by atom ionization or excitation of the sensitive detector layers along the path they take passing through. This detection method can be used in gases, liquids and semiconductors. We want to focus on detectors that use semiconductors as sensitive material. \\
+The detection of elementary particles, nuclei and radiations occurs through their interaction with matter. In particular, charged particles are often detected by atom ionization or excitation of the sensitive detector layers along their path passing through. This detection method can be used in gases, liquids and semiconductors. We want to focus on detectors that use semiconductors as sensitive material. \\
 
-All solid can be divided into three categories based on their electrical conductivity: conductors, semiconductors and insulators. 
-In a solid state lattice, the constituent atoms have a dense periodic arrangement and for this reason, the energy of single atoms are split due to the influence of other atoms in the vicinity. The energy levels of some level groups lie energetically so dense (order of meV) that one speaks of \emph{energy bands}, separated from each other by a \emph{band gap}, which represent the distance in energy between them (\textbf{$E_{G}$}, energy gap). The electrical conduction properties of materials are determined by the two highest energy bands, which are the \textbf{valence band (VB)} and the \textbf{conduction band (CB)}. The energy levels within the same band are so dense that the transitions to unoccupied levels, if they are not completely filled, are easly possible. Therefore the electrical conduction properties depend on the band gap between the two lavels and on the band occupation, as we can see in~\autoref{fig:energy_band}.
+All solids can be divided into three categories based on their electrical conductivity: conductors, semiconductors and insulators. 
+In a solid state lattice, the constituent atoms have a dense periodic arrangement and the energy of single atoms are split due to the influence of other atoms in the vicinity. The energy levels of some level groups lie energetically so dense (order of meV) that one speaks of \emph{energy bands}, separated from each other by a \emph{band gap}, which represent the distance in energy between them (\textbf{$E_{G}$}, energy gap). The electrical conduction properties of materials are determined by the two highest energy bands, which are the \textbf{valence band (VB)} and the \textbf{conduction band (CB)}. The energy levels within the same band are so dense that the transitions to unoccupied levels, if they are not completely filled, are easly possible. Therefore the electrical conduction properties depend on the band gap between the two lavels and on the band occupation, as we can see in~\autoref{fig:energy_band}.
 
 \begin{figure}[h!]
 \centering
@@ -182,9 +182,14 @@ In~\autoref{fig:MAPS_fig} is shown a schematic of their structure.
 
 In MAPS pixel detector, charge collection is mostly achieved by diffusion, because the sensitive region is not fully depleted. The collection electrode is a $n^{+}$ contact in a n-well, embedded in a p-epitaxial layer (highly resistive?) put on the top of a p substrate (low ohmic). Other n-wells can be necessary, for example to host PMOS transistors, and for this reason they have to be shielded by deep p-well, to prevent them to become competitive for charge collection. These highly doped deep layers assume a negative potential with respect to the collection electrode and hence a repulsive effect.
 Due to the absence of a drift field in theepi-layer, with the exception of the region immediately below the collection electrode, collection charge occurs mainly by diffusion and thus it is slow and incomplete. 
-Typical values of the epi-layer thickness are within the range of 1 - 20 $\mu$m.
+Typical values of the epi-layer thickness are within the range of 1 - \SI{20}{\micro m}.
 
-Maps detector can't be used in high rates experiments because they have charge collection time of the order of 100 ns, thus too slow and also a not very suitable radiatin tolerance.  But they have successfully employed for heavy ions collisions, like STAR experiment at RHIC (Relativistic Heavy Ion Collider) and the ALICE upgrade at the LHC[chip pALPIDE articolo 1]. [In fact they do not require complex bump-bonding processes and they could be produced in large volumes, so they result ideal for large dimension experiments.]
+These MAPS detector cannot be used in high rates experiments because they have charge collection time of the order of \SI{100}{ns}, thus too slow. The signal in this standard process is very small (typically <= 1500 e-), due to the small thickness of the epitaxial layer, not even fully depleted, and they also have limited radiation tolerance. 
+In fact due to Non-Ionising Energy Loss (NIEL) effects \cite{wermes_book2020}, radiation produces displacement damage in the sensor bulk also creating energy levels in the band gap that acts as trap centers. 
+Electrons and holes can be trapped and then be released again after some time. This produce a decrease of the signal amplitudes if the de-trapping time constant is longer than the time of signal formation. 
+
+Although their limited radiation tolerance MAPS sensors have been successfully employed for heavy ions collisions, like STAR experiment at RHIC (Relativistic Heavy Ion Collider) and the ALICE upgrade at the LHC[chip ALPIDE articolo 1]. [In fact they do not require complex bump-bonding processes and they could be produced in large volumes, so they result ideal for large dimension experiments.]
+
 
 %DIMENSIONI TIPICHE
 
@@ -197,7 +202,8 @@ The depletion depth depends on the substrate resistivity and the bias voltage, a
 d \propto \sqrt{\rho V}
 \end{equation}
 
-For this reason, new processing techniques have been employed to allow applying higher voltage or process high-ohmic substrate wafers. Both of them are used to increase the depletion region and so to provide large and fast signal.
+For this reason, new processing techniques have been employed to allow applying higher voltage or process high-ohmic substrate wafers. Both of them are used to increase the depletion region underneath the collection electrode can be increased (typically to 25– \SI{150}{\micro m}) and so to provide sufficiently large and fast signal.
+
 %HOGH RESISTIVITY SUBSTRATE
 
 We can distinguish two main variants of DMAPS pixel detector: with a \textit{large} or \textit{small} collection electrode, shown in~\autoref{fig:fill_factor}.
@@ -210,14 +216,37 @@ We can distinguish two main variants of DMAPS pixel detector: with a \textit{lar
 \end{figure}
 
 The \textit{large collection electrode} DMPAS features a deep n-well which acting as electrode but also as shield for the entire CMOS electronics for the readout, which is embedded within it. This architecture improve the radiation tolerance because the reduced average drift distance of the charge carriers decreases the probability of trapping. At the same time though, large size of the electrode implicates higher values of capacitance (several hundred fF) which increases the noise and worsens the timing performance.\\
-The \textit{small collection electrode} variants has a small n-well collection node, distanced from the CMOS circuitry which is embedded in p-well and deep p-well layers (following the logic of the opposite doping?). In this design, low capacitance of about 5-20 fF can be obtained, improving noise and timing performance.
+The \textit{small collection electrode} variants has a small n-well collection node, distanced from the CMOS circuitry which is embedded in p-well and deep p-well layers (following the logic of the opposite doping?). In this design, low capacitance of about 5-\SI{20}{fF} can be obtained, improving noise and timing performance.
 Radiation tolerance instead, is more difficult to reach due to larger average distance travelled by the carriers. Smaller pixel dimensions are preferred for small electrode (to reduce the path), and therefore higher power density is accepted in exchange of increased robustness against radiation.\\
 
 %TRAPPING 
-[NOTE ON TRAPPING]
+%[NOTE ON TRAPPING]
 
 %DIMENSIOINI TIPICHE
 
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=.45\textwidth ,keepaspectratio] {alpide_process.jpg}
+\includegraphics[width=.45\textwidth ,keepaspectratio]{modified_process.jpg}
+\caption{Small electrode design adopted in the ALPIDE sensor with the standard process (left) and the process modification with the addition of a low dose n-doped layer used to implement a planar junction and deplete the epitaxial layer over the full pixel area.}
+\label{fig:n_doped}
+\end{figure}
+%CONTROLLA CAPTION
+
+In the standard process adopted for the ALPIDE sensor \cite{AGLIERIRINELLA2017583} it is difficult to deplete the epitaxial layer over its full width as it is shown in~~\autoref{fig:n_doped} left side. 
+In order to achieve the full depletion of the sensitive layer, combined with a low capacitance collection electrode, a planar junction separated from the small collection electrode has been implemented.  A low dose deep n-type implant has been used to realize a planar junction in the epitaxial layer within the pixel matrix below the wells containing circuitry, as shown in~\autoref{fig:n_doped}. 
+The epi-layer is thus depleted from two pn junctions: the deep p-wells and the low dose n-implant, the n-implant and the p-epitaxial layer~\cite{SNOEYS201790}. This addition creates a potential minimum for electron collection underneath the deep p-well with a field direction towards the n collection well, thus strengthening collection of charges laterally\cite{wermes_book2020}. The epi-layer is \SI{25}{\micro m} thick and the collection electrode is on positive potential.
+This modification of the technology has allowed to further improve radiation tolerance. \\
+
+The most probable value (MPV) of the signal released by a Minimum Ionizing Particle (MIP) in the thin MAPS sensitive thickness ($\approx$ \SI{25}{\micro m}) is only about 2000 $e^{-}$. 
+
+The small charge signal achieved in the thin epi-layer (typically 1600 $e^{-}$) becomes a sizable voltage signal (about \SI{50}{mV}) due to the small ($\geq$\SI{5}{fF}) capacitance according to dV = dQ/CD. Therefore voltage (rather than charge) amplification is employed for the readout of small electrode MAPS.
+
+
+%[ESEMPIO DI SEGNALE CON CAPACITAE CARICA RILASCIATA.]
+%IMMAGINE CAMPO ELETTRICO? NO SENSOR CAPACITANCE PENALTY
+\begin{comment}
 However a additional modification of the technology have allowed to further improve radiation tolerance. In~\autoref{fig:n_doped} is displayed an example.\\
 
 \begin{figure}[h!]
@@ -230,7 +259,7 @@ However a additional modification of the technology have allowed to further impr
 
 The epi-layer is depleted from two pn junctions: the deep p-wells and the low dose n-implant, the n-implant and the p-epitaxial layer[CITE ARTICOLO 2]. This addition creates a potential minimum for electron collection underneath the deep p-well with a field direction towards the n collection well, thus strengthening collection of charges laterally[CITE]. The epi-layer is 25 $\mu$m thick and the collection electrode is on positive potential. [ESEMPIO DI SEGNALE CON CAPACITAE CARICA RILASCIATA.]
 %IMMAGINE CAMPO ELETTRICO? NO SENSOR CAPACITANCE PENALTY
-
+\end{comment}
 
 \subsection{Silicon On Insulator (SOI) technology}
 
@@ -277,7 +306,7 @@ Specifically two different lines of DMAPS development have been followed, distin
 
 \subsection{TJ-Monopix line}
 
-In~\autoref{fig:TJ} are displayed the major prototypes that have allowed to design the last iteration of this series, TJ-Monopix 2, whose characterization results will be shown in~\autoref{ch:TJ2}.
+In~\autoref{fig:TJ} are displayed the major prototypes that have allowed to design the last iteration of this series, TJ-Monopix2, whose characterization results will be shown in~\autoref{ch:TJ2}.
 
 \begin{figure}[h!]
 \centering
@@ -288,9 +317,7 @@ In~\autoref{fig:TJ} are displayed the major prototypes that have allowed to desi
 
 The standard TJ 180 nm process has been employed to realize the ALPIDE (sigla) monolithic active pixel sensor, selected for the ALICE Inner Tracking System (ITS) upgrade [reference].
 The chip proved to be suitable for the modest ALICE requirements, but the standard process do not ensure the full depletion volume, which is crucial to limit the signal degradation expecially after irradiation. For this reason, the aforementioned process modification have been developed by CERN in collaboration with the foundry [cite and reference], that allows full depletion of sensitive layer. This new implementation has been tested in a dedicated chip called TJ-Investigator, and the obtained results have been demonstrated the effectiveness of the modified process. \\
-Therefore two large scale demonstrator chips have been realized, called TJ-Monopix1 and TJ-Malta1, whose main difference lies in the different readout architecture. The TJ-Malta1 chip implemented an \textit{asynchronous} readout architecture, which eliminate the Bunc Crossing ID (BCID, timestamp), in order to reduce the digital power consumption. For TJ-Monopix1 instead, a \textit{coulmn-drain} readout architecture was chosen, which will be described in the following. Both chips have been fully tested and irradiated to investigate their functionality and efficiency, which however has decreased from 97 \% to 70 \% after irradiation. The reason was address to the weak lateral field at the pixel edge, so the process has been further optimized in order to resolve this issue and another chip, called mini-Malta, was implemented with this variation to test its efficiency. Results show significant improvement, thus it was implemented in the original Tj-Monopix1 and TJ-Malta1 chips.
-The variation consist in two different structure of the pixel, displayed in~\autoref{fig:enhance_lat} called \textbf{Full deep p-well (FDPW)} and \textbf{Removed deep p-well (RDPW)}. As we can see, the deep p-well underneath the CMOS electronics is reduced at the pixel edge in case of RDPW structure. It can be seen the significant improvement of the electric lateral field, which results in turn in faster charge collection and so high efficiency even after irradiation.
-%[REFERENZE VARIE]
+Therefore two large scale demonstrator chips have been realized, called TJ-Monopix1 and TJ-Malta1, whose main difference lies in the different readout architecture. The TJ-Malta1 chip implemented an \textit{asynchronous} readout architecture, which eliminate the Bunch Crossing ID (BCID, timestamp), in order to reduce the digital power consumption. For TJ-Monopix1 instead, a \textit{coulmn-drain} readout architecture was chosen, which will be described in the following. Both chips have been fully tested and irradiated to investigate their functionality and efficiency, which however has decreased from 97 \% to 70 \% after irradiation with an equivalent neutron fluence of \SI{e15}{n_{eq}/cm^{2}}. 
 
 \begin{figure}[h!]
 \centering
@@ -298,6 +325,21 @@ The variation consist in two different structure of the pixel, displayed in~\aut
 \caption{In the left, the Full deep p-well (FDPW) structure and its lateral electric field, compared with te Removed deep p-well (RDPW) variation. Both of them implemented the process modification with a low dose n implant.}
 \label{fig:enhance_lat}
 \end{figure}
+
+
+The main reason for the efficiency drop has been discovered to be related to the weak lateral electric field at the pixel edges. So the process has been further optimized in order to resolve this issue. Two different approaches were found to increase the lateral electric field at the pixel borders~\cite{Munker_2019}: creating a gap in the deep n-implant \textbf{n-gap} variant, requiring only a mask change, or introducing an additional p-type implant at the pixel border \textbf{extra deep p-well} variant. The n-gap variant is shown in~\autoref{fig:enhance_lat} compared to the previous version.
+
+It can be seen the significant improvement of the electric lateral field, which results in turn in faster charge collection and so high efficiency even after irradiation. 
+
+\begin{comment}
+The reason was address to the weak lateral field at the pixel edge, so the process has been further optimized in order to resolve this issue and another chip, called mini-Malta, was implemented with this variation to test its efficiency. Results show significant improvement, thus it was implemented in the original TJ-Monopix1 and TJ-Malta1 chips.
+The variation consist in two different structure of the pixel, displayed in~\autoref{fig:enhance_lat} called \textbf{Full deep p-well (FDPW)} and \textbf{Removed deep p-well (RDPW)}. As we can see, the deep p-well underneath the CMOS electronics is reduced at the pixel edge in case of RDPW structure.
+\end{comment} 
+
+
+%[REFERENZE VARIE]
+
+
 
 %RIVEDI EXTRA DEEP P WELL
 
@@ -312,19 +354,23 @@ Now we want to describe the readout architecture chosen for TJ-Monopix2, which w
 \end{description}
 
 The \textit{column-drain} architecture implemented in TJ-Monopix ensures fast readout by encoding the analog charge information using the standard \textbf{Time Over Threshold (ToT)} technique. This procedure exploits two timing information: the \textbf{Leading Edge (LE)} which correspond to the hit time of arrival (when the signal valueS goes beyond the threshold), and the \textbf{Trailing Edge (TE)} that is when the signal goes below the threshold value. From the difference between the TE and the LE, the ToT can be calculated. 
-The \textit{in-pixel} circuitry implemented a Random Memory Acces (RAM) where to store the LE and TE timing info, a Read-Only Memory to store the pixel address and the control and arbitration logic, which we will see more about in the following. 
+The \textit{in-pixel} circuitry implemented a Random Memory Acces (RAM) where to store the LE and TE timing info, a Read-Only Memory to store the pixel address and the control and arbitration logic, which we will see more about in the following.
+ 
 The readout is \textit{column-based}, so all pixels of each double column share a common column-bus which could be accessed by one pixel at a time, with a defined priority logic. The column bus includes the BCID timestamp, the data (LE, TE, address) and the control signals.
 The \textit{periphery} includes the End Of Column (EoC) block which deals with the transmission and readout of the column-bus signals, and the Digital Chip Bottom (DCB), that instead, processes the hit information. 
+
 The readout could be triggere or full-readout. In TJ-Monopix line follow the second type, hit data is continuously transmitted to the DAQ. In case of triggered readout, hit data is stored in a trigger memory, and the information is transmitted only when the trigger signal arrives.
 
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=1]{RO}
-\caption{Architecture of TJ-Monopix 2.}
+\caption{Architecture of TJ-Monopix2.}
 \label{fig:RO}
 \end{figure}
 
-In~\autoref{fig:RO2} is displayed an example of the readout of two hits. The readout sequence starts when the TEcpulse arrived. A hit flag is set and it acivates the \textsc{\textbf{TOKEN}} signal, which in turn is arised to warn that the pixel is available to be read out. This signal propgates across the double column with a priority logic until it arrives to a readout controller, which uses other two global signals, the \textsc{\textbf{FREEZE}} and \textsc{\textbf{READ}}, to control the readout progression. They are distributed to across the EoC blocks and local copies are transimitted only to the double column that has been hit and that has the higher priority (It is a different priority logic among each double column which goes from left to right across the matrix).
+In~\autoref{fig:RO2} is displayed an example of the readout of two hits. 
+
+The readout sequence starts when the TE pulse arrived. A hit flag is set and it acivates the \textsc{\textbf{TOKEN}} signal, which in turn is arised to warn that the pixel is available to be read out. This signal propgates across the double column with a priority logic until it arrives to a readout controller, which uses other two global signals, the \textsc{\textbf{FREEZE}} and \textsc{\textbf{READ}}, to control the readout progression. They are distributed to across the EoC blocks and local copies are transimitted only to the double column that has been hit and that has the higher priority (It is a different priority logic among each double column which goes from left to right across the matrix).
 The first ensures that new hits do not interrupt the pixel priority logic setting other new hit flag, which means that they could not transmit new hit information. In this way the pixel priority in the readout sequence is well defined. The latter instead, allows to the pixel with the hit flag and highest priority to access the data bus and transmit the hit information to the periphery. A series of \textsc{\textbf{READ}} cycles allow all pixel in the sequence to be read out.
 
 \begin{figure}[h!]
@@ -349,124 +395,6 @@ The first ensures that new hits do not interrupt the pixel priority logic settin
 % ARTICOLI VARI
 % PRESENTAZIONI
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-%-----------------------------------------------------------------------------------------------
-
-%COMMENT
-
-
-
-% PRIMA IPOTESI INTRODUZIONE -> SPIEGARE BETHE-BLOCH
-\begin{comment}
-The detection of elementary particles, nuclei and radiations occurs through their interactions with matter. For example, charge particles are detected by ionization of matter along the trajectory o through the emission of electromagnetic radiation (bremsstrahlung, Cherenkov and transition radiation). Electrons and photons usually develop \textit{electromagnetic showers} in matter. So, all of them interacts by \emph{electromagnetic force}.
-Neutrons and other hadrons instead, are revealed employing the \emph{strong interaction} through the formation od \textit{hadronic showers}. Neutrinos, eventually, are detected exploiting the \emph{weak interaction}.
-
-Here we want to sift though the main aspects which characterize the detection of charged particles. 
-
-\subsection{Energy loss by ionization}
-
-The dominant processes which affect the energy loss of charged particles in matter is ionization and excitation of the medium's atoms, at least until the particles reach such high energy that they begin to lose it through radiation.
-
-The average energy loss results from a series of individual stochasti processes, and its behaviour per path lenght is described by the \textit{Bethe-Bloch formula}:
-
-\begin{equation}
--\biggl\langle \frac{dE}{dx} \biggr\rangle = K \frac{Z}{A} \rho \frac{z^{2}}{\beta^{2}} \biggl[ \frac{1}{2} \ln(\frac{2m_{e}c^{2}\beta^{2}\gamma^{2} T_{max}}{I^2}) - \beta^{2} - \frac{\delta(\beta\gamma)}{2} - \frac{C(\beta\gamma,I)}{Z} \biggr]
-\label{eq:bethe}
-\end{equation}
-
-All the various quantities are explained above:
-
-\begin{itemize}
-\item $K = 4\pi N_{A} r^{2} m_{e} c^{2}$ = 0.307 MeV $cm^{2} mol^{-1}$, with the elctron radius $r_{e} = \frac{e^{2}}{4\pi \epsilon_{0} m_{e} c^{2}} \approx 2.8 fm $
-\item Z, A, $\rho$ are the atomic number, the atomic mass and the density of the medium, respectively.
-\item $z, \beta$ are the charge and the velocity of the particle passing through the matter.
-\item I is the mean excitation energy, which describes how easily a target, typically a molecule or atom can absorb kinetic energy from the projectile.
-\item $T_{max}$ is the maximum energy that is possible to transfer to a shell electron in a central collision.
-\item $\delta$ is the \textit{density correction}, which takes into account a relativistic effect that is the increasing transverse extension of the electric field with $\gamma$.
-\item $\frac{C}{Z}$ is a shell correction, relevant for small $\beta$ values.
-\end{itemize}
-
-[description of the curve?]
-
-The Bethe-Bloch formula describes the mean energy loss of particles traversing a medium and so it is also called \textit{\textbf{stopping power}}. 
-As we mentioned above, the energy loss process has a statistical nature, because it is determined by many ionization or excitation cases, which contributes individually to the formula. Both the number N of total processes and the emitted energy in each one of them, produce fluctuation in the enrgy lost by a particle and as consequence of the energy deposited in the material. They are known as \textit{Landau fluctuations} and they can influence the performance of detectors, so they must be considered. For example in particle identification by the measurement of $\< dE/dx \>$, these fluctuations widen the width of the distribution, worsening the resolution in distinguishing different particle species. In tracking detectors instead, they reduce the space resolution.
-
-[bremss]
-
-\end{comment}
-
-
-\begin{comment}
-There are two type of motions affecting charge carriers moving in electric and magnetic field:
-
-\begin{itemize}
-\item An unordered motion with a velocity distribution, classically decribed by the Maxwell-Boltzmann distribution, valid in thermal equilibrium and in absence of an electric field. For example, if there is a concentration gradient in the medium, charges created locally tend to diffuse causing a dispersion of the local charge distribution.
-\item A drift movement determined (induced) by the presence of the external electric and magnetic fields. The \textit{drift velocity} $\vec v_{D}$ is the result from a balance between the electric force that aceelerates the charged particles and a friction force arising from collisions with atoms and molecules. In most cases drift velocity is much smaller then the mean velocity $\bigl\langle v \bigr\rangle$.
-\end{itemize}
-
-The charge carriers motion in semiconductors is described by the Boltmann transport equation () which includes both diffusion and drift motions (figure). However a specific account on the motion of charge carriers is necessary because lattice phenomena have to be taken into account. 
-
-\begin{description}
-\item[DRIFT MOTION]
-\end{description}
-
-\begin{description}
-\item[DIFFUSION MOTION]
-\end{description}
-
-\end{comment}
 
 
 
