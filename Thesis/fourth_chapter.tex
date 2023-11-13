@@ -292,22 +292,23 @@ A schematic layout of the chip is shown in~\autoref{fig:obelix_scheme} . The siz
 
 As mentioned above, this new sensor is the development of TJ-Monopix2, whose characteristics fit already many of the Belle II requirements (\autoref{tab:obelix_specification}).\\
 
-\begin{comment}
-\begin{landscape}
-\begin{table}
+%\begin{comment}
+\begin{sidewaystable}
+
+%\begin{table}
 \centering
 \begin{tabular}{lc|c}
 \hline
 \hline
  & Specification & TJ-Monopix2\\
 \hline
-Pixel pitch & $< 40$\mum & $< 33 \mum$ \\
-Sensitive layer thickness & $< 50 \mum$ & $30 \mum$ and $ 100\mum$ \\
-Sensor thickness & $< 100$\mum & - \\
+Pixel pitch & $< 40 \mu m$ & $< 33 \mu m$ \\
+Sensitive layer thickness & $< 50 \mu m$ & $30 \mu m$ and $ 100\mu m$ \\
+Sensor thickness & $< 100\mu m$ & - \\
 \hline
 Hit rate capability in the matrix & $> 600$~MHz~cm$^{-2}$ & $> 600$~MHz~cm$^{-2}$ \\
 Hit rate capability at the sensor output & $>120$~MHz~cm$^{-2}$ & $\gg 100$~MHz~cm$^{-2}$ \\
-Trigger delay & $>10 \mus$ & - \\
+Trigger delay & $>10 \mu s$ & - \\
 Trigger rate & $30$~kHz & - \\
 %(optional) Track-trigger capability & \rem{to fill} & - \\
 Overall integration time & $<100$~ns & - \\
@@ -317,26 +318,28 @@ Total ionizing dose tolerance & 100~kGy/year & 1~MGy/year \\
 NIEL fluence tolerance & \SI{5 e 13}{n_{eq}/cm^2/year}  & \SI{1.5 e 15}{n_{eq}/cm^2/year} \\
 SEU tolerance & frequently (~min$^{-1}$) flash configuration & - \\
 \hline
-Matrix dimensions & around $30 \times 16 \mma$ & $19 \times 19 \mma$ \\
-Overall sensor dimensions & around $30 \times 19 \mma$ & $20 \times 19 \mma$\\
+Matrix dimensions & around $30 \times 16 mm^{2}$ & $19 \times 19 mm^{2}$ \\
+Overall sensor dimensions & around $30 \times 19 mm^{2}$ & $20 \times 19 mm^{2}$\\
 Powering & through voltage regulators & - \\
 Outputs & one at $<200 \rm{ MHz}$ & one at $160$~MHz \\
 \hline
 \hline
 \end{tabular}
 \caption{OBELIX sensor specifications, compared to the relevant specification of the TJ-Monopix2 sensor.}
-\label{table:vxd-obelix-spec}
+\label{tab:obelix_specification}
 %\caption{bandwidth with average hit rate and max hit rate}
-\end{table}
-\end{landscape}
-\end{comment}
+%\end{table}
+\end{sidewaystable}
+%\end{comment}
 
+\begin{comment}
 \begin{table}[h!]
 \centering
 \includegraphics[scale=.6]{obelix_specification}
 \caption{Comparison between BELLE II requirements and TJ-Monopix2 features.}
 \label{tab:obelix_specification}
 \end{table}
+\end{comment}
 
 From TJ-Monopix2 design, the pixel size of \numproduct{33 x 33}~\unit{\micro m^{2}} is maintained, as well as the layout of both digital and analog parts (\autoref{sec:TJ}). Also the Time-Over-Threshold method to digitize the signal is preserved, with a bus width of 7 bit, togheter with the column-drain readout architecture implemented for pairs of columns. Other features, which will be explained in depth in~\autoref{ch:TJ2}, have been conserved in the new design like the 3-bit register dedicated to the threshold tuning, but with a larger range of correction for the last bit. 
 Moreover to aim at the integration time of \SI{100}{ns}, the clock frequency which defines the precision of ToT and BCID (that is the timestamp), has been decreased from 40 to \SI{20}{MHz}. So the current baseline for OBELIX timestamp precision is \SI{50}{ns}.
