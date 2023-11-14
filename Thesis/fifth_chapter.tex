@@ -37,7 +37,27 @@ TJ-Monopix2 is the next generation small collection electrode DMAPS prototype in
 
 To achieve these goals, a different in-pixel front-end circuit was implemented and a lot of efforts have been focused on optimizing pixel layout in order to reduce its size, which has been decreased from \numproduct{36 x 40}~\unit{\micro m^{2}} in TJ-Monopix1 to \numproduct{33.04 x 33.04}~\unit{\micro m^{2}} (pixel \textit{pitch}). The pixel dimensions are critical to accomplish faster charge collection across all active area, increasing the lateral electric field (\autoref{sec:TJ}). For this reason it was necessary a special effort to design and create a smaller pixel but still adequate to embody the full digital readout. All of this required to work at the technology density limit and also to study for further modifications at the circuit design.
 
-In order to operate with a lower threshold TJ-Monopix2 incorporates an improved front-end circuit that reduces the noise by $\approx$ 40\% and the threshold dispersion by about 80-90\% with respect to TJ-Monopix1. Furthermore, in-pixel threshold tuning has been integrated in order to achieve a more uniform threshold distribution across the pixel matrix, particularly after irradiation. As a result of these improvements, the operating threshold was expected to be at $\approx$ 100 $e^{-}$, three times lower than in TJ-Monopix1.
+In order to operate with a lower threshold TJ-Monopix2 incorporates an improved front-end circuit that reduces the noise by $\approx$ 40\% and the threshold dispersion by about 80-90\% with respect to TJ-Monopix1. Furthermore, in-pixel threshold tuning has been integrated in order to achieve a more uniform threshold distribution across the pixel matrix, particularly after irradiation. As a result of these improvements, the operating threshold was expected to be at $\approx$ 100 $e^{-}$, three times lower than in TJ-Monopix1, the noise less than 8 $e^{-}$, and the threshold dispersion less than 10 $e^{-}$ (\autoref{tab:tj2_spec}) \cite{Moustakas:2021gjr}. 
+
+\medskip
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{c|c}
+Specification & Value \\
+\hline
+\hline
+Threshold & $\approx$ 100 $e^{-}$\\
+\hline
+Noise & $\leq$ 8 $e^{-}$ \\ 
+\hline
+Threshold dispersion & $\leq$ 10 $e^{-}$\\
+\hline
+\hline
+\end{tabular}
+\caption{Specification of TJ-Monopix2.}
+\label{tab:tj2_spec}
+\end{table}
 
 
 %-----------------------------------------------------------------------------------------------
@@ -46,13 +66,14 @@ In order to operate with a lower threshold TJ-Monopix2 incorporates an improved 
 
 The protype is a \numproduct{2 x 2}~\unit{cm^{2}} pixel matrix which consists of \numproduct{512 x 512} pixels. The total active area is approximately \SI{286}{mm^{2}} and it is \SI{300}{\micro m} thick.
 
-
+\begin{comment}
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=.6]{Tj1pix_cov}
 \caption{Detection efficiency map of a TJ-Monopix1 chip with \SI{25}{\micro m} p-epitaxial layer that has been irradiated to \SI{e15}{n_{\textit{eq}}/cm^{2}} NIEL.}
 \label{fig:tj1pix_cov}
 \end{figure}
+\end{comment}
 
 As we can see in~\autoref{fig:tj2matrix}, the matrix is divided in four sectors, named \textbf{flavors} that implement different variation of the front-end circuit. In the first two flavors the collection electrode is DC-coupled directly with the readout electronics,  the continuous baseline reset is implemented by a forward bias diode and they differ for the pre-amplifier circuit design. The second flavor indeed, named \textbf{Cascode FE}, includes an extra-cascode transistor that increases the pre-amplifier gain which in turn leads to a 50\% reduction of the threshold dispersion compared to the first flavor, the \textbf{Normal FE}. The other two flavors consist of AC-coupled pixels (through a metal-oxide-metal MOM capacitor) and in particular, the \textbf{HV-Cascode FE} also incorporates the aforementioned pre-amplifier variation. AC-coupling allows to apply an high positive bias voltage (HV stands for High Voltage) to the collection electrode which potentially enlarges the depleted region, but at the same time it also causes signal losses mainly due to the additional parasitic capacitance introduced at the sensitive input node.\\
 
@@ -67,7 +88,7 @@ As we can see in~\autoref{fig:tj2matrix}, the matrix is divided in four sectors,
 
 %-----------------------------------------------------------------------------------------------%
 
-\subsection{Pixel design}
+\subsection{Pixel design}\label{sec:improved_circuit}
 
 The \numproduct{2 x 2} pixel core layout, shown in~\autoref{fig:tj2core}, is fully optimized and is designed in order to share as much features as possible between the four pixels. The analog area incorporates the front-end circuit, the 3-bit threshold tuning DAC and the pixel configuration registers. The digital region is composed by the 7-bit LE and TE memory (14 SRAM cells per pixel), the 10 bit address ROM (2 bit for the pixel position inside the core and 8 for the group address) and the readout control logic. 
 
@@ -78,10 +99,6 @@ The \numproduct{2 x 2} pixel core layout, shown in~\autoref{fig:tj2core}, is ful
 \label{fig:tj2core}
 \end{figure}
 
-
-%-----------------------------------------------------------------------------------------------%
-
-\subsubsection{Improved front-end circuit design}\label{sec:improved_circuit}
 
 As we have seen above, there are two variations of the front-end circuit (\autoref{fig:tj2_circuit}), such as \textit{normal} and \textit{cascode} type. The latter in particular includes an extra cascode transistor which increases the pre-amplifier gain and consequently reduces the threshold dispersion.\\
 Moreover in TJ-Monopix2 it was preferred to incorporate a simple diode to reset the input node instead of a PMOS transistor, which was the techonology implemented in TJ- Monopix1. A side effect of this choice is that the relationship between charge injected and the ToT of the detected signal is not linear anymore, because the diode is a not linear element and its discharge rate also depends on the collected charge. Indeed in the following analysis it was necessary to fit the ToT trend with a more complex function. But at the same time, the advantages are its simplicity ($p^{+}$ diffusion within the n-well collection electrode) and also the fact that it allows to increase radiation tolerance to Total Ionizing Dose (TID) effects, which was one of the key working area in the upgrade of the sensor.
@@ -110,16 +127,20 @@ In the last two AC-coupled flavors are implemented the same improvements, but he
 \textbf{Explain here what are NOISE, THR and THR dispersion, and why they are important figure of merit for the operation.} 
 
 see for example Eleonora's thesis sec 4.1.1. 
+commento di test
+
+
 
 
 To measure the threshold and noise of the whole matrix, the response of each pixel has been characterized by means of the internal charge injection. \\
 
-\subsection{Injection circuit} \label{inj_circuit_subsection}
+\subsection{Injection circuit} 
+\label{inj_circuit_subsection}
 
 The hit injection circuit included in TJ-Monopix2 is similar to the one of TJ-Monopix1. 
 It allows to produce artificial hits on each pixel through an injection capacitance \textbf{$C_{inj}$} connected at the collection electrode. The injected charge is proportional to the injection voltage pulse amplitude: $Q_{inj} = C_{inj} \cdot \Delta V_{inj}$. The injection pulse is set by two registers ''\textbf{$V_{L}$}'' and ''\textbf{$V_{H}$}'', with $\Delta V_{inj}$ = \textbf{$V_{H}-V_{L}$}, and the minimum injection step is given by the DAC resolution, with the \textit{Least Significant Bit} (LSB) = 7.03 mV. 
 
-The injected signal is then often expressed in DAC units $Q_{inj}(DAC)$ and can be converted to electrons using the design value of the injection capacitance \textbf{$C_{inj}= 230\ aF$}, the same for the all the FEs implemented.  
+The injected signal is then often expressed in DAC units $Q_{inj}(DAC)$ and can be converted to electrons using the design value of the injection capacitance \textbf{$C_{inj}= 230\ aF$}, the same value for the all the FEs implemented.  
 The nominal conversion factor $K$ from DAC to $e^{-}$ corresponds to the injected charge given by a voltage step of 1 DAC: 
 
 \begin{equation}
@@ -149,6 +170,7 @@ Assuming a gaussian noise distribution the S-curve can be fit with the \textit{C
 
 \begin{equation}
  CDF(x,\mu,\sigma) = \frac{1}{2} \cdot \bigg(1 + \textit{erf}\bigg(\frac{x-\mu}{\sigma \sqrt{2}}\bigg)\bigg)
+\label{eq:s-curve}
 \end{equation}
 
 where ''\textit{erf}'' is the Gauss error function, $x$ is the injected signal, $\mu$ and $\sigma$ are respectively the threshold and noise of the pixel.  \\
@@ -204,9 +226,9 @@ $I_{TUNE}$ & 53 & 53\\
 \end{figure}
 
 
-In~\autoref{fig:norm_scurve_140} are plotted all the s-curves of the all Normal flavor pixels. The width of the figure is a first indication of the threshold dispersion of the whole flavor.\\
-
-The threshold and noise distributions measured by the s-curve method, have been fitted with a gaussian distribution and they are shown in~\autoref{fig:thdist_norm} with their maps, too.
+In~\autoref{fig:norm_scurve_140} are plotted all the s-curves of the all Normal flavor pixels. The width of the figure is a first indication of the threshold dispersion of the whole flavor.
+For each pixel the s-curve was fitted with the \autoref{eq:s-curve} to extract their threshold and noise.  
+The threshold and noise distributions measured for all pixels of the Normal FE sub-matrix are shown in~\autoref{fig:thdist_norm},  with their maps too. A fit with a gaussian distribution is used to extract the average threshold and noise values and their dispersion across the sub-matrix, and results are summarized in \autoref{tab:th_noise_all}.
 
 \begin{figure}[h!]
 \centering
@@ -217,8 +239,8 @@ The threshold and noise distributions measured by the s-curve method, have been 
 \subfigure[Noise distribution]
 {\includegraphics[scale=0.35]{Noise_hist_norm_140_fit}}\quad
 \subfigure[Noise map]
-{\includegraphics[scale=0.37]{Noise_map_norm_140}}\\
-\caption{Normal FE.}
+{\includegraphics[scale=0.37]{Noise_map_norm_140_lim}}\\
+\caption{Normal FE flavor: threshold and noise distributions and their maps}
 \label{fig:thdist_norm}
 \end{figure}
 
@@ -236,7 +258,7 @@ In~\autoref{fig:casc_scurve140} the s-curves of all pixels are shown.
 \label{fig:casc_scurve140}
 \end{figure}
 
-The maps and the fit of the threshold and noise distributions instead, are shown in~\autoref{fig:thdist_casc}.
+The distributions of threshold and noise extracted with the fit to the s-curve, with their maps, are shown in~\autoref{fig:thdist_casc}. Results for Cascode FE flavor are summarized in \autoref{tab:th_noise_all}.
 
 
 \begin{figure}[h!]
@@ -248,8 +270,8 @@ The maps and the fit of the threshold and noise distributions instead, are shown
 \subfigure[Noise distribution]
 {\includegraphics[scale=0.35]{Noise_hist_casc_140_fit}}\quad
 \subfigure[Noise map]
-{\includegraphics[scale=0.37]{Noise_map_casc_140}}\\
-\caption{Cascode FE.}
+{\includegraphics[scale=0.37]{Noise_map_casc_140_lilm}}\\
+\caption{Cascode FE:threshold and noise distributions and their maps}
 \label{fig:thdist_casc}
 \end{figure}
 
@@ -329,26 +351,30 @@ As we will see in the following (\autoref{sec:xtalk}), the atypical s-curves in 
 
 \subsubsection{Summary Table}
 
-In~\autoref{tab:th_noise_all} a summary of results for threshold, noise and threshold dispersion of all FE.
+In~\autoref{tab:th_noise_all} a summary of results for threshold, noise and threshold dispersion of all FE in DAC and $e^{-}$ unit, using the nominal conversion factor in~\autoref{eq:conversion_factor}.
 
+%\begin{tabular}{>{\columncolor{NavyBlue!70}} C{3cm}|C{2.8cm}|C{2.8cm}}
 \begin{table}[h!]
 \centering
-\begin{tabular}{>{\columncolor{NavyBlue!70}} c|c|c|c}
+\begin{tabular}{>{\columncolor{NavyBlue!70}} C{1.3cm}|C{1.7cm}|C{1.6cm}|C{1.8cm}|C{1.6cm}|C{1.8cm}|C{1.9cm}}
 \rowcolor{CornflowerBlue}
-Front-End & Threshold [DAC] & Threshold dispersion [DAC] & Noise [DAC]\\
+FE & Threshold [DAC] & Threshold [$e^{-}$] & Threshold dispersion [DAC] & Threshold dispersion [$e^{-}$] & Noise [DAC] & Noise [$e^{-}$]\\
 \hline
-Normal  & 53.62 $\pm$ 0.01 & 2.21 $\pm$ 0.01 & \shortstack{2.503 $\pm$ 0.005 \\ 3.037 $\pm$ 0.002}\\
 \hline
-Cascode & 60.19 $\pm$ 0.01 & 2.81 $\pm$ 0.01 & 2.400 $\pm$ 0.003\\
+Normal  & 53.62$\pm$0.01 & 541.6$\pm$0.1  & 2.21$\pm$0.01 & 22.3$\pm$0.1 & \shortstack{2.503$\pm$0.005 \\ 3.037$\pm$0.002} & \shortstack{25.28$\pm$0.05 \\ 30.67$\pm$0.02}\\
 \hline
-HV - Cascode & 35.34 $\pm$ 0.05 & 2.59 $\pm$ 0.05 & 1.0781 $\pm$ 0.0003\\
+Cascode & 60.19$\pm$0.01 & 607.9$\pm$0.1 & 2.81$\pm$0.01 & 28.4$\pm$0.1 & 2.400$\pm$0.003 & 24.24$\pm$0.03\\
 \hline
-HV & 31.70 $\pm$ 0.10 & 2.30 $\pm$ 0.10 & 1.080 $\pm$ 0.033\\
+HV - Cascode & 35.34$\pm$0.05 & 356.9$\pm$0.5 & 2.59$\pm$0.05 & 53.4$\pm$0.5 & 1.0781$\pm$0.0003 & 10.889$\pm$0.003\\
+\hline
+HV & 31.70$\pm$0.10 & 320$\pm$1 & 2.30$\pm$0.10 & 23$\pm$1 & 1.080$\pm$0.033 & 10.91$\pm$0.33\\
 \hline
 \end{tabular}
 \caption{Summary table of threshold and noise values for all flavors of the W14R12 chip.}
 \label{tab:th_noise_all}
 \end{table}
+
+The measured values are much higher than expected in a convenient working condition (\autoref{tab:tj2_spec}). However, as we have pointed out in the previous, we have carried out the characterization of the matrix response adopting the TB register settings, to obtain results essential for the TB data reconstruction, and not to work in optimized conditions.
 
 
 
@@ -357,7 +383,6 @@ HV & 31.70 $\pm$ 0.10 & 2.30 $\pm$ 0.10 & 1.080 $\pm$ 0.033\\
 %--------------------------------------------------------------------
 \subsection{Threshold dispersion and tuning} \label{sec:tuning}
 
-%CITAZIONE 8BIT BIASING DAC NEL PRECEDENTE???
 
 TJ-Monopix2 is equipped with a circuit which allows the \textit{threshold tuning}. We have already mentioned that the analog part of the in-pixel front-end (\autoref{fig:tj2core}) includes the 3-bit threshold tuning DAC, that can be used to adjust the discriminator threshold of each pixel with respect to the global chip threshold level thus reducing hte threshold dispersion. In other words it can adjust every pixel threshold, in order to have a threshold on the matrix as uniform as possible, or in any case a dispersion as small as possible, which is especially imoprtant to operate the matrix with low threshold, needed with the reduced collection efficiency due to radiation damage.  This system has been design in order to counteract some negative effects that affect the threshold dispersion like systematics (for example related to biasing), process and temperature variations and radiation damage. \\
 
@@ -381,7 +406,6 @@ For example if the 3-bit DAC are set to ''111'', the decimal representation is 8
 \label{fig:tdac}
 \end{figure}
 
-%MA COME AGISCE IDISC: 19.10 LOGBOOK increasing TDAC/IDISC, lower threshold
 
 \subsubsection{First results from threshold tuning}
 
@@ -402,15 +426,6 @@ It has been trying to apply the fine tuning method to level out the threshold of
 
 As we can see the dispersion has been reduced of the 42\% after the tuning and as consequence also the estimation of the threshold is more precise. In~\autoref{fig:casc_maps_tune} are displayed the maps of the threshold and of the TDAC values, such as the value of TCODE assigned at each pixel, in order to obtain a threshold as uniform as possible. \\
 
-\begin{comment}
-In more details, there are three step for tuning:
-
-\begin{itemize}
-\item launch a first threshold scan through the internal charge injection, with a TDAC value equal for all pixels (usually default value is TDAC= 4).
-\item start a TDAC analysis which allows to choose a target threshold. During this phase, a tool tries to assign the optimized value of TDAC at each pixel in several steps, in order to get as close as possible to the set threshold. At the end it returns the final TDAC values for all selected pixels.
-\item At last another scan is launched setting the TDAC of each pixel passing the TDAC map values obtained from the previous. 
-\end{itemize}
-\end{comment}
 
 \begin{figure}[h!]
 \centering
@@ -426,19 +441,17 @@ In more details, there are three step for tuning:
 %--------------------------------------------------------------------
 \section{ToT calibration with internal injection}
 
-%%SIGLA TOT per la prima volta devi aggiungere, come anche PMOS .
-%TOT VS Q_INJ CALIBRATION CURVE
 
 The analog information on the signal height is provided by the Time Over Threshold (\autoref{fig:ToT}) digitized with a \SI{25}{ns} clock (BCID clock-frequency is \SI{40}{MHz}). 
 
 \begin{figure}
 \centering
 \includegraphics[scale=.7]{ToT3}
-\caption{...}
+\caption{Time Over Threshold (ToT) method to encode the charge analog information.}
 \label{fig:ToT}
 \end{figure}
 
-As it has been pointed out in the previous, the choice to use a simple diode instead of a PMOS transistor as reset input baseline element, increases the tolerance to TID radiation but at the same time it implicates a non-linear relationship between the injected charge and the ToT. For this reason, one of the goal of this analysis was to measure the calibration curve ToT vs $Q_{inj}$ via the internal injection. The fit to the calibration curve allows to find the conversion factor needed to reconstruct the signal amplitude. It also allows an absolute calibration of the injection capacitance comparing the results with the ToT response from the radioactive source with known released signal.
+As it has been pointed out in the previous sections, the choice to use a simple diode instead of a PMOS transistor as reset input baseline element, increases the tolerance to TID radiation but at the same time it implicates a non-linear relationship between the injected charge and the ToT. For this reason, one of the goal of this analysis was to measure the calibration curve ToT vs $Q_{inj}$ via the internal injection. The fit to the calibration curve allows to find the conversion function needed to reconstruct the signal amplitude. It also allows an absolute calibration of the injection capacitance, done comparing the results of the ToT response from the radioactive source with known released signal, with the response to the same signal through the injection circuit.
 
 
 %--------------------------------------------------------------------
@@ -451,7 +464,7 @@ The calibration function adopted to describe the $Q_{inj}$-ToT relationship was 
 
 
 %--------------------------------------------------------------------
-\subsection{Time Over Threshold (TOT) curves and fit} \label{sec:tot_fit}
+\subsection{Time Over Threshold (ToT) curves and fit} \label{sec:tot_fit}
 
 The ToT vs $Q_{inj}$ responses for the four flavors of the matrix (using the same TB register settings) are shown in~\autoref{fig:tot_fe}
 The function chosen to describe the calibration curves is:
@@ -485,10 +498,16 @@ In~\autoref{tab:th_fe} are reported the results of the fits for all parameters.
 \begin{tabular}{c|c|c|c|c}
  & \textbf{Normal} & \textbf{Cascode} & \textbf{HV Cascode} & \textbf{HV} \\
 \hline
+\hline
 \textit{a$\pm\Delta$a [$\frac{ToT}{DAC}$]} & 0.12$\pm$0.07 & 0.12$\pm$0.01 & 0.257$\pm$0.007 & 0.275$\pm$0.008 \\
+\hline
 \textit{b$\pm\Delta$b [ToT]} & 4$\pm$18 & 1.4$\pm$3.1 & 3.2$\pm$1.4 & 2.3$\pm$1.6 \\
+\hline
 \textit{c$\pm\Delta$c [ToT$\cdot$DAC]} & 200$\pm$1100 & 140$\pm$130 & 160$\pm$70 & 140$\pm$80 \\
+\hline
 \textit{t$\pm\Delta$d [DAC]} & 20$\pm$90 & 40$\pm$15 & 17$\pm$6 & 13$\pm$8 \\
+\hline
+\hline
 \end{tabular}
 \caption{Parameters obtained from the fit of ToT curve for each frontend.}
 \label{tab:th_fe}
@@ -514,10 +533,15 @@ In~\autoref{tab:th_fe} are reported the results of the fits for all parameters.
 
 %06/10/2022 LOGBOOK
 
-The absolute calibration of the matrix consists in characterizing the response of each pixel to a known signal, like the emission peaks of radioactive sources, then comparing the results with the response from the internal injection circuit to the same amount of charge. By the means of the $Q_{inj}$ - ToT fit (\autoref{sec:tot_fit}), it is possible to convert the ToT signal value to collected charge.\\
-Three different X-rays radioactive sources were used to study the signal spectrum of the matrix, with emission lines from 6 to 60 KeV (corresponding approximately to 1600 and 16000 e- respectively).
-In fact the knowledge of the sources emission spectrum (in other words, the charge released in the matrix from particles emitted in decays) allows to compare the spectra obtained irradiating the chip, with the expected value of their peaks. It is worth mentioning that only the events in which all charge inducted is collected in a single pixel are part of the peaks reconstructed by the chip.\\
-The absolute calibration of the conversion factor of~\autoref{eq:conversion_factor} (i.e. of the injection capacitance $C_{inj}$) is performed with the \SI{5.9}{KeV} peak of the \ch{^{55}Fe} source ($approx$ 1616 $e^{-}$), that is still in the range explored with the injection circuit. The other radioactive sources allowed to extend the ToT comparison at higher values with respect to the limit imposed by the saturation of the internal injection circuit. In~\autoref{tab:radio_sources} are shown the energies of the $\gamma$ emitted by the sources used.\\
+After the characterization with the internal injection circuit we also measured the response of the matrix to three different X-rays radioactive sources, \ch{^{55}Fe}, \ch{^{241}Am}, \ch{^{109}Cd}, whith emission lines from 6 to 60 KeV, orresponding to approximately to 1600 to 16000 e- signal charge released in the silicon, as shown in \autoref{tab:radio_sources}.
+
+In this way we could perform an absolute calibration of the response of the matrix and also extend the study of the ToT spectrum above the limited range of the internal injection circuit (only limited to about 1700 e-). This is useful to verify if the fitted calibration curve TOT vs Qinj describes well the response of the matrix also to higher signal, that could be deposited by a MIP due to the long tail of the Landau distribution. 
+
+The absolute calibration of the matrix consists in characterizing the response of each pixel to a known signal, like the emission peaks of radioactive sources, then comparing the results with the response from the internal injection circuit to the same amount of signal, as explained in \autoref{sec:inj_cap_calib}. 
+%By the means of the $Q_{inj}$ - ToT fit (\autoref{sec:tot_fit}), it is possible to convert the ToT signal measured from the source to collected charge.\\
+%Three different X-rays radioactive sources were used to study the signal spectrum of the matrix, with emission lines from 6 to 60 KeV (corresponding approximately to 1600 and 16000 e- respectively).
+%In fact the knowledge of the sources emission spectrum (in other words, the charge released in the matrix from particles emitted in decays) allows to compare the spectra obtained irradiating the chip, with the expected value of their peaks. It is worth mentioning that only the events in which all charge inducted is collected in a single pixel are part of the peaks reconstructed by the chip.\\
+The absolute calibration of the conversion factor of~\autoref{eq:conversion_factor}, equivalent to measurement of the injection capacitance $C_{inj}$,  is performed with the \SI{5.9}{KeV} peak of the \ch{^{55}Fe} source (~ 1616 $e^{-}$), that is still in the range explored with the injection circuit. The other radioactive sources, with high energies, allowed to extend the ToT comparison at higher values with respect to the limit imposed by the saturation of the internal injection circuit. In~\autoref{tab:radio_sources} are shown the energies of the $\gamma$ emitted by the sources used.\\
 Considering that the average energy necessary to produce an electron/hole pair in silicon is 3.65 eV, it is possible to convert the peak energies in a mean value of electrons released using the~\autoref{eq:energy_electron_conv}. So in~\autoref{tab:radio_sources} are reported also the equivalent emission in electrons, which will be useful later.
 
 \begin{equation}
@@ -560,24 +584,26 @@ Now we can go through the results obtained from three different sources: \ch{^{5
 \subsection{\ch{^{55}Fe}}
 
 The \ch{^{55}Fe} source decays by \textbf{electron capture} to \ch{^{55}Mn}. One of the photons emitted in this transistion has an energy of 5.9 KeV ($K_{\alpha}$) and it produces via photoelectric effect an electron, which deposits a ionization charge of about 1616 $e^{-}$ in the sensor. 
-All flavors were exposed to a \ch{^{55}Fe} source, with activity of \SI{18}{MBq}. In~\autoref{fig:fe_all} are shown the results for the ToT spectrum of single pixels. The peak corresponds to events where the $\gamma$ interacts close to the collection diode and the entire signal is on a single pixel. The shoulder at smaller ToT is due to the charge sharing among several pixels, since no clusters are reconstructed. The peak was fitted by a gaussian function, limited in the region of the peak itself. 
-
-\begin{figure}[h!]
+All the four flavors of the matrix were exposed to a \ch{^{55}Fe} source, with activity of \SI{18}{MBq}. 
+\begin{figure}[h]
 \centering
 \subfigure[\textbf{Normal}]
-{\includegraphics[scale=0.35]{fe55_Normal_peak}}\quad
+{\includegraphics[scale=0.4]{fe55_Normal_peak}}\quad
 \subfigure[\textbf{Cascode}]
-{\includegraphics[scale=0.35]{fe55_Cascode_peak}}\\
+{\includegraphics[scale=0.4]{fe55_Cascode_peak}}\\
 \subfigure[\textbf{HV Cascode}]
-{\includegraphics[scale=0.35]{fe_HV Casc._peak}}\quad
+{\includegraphics[scale=0.4]{fe_HV Casc._peak}}\quad
 \subfigure[\textbf{HV}]
-{\includegraphics[scale=0.35]{fe_HV_peak}}\\
-\caption{\ch{^{55}Fe} peaks for all frontends.}
+{\includegraphics[scale=0.4]{fe_HV_peak}}\\
+\caption{\ch{^{55}Fe} single pixel ToT spectrum for all frontends.}
 \label{fig:fe_all}
 \end{figure}
+In~\autoref{fig:fe_all} are shown the results for the ToT spectra of single pixels in each of the four flavors. The peak corresponds to events where the $\gamma$ interacts close to the collection diode and the entire signal is on a single pixel. The shoulder at smaller ToT is due to the charge only partially collected on a single pixel, since charge is shared among several pixels and no cluster reconstruction is done in this analysis. The ToT peak was fitted by a gaussian function, limited in the region of the peak itself, and results of the fit are reported in the box of each plot.  
+%are also reported the results of the fit that will be crucial in the following. 
 
-As it can be seen for the HV's FE a cut has been applied at low ToT, only to make clearly visible the emission line, since a lot of noisy pixels caused a sharp peak at 0 ToT. In those flavors there were several columns of not-functioning pixels. In the box of each plot are also reported the results of the fit that will be crucial in the following.
+As it can be seen for the HV's FE a cut has been applied at low ToT, only to make clearly visible the emission line, since a lot of noisy pixels caused a sharp peak at 0 ToT. In those flavors there were several columns of not-functioning pixels. 
 
+The ToT peak value can be converted to signal in DAC, using the fitted calibration curve TOT vs Qinj[DAC] of \autoref{eq:fit_function}, and then converted to signal in e-, assuming the nominal conversion factor $K$ of 10.1 e-/DAC of \autoref{eq:conversion_factor}. In this way we could see a reasonable agreement between the expected signal $Q_{\SI{5.9}{KeV}}$~=~1616 $e^{-}$ and the measured one for the Normal FE (1742 e-) and Cascode FE (1813 e-). On the contrary, as expected   we observed a significant loss in the collected signal for the HV flavours, due to the AC coupling and the effect of the parassitic capacitance at the sensitive input node. The signal collected was xxx e-  in the HV normal FE,  and xxx e-  in the HV cascode, corresponding to a loss of about 41\%, thus improving from previous version of the chip,  where higher loss (> 50\%) were found. 
 
 %--------------------------------------------------------------------
 \subsection{\ch{^{241}Am}}
@@ -586,102 +612,120 @@ As it can be seen for the HV's FE a cut has been applied at low ToT, only to mak
 %AGGIUNGI REFERENZA (GAMMA RAY SPECTRUM OF AM-241 IN A BACK SCATTERINGGEOMETRY USING A HIGH PURITY GERMANIUM DETECTOR)
 
 The \ch{^{241}Am} source has a more complex spectrum (\autoref{fig:am241_spectrum}) and not all its peaks can be detected by the chip (because of the limited range of ToT available, depending on the numer of bit dedicated to it). The spectrum shows other minor peaks besides the usual intense gamma peaks (59.5 and \SI{26.3}{keV}) and several characteristic L X-rays from \ch{^{237}Np} (20.7, 17.7 and \SI{13.9}{keV}).\\ 
-
+%
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=.4]{Am241}
 \caption{\ch{^{241}Am} $\gamma$ emission spectrum.}
 \label{fig:am241_spectrum}
 \end{figure}
-
+%
 The ToT measured spectra with the \ch{^{241}Am} source on the four flavors are reported in~\autoref{fig:am_all}. Two peaks at lower energy are clearly visible while, for higher ToT values there are larger structures .
 
 \begin{figure}[h!]
 \centering
 \subfigure[\textbf{Normal}]
-{\includegraphics[scale=0.35]{am_Normal_peak}}\quad
+{\includegraphics[scale=0.4]{am_Normal_peak}}\quad
 \subfigure[\textbf{Cascode}]
-{\includegraphics[scale=0.35]{am_Cascode_peak}}\\
+{\includegraphics[scale=0.4]{am_Cascode_peak}}\\
 \subfigure[\textbf{HV Cascode}]
-{\includegraphics[scale=0.35]{am_HV Casc._peak}}\quad
+{\includegraphics[scale=0.4]{am_HV Casc._peak}}\quad
 \subfigure[\textbf{HV}]
-{\includegraphics[scale=0.35]{am_HV_peak}}\\
-\caption{\ch{^{241}Am} peaks for all frontends.}
+{\includegraphics[scale=0.4]{am_HV_peak}}\\
+\caption{\ch{^{241}Am} single pixel ToT spectrum for all frontends.}
 \label{fig:am_all}
 \end{figure}
-
+%
 In the case of the first two flavors, it could be possible to fit four peaks of the emission lines. In case of the HV's flavors instead, only three peaks for the HV-Cascode FE and two for the HV. As already discussed (\autoref{sec:improved_circuit}) the AC-copuling causes about 41.5\% of signal loss, so they are much less evident and more difficult to fit as isolated peak.
 
-
+\begin{figure}[h!]
+\centering
+\subfigure[\textbf{Normal}]
+{\includegraphics[scale=0.34]{cd109_Normal_peak}}\quad
+\subfigure[\textbf{Cascode}]
+{\includegraphics[scale=0.4]{cd109_Cascode_peak}}\\
+\subfigure[\textbf{HV Cascode}]
+{\includegraphics[scale=0.4]{cd109_HV Casc._peak}}\quad
+\subfigure[\textbf{HV}]
+{\includegraphics[scale=0.4]{cd109_HV_peak}}\\
+\caption{\ch{^{109}Cd} single pixel ToT spectrum for all frontends.}
+\label{fig:cd_all}
+\end{figure}
 %--------------------------------------------------------------------
 \subsection{\ch{^{109}Cd}}
 
 The third source employed was the \ch{^{109}Cd}. This isotope decay in \ch{^{109}Ag} by electronic capture, producing a photon of 22 KeV in the transition. The ToT measured spectra with \ch{^{109}Cd} source on the four flavors of the matrix are reported in~\autoref{fig:cd_all}. 
 
-\begin{figure}[h!]
-\centering
-\subfigure[\textbf{Normal}]
-{\includegraphics[scale=0.35]{cd109_Normal_peak}}\quad
-\subfigure[\textbf{Cascode}]
-{\includegraphics[scale=0.35]{cd109_Cascode_peak}}\\
-\subfigure[\textbf{HV Cascode}]
-{\includegraphics[scale=0.35]{cd109_HV Casc._peak}}\quad
-\subfigure[\textbf{HV}]
-{\includegraphics[scale=0.35]{cd109_HV_peak}}\\
-\caption{\ch{^{109}Cd} pekas for all frontends.}
-\label{fig:cd_all}
-\end{figure}
+
 
 %--------------------------------------------------------------------
 %\subsection{\ch{^{190}Sr}}
 %%apg 55 tesi
 
 
-\subsection{Injection capacitance calibration}
+\subsection{Conversion factor $K$ and $C_{inj}$ absolute calibration}
+\label{sec:inj_cap_calib}
 
 %~\autoref{eq:conversion_factor}
-The absolute calibration of the conversion factor $K$:
-
+The absolute calibration of the conversion factor $K$, that converts a signal charge expressed in DAC units to $e^{-}$, is performed using the data from the \ch{^{55}Fe} source. 
+As shown in \autoref{inj_circuit_subsection}, the conversion factor $K$ corresponds to the injected charge given by a voltage step of 1 DAC through the injection capacitance $C_{inj}$ implemented in each pixel. 
 \begin{equation}
-K = \frac{C_{inj}}{q_{e^{-}}} \cdot \Delta V_{LSB}
+K\bigg[\frac{e^{-}}{DAC}\bigg] = \frac{C_{inj}}{q_{e^{-}}} \cdot \Delta V_{LSB} 
+%C_{inj} = K (\frac{e^{-}}{DAC}) \cdot \frac{\SI{1.6e-19}{\frac{C}{e^{-}}}}{\SI{7.03}{\frac{mV}{DAC}}}
 \end{equation}
 
-and of the injection capacitance:
+For the design value of $C_{inj}=230$aF we expect $K=10.1~e^-/DAC$, but an absolute measurement is needed since there could be significant variation from chip to chip and also across the matrix.
 
-\begin{equation}
-C_{inj} = K (\frac{e^{-}}{DAC}) \cdot \frac{\SI{1.6e-19}{\frac{C}{e^{-}}}}{\SI{7.03}{\frac{mV}{DAC}}}
-\end{equation}
+%and of the injection capacitance:
 
-that convert a signal charge expressed in DAC units to $e^{-}$, is performed using the data from the \ch{^{55}Fe} source. 
+%\begin{equation}
+%C_{inj} = K (\frac{e^{-}}{DAC}) \cdot \frac{\SI{1.6e-19}{\frac{C}{e^{-}}}}{\SI{7.03}{\frac{mV}{DAC}}}
+%\end{equation}
 
-As first step the ToT of the peak of the \SI{5.9}{KeV} $\gamma$ line is converted to signal charge in DAC using the fitted calibration curve of~\autoref{eq:fit_function}
+%that convert a signal charge expressed in DAC units to $e^{-}$, is performed using the data from the \ch{^{55}Fe} source. 
+
+As first step the ToT value of the peak of the \SI{5.9}{KeV} $\gamma$ line for each pixel is converted to signal charge in DAC, $Q_{\SI{5.9}{KeV}}$[DAC], using the fitted calibration curve of~\autoref{eq:fit_function}
 
 Specifically the fit function was inverted obtaining:
-
 \begin{equation}
 x(y) = \bigg(\frac{t}{2} - \frac{b}{2a} + \frac{y}{2a}\bigg) \pm \sqrt{\bigg(\frac{t}{2} + \frac{b}{2a} - \frac{y}{2a}\bigg)^{2} + \frac{c}{a}}
 \end{equation}
-
 where \textit{x} represents the charge in DAC corresponding to the ToT labeled by \textit{y}.
 
-As shown in~\autoref{tab:radio_sources}, the charge released in the sensor by the \SI{5.9}{KeV} $\gamma$ corresponds roughly to $Q_{\SI{5.9}{KeV}}$($e^{-}$)~=~1616 $e^{-}$. Therefore the conversion factor $K$ for each pixel can be calculated as:
+As shown in~\autoref{tab:radio_sources}, the charge released in the sensor by the \SI{5.9}{KeV} $\gamma$ corresponds roughly to $Q_{\SI{5.9}{KeV}}$[$e^{-}$]~=~1616 $e^{-}$. Therefore the conversion factor $K$ for each pixel can be calculated as:
 
 \begin{equation}
 K\bigg[\frac{e^{-}}{DAC}\bigg] = \frac{1616 \, e^{-}}{Q_{\SI{5.9}{KeV}}[DAC]}
 \label{eq:inj_cap}
 \end{equation} 
 
-By these steps, a value of the conversion factor was estimated for each well-functioning pixel. In~\autoref{fig:cap_dist} is reported the distributions of the conversion factor estimated, fitted by a gaussian function.
+By these steps, a value of the conversion factor $k$ was estimated for each pixel in the Normal and Cascode FE. The map of the measured values together with their distribution in the two flavors is shown in~\autoref{fig:cap_dist}, with the results of the fit with a gaussian function. In \autoref{tab:cap_mean} the average conversion factors found in the two flavors are compared with the and the design value, showing a good agreement (10\%).
 
-\begin{figure}
+It is important to stress that due to the loss of the signal in the HV flavours, the amount of charge collected from \SI{5.9}{KeV} $\gamma$ is not really known thus it is not possible to perform the absolute calibration of the conversion factor for the pixels in the HV flavours. 
+
+\begin{figure}[h!]
 \centering
 \subfigure[\textbf{Normal}]
-{\includegraphics[scale=0.35]{c_inj_alpha_fe_Normal}}\quad
+{\includegraphics[scale=0.4]{c_inj_alpha_fe_Normal}}\quad
 \subfigure[\textbf{Cascode}]
-{\includegraphics[scale=0.35]{c_inj_alpha_fe_Cascode}}\\
-\caption{Injection capacitance distributions of Normal and Cascode FE.}
+{\includegraphics[scale=0.4]{c_inj_alpha_fe_Cascode}}\quad
+\subfigure[\textbf{Map of the conversion factors}]
+{\includegraphics[scale=0.4]{k_maps}}\\
+\caption{Conversion factor $K$ measured for the pixels in the Normal and Cascode FE.}
 \label{fig:cap_dist}
 \end{figure} 
+%
+%\begin{figure}[h!]
+%\centering
+%\subfigure[\textbf{Normal}]
+%{\includegraphics[scale=0.35]{k_maps_Normal}}\quad
+%\subfigure[\textbf{Cascode}]
+%{\includegraphics[scale=0.35]{k_maps_Cascode}}\\
+%\subfigure[\textbf{All}]
+%{\includegraphics[scale=0.35]{k_maps}}\\
+%\caption{Map of the conversion factor $k$ measured in all pixels withe the ^{55}Fe source}
+%\label{fig:k_map}
+%\end{figure} 
 %%%%%ADD SUMMARY TABLE
 
 
@@ -689,26 +733,16 @@ By these steps, a value of the conversion factor was estimated for each well-fun
 \centering
 \begin{tabular}{>{\columncolor{NavyBlue!70}} C{2.8cm}|C{1.7cm}|C{1.8cm}|C{1.7cm}|C{1.7cm}}
 \rowcolor{CornflowerBlue}
-Source peak & $K_{Normal}$ ($\frac{e^{-}}{DAC}$) & $K_{Cascode}$ ($\frac{e^{-}}{DAC}$)\\[2.5ex]
+Source peak & $K_{design}$ ($\frac{e^{-}}{DAC}$) & $K_{Normal}$ ($\frac{e^{-}}{DAC}$) & $K_{Cascode}$ ($\frac{e^{-}}{DAC}$)\\[2.5ex]
 \hline
-\ch{^{55}Fe} (5.9 KeV) & 9.37 & 9.00\\[1ex]
+\ch{^{55}Fe} (5.9 KeV) & 10.1  & 9.37 & 9.00\\[1ex]
 \hline
 \end{tabular}
-\caption{Estimation of injection capacitance of Normal and Cascode flavors using the \ch{^{55}Fe} radioactive source emission line at \SI{5.9}{KeV}.}
+\caption{Average conversion factor $K$ for the Normal and Cascode FE using the \ch{^{55}Fe} radioactive source emission line at \SI{5.9}{KeV}.}
 \label{tab:cap_mean}
 \end{table}
 
-\begin{figure}
-\centering
-\subfigure[\textbf{Normal}]
-{\includegraphics[scale=0.35]{k_maps_Normal}}\quad
-\subfigure[\textbf{Cascode}]
-{\includegraphics[scale=0.35]{k_maps_Cascode}}\\
-\subfigure[\textbf{All}]
-{\includegraphics[scale=0.35]{k_maps}}\\
-\caption{???}
-\label{fig:k_map}
-\end{figure} 
+
 
 
 %VEDI APPUNTI\\
@@ -718,19 +752,29 @@ Source peak & $K_{Normal}$ ($\frac{e^{-}}{DAC}$) & $K_{Cascode}$ ($\frac{e^{-}}{
 %[It's necessary to consider that maybe some measurments were done in different conditions of pressure and temperature?]
 
 
-?????????????
-Here it is necessary to point out that for iron source more statistics were collected so in this case a complete analysis of each pixel has been done. For the other sources instead, there weren't enough statistics on every pixel so the injection capacitance has been estimate only as a mean value for the whole front-end, just to compare with the results obtained from the iron analysis.  
-In case of \ch{^{55}Fe} source, we managed to fit the emission peak for each working pixel of the whole matrix. 
+%?????????????
+%Here it is necessary to point out that for iron source more statistics were collected so in this case a complete analysis of each pixel has been done. For the other sources instead, there weren't enough statistics on every pixel so the injection capacitance has been estimate only as a mean value for the whole front-end, just to compare with the results obtained from the iron analysis.  
+%In case of \ch{^{55}Fe} source, we managed to fit the emission peak for each working pixel of the whole matrix. 
 
-?????????????
+%?????????????
 
 %--------------------------------------------------------------------
 \subsection{Check on calibration curve ToT vs $Q_{inj}$ with radioactive sources}
 
-The calibration of the ToT vs $Q_{inj}$(DAC) with the injection circuit could be performed only up to $\approx$ 170 DAC. The radioactive sources can be used up to higher energy to check the agreement with the fitted function in~\autoref{eq:fit_function} .\\
-Initially the signal charge in DAC corresponding to each $\gamma$ peak, has been calculated using the nominal conversion factor equal to 10.1 $\frac{e^{-}}{DAC}$. As it could be seen from results in~\autoref{fig:inj_cap_10} there is a reasonable agreement between data and ToT relationship studied in~\autoref{sec:tot_fit}.
+The calibration of the ToT vs $Q_{inj}$(DAC) response with the injection circuit could be performed only up to $\approx$ 170 DAC (about 1700e-). The radioactive sources can be used up to higher energy to check the agreement of the response with the fitted function in~\autoref{eq:fit_function}.\\
 
-After the absolute calibration, assuming the average value of of the conversion factor $K$ (\textit{Mean value}) measured with \ch{^{55}Fe}, the charge in DAC corresponding to the emission peaks have been recalculated and results are shown in~\autoref{fig:inj_cap_sources}.
+This comparison is shown in \autoref{fig:inj_cap_10} and \autoref{fig:inj_cap_sources}. In both plots the ToT vs $Q_{inj}$(DAC) fitted curve is shown with superimposed the points corresponding to each $\gamma$ line from the different sources. 
+For each $\gamma$ line the point shown in the plot has the ToT measured from the source spectrum and the charge in DAC corresponding to the charge released by that photon.  
+In~\autoref{tab:source_conv_norm} and in~\autoref{tab:source_conv_casc} the various inputs are shown. 
+The signal charge in DAC, corresponding to the number of e- of each $\gamma$ line, has been calculated using either the nominal conversion factor equal to 10.1 $\frac{e^{-}}{DAC}$ or the average value of of the conversion factor $K$ (\textit{Mean value}) measured with \ch{^{55}Fe} absolute calibration. 
+
+As it could be seen from results in~\autoref{fig:inj_cap_10} there is already a reasonable agreement between data and ToT fitted function, with the nominal conversion factor, with even a better agreement obtained using the absolute calibration of the conversion factor specific for this chip. 
+Deviation from the fitted TOT response are visible, especially in the Cascode FE above 600 DAC (6000 e-), this could be ascribed to a deviation from the linear response of the TOT to high signal, more likely to happen in the Cascode flavor that has higher gain.
+
+This preliminary study showed that through the calibration of the TOT with internal injection circuit, and the absolute calibration, we are now able to interpret data from the MIP, collected during the TB,  with a reasonable accuracy to perform the reconstruction, which was the main purpose of this analysis.
+
+
+%After the absolute calibration, assuming the average value of of the conversion factor $K$ (\textit{Mean value}) measured with \ch{^{55}Fe}, the charge in DAC corresponding to the emission peaks have been recalculated and results are shown in~\autoref{fig:inj_cap_sources}.
 
 In~\autoref{tab:source_conv_norm} and in~\autoref{tab:source_conv_casc}   ....(descrizione, specifica quale K usi, richiama tabella?)
 
@@ -784,7 +828,6 @@ Source & Energy $\gamma$ [KeV] & $Q_{expected}$ [$e^{-}$] & $ToT_{measured}$ & $
 
 %SPIEGATABELLAAA
 
-As we can see, a better agreement is therefore obtained and this shows that through calibration we are now able to interpret data with greater precision, which was the main purpose of this analysis.
 
 \begin{figure}
 \centering
@@ -792,7 +835,7 @@ As we can see, a better agreement is therefore obtained and this shows that thro
 {\includegraphics[scale=0.35]{ToT_Normal_thesis}}\quad
 \subfigure[\textbf{Cascode}]
 {\includegraphics[scale=0.35]{ToT_Cascode_thesis}}\\
-\caption{ToT of all flavors assuming the nominal(expected) conversion factor equal to 10.1 $\frac{e^{-}}{DAC}$.}
+\caption{ToT vs Q calibration curve measured with the internal injection circuit compared with response from several $gamma$ lines from radioactive sources, assuming the nominal conversion factor equal to 10.1 $\frac{e^{-}}{DAC}$.}
 \label{fig:inj_cap_10}
 \end{figure} 
 
@@ -803,7 +846,7 @@ As we can see, a better agreement is therefore obtained and this shows that thro
 {\includegraphics[scale=0.35]{ToT_Normal_iron}}\quad
 \subfigure[\textbf{Cascode}]
 {\includegraphics[scale=0.35]{ToT_Cascode_iron}}\\
-\caption{ToT linearity of all flavors assuming the conversion factor obtained from \ch{^{55}Fe}.}
+\caption{ToT vs Q calibration curve measured with the internal injection circuit compared with response from several $gamma$ lines from radioactive sources, assuming the conversion factor obtained from \ch{^{55}Fe}.}
 \label{fig:inj_cap_sources}
 \end{figure} 
 
@@ -858,12 +901,12 @@ The results are compared with simulations done by Hung Pham.  (...). [???]
 \item[\textbf{$I_{CASN}$}] 
 \end{description}
 
-In figure \vref{fig:icasn_sim}, we can see the simulated behaviour of the threshold and the gain, increasing the value o $I_{CASN}$.
+In figure \vref{fig:icasn_sim}, we can see the simulated behaviour of the threshold increasing the value o $I_{CASN}$.
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=.8]{thr_gain_icasn(sim)}
-\caption{Trends of Gain and Threshold increasing $I_{CASN}$.}
+\includegraphics[scale=.15]{thr_gain_icasn(sim)2}
+\caption{Trends of threshold increasing $I_{CASN}$.}
 \label{fig:icasn_sim}
 \end{figure}
 
@@ -899,8 +942,8 @@ We can compare them with the simulation shown in figure \vref{fig:ithr_sim}.
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=.6]{ithr_simulation}
-\caption{Trends of Gain and Threshold increasing $I_{CASN}$.}
+\includegraphics[scale=.3]{ithr_simulation2}
+\caption{Trends of threshold increasing $I_{CASN}$.}
 \label{fig:ithr_sim}
 \end{figure}
 
@@ -915,7 +958,7 @@ The last analysis done to make a comparison with the simulations, is about the t
 \subfigure[ToT vs $I_{THR}$ ($I_{CASN}$=0 DAC) - Data (\textbf{Cascode})]
 {\includegraphics[scale=0.45]{tot_curves_icasn0}}\quad
 \subfigure[ToT vs $I_{THR}$ ($I_{CASN}$=0 DAC) - Simulation]
-{\includegraphics[scale=0.5]{tot_curves_icasn0_simu}}\\
+{\includegraphics[scale=0.55]{tot_curves_icasn0_simu2}}\\
 \caption{ToT vs $I_{THR}$}
 \label{fig:tot_vs_ithr}
 \end{figure}
@@ -925,7 +968,7 @@ The last analysis done to make a comparison with the simulations, is about the t
 \subfigure[ToT vs $I_{CASN}$ ($I_{THR}$=64 DAC) - Data (\textbf{Cascode})]
 {\includegraphics[scale=0.5]{tot_curves_ithr64}}\\%\quad
 \subfigure[ToT vs $I_{CASN}$ ($I_{THR}$=64 DAC) - Simulation]
-{\includegraphics[scale=0.35]{tot_curves_ithr64_simu}}\\
+{\includegraphics[scale=0.3]{tot_curves_ithr64_simu2}}\\
 \caption{ToT vs $I_{CASN}$}
 \label{fig:tot_vs_icasn}
 \end{figure}
@@ -1173,7 +1216,7 @@ Also suggested to change the clock and see if the delay from the FREEZE edge is 
 
 \section{Test Beam results}
 
-This full characterization of the chip allowed to interpret data collected during the Test Beam done in Desy in June 2022. Several measurements have been taken, among which: pixel response, noise level, cluster signal, full depletion depth, voltage scan and angular scan. In particular the aim was to study electrical characteristics and hit detection effciency of unirradiated modules.
+This full characterization of the chip allowed to interpret data collected during the Test Beam done in Desy in June 2022. Several measurements have been taken, among which: pixel response, noise level, cluster signal, full depletion depth, voltage scan and angular scan. In particular the aim was to study electrical characteristics and hit detection efficiency of unirradiated modules.
 
 
 
