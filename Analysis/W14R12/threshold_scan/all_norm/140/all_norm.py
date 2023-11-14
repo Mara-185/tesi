@@ -337,7 +337,7 @@ def main(input_file, overwrite=False):
 
 
         plt.title(subtitle)
-        plt.suptitle(f"Noise (width of s-curve slope) distribution")
+        plt.suptitle(f"Noise distribution")
         plt.xlabel("Noise [DAC]")
         plt.ylabel("Pixels / bin")
         set_integer_ticks(plt.gca().yaxis)
@@ -390,7 +390,7 @@ def main(input_file, overwrite=False):
 
 
         plt.title(subtitle)
-        plt.suptitle(f"Noise (width of s-curve slope) distribution")
+        plt.suptitle(f"Noise distribution")
         plt.xlabel("Noise [DAC]")
         plt.ylabel("Pixels / bin")
         set_integer_ticks(plt.gca().yaxis)
@@ -407,7 +407,7 @@ def main(input_file, overwrite=False):
         plt.pcolormesh(occupancy_edges[0], occupancy_edges[1], noise_DAC.transpose(),
                        rasterized=True)  # Necessary for quick save and view in PDF
         plt.title(subtitle)
-        plt.suptitle("Noise (width of s-curve slope) map")
+        plt.suptitle("Noise map")
         plt.xlabel("Column")
         plt.ylabel("Row")
         set_integer_ticks(plt.gca().xaxis, plt.gca().yaxis)
@@ -416,6 +416,21 @@ def main(input_file, overwrite=False):
         frontend_names_on_top()
         pdf.savefig();
         plt.savefig("Noise_map_norm_140.png"); plt.clf()
+
+        plt.axes((0.125, 0.11, 0.775, 0.72))
+        plt.pcolormesh(occupancy_edges[0], occupancy_edges[1], noise_DAC.transpose(),
+                       rasterized=True)  # Necessary for quick save and view in PDF
+        plt.title(subtitle)
+        plt.suptitle("Noise map")
+        plt.xlabel("Column")
+        plt.ylabel("Row")
+        set_integer_ticks(plt.gca().xaxis, plt.gca().yaxis)
+        cb = plt.colorbar()
+        cb.set_label("Noise [DAC]")
+        plt.clim([1.75,4])
+        frontend_names_on_top()
+        pdf.savefig();
+        plt.savefig("Noise_map_norm_140_lim.png"); plt.clf()
 
         # Time since previous hit vs ToT
 

@@ -425,7 +425,7 @@ def main(input_file, overwrite=False):
             plt.hist(ns.reshape(-1), bins=min(20*m, 100), range=[0, m],
                      label=f"{name} ${noise_mean:L}$", histtype='step', color=f"C{i}")
             plt.title(subtitle)
-            plt.suptitle(f"Noise (width of s-curve slope) distribution")
+            plt.suptitle(f"Noise distribution")
             plt.xlabel("Noise [DAC]")
             plt.ylabel("Pixels / bin")
             set_integer_ticks(plt.gca().yaxis)
@@ -482,7 +482,7 @@ def main(input_file, overwrite=False):
 
 
             plt.title(subtitle)
-            plt.suptitle(f"Noise (width of s-curve slope) distribution")
+            plt.suptitle(f"Noise distribution")
             plt.xlabel("Noise [DAC]")
             plt.ylabel("Pixels / bin")
             set_integer_ticks(plt.gca().yaxis)
@@ -506,7 +506,7 @@ def main(input_file, overwrite=False):
             plt.pcolormesh(occupancy_edges[0], occupancy_edges[1], noise_DAC.transpose(),
                            rasterized=True)  # Necessary for quick save and view in PDF
             plt.title(subtitle)
-            plt.suptitle("Noise (width of s-curve slope) map")
+            plt.suptitle("Noise map")
             plt.xlabel("Column")
             plt.ylabel("Row")
             set_integer_ticks(plt.gca().xaxis, plt.gca().yaxis)
@@ -515,6 +515,28 @@ def main(input_file, overwrite=False):
             frontend_names_on_top()
             pdf.savefig();
             plt.savefig(f"Noise_map_{name}_140.png"); plt.clf()
+
+
+        for i, (fc, lc, name) in enumerate(FRONTENDS):
+            if fc >= col_stop or lc < col_start:
+                continue
+            fc = max(0, fc - col_start)
+            lc = min(col_n - 1, lc - col_start)
+            ns = noise_DAC[fc:lc+1,:]
+            plt.axes((0.125, 0.11, 0.775, 0.72))
+            plt.pcolormesh(occupancy_edges[0], occupancy_edges[1], noise_DAC.transpose(),
+                           rasterized=True)  # Necessary for quick save and view in PDF
+            plt.title(subtitle)
+            plt.suptitle("Noise map")
+            plt.xlabel("Column")
+            plt.ylabel("Row")
+            set_integer_ticks(plt.gca().xaxis, plt.gca().yaxis)
+            cb = plt.colorbar()
+            cb.set_label("Noise [DAC]")
+            plt.clim([1.75,4])
+            frontend_names_on_top()
+            pdf.savefig();
+            plt.savefig(f"Noise_map_{name}_140_lim.png"); plt.clf()
 
         # Time since previous hit vs ToT
 
