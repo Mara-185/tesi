@@ -33,17 +33,18 @@ This detailed characterization returned crucial results (1, 2) for the Test Beam
 \section{Matrix and flavors}
 
 
-TJ-Monopix2 is the next generation small collection electrode DMAPS prototype in TowerJazz 180 nm. The need to create a sensor capable to mantain high efficiency even after irradiation, required improvements compared to TJ-Monopix1 in two important fields: a lower operating threshold to keep a good efficiency with the reduced charge collected after irradiation and smaller pixel pitch to increase charge collection efficiency all over its area, expecially in the corners.\\
+TJ-Monopix2 is the next generation small collection electrode DMAPS prototype in TowerJazz 180 nm. The need to create a sensor capable to mantain high efficiency even after irradiation, required improvements compared to TJ-Monopix1 in two important fields: a lower operating threshold,  to keep a good efficiency with the reduced charge collected after irradiation, and a smaller pixel pitch, to increase charge collection efficiency all over its area, expecially in the corners.\\
 
-To achieve these goals, a different in-pixel front-end circuit was implemented and a lot of efforts have been focused on optimizing pixel layout in order to reduce its size, which has been decreased from \numproduct{36 x 40}~\unit{\micro m^{2}} in TJ-Monopix1 to \numproduct{33.04 x 33.04}~\unit{\micro m^{2}} (pixel \textit{pitch}). The pixel dimensions are critical to accomplish faster charge collection across all active area, increasing the lateral electric field (\autoref{sec:TJ}). For this reason it was necessary a special effort to design and create a smaller pixel but still adequate to embody the full digital readout. All of this required to work at the technology density limit and also to study for further modifications at the circuit design.
+To achieve these goals, a different in-pixel front-end circuit was implemented and a lot of efforts have been focused on optimizing pixel layout in order to reduce its size, which has been decreased from \numproduct{36 x 40}~\unit{\micro m^{2}} in TJ-Monopix1 to \numproduct{33.04 x 33.04}~\unit{\micro m^{2}} (pixel \textit{pitch}). The pixel dimensions are critical to accomplish faster charge collection across all active area, increasing the lateral electric field (\autoref{sec:TJ}). For this reason it was necessary a special effort to design and create a smaller pixel pitch but still adequate to embody the full digital readout. All of this required to work at the technology density limit and also to study for further modifications at the circuit design.
 
-In order to operate with a lower threshold TJ-Monopix2 incorporates an improved front-end circuit that reduces the noise by $\approx$ 40\% and the threshold dispersion by about 80-90\% with respect to TJ-Monopix1. Furthermore, in-pixel threshold tuning has been integrated in order to achieve a more uniform threshold distribution across the pixel matrix, particularly after irradiation. As a result of these improvements, the operating threshold was expected to be at $\approx$ 100 $e^{-}$, three times lower than in TJ-Monopix1, the noise less than 8 $e^{-}$, and the threshold dispersion less than 10 $e^{-}$ (\autoref{tab:tj2_spec}) \cite{Moustakas:2021gjr}. 
+In order to operate with a lower threshold TJ-Monopix2 incorporates an improved front-end circuit that reduces the noise by $\approx$ 40\% and the threshold dispersion by about 80-90\% with respect to TJ-Monopix1. Furthermore, in-pixel threshold tuning has been integrated in order to achieve a more uniform threshold distribution across the pixel matrix, particularly after irradiation. As a result of these improvements, the operating threshold in optimized working conditions, was expected to be at $\approx$ 100 $e^{-}$, three times lower than in TJ-Monopix1, the noise less than 8 $e^{-}$, and the threshold dispersion less than 10 $e^{-}$ (\autoref{tab:tj2_spec}) \cite{Moustakas:2021gjr}. 
 
 \medskip
 
 \begin{table}[h!]
 \centering
 \begin{tabular}{c|c}
+\hline
 Specification & Value \\
 \hline
 \hline
@@ -55,7 +56,7 @@ Threshold dispersion & $\leq$ 10 $e^{-}$\\
 \hline
 \hline
 \end{tabular}
-\caption{Specification of TJ-Monopix2.}
+\caption{Expected performance of TJ-Monopix2.}
 \label{tab:tj2_spec}
 \end{table}
 
@@ -102,8 +103,8 @@ The \numproduct{2 x 2} pixel core layout, shown in~\autoref{fig:tj2core}, is ful
 \end{figure}
 
 
-As we have seen above, there are two variations of the front-end circuit (\autoref{fig:tj2_circuit}), such as \textit{normal} and \textit{cascode} type. The latter in particular includes an extra cascode transistor which increases the pre-amplifier gain and consequently reduces the threshold dispersion.\\
-Moreover in TJ-Monopix2 it was preferred to incorporate a simple diode to reset the input node instead of a PMOS transistor, which was the techonology implemented in TJ- Monopix1. A side effect of this choice is that the relationship between charge injected and the ToT of the detected signal is not linear anymore, because the diode is a not linear element and its discharge rate also depends on the collected charge. Indeed in the following analysis it was necessary to fit the ToT trend with a more complex function. But at the same time, the advantages are its simplicity ($p^{+}$ diffusion within the n-well collection electrode) and also the fact that it allows to increase radiation tolerance to Total Ionizing Dose (TID) effects, which was one of the key working area in the upgrade of the sensor.
+As we have seen above, there are two variations of the front-end circuit (\autoref{fig:tj2_circuit}), such as \textit{normal} and \textit{cascode} type. The latter in particular includes an extra cascode transistor which increases the pre-amplifier gain and consequently reduces the threshold dispersion (\autoref{eq:disp_gain}).\\
+The operating point of the front-end could be varied changing the registers that are setting the various voltages and currents of the circuit indicated in \autoref{fig:tj2_circuit}.
 
 
 \begin{figure}[h!]
@@ -126,13 +127,47 @@ In the last two AC-coupled flavors are implemented the same improvements, but he
 \section{Threshold and noise} \label{thresh_noise}
 
 
-\textbf{Explain here what are NOISE, THR and THR dispersion, and why they are important figure of merit for the operation.} 
-
-see for example Eleonora's thesis sec 4.1.1. 
-commento di test
+%\textbf{Explain here what are NOISE, THR and THR dispersion, and why they are important figure of merit for the operation.} see for example Eleonora's thesis sec 4.1.1. 
 
 
+The most probable value (MPV) of the signal released by a Minimum Ionizing Particle (MIP) in the thin MAPS sensitive thickness (~30 um) is only about 2250e- (assuming 75e-/um \cite{wermes_book2020}. This small signal is collected by 2 or more pixels and could be further reduced after the radiation damage due to trapping effects. 
+In MAPS sensors is then crucial to set the discriminator threshold to very low values in order to retain high detection efficiency, even after radiation damage.
 
+The minimum value of the global threshold, compatible with a stable detector operation, depends on two important figures of merit: the noise and threshold dispersion across the matrix. 
+
+\textbf{Noise and equivalent noise charge}. Electronic noise from the sensor diode and the pre-amplifier transistor (or other) devices results in time-varying voltage fluctuations at the pre-amplifier output. The Root Mean Square (RMS) of the voltage fluctuations is called noise output voltage.  
+To quantify the noise of a readout channel the equivalent noise charge (ENC) is introduced, defined as the corresponding charge, in electrons, at the input of the channel that gives an output signal equal to the RMS noise output voltage.
+
+\begin{equation}
+ENC = \frac{noise \, output \, voltage \, (V)}{gain \, (V/e^{-})} 
+\end{equation}
+
+\textbf{Operating threshold and threshold dispersion} 
+The global detection threshold has to be set to a value as low as possible in order to maximize the detection efficiency but not too low in order to keep the noise hits at an acceptable level.  Therefore the operating threshold value is ideally located between the noise peak around the baseline and the signal distribution. 
+Dispersion of the threshold across the pixel matrix originates from the fabrication process variations and mismatch of the integrated electronic components. These process related effects are responsible for dispersion of the quiescent voltage at the output of the pre-amplifier (baseline dispersion) and also for dispersion of the voltage offset of the discriminator, both contributing to the dispersion of the detection threshold. 
+
+The threshold and its dispersion are also usually quantified reporting the corresponding charge, in electrons, at the input of the channel that gives an output signal corresponding to the threshold voltage and its dispersion:
+
+\begin{align}
+THR (e^{-}) & = \frac{voltage \, threshold \, (V)}{gain \, (V/e^{-})} \label{eq:th_gain} \\
+\sigma_{thr} (e^{-})    & = \frac{threshold \, dispersion \, (V)}{gain \, (V/e^{-})} 
+\label{eq:disp_gain}
+\end{align}
+
+The noise sets a lower bound to the threshold, but does not determine the stable operating threshold value which depends additionally on how the threshold varies with time and from pixel to pixel. 
+Therefore, apart from the global threshold, the possibility to fine tune the threshold locally per pixel is usually included in order to compensate these variations and is realized by simple digital to analog converters (DACs). The dispersion of threshold after tuning is inversely proportional to the tuning DAC (TDAC) number of bits:
+
+\begin{equation}
+\sigma_{thr,tuned} = \frac{\sigma_{thr}}{2^{n_{dac}}}
+\end{equation}
+
+The operating threshold lower limit should be at least approximately 5-6 times higher than the combined standard deviation of noise and threshold dispersion:
+
+\begin{equation}
+THR=5-6 *\sqrt{ENC^{2} + \sigma_{thr}^{2}}
+\end{equation}
+
+comment on the fact that a lower global threshold could be achieved increasing the gain, since both ENC and the Qthr are inversaly proportional to the gain. 
 
 To measure the threshold and noise of the whole matrix, the response of each pixel has been characterized by means of the internal charge injection. \\
 
@@ -191,13 +226,14 @@ In the following sections are reported the results of this study for the four fl
 
 \subsubsection{Normal FE}
 
-The first flavor of the matrix is the \textbf{Normal FE}, which consists of 512 rows and 224 columns for a total of 114.688 pixels. The chip registers have been set with the same values used during the Test Beam at Desy (July 2022) which are different for the DC and AC-coupling case. They are called for simplicity ''\textbf{GOE settings}'' and they are reported in~\autoref{tab:tb_settings}, where the different biasing voltages used to power up the chip are also added.
+The first flavor of the matrix is the \textbf{Normal FE}, which consists of 512 rows and 224 columns for a total of 114.688 pixels. The chip registers have been set with the same values used during the Test Beam at Desy (July 2022), which are different for the DC and AC-coupling case. They are called for simplicity ''\textbf{GOE settings}'' and they are reported in~\autoref{tab:tb_settings}, where the different biasing voltages used to power up the chip are also added. At the time of this first Test Beam campaign the front-end registers were still not  optimized to reach low threshold values. 
 
 \begin{table}[h!]
 \centering
 %\begin{tabular}{>{\columncolor{ProcessBlue!60}} C{3.2cm}|C{3.7cm}|C{3.5cm}}
 \begin{tabular}{C{3.2cm}|C{3.7cm}|C{3.5cm}}
 %\rowcolor{lightgray}
+\hline
 Registers & Normal/Cascode FE ($P_{SUB}$/$P_{WELL}$ = -3 V) & HV/HV-Cascode FE ($P_{SUB}$/$P_{WELL}$ = 0 V, HV = +5 V)\\[2ex]
 \hline
 \hline
@@ -237,7 +273,7 @@ The threshold and noise distributions measured for all pixels of the Normal FE s
 \subfigure[Threshold distribution]
 {\includegraphics[scale=0.35]{all_norm_thdist_140}}\quad
 \subfigure[Threshold map]
-{\includegraphics[scale=0.37]{threshold_map_norm_140}}\\
+{\includegraphics[scale=0.37]{threshold_map_norm_140_2}}\\
 \subfigure[Noise distribution]
 {\includegraphics[scale=0.35]{Noise_hist_norm_140_fit}}\quad
 \subfigure[Noise map]
@@ -268,11 +304,11 @@ The distributions of threshold and noise extracted with the fit to the s-curve, 
 \subfigure[Threshold distribution]
 {\includegraphics[scale=0.35]{all_casc_thdist_140}}\quad
 \subfigure[Threshold map]
-{\includegraphics[scale=0.37]{threshold_map_casc_140}}\\
+{\includegraphics[scale=0.37]{threshold_map_casc_140_2}}\\
 \subfigure[Noise distribution]
 {\includegraphics[scale=0.35]{Noise_hist_casc_140_fit}}\quad
 \subfigure[Noise map]
-{\includegraphics[scale=0.37]{Noise_map_casc_140_lilm}}\\
+{\includegraphics[scale=0.37]{Noise_map_casc_140_lim}}\\
 \caption{Cascode FE:threshold and noise distributions and their maps}
 \label{fig:thdist_casc}
 \end{figure}
@@ -357,8 +393,10 @@ In~\autoref{tab:th_noise_all} a summary of results for threshold, noise and thre
 %\begin{tabular}{>{\columncolor{NavyBlue!70}} C{3cm}|C{2.8cm}|C{2.8cm}}
 \begin{table}[h!]
 \centering
-\begin{tabular}{>{\columncolor{NavyBlue!70}} C{1.3cm}|C{1.7cm}|C{1.6cm}|C{1.8cm}|C{1.6cm}|C{1.8cm}|C{1.9cm}}
-\rowcolor{CornflowerBlue}
+%\begin{tabular}{>{\columncolor{NavyBlue!70}} C{1.3cm}|C{1.7cm}|C{1.6cm}|C{1.8cm}|C{1.6cm}|C{1.8cm}|C{1.9cm}}
+\begin{tabular}{C{1.3cm}|C{1.7cm}|C{1.6cm}|C{1.8cm}|C{1.6cm}|C{1.8cm}|C{1.9cm}}
+%\rowcolor{CornflowerBlue}
+\hline
 FE & Threshold [DAC] & Threshold [$e^{-}$] & Threshold dispersion [DAC] & Threshold dispersion [$e^{-}$] & Noise [DAC] & Noise [$e^{-}$]\\
 \hline
 \hline
@@ -517,13 +555,13 @@ In~\autoref{tab:th_fe} are reported the results of the fits for all parameters.
 \begin{figure}[h!]
 \centering
 \subfigure[\textbf{Normal}]
-{\includegraphics[scale=0.35]{Tot_fit_normal(200)}}\quad
+{\includegraphics[scale=0.4]{Tot_fit_normal(200)2}}\quad
 \subfigure[\textbf{Cascode}]
-{\includegraphics[scale=0.35]{Tot_fit_cascode(200)}}\\
+{\includegraphics[scale=0.4]{Tot_fit_cascode(200)2}}\\
 \subfigure[\textbf{HV Cascode}]
-{\includegraphics[scale=0.35]{Tot_fit_HV Casc.(200)}}\quad
+{\includegraphics[scale=0.4]{Tot_fit_HV Casc.(200)_300}}\quad
 \subfigure[\textbf{HV}]
-{\includegraphics[scale=0.35]{Tot_fit_HV(200)}}\\
+{\includegraphics[scale=0.4]{Tot_fit_HV(200)_300}}\\
 \caption{ToT curves fit for all frontend.}
 \label{fig:tot_fe}
 \end{figure}
@@ -553,9 +591,12 @@ N_{e^{-}} = \frac{E \, [eV]}{3.65 [\frac{eV}{e/h \, pair}]}
 
 \begin{table}[h!]
 \centering
-\begin{tabular}{>{\columncolor{NavyBlue!70}} C{3cm}|C{2.8cm}|C{2.8cm}}
-\rowcolor{CornflowerBlue}
+%\begin{tabular}{>{\columncolor{NavyBlue!70}} C{3cm}|C{2.8cm}|C{2.8cm}}
+\begin{tabular}{C{3cm}|C{2.8cm}|C{2.8cm}}
+%\rowcolor{CornflowerBlue}
+\hline
 Source & Energy $\gamma$ [KeV] & Equivalent charge [$e^{-}$]\\[2ex]
+\hline
 \hline
 \ch{^{55}Fe} & 5.9 & 1616\\[0.5ex]
 \hline
@@ -570,6 +611,7 @@ Source & Energy $\gamma$ [KeV] & Equivalent charge [$e^{-}$]\\[2ex]
 \ch{^{241}Am} & 26.4 & 7233\\[0.5ex]
 \hline
 \ch{^{241}Am} & 59.7 & 16356\\
+\hline
 \hline
 \end{tabular}
 \caption{Emission lines of \ch{^{55}Fe}, \ch{^{241}Am}, \ch{^{109}Cd} sources visible by the sensor.}
@@ -729,11 +771,15 @@ It is important to stress that due to the loss of the signal in the HV flavours,
 
 \begin{table}[h!]
 \centering
-\begin{tabular}{>{\columncolor{NavyBlue!70}} C{2.8cm}|C{1.7cm}|C{1.8cm}|C{1.7cm}|C{1.7cm}}
-\rowcolor{CornflowerBlue}
+%\begin{tabular}{>{\columncolor{NavyBlue!70}} C{2.8cm}|C{1.7cm}|C{1.8cm}|C{1.7cm}|C{1.7cm}}
+\begin{tabular}{C{2.8cm}|C{1.7cm}|C{1.8cm}|C{1.7cm}|C{1.7cm}}
+%\rowcolor{CornflowerBlue}
+\hline
 Source peak & $K_{design}$ ($\frac{e^{-}}{DAC}$) & $K_{Normal}$ ($\frac{e^{-}}{DAC}$) & $K_{Cascode}$ ($\frac{e^{-}}{DAC}$)\\[2.5ex]
 \hline
+\hline
 \ch{^{55}Fe} (5.9 KeV) & 10.1  & 9.37 & 9.00\\[1ex]
+\hline
 \hline
 \end{tabular}
 \caption{Average conversion factor $K$ for the Normal and Cascode FE using the \ch{^{55}Fe} radioactive source emission line at \SI{5.9}{KeV}.}
@@ -790,9 +836,12 @@ In~\autoref{tab:source_conv_norm} and in~\autoref{tab:source_conv_casc}   ....(d
 
 \begin{table}[h!]
 \centering
-\begin{tabular}{>{\columncolor{NavyBlue!70}} C{1.5cm}|C{1.8cm}|C{1.8cm}|C{1.8cm}|C{1.8cm}|C{1.8cm}|C{1.8cm}}
-\rowcolor{CornflowerBlue}
+%\begin{tabular}{>{\columncolor{NavyBlue!70}} C{1.5cm}|C{1.8cm}|C{1.8cm}|C{1.8cm}|C{1.8cm}|C{1.8cm}|C{1.8cm}}
+\begin{tabular}{C{1.5cm}|C{1.8cm}|C{1.8cm}|C{1.8cm}|C{1.8cm}|C{1.8cm}|C{1.8cm}}
+%\rowcolor{CornflowerBlue}
+\hline
 Source & Energy $\gamma$ [KeV] & $Q_{expected}$ [$e^{-}$] & $ToT_{measured}$ & $Q_{measured}$ [DAC] & Q [$e^{-}$] \footnotesize{with nominal K factor = 10.1 $e^{-}$/DAC} & Q [$e^{-}$] \footnotesize{with \ch{^{55}Fe} K factor = 9.37 $e^{-}$/DAC}\\[2ex]
+\hline
 \hline
 \ch{^{55}Fe} & 5.9 & 1616 & 23.4 & 172 & 1742 & 1616 \\[0.5ex]
 \hline
@@ -806,6 +855,7 @@ Source & Energy $\gamma$ [KeV] & $Q_{expected}$ [$e^{-}$] & $ToT_{measured}$ & $
 \hline
 \ch{^{241}Am} & 26.4 & 7233 & 94.1 & 753 & 7606 & 7057 \\[0.5ex]
 \hline
+\hline
 \end{tabular}
 \caption{Emission lines of \ch{^{55}Fe}, \ch{^{241}Am}, \ch{^{109}Cd} sources for Normal frontend.}
 \label{tab:source_conv_norm}
@@ -814,9 +864,12 @@ Source & Energy $\gamma$ [KeV] & $Q_{expected}$ [$e^{-}$] & $ToT_{measured}$ & $
 
 \begin{table}[h!]
 \centering
-\begin{tabular}{>{\columncolor{NavyBlue!70}} C{1.5cm}|C{1.8cm}|C{1.8cm}|C{1.8cm}|C{1.8cm}|C{1.8cm}|C{1.8cm}}
-\rowcolor{CornflowerBlue}
+%\begin{tabular}{>{\columncolor{NavyBlue!70}} C{1.5cm}|C{1.8cm}|C{1.8cm}|C{1.8cm}|C{1.8cm}|C{1.8cm}|C{1.8cm}}
+\begin{tabular}{C{1.5cm}|C{1.8cm}|C{1.8cm}|C{1.8cm}|C{1.8cm}|C{1.8cm}|C{1.8cm}}
+%\rowcolor{CornflowerBlue}
+\hline
 Source & Energy $\gamma$ [KeV] & $Q_{expected}$ [$e^{-}$] & $ToT_{measured}$ & $Q_{measured}$ [DAC] & Q [$e^{-}$] \footnotesize{with nominal K factor = 10.1 $e^{-}$/DAC} & Q [$e^{-}$] \footnotesize{with \ch{^{55}Fe} K factor = 9.00 $e^{-}$/DAC}\\[2ex]
+\hline
 \hline
 \ch{^{55}Fe} & 5.9 & 1616 & 21.8 & 180 & 1813 & 1616 \\[0.5ex]
 \hline
@@ -829,6 +882,7 @@ Source & Energy $\gamma$ [KeV] & $Q_{expected}$ [$e^{-}$] & $ToT_{measured}$ & $
 \ch{^{109}Cd} & 22 & 6027 & 77.6 & 642 & 6483 & 5777 \\[0.5ex]
 \hline
 \ch{^{241}Am} & 26.4 & 7233 & 90.8 & 753 & 7604 & 6776 \\[0.5ex]
+\hline
 \hline
 \end{tabular}
 \caption{Emission lines of \ch{^{55}Fe}, \ch{^{241}Am}, \ch{^{109}Cd} sources for Cascode frontend.}
@@ -866,30 +920,34 @@ Source & Energy $\gamma$ [KeV] & $Q_{expected}$ [$e^{-}$] & $ToT_{measured}$ & $
 %--------------------------------------------------------------------
 \section{Operation with low threshold} \label{sec:low_thr}
 
-One of the most important target in sensor design is to keep high efficiency even after irradiation damages. All experimental environments indeed, are exposed to high doses of radiations, so it's crucial to ensure the functionality of the detectors, even after being irradiated.
+%One important target in sensor design is to keep the detection efficiency high even after irradiation damages, that could cause a reduction of the collected signal due to trapping. 
+Many experimental environments are exposed to high doses of radiations, so one important target in sensor design is to keep the detection efficiency high even after radiation damage, that could cause a reduction of the collected signal due to trapping. 
+%it's crucial to ensure the functionality of the detectors even after a significant radiation damage. 
 
-For this reason, many tests were done in order to understand the chip behaviour at low threshold where a good value of efficiency could be preserved.
+For this reason, many tests were performed to understand the chip behaviour at low threshold, that is needed to preserve a good efficiency even with a reduced signal. 
 Moreover working at low threshold allows to detect low charge events due to charge sharing or charge trapping (effect which increases after irradiation), expecially in case of thin epitaxial material. 
 
 
 %--------------------------------------------------------------------
-\subsection{Register optimization}
+\subsection{Registers optimization}
 
-As we have seen in section (REFERENCE), there are a lot of registers which control the discriminator threshold and also the readout sequence. So preliminary it was necessary to explore their possible settings in order to operate the chip at low threshold.\\
+As we have seen in section \autoref{sec:improved_circuit}, there are many global registers that control the operating point of the front-end circuit and the discriminator threshold as well as the readout sequence. So preliminary it was necessary to explore their possible settings in order to operate the chip at low threshold.\\
 
-Now we will go through the main registers used for this purpose, in order to explain their functionality. There are several dozens of registers but we focused on some of the most important and crucial to set the threshold and its dispersion.
+Now we will go through the main registers used for this purpose, in order to explain their functionality, only focusing on the ones that affect the threshold and its dispersion.
+%of registers but we focused on some of the most important and crucial to set the threshold and its dispersion.
 
 \begin{itemize}
 \label{currents}
-\item \textit{$I_{CASN}$} : this current is responsible of the output baseline signal. In particular it sets the baseline of the FE output that goes to the input discriminator. In a few words, higher this value, higher the baseline, lower the threshold and also a little bit the gain and vice versa by decreasing it.
-\item \textit{$I_{THR}$}: it controls the pre-amplifier feedback strenght and speed, so it is responsible for the output reset rate. Increasing this current increases the gain and the time that the analog output takes to get back to the baseline and as consequence, it increases a lot the maximum value of the ToT. In fact it is recommend to set $I_{THR}$ to low value (e.g. 8 nA[ref]) in order to avoid high ToT slope.
-\item \textit{$I_{DB}$}: this current corresponds to \textbf{$I_{DISC,coarse}$} explained in~\autoref{sec:tuning}. It represents the primary current that sets the discriminator threshold, to which another current is added by the the tuning.
+\item \textit{$I_{CASN}$} : this current is responsible of the output baseline signal. In particular it sets the baseline of the output signal that goes to the discriminator input. For a given value of the discriminator threshold, set with a different register, the higher is \textit{$I_{CASN}$} and the baseline, the lower is the effective threshold. 
+%This increase in the baseline also increase a little bit the gain.  
+\item \textit{$I_{THR}$}: it controls the pre-amplifier feedback strenght and speed, so it is responsible for the output reset rate. With higher $I_{THR}$ the gain increases, so the threshold decreases, according to \autoref{eq:disp_gain}. Higher $I_{THR}$ also increases the time that the analog output takes to get back to the baseline. As a consequence with higher \textit{$I_{THR}$} also the ToT response changes, increasing a lot maximum value of the ToT. In fact it is recommend to set $I_{THR}$ to low value (e.g. 8 nA[ref]) in order to avoid high ToT slope and saturation.
+\item \textit{$I_{DB}$}: this current corresponds to \textbf{$I_{DISC,coarse}$} explained in~\autoref{sec:tuning}. It represents the primary current that sets the discriminator threshold voltage, to which another current is added for the pixel threshold tuning.
 \item \textit{$I_{TUNE}$}: it corresponds to \textbf{$I_{DISC,fine}$} instead (\autoref{sec:tuning}). Remembering the equation from tuning \footnote{
 \begin{equation}
 I_{DISC} = I_{DISC, coarse} + (TCODE - 1) \cdot I_{DISC,fine},  \hspace{.5cm}	where \hspace{.5cm} 1 \leq TDAC \leq 7
 \end{equation}
 } (\autoref{eq:tuning_eq}), this is the current to multiply by the TDAC value, which is added to $I_{DB}$, during the tuning process.
-\item \textit{$I_{BIAS}$}: this current acts on the pre-amplifier input transistor and influences the threshold dispersion and the gain. In particular increasing this value, the dispersion decreases and the gain becomes greater. Nevertheless it can't be increased a lot because it affects the power consumption, too. %higher rise time? pre-ampl output rise time??
+\item \textit{$I_{BIAS}$}: this current acts on the pre-amplifier input transistor and influences the gain, thus the threshold dispersion. In particular increasing this value, the gain increases and theshold dispersion decreases. Nevertheless it can't be increased too much since it affects the power consumption, too. %higher rise time? pre-ampl output rise time??
 %\item \textit{$V_{RESET}$}: this register influences the threshold dispersion. Lowering its value, the dispersion decreases and vice versa
 \end{itemize}
 
@@ -911,7 +969,7 @@ The results are compared with simulations done by Hung Pham.  (...). [???]
 \item[\textbf{$I_{CASN}$}] 
 \end{description}
 
-In figure \vref{fig:icasn_sim}, we can see the simulated behaviour of the threshold increasing the value o $I_{CASN}$.
+In figure \autoref{fig:icasn_sim}, we can see the simulated behaviour of the threshold increasing the value o $I_{CASN}$.
 
 \begin{figure}[h!]
 \centering
@@ -927,9 +985,9 @@ In figure \vref{fig:icasn_sim}, we can see the simulated behaviour of the thresh
 \label{fig:alltrends_icasn}
 \end{figure}
 
-To verify the trend of threshold as this current varies, three different acquisitions have been taken by fixing $I_{THR}$ = 20, 40, 64 and increasing $I_{CASN}$ from 0  to 30 DAC, with a step of 5 DAC. We have done this enabling 200 pixels in the Cascode FE (rows: 472 - 512, cols: 225 - 230).[??]\\
+To verify the trend of threshold as $I_{CASN}$ varies, three different acquisitions have been taken by fixing $I_{THR}$ = 20, 40, 64 DAC and increasing $I_{CASN}$ from 0 to 30 DAC, with a step of 5 DAC. We have done this enabling 200 pixels in the Cascode FE (rows: 472 - 512, cols: 225 - 230).[??]\\
 
-Each threshold distribution has been fitted with a gaussian function in order to estimate the average threshold value and its dispersion.
+The thresholds of the enabled pixels are measured from the s-curve for each of the setting of the register, and the measured threshold distribution has been fitted with a gaussian function in order to estimate the average threshold value and its dispersion.
 
 In figure \vref{fig:alltrends_icasn} are reported all trends obtained.
 
@@ -938,7 +996,7 @@ In figure \vref{fig:alltrends_icasn} are reported all trends obtained.
 \item[\textbf{$I_{THR}$}]
 \end{description}
 
-Reusing the same data of the previous measurements, the trend of the threshold have been studied bt changing the value of $I_{THR}$ and fixing that of $I_{CASN}$. In this case only $I_{CASN}$ from 0 to 15 DAC is considered, because for higher values we don't have enough measures of the threshold (specifically only two for $I_{THR}$=40, 64). The results are shown in figure \vref{fig:alltrends_ithr}.
+Reusing the same data of the previous measurements, the trend of the threshold have been studied by changing the value of $I_{THR}$ and fixing that of $I_{CASN}$. In this case only $I_{CASN}$ from 0 to 15 DAC is considered, because for higher values we don't have enough measures of the threshold (specifically only two for $I_{THR}$=40, 64). The results are shown in figure \vref{fig:alltrends_ithr}.
 
 \begin{figure}[h!]
 \centering
@@ -947,8 +1005,8 @@ Reusing the same data of the previous measurements, the trend of the threshold h
 \label{fig:alltrends_ithr}
 \end{figure}
 
-As expected, increasing $I_{THR}$ results to lower gain and faster return to baseline, so higher threshold. 
-We can compare them with the simulation shown in figure \vref{fig:ithr_sim}. 
+As expected, increasing $I_{THR}$ results to lower gain so higher threshold, and faster return to baseline. 
+We can compare the measured trend with the expected one from the simulation shown in figure \vref{fig:ithr_sim}. 
 
 \begin{figure}[h!]
 \centering
@@ -993,17 +1051,20 @@ Results are reported in~\autoref{fig:tot_vs_ithr} and~\autoref{fig:tot_vs_icasn}
 
 \section{Cross talk issue and mitigation} \label{sec:xtalk}
 
-As it was already pointed out, during the measurements of the average threshold of all FEs, there were something atypical in the s-curves of the HV flavors (subsection \vref{first_xtalk}), indeed some pixels seem to have occupancy greater than 1. This behavior threatens the good functionality of the overall matrix response, because these \textit{noisy pixels} flood the readout, giving unreliable results.
+As it was already pointed out, during the measurements of the average threshold of all FEs, there was something atypical in the s-curves of the HV flavors (subsection \vref{first_xtalk}): some "hot" pixels showed occupancy greater than 1, firing more than the number of injected events. These extra hits from the hot pixels were not simply related to the random fluctuation of the pixels above threshold due to their noise, since these hot pixels were firing only when there was some digital activity in the matrix, during the readout sequence of other pixels. The same pixels were instead silent, with no extra hits, in case the readout sequence was not activated by other pixel. 
 
-Also the systematic study of different register configurations has revealed the presence of the hot pixels which prevent to use certain settings and as consequence to reach lower global thresholds. \\
+This behavior threatens the good functionality of the overall matrix response, because these \textit{hot pixels} flood the readout, giving unreliable results.
+Also during the systematic study of different register configurations the presence the presence of hot pixels was prevent to use certain settings to reach lower global thresholds. \\
 
-For this reason an investigation has been conducted in order to understand the reasons why they start to fire and how to cure them as far as possible.
-In the meantime an important issue with cross-talk of the readout signals was discovered, and so in this section we examine this effect and some attempts to mitigate it using different settings/bias.
+For this reason a detailed investigation has been conducted in order to understand the reasons why the hot pixels start to fire and how to cure them as much as possible. 
+Thanks to these tests we could pin point the origin of the this cross-talk with some coupling with specific digital signals activated in the entire matrix during the readout sequence.
+Since the timestamp of hit is available we could study the time correlation of the extra hits with the timing of the various digital signals in the readout sequence.  
+These tests were perfomed in controlled situation and the main findings are reported here.  In this section we examine this effect and some attempts to mitigate it using different settings/bias.
 
 
 \subsection{Hot pixel issue}
 
-First of all we noticed that in the s-curves oh the HV flavors (e.g. that of HV-Cascode reported in figure \vpageref{fig:hot_first}), the atypical behavior could be triggered by a digital signal sent to the matrix during the readout activity at low threshold. This consideration is based on two main reasons:
+First of all we noticed that in the s-curves oh the HV flavors (e.g. that of HV-Cascode reported in  \autoref{fig:hot_first}), the atypical behavior could be triggered by a digital signal sent to the matrix during the readout activity at low threshold. This consideration is based on two main reasons:
 
 \begin{itemize}
 \item when the matrix has high threshold, like for Normal and Cascode FE, all pixels seem to behave as expected, without \textit{hot pixels}.\\ Lowering the threshold and running some source acquisitions without any source, no strange behaviour was observed. Acquiring data with a radioactive source instead, even Normal and Cascode FE seem to reveal the same problem. This led to thinking that during the readout of good pixels an induced signal is created which couples with some other pixels, in particular with those at lower threshold with respect to the average value. If the height of this signal exceeds the threshold of the single pixel, it causes some spurious hits, making the pixel ''\textbf{hot}''.
@@ -1024,7 +1085,7 @@ From these first observations, we have reached the conclusion that the cross tal
 
 \subsection{Hot pixel strategy (study)}
 
-At first, it has been lowered the threshold in order to ''create'' hot pixel also in the first two flavors of the matrix. In fact with TB settings the threshold was too high and the hypothetical induced signal did not cause sporious hits. For this purpose different settings were tried, changing some fundamental registers responsible for the threshold like those listed and explained \vpageref{currents}. 
+At first, it has been lowered the threshold in order to ''create'' hot pixel also in the first two flavors of the matrix. In fact with TB settings the threshold was too high and the hypothetical induced signal did not cause spurious hit. For this purpose different settings were tried, changing some fundamental registers responsible for the threshold like those listed and explained \vpageref{currents}. 
 
 Then several tests have been run under controlled conditions:
 \begin{itemize}

@@ -305,7 +305,7 @@ Now we want to describe the analog circuit and the readout architecture chosen f
 
 
 \begin{description}
-\item[The Column-drain readout architecture]
+\item[Analog front-end]
 \end{description}
 
 As we have seen in the previous, due to small capacitance of the small electrode MAPS, voltage amplification can be used to transform the charge signal arriving on the sensing node into a voltage signal. 
@@ -319,7 +319,8 @@ In~\autoref{fig:analog} a schematic of the voltage amplification and the readout
 \label{fig:analog}
 \end{figure}
 
-The charge signal produced by particles passing through and collected by the collection node, is converted in a voltage signal through a small capacitance. It goes in input to a pre-amplifier which amplifies the signal and then send it to a discriminator. At this stage, the discriminator decides if discriminate the signal or not, on the base of its voltage threshold value. If the signal arriving from the pre-amplifier remains under the discriminator threshold, then it is not discriminate. If the signal goas above the threshold instead, the pulse is discriminate and its Time Over Threshold is measured (more about this in the following). Discriminator threshold is set by the means of some chip registers that we will see in \label{ch:TJ2}. Data collected are send to the periphery in order to comunicate and store them outside the chip.\\
+The charge signal, produced by particles traversing the medium, and collected by the collection node, is converted in a voltage signal through a small capacitance. Then, it goes in input to a pre-amplifier which amplifies the signal and sends it to the discriminator. At this stage, the discriminator decides whether to discriminate the signal, based on the value of its threshold. If the pre-amplifier output goes above the discriminator threshold, the pulse is discriminated and its Time Over Threshold is measured (as explained in the following), otherwise it is not transmitted. 
+Pre-amplifier and discriminator working conditions are defined by several chip registers, which can be set within certain ranges (dependent on the number of bit dedicated to each register). The collected data are sent to the chip periphery in order to transmit and store them outside the chip.\\
 
 \begin{figure}[h!]
 \centering
@@ -329,9 +330,13 @@ The charge signal produced by particles passing through and collected by the col
 \end{figure}
 
 
-The \textit{column-drain} architecture implemented in TJ-Monopix ensures fast readout by encoding the analog charge information using the standard \textbf{Time Over Threshold (ToT)} technique~\autoref{fig:tot_scheme}. This procedure exploits two timing information: the \textbf{Leading Edge (LE)} which corresponds to the hit time of arrival (when the signal value goes beyond the threshold), and the \textbf{Trailing Edge (TE)} that is when the signal goes below the threshold value. From the difference between the TE and the LE, the ToT can be calculated.  %(\autoref{fig:ToT}).
+The \textit{column-drain} architecture implemented in TJ-Monopix ensures fast readout by encoding the analog charge information using the standard \textbf{Time Over Threshold (ToT)} technique~\autoref{fig:tot_scheme}. This procedure exploits two timing information: the \textbf{Leading Edge (LE)} which corresponds to the hit time of arrival (when the signal value goes beyond the threshold), and the \textbf{Trailing Edge (TE)} that is when the signal goes below the threshold value. From the difference between the TE and the LE, the ToT can be calculated (\autoref{fig:ToT}).
 
-The \textit{in-pixel} circuitry implemented a Random Memory Acces (RAM) where to store the LE and TE timing info, a Read-Only Memory (ROM) to store the pixel address and the control and arbitration logic, which we will see more about in the following.
+The \textit{in-pixel} circuitry implemented a Random Memory Acces (RAM) where to store the LE and TE timing info, a Read-Only Memory (ROM) to store the pixel address and the control and arbitration logic, essential to read out the hit, as described in the following.
+
+\begin{description}
+\item[The Column-drain readout architecture]
+\end{description}
  
 The readout is \textit{column-based}, so all pixels of each double column share a common column-bus which could be accessed by one pixel at a time, with a defined priority logic. The column bus includes the BCID timestamp, the data (LE, TE, address) and the control signals.
 The \textit{periphery} includes the End Of Column (EoC) block which deals with the transmission and the readout of the column-bus signals, and the Digital Chip Bottom (DCB) that instead, processes the hit information. 
@@ -347,8 +352,8 @@ In~\autoref{fig:RO2} is displayed an example of the readout of two hits.
 \label{fig:RO2}
 \end{figure}
 
-The readout sequence starts when the TE pulse arrived. A hit flag is set and it acivates the \textsc{\textbf{TOKEN}} signal, which in turn is arised to warn that the pixel is available to be read out. This signal propgates across the double column with a priority logic until it arrives to a readout controller, which uses other two global signals, the \textsc{\textbf{FREEZE}} and \textsc{\textbf{READ}}, to control the readout progression. They are distributed across the EoC blocks and local copies are transimitted only to the double column that has been hit and that has the higher priority (It is a different priority logic among each double column which goes from left to right across the matrix).
-The first ensures that new hits do not interrupt the pixel priority logic setting other new hit flag, which means that they could not transmit new hit information, but they could store it for the next readout sequence. In this way the pixel priority in each readout sequence is well defined. The \textsc{\textbf{READ}} signal instead, allows to the pixel with the hit flag and highest priority to access the data bus and transmit the hit information to the periphery. A series of \textsc{\textbf{READ}} cycles allow all pixels in the sequence to be read out.
+The readout sequence starts when the TE pulse arrived. A hit flag is set and it activates the \textsc{\textbf{TOKEN}} signal, which in turn is arose to warn that the pixel is available to be read out. This signal propagates across the double column with a priority logic until it arrives to a readout controller, which uses other two global signals, the \textsc{\textbf{FREEZE}} and \textsc{\textbf{READ}}, to control the readout progression. They are distributed across the EoC blocks and local copies are transmitted to each double column that has been hit and that has the higher priority (there is a different priority logic among each double column which goes from left to right, along the matrix).
+The first ensures that new hits do not interrupt the pixel priority logic setting other new hit flags, which means that they could not transmit new hit information, but they could store it for the next readout sequence. In this way the pixel priority in each readout sequence is well defined. The \textsc{\textbf{READ}} signal instead, allows to the pixel with the hit flag and highest priority to access the data bus and transmit the hit information to the periphery. A series of \textsc{\textbf{READ}} cycles allow all pixels in the sequence to be read out.
 
 
 \begin{figure}[h!]
@@ -360,7 +365,5 @@ The first ensures that new hits do not interrupt the pixel priority logic settin
 
 %ROIC ReadOut Integrated Circuit
 %occupancy
-%energy necessary to release for silicon 3.65 e numero medio elettroni prodotti??
-%other semiconductor
 
 
