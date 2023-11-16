@@ -140,6 +140,7 @@ To quantify the noise of a readout channel the equivalent noise charge (ENC) is 
 
 \begin{equation}
 ENC = \frac{noise \, output \, voltage \, (V)}{gain \, (V/e^{-})} 
+\label{eq:ENC}
 \end{equation}
 
 \textbf{Operating threshold and threshold dispersion} 
@@ -167,7 +168,9 @@ The operating threshold lower limit should be at least approximately 5-6 times h
 THR=5-6 *\sqrt{ENC^{2} + \sigma_{thr}^{2}}
 \end{equation}
 
-comment on the fact that a lower global threshold could be achieved increasing the gain, since both ENC and the Qthr are inversaly proportional to the gain. 
+Since both the ENC (\autoref{eq:ENC}) and the threshold dispersion (\autoref{eq:disp_gain}) are inversely proportional to the gain, a lower global threshold could be achieved increasing the gain, through an optimized choice of chip registers.
+
+%comment on the fact that a lower global threshold could be achieved increasing the gain, since both ENC and the Qthr are inversaly proportional to the gain. 
 
 To measure the threshold and noise of the whole matrix, the response of each pixel has been characterized by means of the internal charge injection. \\
 
@@ -275,12 +278,19 @@ The threshold and noise distributions measured for all pixels of the Normal FE s
 \subfigure[Threshold map]
 {\includegraphics[scale=0.37]{threshold_map_norm_140_2}}\\
 \subfigure[Noise distribution]
-{\includegraphics[scale=0.35]{Noise_hist_norm_140_fit}}\quad
+{\includegraphics[scale=0.35]{Noise_hist_norm_140_fit2}}\quad
 \subfigure[Noise map]
 {\includegraphics[scale=0.37]{Noise_map_norm_140_lim}}\\
 \caption{Normal FE flavor: threshold and noise distributions and their maps}
 \label{fig:thdist_norm}
 \end{figure}
+
+The striped pattern, visible in the threshold map, is due to the power distribution network. The voltage drop across the matrix analog power grid is compensated by using a local analog matrix supply, for groups of 32 columns. \\
+
+%pag 170 TESI MOUSTAKAS
+
+The noise map, shows a different behaviour in the upper part of the flavor, which has a smaller noise value on average, with respect to the lower part, where it results higher.  
+
 
 
 
@@ -306,7 +316,7 @@ The distributions of threshold and noise extracted with the fit to the s-curve, 
 \subfigure[Threshold map]
 {\includegraphics[scale=0.37]{threshold_map_casc_140_2}}\\
 \subfigure[Noise distribution]
-{\includegraphics[scale=0.35]{Noise_hist_casc_140_fit}}\quad
+{\includegraphics[scale=0.35]{Noise_hist_casc_140_fit2}}\quad
 \subfigure[Noise map]
 {\includegraphics[scale=0.37]{Noise_map_casc_140_lim}}\\
 \caption{Cascode FE:threshold and noise distributions and their maps}
@@ -338,7 +348,7 @@ In~\autoref{fig:thdist_hvc} are shown the fit of the threshold and noise distrib
 \subfigure[Threshold distribution]
 {\includegraphics[scale=0.35]{all_HVc_thdist_140}}\quad
 \subfigure[Noise distribution]
-{\includegraphics[scale=0.37]{Noise_hist_HV Casc._140_fit}}\\
+{\includegraphics[scale=0.37]{Noise_hist_HV Casc._140_fit2}}\\
 \caption{HV Cascode FE.}
 \label{fig:thdist_hvc}
 \end{figure}
@@ -367,7 +377,7 @@ In~\autoref{fig:thdist_hv}the fit of the threshold and noise distribution, and i
 \subfigure[Threshold distribution]
 {\includegraphics[scale=0.35]{all_HV_thdist_140}}\quad
 \subfigure[Noise distribution]
-{\includegraphics[scale=0.37]{Noise_hist_HV_140_fit}}\\
+{\includegraphics[scale=0.37]{Noise_hist_HV_140_fit2}}\\
 \caption{HV Normal FE.}
 \label{fig:thdist_hv}
 \end{figure}
@@ -378,7 +388,7 @@ In~\autoref{fig:thdist_hv}the fit of the threshold and noise distribution, and i
 \subfigure[Threshold map]
 {\includegraphics[scale=0.35]{threshold_map_All FEs_140}}\quad
 \subfigure[Noise map]
-{\includegraphics[scale=0.37]{Noise_map_HV Casc._140}}\\
+{\includegraphics[scale=0.37]{Noise_map_HV_1402}}\\
 \caption{HV's FE.}
 \label{fig:HVs_maps}
 \end{figure}
@@ -386,10 +396,11 @@ In~\autoref{fig:thdist_hv}the fit of the threshold and noise distribution, and i
 As we will see in the following (\autoref{sec:xtalk}), the atypical s-curves in HVs flavors with many hot pixels, have been the first hint of the cross-talk problem, tied to a global lower threshold in these sectors, compared with the first two threshold measured in the Normal and Cascode sector (with the TB settings). 
 
 
-\subsubsection{Summary Table}
+\subsubsection{Threshold and noise results with TB settings}
 
 In~\autoref{tab:th_noise_all} a summary of results for threshold, noise and threshold dispersion of all FE in DAC and $e^{-}$ unit, using the nominal conversion factor in~\autoref{eq:conversion_factor}.
 
+\begin{comment}
 %\begin{tabular}{>{\columncolor{NavyBlue!70}} C{3cm}|C{2.8cm}|C{2.8cm}}
 \begin{table}[h!]
 \centering
@@ -412,6 +423,27 @@ HV & 31.70$\pm$0.10 & 320$\pm$1 & 2.30$\pm$0.10 & 23$\pm$1 & 1.080$\pm$0.033 & 1
 \caption{Summary table of threshold and noise values for all flavors of the W14R12 chip.}
 \label{tab:th_noise_all}
 \end{table}
+\end{comment}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{C{1.3cm}|C{1.7cm}|C{1.6cm}|C{1.8cm}|C{1.6cm}|C{1.8cm}|C{1.9cm}}
+\hline
+FE & Threshold [DAC] & Threshold [$e^{-}$] & Threshold dispersion [DAC] & Threshold dispersion [$e^{-}$] & Noise [DAC] & Noise [$e^{-}$]\\
+\hline
+\hline
+Normal  & 53.62 & 541.6  & 2.21 & 22.3 & \shortstack{2.503 \\ 3.037} & \shortstack{25.28 \\ 30.67}\\
+\hline
+Cascode & 60.19 & 607.9 & 2.81 & 28.4 & 2.400 & 24.24\\
+\hline
+HV - Cascode & 35.34 & 356.9 & 2.59 & 26.2 & 1.0781 & 10.889\\
+\hline
+HV & 31.70 & 320 & 2.30 & 23 & 1.080 & 10.91\\
+\hline
+\end{tabular}
+\caption{Summary table of threshold and noise values for all flavors of the W14R12 chip.}
+\label{tab:th_noise_all}
+\end{table}
 
 The measured values are much higher than expected in a convenient working condition (\autoref{tab:tj2_spec}). However, as we have pointed out in the previous, we have carried out the characterization of the matrix response adopting the TB register settings, to obtain results essential for the TB data reconstruction, and not to work in optimized conditions.
 
@@ -421,61 +453,6 @@ In~\autoref{sec:low_thr} we will show some test results, trying to operate the c
 
 
 %--------------------------------------------------------------------
-\subsection{Threshold dispersion and tuning} \label{sec:tuning}
-
-
-TJ-Monopix2 is equipped with a circuit which allows the \textit{threshold tuning}. We have already mentioned that the analog part of the in-pixel front-end (\autoref{fig:tj2core}) includes the 3-bit threshold tuning DAC, that can be used to adjust the discriminator threshold of each pixel with respect to the global chip threshold level thus reducing the threshold dispersion. In other words it can adjust every pixel threshold, in order to have a threshold on the matrix as uniform as possible, or in any case a dispersion as small as possible, which is especially important to operate the matrix with low threshold, needed with the reduced collection efficiency due to radiation damage.  This system has been design in order to counteract some negative effects that affect the threshold dispersion like systematics (for example related to biasing), process and temperature variations and radiation damage. \\
-
-Specifically the TDAC circuit, shown in~\autoref{fig:tdac}, helps to make threshold trimming of each pixel. This component controls the discriminator active load current $I_{DISC}$ which is partially responsible of the pixel threshold. It works as an analog multiplexer, which selects one of seven $I_{DISC, n}$ lines generated by the main 8-bit biasing DAC. So the possbile vaue of the final $I_{DISC}$ is given by the sum of two contributions:
-
-\begin{equation}
-I_{DISC} = I_{DISC, coarse} + (TCODE - 1) \cdot I_{DISC,fine},  \hspace{.5cm}	where \hspace{.5cm} 1 \leq TDAC \leq 7
-\label{eq:tuning_eq}
-\end{equation}
-
-\textbf{$I_{DISC, coarse}$} is the current set by the primary value of threshold, resulting by the setting of the main registers which are responsible for it (\autoref{sec:low_thr}). 
-\textbf{$I_{DISC, fine}$} is the current selected by the fine tuning step (TDAC) and it depends on the 3-bit tunning code that is stored in the in-pixel configuration memory.
-\textbf{TCODE} is the decimal representation of the TDAC code. 
-
-For example if the 3-bit DAC are set to ''111'', the decimal representation is 8 and the fine tuning provide a current $I_{DISC,7}$, which corresponds to the highest threshold. If the 3-bit are set to ''010'' the corresponding TCODE is 2 and the current $I_{DISC,1}$ is provided,  which set the lowest threshold possible around the central value $I_{DISC,coarse}$. The particular combination ''000'' instead (TCODE = 0) masks the single pixel by disabling the discriminator, without affecting the operation of the others.
-
-\begin{figure}
-\centering
-\includegraphics[scale=.8]{tuning_b}
-\caption{Schematic of 3-bit tuning DAC (TDAC)}
-\label{fig:tdac}
-\end{figure}
-
-
-\subsubsection{First results from threshold tuning}
-
-It has been trying to apply the fine tuning method to level out the threshold of some pixels as much as possible. We have considered about 12.000 pixels of the \textbf{Cascode FE} and in~\autoref{fig:casc_tuning} are shown the results before and after the threshold trimming for the s-curves and threshold distributions.
-
-
-\begin{figure}[h!]
-\centering
-\subfigure[Cascode FE s-curves untuned]
-{\includegraphics[scale=0.5]{casc_untuned}}\quad
-\subfigure[Cascode FE s-curves tuned]
-{\includegraphics[scale=0.5]{casc_tuned}}\quad
-\subfigure[Cascode FE threshold distribution]
-{\includegraphics[scale=0.8]{casc_th_tuned_untuned}}\quad
-\caption{Cascode FE before tuning and after tuning comparison.}
-\label{fig:casc_tuning}
-\end{figure}
-
-As we can see the dispersion has been reduced of the 42\% after the tuning and as consequence also the estimation of the threshold is more precise. In~\autoref{fig:casc_maps_tune} are displayed the maps of the threshold and of the TDAC values, such as the value of TCODE assigned at each pixel, in order to obtain a threshold as uniform as possible. \\
-
-\begin{figure}[h!]
-\centering
-\subfigure[Map of TDAC value with target threshold of $\approx$ 250 $e^{-}$]
-{\includegraphics[scale=0.33]{tdac_map}}\quad
-\subfigure[Threshold map of tuned Cascode FE]
-{\includegraphics[scale=0.53]{th_map_tuned}}\quad
-\caption{Maps of tuned Cascode FE.}
-\label{fig:casc_maps_tune}
-\end{figure}
-
 
 %--------------------------------------------------------------------
 \section{ToT calibration with internal injection}
@@ -1044,34 +1021,71 @@ The last analysis done to make a comparison with the simulations, is about the t
 Results are reported in~\autoref{fig:tot_vs_ithr} and~\autoref{fig:tot_vs_icasn}. Also here we can see a good agreement between data and simulations.
 
 %--------------------------------------------------------------------
-\subsubsection{some nice picture of the optimized thr and tuning}
+%\subsubsection{some nice picture of the optimized thr and tuning}
+\subsection{Low threshold operation, threshold dispersion and tuning} \label{sec:tuning}
 
-!!!!
+After the study of the optimization of the registers to operate the matrix at lower threshold,  we found a stable working point around 250 e-, as show in this section. In order to reach this global theshold value is was also important to have a uniform threshold distribution among the pixel in the matrix. 
+
+TJ-Monopix2 is equipped with a circuit which allows the \textit{threshold tuning}. We have already mentioned that the analog part of the in-pixel front-end (\autoref{fig:tj2core}) includes the 3-bit threshold tuning DAC, that can be used to adjust the discriminator threshold of each pixel with respect to the global chip threshold level thus reducing the threshold dispersion. In other words it can adjust every pixel threshold, in order to have a threshold on the matrix as uniform as possible, or in any case a dispersion as small as possible, which is especially important to operate the matrix with low threshold, needed with the reduced collection efficiency due to radiation damage.  This system has been design in order to counteract some negative effects that affect the threshold dispersion like systematics (for example related to biasing), process and temperature variations and radiation damage. \\
+
+Specifically the TDAC circuit, shown in~\autoref{fig:tdac}, helps to make threshold trimming of each pixel. This component controls the discriminator active load current $I_{DISC}$ which is partially responsible of the pixel threshold. It works as an analog multiplexer, which selects one of seven $I_{DISC, n}$ lines generated by the main 8-bit biasing DAC. So the possibile values of the final $I_{DISC}$ is given by the sum of two contributions:
+
+\begin{equation}
+I_{DISC} = I_{DISC, coarse} + (TCODE - 1) \cdot I_{DISC,fine},  \hspace{.5cm}	where \hspace{.5cm} 1 \leq TDAC \leq 7
+\label{eq:tuning_eq}
+\end{equation}
+
+\textbf{$I_{DISC, coarse}$} is the current set by the primary value of threshold, resulting by the setting of the main registers which are responsible for it (\autoref{sec:low_thr}). 
+\textbf{$I_{DISC, fine}$} is the current selected by the fine tuning step (TDAC) and it depends on the 3-bit tunning code that is stored in the in-pixel configuration memory.
+\textbf{TCODE} is the decimal representation of the TDAC code. 
+
+For example if the 3-bit DAC are set to ''111'', the decimal representation is 8 and the fine tuning provide a current $I_{DISC,7}$, which corresponds to the highest threshold. If the 3-bit are set to ''010'' the corresponding TCODE is 2 and the current $I_{DISC,1}$ is provided,  which set the lowest threshold possible around the central value $I_{DISC,coarse}$. The particular combination ''000'' instead (TCODE = 0) masks the single pixel by disabling the discriminator, without affecting the operation of the others.
+
+\begin{figure}
+\centering
+\includegraphics[scale=.8]{tuning_b}
+\caption{Schematic of 3-bit tuning DAC (TDAC)}
+\label{fig:tdac}
+\end{figure}
 
 
-\section{Cross talk issue and mitigation} \label{sec:xtalk}
+\subsection{First results from threshold tuning}
 
-As it was already pointed out, during the measurements of the average threshold of all FEs, there was something atypical in the s-curves of the HV flavors (subsection \vref{first_xtalk}): some "hot" pixels showed occupancy greater than 1, firing more than the number of injected events. These extra hits from the hot pixels were not simply related to the random fluctuation of the pixels above threshold due to their noise, since these hot pixels were firing only when there was some digital activity in the matrix, during the readout sequence of other pixels. The same pixels were instead silent, with no extra hits, in case the readout sequence was not activated by other pixel. 
+%\roman{Add a couple of sentences that summarize how the threshold tuning algorithm works. }
 
-This behavior threatens the good functionality of the overall matrix response, because these \textit{hot pixels} flood the readout, giving unreliable results.
-Also during the systematic study of different register configurations the presence the presence of hot pixels was prevent to use certain settings to reach lower global thresholds. \\
-
-For this reason a detailed investigation has been conducted in order to understand the reasons why the hot pixels start to fire and how to cure them as much as possible. 
-Thanks to these tests we could pin point the origin of the this cross-talk with some coupling with specific digital signals activated in the entire matrix during the readout sequence.
-Since the timestamp of hit is available we could study the time correlation of the extra hits with the timing of the various digital signals in the readout sequence.  
-These tests were perfomed in controlled situation and the main findings are reported here.  In this section we examine this effect and some attempts to mitigate it using different settings/bias.
+It has been trying to apply the fine tuning method to level out the threshold of some pixels as much as possible. We have considered about 12.000 pixels of the \textbf{Cascode FE} and in~\autoref{fig:casc_tuning} are shown the results before and after the threshold trimming for the s-curves and threshold distributions.
 
 
-\subsection{Hot pixel issue}
+\begin{figure}[h!]
+\centering
+\subfigure[Cascode FE s-curves untuned]
+{\includegraphics[width=.42\textwidth,keepaspectratio]{s-curve_untuned.jpg}}
+\subfigure[Cascode FE s-curves tuned]
+{\includegraphics[width=.42\textwidth,keepaspectratio]{s-curve_tuned.jpg}}
+\subfigure[Cascode FE threshold distribution untuned]
+{\includegraphics[width=.4\textwidth,keepaspectratio] {thr_untuned.jpg}}
+\subfigure[Cascode FE threshold distribution tuned]
+{\includegraphics[width=.4\textwidth,keepaspectratio]{thr_tuned.jpg}}
+\caption{Cascode FE before tuning and after tuning comparison.}
+\label{fig:casc_tuning}
+\end{figure}
 
-First of all we noticed that in the s-curves oh the HV flavors (e.g. that of HV-Cascode reported in  \autoref{fig:hot_first}), the atypical behavior could be triggered by a digital signal sent to the matrix during the readout activity at low threshold. This consideration is based on two main reasons:
+As we can see the dispersion has been reduced of the 42\% after the tuning and as consequence also the estimation of the threshold is more precise. In~\autoref{fig:casc_maps_tune} are displayed the maps of the threshold and of the TDAC values, such as the value of TCODE assigned at each pixel, in order to obtain a threshold as uniform as possible. \\
 
-\begin{itemize}
-\item when the matrix has high threshold, like for Normal and Cascode FE, all pixels seem to behave as expected, without \textit{hot pixels}.\\ Lowering the threshold and running some source acquisitions without any source, no strange behaviour was observed. Acquiring data with a radioactive source instead, even Normal and Cascode FE seem to reveal the same problem. This led to thinking that during the readout of good pixels an induced signal is created which couples with some other pixels, in particular with those at lower threshold with respect to the average value. If the height of this signal exceeds the threshold of the single pixel, it causes some spurious hits, making the pixel ''\textbf{hot}''.
+\begin{figure}[h!]
+\centering
+\subfigure[Map of TDAC value with target threshold of $\approx$ 250 $e^{-}$]
+{\includegraphics[scale=0.33]{tdac_map}}\quad
+\subfigure[Threshold map of tuned Cascode FE]
+{\includegraphics[scale=0.53]{th_map_tuned}}\quad
+\caption{Maps of tuned Cascode FE.}
+\label{fig:casc_maps_tune}
+\end{figure}
 
-\item Moreover, always considering the HV Cascode s-curves, it could be noticed that in the region before the threshold ($Q_{inj}$<threshold, pointed by the blue arrow) there isn't an anomalous activity which means that the induced signal is not due to the BCID tha is always sent to the matrix during the injection or an acquisition with the source, regardless of being above or below the  threshold. The atypical behaviour indeed, is in the region above the threshold ($Q_{inj}$>threshold, pointed by the red arrow) where the occupancy of some pixels becomes greater than 1. This means that these \textit{hot pixels} detect more hits of those injected.
 
-\end{itemize} 
+\section{Hot pixels from cross talk issue and mitigation} \label{sec:xtalk}
+
+As it was already pointed out, during the measurements of the average threshold of all FEs, there was something atypical in the s-curves of the HV flavors (\autoref{first_xtalk}): some "hot" pixels started to appear, showing occupancy greater than 1, thus firing more than the number of injected events. 
 
 \begin{figure}[h!]
 \centering
@@ -1080,35 +1094,91 @@ First of all we noticed that in the s-curves oh the HV flavors (e.g. that of HV-
 \label{fig:hot_first}
 \end{figure}
 
-From these first observations, we have reached the conclusion that the cross talk could be tied to the readout activity. So we have started investigating the timestamp of those hits not synchronize with the timestamp of the injection.
+These extra hits from the hot pixels were not simply related to the random fluctuation of the pixels above threshold due to their noise, since these hot pixels were firing only when there was some digital activity in the matrix, during the readout sequence of other pixels. The same pixels were instead silent, with no extra hits, in case the readout sequence was not activated by other pixel. 
+
+This is visible in \autoref{fig:hot_first}: the region with the red arrow has extra hits from hot pixels and it corresponds to events in the matrix when many pixels have real hits from injection (Qinj > THR) and the digital readout is then active. Instead in the region indicated with the blue arrow, where Qinj < THR, where there are no real hits from injection that activate the readout, also the hot pixels do not fire.  
+
+The observation that hot pixels were not firing simply due to their noise fluctuation, was also confirmed with additional acquisition without injection. With a given setting of the threshold the matrix had no hits, indicating that the threshold setting was high enough to cut to zero the occupancy from noise fluctuation. As soon as the matrix was stimulated with real hits from a radioactive source, several hot pixels start to fire, sending hits just after the event were real hits from the radioactive source are readout. This was an additional confirmation that the spurious hits were correlated with some activity of the readout sequence. 
 
 
-\subsection{Hot pixel strategy (study)}
 
-At first, it has been lowered the threshold in order to ''create'' hot pixel also in the first two flavors of the matrix. In fact with TB settings the threshold was too high and the hypothetical induced signal did not cause spurious hit. For this purpose different settings were tried, changing some fundamental registers responsible for the threshold like those listed and explained \vpageref{currents}. 
+This behavior threatens the good functionality of the overall matrix response, because these \textit{hot pixels} flood the readout, giving unreliable results.
+Also during the systematic study of different register configurations the presence the presence of hot pixels was prevent to use certain settings to reach lower global thresholds. 
 
-Then several tests have been run under controlled conditions:
+For this reason a detailed investigation has been conducted in order to understand the reasons why the hot pixels start to fire and how to cure them as much as possible. 
+
+Thanks to these tests we could identify the origin of the this cross-talk with some coupling of the front-end,  or the input collection diode, with a specific digital signal activated in the entire matrix during the readout sequence.
+Using the available timing information for the hits, their Leading edge (LE),  we could study the time correlation of the extra hits with the timing of the various digital signals in the readout sequence, that could be selectively moved changing some readout registers. 
+
+These tests were performed in controlled situation, as shown in next section,  and the main conclusion is the following:
+\begin{itemize}
+\item the cross talk coupling is present in all pixels of the matrix. The responsible digital signal is distributed to all pixel during the readout sequence,  producing a similar signal pulse in all pixels.
+\item this induced or cross-talk signal is anyway producing hits (signal above threshold) only in the pixels have a threshold lower than induced signal height. For a given setting of global threshold, higher than the induced signal height, some pixels could have a significantly lower threshold,  simply due to threshold dispersion or other reason, and they behave as "hot" pixels.  
+\item also "normal" pixels can become "hot", firing on this induced signal, if their threshold is reduced, either lowering the global threshold setting or reducing their specific threshold of the pixel with the TDAC threshold tuning
+\end{itemize}
+
+
+
+In the following section we describe some of these tests and some attempts to mitigate the issue using different settings/bias.
+
+
+%\subsection{Hot pixel issue}
+
+%First of all we noticed that in the s-curves oh the HV flavors (e.g. that of HV-Cascode reported in  \autoref{fig:hot_first}), the atypical behavior could be triggered by a digital signal sent to the matrix during the readout activity at low threshold. This consideration is based on two main reasons:
+
+%\begin{itemize}
+%\item when the matrix has high threshold, like for Normal and Cascode FE, all pixels seem to behave as expected, without \textit{hot pixels}.\\ Lowering the threshold and running some source acquisitions without any source, no strange behaviour was observed. Acquiring data with a radioactive source instead, even Normal and Cascode FE seem to reveal the same problem. This led to thinking that during the readout of good pixels an induced signal is created which couples with some other pixels, in particular with those at lower threshold with respect to the average value. If the height of this signal exceeds the threshold of the single pixel, it causes some spurious hits, making the pixel ''\textbf{hot}''.
+
+%\item Moreover, always considering the HV Cascode s-curves, it could be noticed that in the region before the threshold ($Q_{inj}$<threshold, pointed by the blue arrow) there isn't an anomalous activity which means that the induced signal is not due to the BCID tha is always sent to the matrix during the injection or an acquisition with the source, regardless of being above or below the  threshold. The atypical behaviour indeed, is in the region above the threshold ($Q_{inj}$>threshold, pointed by the red arrow) where the occupancy of some pixels becomes greater than 1. This means that these \textit{hot pixels} detect more hits of those injected.
+
+%\end{itemize} 
+
+
+
+%From these first observations, we have reached the conclusion that the cross talk could be tied to the readout activity. So we have started investigating the timestamp of those hits not synchronize with the timestamp of the injection.
+
+
+\subsection{Hot pixel studies}
+
+
+At first, the threshold has been lowered in order to ''create'' hot pixel also in the first two flavors of the matrix. In fact with TB settings the threshold for Normal and Cascode FE was higher (above 500 e-) than the threshold in the HV FE (of about 350 e-) where the hot pixels were firstly observed, so the hypothetical induced signal did not cause spurious hit in the the two first flavors. For this purpose different settings were tried, changing some fundamental registers responsible for the threshold like those listed and explained \autoref{currents}. 
+We confirmed the hot pixels were appearing also in the first two flavor operating the matrix at a global threshold below 350 e-. 
+
+
+Then several tests have been performed under controlled conditions:
 \begin{itemize}
 \item one healty(good) pixel was injected;
 \item one \textit{hot pixel} (two or three in different tests) was enabled but not injected;
 \item the all matrix except these pixels was disabled.
 \end{itemize}
 
-In this way (remembering the readout sequence [REFERENCE]) the readout cycle has a known duration and two different timing info has been used to study the induced signal with greater precision:
+\begin{figure}[h!]
+\centering
+\includegraphics[width=.8\textwidth,keepaspectratio]{cross_talk_redout.jpg}
+\caption{Hot pixel study: readout sequence.}
+\label{fig:hot_pixel_readout}
+\end{figure}
+
+In this way the readout cycle, shown schematically in \autoref{fig:hot_pixel_readout}, has a known duration, with the timing of the various digital control signals (FREEZE, READ) with a known position with respect to Trailing Edge (TE) of the first hit that activate the readout. The digital readout signal timing can be moved acting on specific registers listed in \autoref{tab:ro_registers}. 
+
+Two different timing information have been used to study the time correlation of the induced signal hits with the digital signals:
 
 \begin{itemize}
 \item \textbf{$\Delta$TS} (TimeStamp) between two consecutive hits: the TimeStamp is assigned from the FPGA when the \textsc{token} rises on the TE of the first hit to read, but only if the previous readout frame is completed. So, if the hit coming from a \textit{hot pixel} is after the hit from the injected one, the minimum $\Delta TS$ has to be equal to the readout time of 1 pixel and so to the duration of the \textsc{FREEZE\_STOP} signal .\\
-This info has allowed to verify if the hot pixel fires after the good injected one or not.
-\item LE(hit) - TE(previous hit): this quantity measures the elapsed time between a hit and the previous one. This is a finer info than the $\Delta$TS because it allows to correlate the hit with the induced digital signal, originate from the readout cycle.
+This info has allowed to verify if the hot pixel fires immediately after the good injected one or not.
+\item LE(hit) - TE(previous hit): this quantity measures the elapsed time between the start of a hit (Leading Edge) and the end of the previous one (Trailing Edge). The TE of the first hit  activates the readout and also corresponds to the start of the entire readout sequence.  All the other readout control signals have a known/selectable timing position with respect to this TE. So the distance LE(hit) - TE(previous hit) allows to correlate the LE of the spurious hit, due to cross talk, with the specific digital signal edge that produces the effect. 
 \end{itemize}
 
-Moreover, since a 7-bit BCID is sent to the matrix during its activity, it was important to keep short (<128 clock cycle) the duration of the full readout sequence and to not enable too many pixels in order to not extend too much the readout frame. Otherwise the information on the leading edge of the pixel could not be correlated with the token of the previous hit. In other words, if the readout frame exceed 128 clock cycles, since the token could be raised if the matrix is \textbf{not} freeze, even if an hit is arrived before it could be read only in the next frame when it could rise again the token, but in this case it will have different TimeStamp. So in this case the TS is useless for our purpose.
+%Moreover, since the LE and TE are measured with a 7-bit BCID counter distributed the matrix during its activity, it was important to keep short (<128 clock cycle) the duration of the full readout sequence and to not enable too many pixels in order to not extend too much the readout frame. Otherwise the information on the leading edge of the pixel could not be correlated with the token of the previous hit. In other words, if the readout frame exceed 128 clock cycles, since the token could be raised if the matrix is \textbf{not} freeze, even if an hit is arrived before it could be read only in the next frame when it could rise again the token, but in this case it will have different TimeStamp. So in this case the TS is useless for our purpose.
 
 
-\subsection{Cross-talk (Results)}
+\subsection{Digital signal responsible for cross talk }
 
-Referring to the readout sequence, in order to understand which signal could induce cross talk, each register value has been moved one by one.
-In table \vpageref{tab:ro_registers} just an example from the several settings tried is reported.
+Referring to the readout sequence, in order to understand which digital signal could induce cross talk, we moved the registers used to control the timing of the these signals with respect to the start of the readout sequence (i.e. with respect to the TE of the first hit).Doing so we expected to see the same shift in the LE-TE distance  when the responsible digital signal was changed.
+
+In table \autoref{tab:ro_registers} is reported just an example from the several settings for these regiters that were used.
+
+%This step of the procedure is tied with the necessity to keep the readout sequence within the maximum 128 BCID range.\\
 
 \begin{table}[h!]
 \centering
@@ -1133,16 +1203,16 @@ Register & Value \\
 \label{tab:ro_registers}
 \end{table}
 
-Doing so indeed, the LE-TE info has to shift by the same value with which the signal that cause the cross talk has been changed. This step of the procedure is tied with the necessity to keep the readout sequence within the maximum 128 BCID range.\\
+For example, if \textsc{FREEZE\_START\_CONF}, the rising edge of the FREEZE signal, is responsible for the cross talk, we expect that shifting its value by a certain amount would also delays by the same amount the timing of the induced hit by cross talk  and this should be visible in the LE-TE position. \\
 
-For example, if \textsc{FREEZE\_START\_CONF} is responsible for the cross talk signal, we expct that shifting its value by a certain amount, the hot pixels start to fire after that this signal arises due to the hit on the injected pixel. So the value of LE-TE has to be \textsc{FREEZE\_START\_CONF} + some potential delay. Same argument for the other registers. \\
+%the hot pixels start to fire after that this signal arises due to the hit on the injected pixel. So the value of LE-TE has to be \textsc{FREEZE\_START\_CONF} + some potential delay. Same argument for the other registers. \\
 
-By this procedure, repeated for each readout register, we have come to the conclusion that the cross-talk could be related to the raising and falling edge of the \textsc{FREEZE} signal.
+By this procedure, repeated for each readout register, we have confirmed that the cross-talk is related to the raising and falling edge of the \textsc{FREEZE} signal.
 
-In figure \vpageref{fig:xtalk} an example of some results obtained. It is the histogram of the time last between the leading edge of an hit and the trailing edge of the previous hit, when one pixel is injected and two are read. It's possible to see several peaks (reffering to the readout setting reported in table \vpageref{tab:ro_registers}):
+In figure \vpageref{fig:xtalk} an example of some results obtained. It is the histogram of the time last between the leading edge of an hit and the trailing edge of the previous hit, when one pixel is injected and two are read. It's possible to see several peaks (refering to the readout setting reported in table \vpageref{tab:ro_registers}):
 
 \begin{itemize}
-\item one at 0, that represent the situation in which both hits come from hot pixel firing simultanously after the injection. This means that they are activated by the same signal and so it is the most important confirmation that is cross-talk and not random firing pixel signal;
+\item one at 0, that represent the situation in which both hits come from hot pixel firing simoultanously after the injection. This means that they are activated by the same signal and so it is the most important confirmation that is cross-talk and not random firing pixel signal;
 \item one at $\approx$ 18 equal to \textsc{FREEZE STAR} raising + 8 $\rightarrow$ first induced signal;
 \item one at $\approx$ 35 equal to \textsc{FREEZE STOP} falling + 4 $\rightarrow$ second induced signal;
 \item one at $\approx$ 55 equal to \textsc{FREEZE STOP} falling + 4 when two different pixels are read. In more details, after the first 30 time unit until the first \textsc{LOAD CONF}, a distinct pixel reading starts and it takes another 20 time unit (\textsc{LOAD} - \textsc{FREEZE START}) + 1 unit time to conclude the frame with the \textsc{FREEZE STOP} and so 51 + 4 unit time wrote above. Therefore when two pixels are read, the \textsc{FREEZE STOP} falls after 51 clock cycles, and it is compatible with the last peak in the plot.
@@ -1160,15 +1230,8 @@ In figure \vpageref{fig:xtalk} an example of some results obtained. It is the hi
 \label{fig:xtalk}
 \end{figure}
 
-As already stated, we run several tests varying the number of pixels to read, the value of the readout registers, different combination of hot and good pixels and also different spatial location of them in the matrix to exclude the possibility that the problem was related to particular columns. All results are in agreement with the interpretation explained above.\\
-
-?????...\\
-Furthermore it hase been tried to estimate the height of the induced signal from the threshold of the hot pixel. For this reason we have have tried different setting of the currents cited above to make a pixel \textit{hot} in order to understand when the induced signal went above the threshold. We have found that the signal could (may) correspond to 100/150 $e^{-}$.\\
-??????
-%the height of the cross talk signal from FREEZE was measured lowering gradually the THR of good pixels to monito when they become hot.
-
-In figure \vpageref{fig:analog_xtalk} an analog acquistion of the readout signals taken by an oscilloscope.
-
+An additional confirmation of the previous studies,  that indicate the FREEZE as responsible for this cross talk, was also found observing directly at the oscilloscope the behaviour of the analog output of test pixel,  available for debugging purpose.    
+In figure \autoref{fig:analog_xtalk} an analog acquisition of the readout signals taken during the test performed in a similar way as before. 
 
 \begin{figure}
 \centering
@@ -1177,38 +1240,55 @@ In figure \vpageref{fig:analog_xtalk} an analog acquistion of the readout signal
 \label{fig:analog_xtalk}
 \end{figure}
 
-In these tests one pixel was injected from 0 to 140 DAC (in the acquisition it can be seen in the increasing signal height). There are two different group of spikes: the first which is smaller and represent the cross-talk from the raising of the \textsc{FREEZE} signal and the second, larger and corresponding to the cross talk from the falling edge of the same signal.
-Moreover it's possible to see that in the two different pictures, the cross talk signals move according to the different settings of the \textsc{FREEZE START/STOP} edge.
+In these tests the analog pixel, together with another pixel in the matrix,  was injected with variable signals from 0 to 140 DAC (in the acquisition it can be seen in the increasing signal height). In the analog output are visible also two different groups of spikes: the first smaller represents the cross-talk effect on this pixel from the raising of the \textsc{FREEZE} signal during the readout sequence of the other pixel , and the second, larger and corresponding to the cross talk from the falling edge of the same signal.
+Moreover it's possible to see that in the two different pictures, the cross talk induced signals move according to the different settings of the \textsc{FREEZE START/STOP} edge that was changed in the two acquisitions.
 
 %meglio una lista??
 
 
-\subsection{Mitigation}
 
-As seen in the previous, the problem of the hot pixel is tied to the induction signal produced during the readout, which cause cross-talk. It becomes even more serious when there is a grater dispersion threshold.\\
 
-Potentially every pixel could become \textit{hot} if its threshold is lower than the height of the cross-talk signal, since the \textsc{FREEZE} in sent across the entire matrix. 
+As already stated, we run several tests varying the number of pixels to read, the value of the readout registers, different combination of hot and good pixels and also different spatial location of them in the matrix to exclude the possibility that the problem was related to particular columns. All results are in agreement with the interpretation explained above.\\
 
-As an example, in figure \vpageref{fig:making_hot} it si possible to compare the behaviour of pixel (218, 123) for different register settings adopted in order to reduce the threshold.
+%?????...\\
+
+\subsection{Cross talk signal height}
+
+Furthermore it we tried to estimate the height of the induced signal from the threshold of the hot pixel. For this reason we have have tried different setting of the registers cited above to make a pixel \textit{hot} in order to understand when the induced signal went above the threshold. We have found that the induced signal correspond to about 100/150 $e^{-}$ depending on the bias condition.
+
+As an example of these tests is shown in figure \autoref{fig:making_hot}. The s-curve of the same pixels (218, 123) are shown with different setting of the registers used to reduce gradually its threshold. The pixel that has a normal s-curve when has high THR of 350 e-. It starts to misbheave with occupancy slightly above 1 for THR = 200 e-, and becomes hot for  THR = 150 e-.
 
 \begin{figure}[h!]
 \centering
-\subfigure[$I_{DB}$=100, $I_{TUNE}$=53 - Good behavior (the red one)]
+\subfigure[$I_{DB}$=100, $I_{TUNE}$=53 - Good behavior for pixel 218, 123 (the red one) with THR > 35 DAC=350 e-, while other pixels with THR ~ 15 DAC=150 e- are already "hot" ]
 {\includegraphics[scale=0.35]{making_hot1}}\quad
-\subfigure[$I_{DB}$=60, $I_{TUNE}$=150 - Pixel starts to misbehave]
+\subfigure[$I_{DB}$=60, $I_{TUNE}$=150 - Pixel 218,123 has THR around 20 DAC and starts to misbehave]
 {\includegraphics[scale=0.35]{making_hot3}}\\
-\subfigure[$I_{DB}$=55, $I_{TUNE}$=150 - Pixel becomes \textit{hot}]
+\subfigure[$I_{DB}$=55, $I_{TUNE}$=150 - Pixel has THR below 15 DAC and becomes \textit{hot}]
 {\includegraphics[scale=0.35]{making_hot2}}\\
-\caption{S-curve of the pixel (218, 123) for different register settings.}
+\caption{S-curve of the pixel (218, 123) for different register settings that change its threshold.}
 \label{fig:making_hot}
 \end{figure}
 
  
+
+%??????
+%the height of the cross talk signal from FREEZE was measured lowering gradually the THR of good pixels to monito when they become hot.
+
+
+
+\subsection{Cross talk mitigation}
+
+As seen in the previous, the problem of the hot pixel is tied to the induction signal produced during the readout, which cause cross-talk. It becomes even more serious when there is a larger threshold dispersion, since although the global threshold is set well above the level of the induced signal, some pixels can still have a threshold lower than the induced signal.\\
+
+Potentially every pixel could become \textit{hot} if its threshold is lower than the height of the cross-talk signal, since the \textsc{FREEZE} in sent across the entire matrix. 
+
+
 \begin{description}
 \item \textbf{Threshold trimming}
 \end{description}
  
-Therefore a possible treatment could be related to the threshold tuning, explained in section (\vref{tuning}) , which could allow to make the pixel threshold more uniform (less threshold dispersion) and simultanously to target a value greater than the induced signals. \\
+Therefore a possible treatment could be related to the threshold tuning, explained in section (\vref{tuning}) , which could allow to make the pixel threshold more uniform (less threshold dispersion) and simultaneously to target a value greater than the induced signals. \\
 
 In figure \vpageref{fig:tuning_hot} an example of the results obtained.
 
@@ -1222,7 +1302,7 @@ In figure \vpageref{fig:tuning_hot} an example of the results obtained.
 \label{fig:tuning_hot}
 \end{figure} 
 
-It' evident the reduction of the tail in the threshold distribution, in fact the dispersion is reduced by 56\%. Also the hot pixels decrease from 18\% to 1.2\% of the total number of pixels studied. We can also notice that the peak at 0 threshold disappears.
+It is evident the reduction of the tail in the threshold distribution, in fact the dispersion is reduced by 56\%. Also the hot pixels decrease from 18\% to 1.2\% of the total number of pixels studied. We can also notice that the peak at 0 threshold disappears.
 
 %It was effectively done managing to obtin lower threshold
 %DEVI METTERE ESEMPIO???
@@ -1232,7 +1312,7 @@ It' evident the reduction of the tail in the threshold distribution, in fact the
 \item \textbf{Bias Voltage}
 \end{description}
 
-Moreover it has been tried to increase the voltage bias of the all matrix, too. We remember that all previous test has been run with $P_{WELL}/P_{SUB}$ set to -3 V. This value was increased to -6 V and indeed there were some improvements. In fact increasing the bias, we expected a decrease of the diode capacitance thus higher gain and lower thresold dispersion. In addition the coupling with the cross talk signal is reduced too and so the induced signal height. \\
+Moreover it has been tried to increase the bias voltage of the  matrix to study the effect of the cross talk. All previous test have been performed with $P_{WELL}/P_{SUB}$ set to -3 V. This value was increased to -6 V and there were some improvements. In fact increasing the bias, we expected a decrease of the diode capacitance thus higher gain and lower threshold dispersion. In addition the coupling with the cross talk signal seemed reduced too and so the induced signal height. \\
 In figure \vpageref{fig:bias_comp} a comparison between the threshold distribution respectively at -3 V and -6 V, with same registers setting and without tuning.
 
 \begin{figure}[h!]
@@ -1247,7 +1327,7 @@ In figure \vpageref{fig:bias_comp} a comparison between the threshold distributi
 
 At higher bias voltage not only is the threshold lower (higher gain), but also its dispersion, as expected. And despite that there are fewer hot pixels: 1.3\% at -6V against 17\% at -3 V. Also here there is clear a reduction of the threshold distribution tail. 
 
-\subsubsection{Final results?}
+\subsubsection{Conclusion from cross talk studies}
 
 Eventually the final results obtained with both threshold tuning and a bias voltage on $P_{WELL}/P_{SUB}$=-6 V. 
 
@@ -1263,7 +1343,10 @@ Eventually the final results obtained with both threshold tuning and a bias volt
 
 As we can see in figure \vpageref{fig:bias_tuning}, the threshold dispersion decreases together with the number of the hot pixels. In fact without the tuning, there are 1.3\% of them, instead with tuning procedure there are none at all.
 
+The conclusion of these studies was that with bias of -6V and the use of threshold tuning it was possible to operate the matrix with a global threshold at the level of 200/250 e-, much higher of the expected minimum threshold of 100 e- indicated from the simulations during the design, but still totally acceptable to keep a good detection efficiency even after irradiation. 
 
+These cross talk studies were also crucial to indicate possible mitigation strategies for the next OBELIX chip. 
+The origin of the this cross talk coupling is still under investigation with detailed simulations of the matrix behaviour. At the same time in OBELIX we plan to increase the range of the threshold tuning DACs in order to have the possibility to increase selectively the threshold of pixel that are in the tail of the threshold distribution and could otherwise become hot and disturb the readout. 
 
 %LOWERING ITHR DECREASED THE INDUCED SIGNAL, BUT MATRIX NOT GOOD FUNCTIONALITY?
 %VRESET(agisce sulla dispersione) AND IBIAS(aumenta gain e diminuisce dispersion ma aumenta power consumption)
@@ -1287,17 +1370,18 @@ Also suggested to change the clock and see if the delay from the FREEZE edge is 
 
 \section{Test Beam results}
 
-This full characterization of the chip allowed to interpret data collected during the Test Beam done in Desy in June 2022. Several measurements have been taken, among which: pixel response, noise level, cluster signal, full depletion depth, voltage scan and angular scan. In particular the aim was to study electrical characteristics and hit detection efficiency of unirradiated modules.
+This full characterization of the chip allowed to interpret data collected during the Test Beam campaign at Desy (June 2022). Several tests have been conducted to study the electrical characteristics and the hit detection efficiency of the un-irradiated modules \cite{Bespin:2023vyw}.
 
+%Several measurements have been taken, among which: pixel response, noise level, cluster signal, full depletion depth, voltage scan and angular scan. In particular the aim was to study electrical characteristics and hit detection efficiency of unirradiated modules.
 
 
 \subsection{Experimental apparatus and DUTs }
 
-The measurements have been performed in a 4 (o 5) GeV electron beam at DESY II testbeam facility at DESY, Hamburg. The experimental apparatus consisted of a beam telescope, a Trigger Logic Unit to provide trigger and control signals employed during test beams, a scintillator trigger and a rotation-translation stage on which install the device under test. (figure \vpageref{fig:tb}).
+The measurements have been performed using an electron beam with energies in the range of 3-\SI{5}{GeV}, at DESY II testbeam facility at DESY, Hamburg \cite{Diener:2018qap}. The experimental apparatus consisted of a beam telescope, a Trigger Logic Unit to provide trigger and control signals employed during test beams, a scintillator trigger and a rotation-translation stage on which install the device under test. (figure~\autoref{fig:tb}).
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=.7]{TBJUNE22_2}
+\includegraphics[scale=.6]{TBJUNE22_2}
 \caption{Test Beam experimental apparatus.}
 \label{fig:tb}
 \end{figure}
@@ -1316,13 +1400,43 @@ The measurements have been performed in a 4 (o 5) GeV electron beam at DESY II t
 \end{figure}
 \end{comment}
 
-Three different modules have been tested with different sensor geometry, among which the chip W14R12 that we have studied in depth through laboratory measurements. All results described in previous sections have been crucial to interpret data obtained during these tests.
+Three different modules have been tested with different sensor geometries, among which the chip W14R12 that we have studied in depth through laboratory measurements. All results described in previous sections have been crucial to interpret data obtained during these tests. Preliminary setting were used (\autoref{tab:tb_settings}), featuring high threshold.
 
 In the following we will briefly mention the results obtained.
 
 
-\subsection{Hit detection efficiency measurements}
+\subsection{Cluster charge distribution and efficiency measurements}
 
+The cluster distribution, obtained from electron beam measurements, is shown in~\autoref{fig:clust_dist}. The MPV of the cluster charge is determined through a Landau fit, resulting in (3010$\pm$24)~$e^{-}$. In this distribution the signal of each pixel has been corrected by the calibration factor, which we have discussed in depth in ....
+
+\begin{figure}
+\centering
+\includegraphics[scale=.8]{cluster_dist}
+\caption{Cluster charge distribution.}
+\label{fig:clust_dist}
+\end{figure}
+
+
+The hit detection efficiency $\epsilon$ is evaluated by the ratio of the matched hit to the total tracks. For the DC-coupled flavors, for a threshold of $\approx$  500-600~$e^{-}$ (\autoref{tab:th_noise_all}), the hit efficiency measured is 99.54$\pm$0.04~\%, as shown in~\autoref{fig:det_eff}.
+
+\begin{figure}
+\centering
+\includegraphics[scale=.8]{det_eff_DC}
+\caption{(99.54$\pm$0.04)~\% hit detection efficiency of DC-coupled flavours at \SI{3}{V} bias voltage.}
+\label{fig:det_eff}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+\begin{comment}
 Initially a depletion depth study have been done and with a voltage bias of -3 V (Normal and Cascode FE), for the chip W14R12 resulted 33$\mu$m $\pm$ 0.04 (stat.) $\pm$ 2.53 (sys.).
 
 Voltage scan measurements have been performed for both the two type of pixel couplings, such as DC and AC coupled. For the latter, only some first results have been obtained. 
@@ -1391,6 +1505,7 @@ In particular in figure \vpageref{fig:tb_DC_Cz} are reported the hit map efficie
 \caption{Cluster size and efficiency results for HV FE.}
 \label{fig:tb_HV}
 \end{figure}
+\end{comment}
 
 
 
