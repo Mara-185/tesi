@@ -48,29 +48,55 @@
 \end{titlepage}
 
 
+%----------------------------
+\clearpage
+\null
+\thispagestyle{empty}
+\clearpage
+
+\cleardoublepage
+\thispagestyle{empty}
+\vspace*{\stretch{1}}
+\begin{flushright}
+\itshape A Nicola,\\
+al bambino curioso \\
+che colora i miei giorni \\
+di sfumature sempre nuove
+\end{flushright}
+\vspace{\stretch{2}}
+\cleardoublepage
+
+\clearpage
+\null
+\thispagestyle{empty}
+\clearpage
+
+
+%----------------------------
 %Contenuti
 \doublespacing
 \tableofcontents
 \singlespacing
+
 
 \newpage
 
 % --------------------------------------------
 %		ABSTRACT 
 %---------------------------------------------
-%\input{Intro}
+\input{Intro}
 
 
 % --------------------------------------------
 %		CAPITOLO 1 
 %---------------------------------------------
-%\input{first\_chapter}
+\input{first\_chapter}
 
 
 % --------------------------------------------
 %		CAPITOLO 2 
 %---------------------------------------------
-%\input{second\_chapter}
+\input{second\_chapter}
 
 
 % --------------------------------------------
@@ -82,7 +108,7 @@
 % --------------------------------------------
 %		CAPITOLO 4
 %---------------------------------------------
-%\input{fourth_chapter}
+\input{fourth_chapter}
 
 
 % --------------------------------------------
@@ -96,14 +122,24 @@
 %		CONCLUSIONI 
 %---------------------------------------------
 %
-\chapter{Conclusions}
+\input{conclusions}
+
 
 
 % --------------------------------------------
 %		BIBLIOGRAFIA 
 %---------------------------------------------
 
-\bibliographystyle{unsrt}
+%\bibliographystyle{unsrt}
+\bibliographystyle{JHEPmod}
+
+%\bibliographystyle{h-elsevier}     NO
+%\bibliographystyle{habbrv}         NO
+%\bibliographystyle{hplain}         NO
+%\bibliographystyle{hunsrt}         NO
+%\bibliographystyle{kp}             SI MA NO 
+%\bibliographystyle{hep}
+
 \bibliography{refs}
 
 

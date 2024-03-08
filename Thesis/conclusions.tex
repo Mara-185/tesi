@@ -1,0 +1,22 @@
+%--------------------------------
+%	    CONCLUSIONS
+%--------------------------------
+
+\chapter{Conclusions}
+
+This thesis presents the characterization of the TJ-Monopix2 chip (W14R12), a small collection electrode DMAPS prototype in a modified TowerJazz Semiconductor imaging process.
+
+Threshold and noise distributions have been studied for each frontend, using the same register setting and biasing voltages employed during the Test Beam campaign in Desy (June 2022).
+The registers' values were not optimized to take measurements at low threshold, therefore the results obtained in the first part of the work, cannot be compared with the specifications of the chip, but they have defined the working point of the matrix, crucial for interpreting the data collected during the Test Beam. We have measured a threshold of $\approx$ 500-600~$e^{-}$ with a noise of about 25~$e^{-}$ and a threshold dispersion of $\approx$ 20-30~$e^{-}$ (for Normal and Cascode flavours).
+
+We have characterized the Time Over Threshold (TOT) calibration function, which allows to translate the time information to the charge collected in the pixel, using the internal injection circuit. A first absolute calibration has been performed using a \ch{^{55}Fe} radioactive source with a known emission line of \SI{5.9}{KeV} ($\approx$ 1616~$e^{-}$). 
+
+We have also measured the response of the matrix to other radioactive sources like \ch{^{241}Am} and \ch{^{109}Cd}, to extend the study of the TOT spectrum above the limit imposed by the saturation of the internal injection circuit.
+
+We have studied the operation of the matrix at low threshold, that is necessary to maintain good efficiency after irradiation, when radiation damage causes a reduction in the collected charge.
+Exploiting the threshold tuning circuit, which allows to adjust the threshold of the individual pixels, we have achieved a global threshold of $\approx$ 224~$e^{-}$ with a threshold dispersion of $\approx$ 7~$e^{-}$. These values could be compared with the chip specifications, which in a optimized operating point, indicate a threshold of 100~$e^{-}$ and a threshold dispersion~$\le$~10~$e^{-}$. The charge released by a MIP in this thin sensor is approximately (3010$\pm$24)~$e^{-}$. The possibility to reach lower threshold has been limited by the presence of a cross-talk issue, discovered during this investigation.
+After an accurate analysis, we have found the cause in one of the readout logic signals, the \textsc{freeze}. This signal is responsible for freezing the matrix during the readout cycle, preventing new hit from disturbing the readout of the previous one, before the cycle is completed. The cross-talk is induced by the leading and the trailing edge of the \textsc{freeze}, and if the height of this induced signal is higher than the threshold of the pixel, it causes spurious hits flooding the readout and invalidating the measurements.
+
+The characterization of the TJ-Monopix2 chip has been useful to interpret data collected during the Test Beam (2022) with unirradiated sensor. The analysis conducted about the origin of the cross-talk issue, has been relevant in the design of the next chip, OBELIX, which will be the final prototype chosen for the VTX upgrade program.
+
+%The R\&D is ongoing and a new Test Beam has been organized in July 2023, to test irradiated sensors up to a fluence of \SI{e15}{n_{eq}/cm^{2}}.
