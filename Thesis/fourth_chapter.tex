@@ -1,31 +1,55 @@
 % --------------------------------------------
-%		CAPITOLO 3 
+%		CAPITOLO 4 
 %---------------------------------------------
 \chapter{VTX detector} \label{ch:VTX}
 
 
-This chapter focuses on the vertex detector upgrade of Belle II, VTX. We will go through the VTX concept and layout, designed with a different geometry with respect VXD and with a new pixel sensors (OBELIX). We will discuss the motivations for some of the design choices and present some of the detector performance studies demonstrating the robustness against backgrounds.
+This chapter describes the vertex detector upgrade of Belle II, VTX. We will go through the VTX concept and layout, designed with a different geometry with respect VXD and with a new pixel sensors (OBELIX). We will discuss the motivations for some of the design choices and present some of the detector performance studies demonstrating the robustness against backgrounds.
 
 
 %---------------------------------------------
-%			3.1
+%			4.1
 %---------------------------------------------
 \section{VTX Layout and mechanical structure}
 
-As previously discussed, reaching full luminosity will entail higher backgrounds and will probably require a re-design of the interaction region. It is therefore necessary to use a radiation-hard technology, with high granularity to reduce occupancy, and with a reduced material budget to improve the already excellent performance of VXD.
+As previously discussed (\autoref{ch:upgrade}), reaching full luminosity will entail higher backgrounds and will probably require a re-design of the interaction region. It is therefore necessary to use a radiation-hard technology, with high granularity to reduce occupancy, and with a reduced material budget to improve the already excellent performance of VXD.
 
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=.6]{VTX_layers}
-\caption{Concept of VTX layout with 5 barrel layers, filling the current VXD volume.}
+\subfigure[Concept of VTX layout with 5 barrel layers, filling \newline the current VXD volume.]{\includegraphics[scale=.65]{VTX_layers}}
+\subfigure[End view of the VTX detector for layer 3 at \SI{39}{mm} from the IP.]{\includegraphics[scale=.65]{VTX_layers_endview}}
+\caption{VTX detector layout.}
 \label{fig:VTX_layers}
 \end{figure}
 
 
-The VTX project aims to replace the all VXD with a fully pixelated detector based on Depleted Monolithic Active Pixel Sensors (DMAPS) arranged on five layers at different distance from the beam pipe (\autoref{fig:VTX_layers}). The radii and the number of the layers are currently subject to several  studies and simulations, in order to achieve an optimized arrangement. 
+The VTX project aims to replace the VXD with a fully pixelated detector based on Depleted Monolithic Active Pixel Sensors (DMAPS) arranged in five layers at different distance from the beam pipe (\autoref{fig:VTX_layers}) \cite{BelleIIVTX:2023szr, F.Forti:3930}. The radii and the number of the layers are currently subject to several  studies and simulations, in order to achieve an optimized arrangement (shown in~\autoref{tab:layers_tab}). 
+%There are two options for the third layer (3a and 3b), as reported in~\autoref{tab:layers_tab}
 Currently two layers are planned in the innermost part (\textit{i}VTX) and three in the outer part (\textit{o}VTX). The active length of the ladders varies from 12 to \SI{70}{cm} to cover the required acceptance of \ang{17}~<~$\theta$~<~\ang{150}.\\
-As already discussed for the other upgrade proposals, it is important to try to reduce the material budget, in order to minimize the multiple Coulomb scattering which particularly affects the very soft particles produced in Belle II, down to \SI{50}{MeV}. By using the MAPS sensors, it is expected a reduction of the overall material budget down to 2\% of radiation length, against the present 3\% of VXD, which uses two DEPFETs and double-sided strip detectors.
+It is important to try to reduce the material budget, in order to minimize the multiple Coulomb scattering which particularly affects the very soft particles produced in Belle II, down to \SI{50}{MeV}. By using the MAPS sensors, it is expected a reduction of the overall material budget down to less than 2\% of radiation length, against the present 3\% of VXD.
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{C{3cm}|C{0.8cm}|C{0.8cm}|C{0.8cm}|C{0.8cm}|C{1.2cm}||C{1.2cm}|C{0.8cm}||C{1.2cm}}
+\hline
+\hline
+Layer & 1 & 2 & 3a & 4 & 5 & Total & 3b & Total \\
+\hline
+\hline
+Radius (mm) & 14.1 & 22.1 & 39.1 & 89.5 & 140.0 & & 69.1 & \\
+\hline
+\# Ladders & 6 & 10 & 17 & 40 & 31 & 104 & 30 & 117 \\
+\hline
+\# Sensors/ladder & 4 & 4 & 7 & 16 & \numproduct{2 x 24} & 2311 & 12 & 2552 \\
+\hline
+Mat. Budget ($X_{0}$) & 0.1 & 0.1 & 0.3 & 0.5 & 0.8 & 1.8 & 0.4 & 1.9 \\
+\hline
+\hline
+\end{tabular}
+\caption{The VTX detector main parameters with the two options (3a and 3b) for the radius of the middle layer. From~\cite{F.Forti:3930}.}
+\label{tab:layers_tab}
+\end{table}
 
 
 \subsection{iVTX}
@@ -52,23 +76,23 @@ A redistribution layer for power and data is also added to the demonstrator, to 
 The R\&D is ongoing and the full-silicon ladder concept is currently being assessed with industrial partners. The first thin ladders have been produced and characterised with different thicknesses and geometries.
 
 Several tests are focused on evaluating power delivery efficiency, the quality of the signals which travel through the ladder and also the process used to fully assembly it. 
-\autoref{fig:iVTX_eye} shows eye diagrams from simulation with a transfer rate of 640 Mbps, indicating that 320 Mbps of data rate will be possible.
+\autoref{fig:iVTX_eye} shows eye diagrams from simulation with a transfer rate of \SI{640}{Mbps}, indicating that \SI{320}{Mbps} of data rate will be possible.
 
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=.7]{iVTX_eye}
-\caption{Eye diagrams of the iVTX data transmission lines at four different locations on the ladder. They represent the overlap of multiple samples of the output of transmission line triggered by the clock cycle.}
+\caption{Eye diagrams of the iVTX data transmission lines at four different locations on the ladder. They represent the overlap of multiple samples of the output of transmission line triggered by the clock cycle. From~\cite{BelleIIVTX:2023szr}.}
 \label{fig:iVTX_eye}
 \end{figure}
 
-Moreover it has been demonstrated that air at the temperature of \SI{15}{\degreeCelsius} and flowing with a speed of \SI{10}{m/s} succeeds to cool a single inner module, assuming power is uniformly dissipated on the sensor surface. The maximum temperature reached is \SI{20}{\degreeCelsius}. 
+Moreover, it has been demonstrated that air at the temperature of \SI{15}{\degreeCelsius} and flowing with a speed of \SI{10}{m/s} succeeds to cool a single inner module, assuming power is uniformly dissipated on the sensor surface. The maximum temperature reached is \SI{20}{\degreeCelsius}. 
 
 Through very first estimates it is expected that an equivalent section of 6 tubes with \SI{10}{mm} of diameter is necessary to expel the heat from the inner layers, roughly equal to \SI{65}{W}. So it is essential to design a mechanical structure which provides for the space needed to the tubes in order to bring the air at the IP and also compatible with the new interaction region.
 
 
 \subsection{oVTX} \label{sec:oVTX}
 
-The \textbf{\textit{outer}VTX} consists of three layers respectively at radii of 39 or 69, 89 and \SI{140}{mm} from the beam pipe. Because of the larger distance required to cover the acceptance, they cannot be self-supporting. They follow a more traditional approach, inspired by the design developed for the ALICE ITS2 \cite{Fantoni:2020iyr}. Each ladder is water cooled and supported by a light carbon fiber support structure, which provides the mechanical stiffness. Its truss design is shown in~\autoref{fig:oVTX} : \SI{70}{cm} long and \SI{5.8}{g} of weight, it is able to support more than 40 sensors in two rows next to each other with a small overlap, leading to a material budget of 0.3\% $X_{0}$ for the first two layers and 0.8\%$X_{0}$  for the outermost one.
+The \textbf{\textit{outer}VTX} consists of three layers respectively at radii of 39 or 69, 89 and \SI{140}{mm} from the interaction point. Because of the larger distance required to cover the acceptance, they cannot be self-supporting. They follow a more traditional approach, inspired by the design developed for the ALICE ITS2 \cite{Fantoni:2020iyr}. Each ladder is water cooled and supported by a light carbon fiber support structure, which provides the mechanical stiffness. Its truss design is shown in~\autoref{fig:oVTX} : \SI{70}{cm} long and \SI{5.8}{g} of weight, it is able to support more than 40 sensors in two rows next to each other with a small overlap, leading to a material budget of 0.3\% $X_{0}$ for the first layer, 0.5\% $X_{0}$ for the second and 0.8\% $X_{0}$  for the outermost one.
 
 \begin{figure}[h!]
 \centering
@@ -78,7 +102,7 @@ The \textbf{\textit{outer}VTX} consists of three layers respectively at radii of
 \end{figure}
 
 
-For the cooling of the ladder a cold-plate concept is under development (\autoref{fig:oVTX_coldplate}), on which the sensors are glued and that in turn is installed on the \textit{truss}. For each row there is a polymide cooling tube that runs over all the sensors and turns back at the other end, so that the heated coolant leaves on the same side. Then two flex print cables connect the two halves of the ladder to the connector.
+For the cooling of the ladder a cold-plate concept is under development (\autoref{fig:oVTX_coldplate}), on which the sensors are glued and that in turn is installed on the \textit{truss}. For each row there is a polymide cooling tube that runs over all the sensors and turns back at the other end, so that the cooling circuit connections are on the same side. Two flexible printed circuits are wire-bonded to the OBELIX chips and provide the connection to the readout.
 
 
 \begin{figure}[h!]
@@ -88,61 +112,60 @@ For the cooling of the ladder a cold-plate concept is under development (\autore
 \label{fig:oVTX_coldplate}
 \end{figure}
 
-For layer 3 instead, only one flex print cable in the backward side is considered, in order to leave more space in the forward for other possible services and accelerator components. For the third layer two different solutions are under study: at radius of \SI{39}{mm} e \SI{69}{mm} respectively. 
-In~\autoref{fig:ladders} are displayed schematic examples of some design hypotheses. 
+For layer 3 instead, only one flex printed circuit cable in the backward side is considered, to leave more space forward for other possible services and accelerator components. For the third layer two different solutions are under study: at radius of \SI{39}{mm} e \SI{69}{mm} respectively. 
+In~\autoref{fig:ladders} schematic examples of some design hypotheses are displayed. 
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=.7]{ladders}
+\includegraphics[scale=.8]{ladders}
 \caption{Schematic view of possibile solutions for the three outermost layers.}
 \label{fig:ladders}
 \end{figure}
 
 
-In~\autoref{fig:oVTX_5} are shown the several substructures described before, that constitute a ladder of the outermost layer 5. From bottom to top come in succession the carbon fibre structure, two cold-plates for the two neighbouring sensor rows (indicated as ''Chips'', in grey) and the flex cables for power and data transmission (green). 
+\autoref{fig:oVTX_5} shows the several substructures described before, that constitute a ladder of the outermost layer 5. From bottom to top the carbon fibre structure, two cold-plates for the two neighbouring sensor rows (indicated as "Chips", in grey) and the flex cables for power and data transmission (green) follow one another. 
 
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=.7]{oVTX_5}
+\includegraphics[scale=.8]{oVTX_5}
 \caption{An exploding drawing of a fully assembled layer 5 ladder.}
 \label{fig:oVTX_5}
 \end{figure}
 
 
-The carbon fiber support structure and flex cable have been designed and fabricated for layer 5, which is also the longest. Services for the last two layers, like electrical connections and cooling, can be provided both on forward and backward sides.
-A Multiline Power Bus has been realized in order to power each OBELIX chip along the ladder. \\
+The carbon fiber support structure and the flex cables have been designed and fabricated for layer 5, which is also the longest. Services for the last two layers, like electrical connections and cooling, can be provided both on forward and backward sides.
+A Multiline Power Bus has been realized to power each OBELIX chip along the ladder. \\
 
-Mechanical tests have been performed showing that the first resonance frequency is at \SI{200}{Hz}, which is safely far from the frequencies of the typical earthquakes in Japan.\\
-
+Mechanical tests have been performed showing that the first resonance frequency is at \SI{200}{Hz}, which is safely far from the frequencies of the typical earthquakes in Japan.
 To reduce as much as possible the material budget, the transmission lines and the flex cables must be as thin as possible, but they also have to ensure safe data transmission.
 
-For this reason, the outermost ladders (\SI{70}{cm} long) are equipped with two flex cables, one from each side of the \textit{truss}. In~\autoref{fig:oVTX_eye} the resulting eye diagram from testing the signal integrity of one of the \SI{35}{cm} long transmission lines for data transmission rate of \SI{500}{Mbps} is shown. This result demonstrates that the bandwidth is large enough to allow the needed \SI{160}{Mbps} for data transmission.
+In~\autoref{fig:oVTX_eye} the resulting eye diagram from testing the signal integrity of one of the \SI{35}{cm} long transmission lines for data transmission rate of \SI{500}{Mbps} is shown. This result demonstrates that the bandwidth is large enough to allow the needed \SI{160}{Mbps} for data transmission.
 
 
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=.8]{oVTX_eye}
-\caption{Eye diagram for the oVTX transmission line signal integrity of the layer 5 flex cable.}
+\caption{Eye diagram for the oVTX transmission line signal integrity of the layer 5 flex cable. From~\cite{BelleIIVTX:2023szr}.}
 \label{fig:oVTX_eye}
 \end{figure}
 
 
-In addition, thermal tests have been performed for the last layer prototypes using kapton heaters to emulate the power dissipation of the chips. The coolant (demineralized water) has been set to a temperature of \SI{10}{\degreeCelsius} at the beginning, the environment at \SI{20}{\degreeCelsius} with a negative pressure of \SI{0.2}{bar}. Results have demonstrated that for three different configurations of the flow (such as monodirectional, bi-directional and with an U-turn at one end) the average temperature stands at \SI{24}{\degreeCelsius} with a maximum gradient of $\Delta T \approx$ \SI{4}{\degreeCelsius} along the full length of the ladder. 
+In addition, thermal tests have been performed for the last layer prototypes using kapton heaters to emulate the power dissipation of the chips. The coolant (demineralized water) has been set to a temperature of \SI{10}{\degreeCelsius} at the beginning, the environment at \SI{20}{\degreeCelsius} with a negative pressure of \SI{0.2}{bar}. Results have demonstrated that for three different configurations of the flow (such as monodirectional, bi-directional and with an U-turn at one end) the average temperature remains below \SI{24}{\degreeCelsius} with a maximum gradient of $\Delta T \approx$ \SI{4}{\degreeCelsius} along the full length of the ladder. 
 
 All these investigations validate the design of the longest ladder, which is the most challenging, and therefore the possibility to operate the chips safely.
 
 
 %---------------------------------------------
-%			3.2
+%			4.2
 %---------------------------------------------
 \section{Performance simulation}
 
 
-As we have seen in~\autoref{ch:upgrade}, increasing the luminosity implies higher level of machine related background and so larger doses of radiation, expecially in the inner layers of the whole detector. 
+As we have seen in~\autoref{ch:upgrade}, increasing the luminosity implies higher level of machine related background and larger doses of radiation, especially in the inner layers of the detector. 
 For these reasons simulations and studies are focusing on ensuring that the main physics goals of the experiment will be achieved despite the more severe working conditions. 
 
-The VTX detector, with high granularity in both space and time and thin sensors, could bring significant improvements in tracking efficiency and resolution expecially at low momentum, in the impact parameter resolution, and in the robustness against backgrounds. Moreover, better vertexing performance entails not only improved time-dependent analyses of B and D mesons, but also an enhanced capability to distinguish among different decay topologies, and a more powerful rejection of background events.
+The VTX detector, with high granularity in both space and time and thin sensors, could bring significant improvements in tracking efficiency and resolution especially at low momentum, in the impact parameter resolution, and in the robustness against backgrounds. Moreover, better vertexing performance entails not only improved time-dependent analyses of B and D mesons, but also an enhanced capability to distinguish among different decay topologies, and a more powerful rejection of background events.
 
 
 \subsection{VTX geometries}
@@ -150,15 +173,15 @@ The VTX detector, with high granularity in both space and time and thin sensors,
 Two different VTX geometries are currently under study, which differ only in the position of the third layer (\autoref{fig:ladders}).  
 
 The \textit{\textbf{nominal}} geometry is expected to maximize the track impact parameter resolution and it places the third layer at \SI{39}{mm} from the IP.
-The \textit{\textbf{alternative}} geometry instead, aims to improve the $K_{S}^{0}$ reconstruction efficiency and the third layer is located at \SI{69}{mm} from the IP.\\
+The \textit{\textbf{alternative}} geometry instead, aims to improve the $K_{S}^{0}$ reconstruction efficiency and the third layer is located at \SI{69}{mm} from the IP.
 
-Simulations are ongoing to compare the performance of these two different layouts with that of the current Belle II detector (utilizing a full Geant4 simulation of the detector in the study of specific decay modes of interest). Moreover, the different machine background predictions are also simulated, to compare the detector performance under different background conditions. 
+Simulations are ongoing to compare the performance of these two different layouts with that of the current Belle II detector (utilizing a full Geant4 simulation of the detector in the study of specific decay modes of interest)~\cite{Belle-II:2023lba}. Moreover, the different machine background predictions are also simulated, to compare the detector performance under different background conditions. 
 
 \subsection{Tracking efficiency at low momentum and impact parameter resolution}
 
 Tracking efficiency at low momentum is one of the areas where the VTX upgrade provides the most promising results, particularly for the \textit{soft pions} originated from the decays of $D^{*\pm}$ mesons.
 
-Studies are based on the reconstruction of the decay chain $B^{0} \rightarrow D^{*-}l^{+}\nu$, with $D^{*-} \rightarrow \bar{D}^{0} \pi^{-}_{soft}$ and $\bar{D}^{0} \rightarrow K^{+} \pi^{-}$ or $K^{+} \pi^{-} \pi^{+} \pi^{-}$. All background scenarios metioned in~\autoref{sec:bkg_predictions} are considered in the evaluation of the \textit{nominal} VTX performance and they are compared with the nominal Belle II geometry in the intermediate (\textbf{v2}) background hypothesis.
+Studies are based on the reconstruction of the decay chain $B^{0}~\rightarrow~D^{*-}l^{+}\nu$, with $D^{*-}~\rightarrow\bar{D}^{0} \pi^{-}_{soft}$ and $\bar{D}^{0}~\rightarrow~K^{+} \pi^{-}$ or $K^{+} \pi^{-} \pi^{+} \pi^{-}$. All background scenarios mentioned in~\autoref{sec:bkg_predictions} are considered in the evaluation of the \textit{nominal} VTX performance and they are compared with the nominal Belle II geometry in the intermediate (\textbf{v2}) background hypothesis.
 
 
 \begin{table}[htbp]
@@ -184,18 +207,18 @@ Studies are based on the reconstruction of the decay chain $B^{0} \rightarrow D^
 \end{table}
 
 
-We can see in~\autoref{tab:simulation_low_mom} that the VTX reconstruction efficiency\footnote{Efficiency is defined as the ration between the number of correctly reconstructed signal events and the total number of candidates.}  in all three background hypotheses, is improved by almost a factor 1.7 with respect to the nominal Belle II, with comparable purity\footnote{In a few words, the probability that a correctly reconstructed signal  is a ''signal event''.} . Moreover, efficiency remains practically stable in all background conditions, even in the most severe one.
+In~\autoref{tab:simulation_low_mom} the VTX reconstruction efficiency\footnote{Efficiency is defined as the ration between the number of correctly reconstructed signal events and the total number of candidates.}  in all three background hypotheses is reported, and it is improved by almost a factor 1.7 with respect to the nominal Belle II, with comparable purity\footnote{In a few words, the probability that a correctly reconstructed signal  is a ''signal event''.} . Moreover, efficiency remains practically stable in all background conditions, even in the most severe one.
 
 This enhancement in tracking efficiency relies in particular on improved tracking efficiency for the $\pi_{soft}^{-}$ mesons, as we can see in~\autoref{fig:simulation_soft_pi} where the efficiency is shown as a function of momentum and polar angle.
 
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=.53]{simulation_soft_pi}
+\includegraphics[scale=.65]{simulation_soft_pi}
 \caption{Reconstruction efficiency of $B^{0} \rightarrow D^{*-}l^{+}\nu$ as a function of the transverse momentum of the $\pi_{soft}^{-}$ (from  $D^{*-} \rightarrow \bar{D}^{0} \pi^{-}_{soft}$) in the plot on the left and of the polar angle of the $\pi_{soft}^{-}$ on the right. 
 The shaded blue histograms represents the momentum spectrum of the  $\pi_{soft}^{-}$.
-The nominal Belle II geometry efficiency in the intermediate background scenario (\textbf{v2}) is represents by black dots and it is compared with the nominal VTX configuration in the optimistic (\textbf{v1}, green squares), medium (\textbf{v2}, blue upward pointing triangles) and pessimistic (\textbf{v3}, red downward
-pointing triangles) background hypotheses. The bottom plots show the ration between nominal Belle II and nominal VTX in the \textbf{v2} background scenario.}
+The nominal Belle II geometry efficiency in the intermediate background scenario (\textbf{v2}) is represented by black dots and it is compared with the nominal VTX configuration in the optimistic (\textbf{v1}, green squares), medium (\textbf{v2}, blue upward pointing triangles) and pessimistic (\textbf{v3}, red downward
+pointing triangles) background hypotheses. The bottom plots show the ration between nominal Belle II and nominal VTX in the \textbf{v2} background scenario. From \cite{F.Forti:3930}.}
 \label{fig:simulation_soft_pi}
 \end{figure}
 
@@ -207,9 +230,9 @@ The distributions of the decay vertex resolution $\sigma_{z}$ (i.e. the width of
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=.65]{simulation_vertex}
+\includegraphics[scale=.75]{simulation_vertex}
 \caption{On the left: comparison of the B decay vertex resolution along the \textit{z} axis in $B^{0} \rightarrow J/\psi K_{S}^{0}$ events for the nominal Belle II (solid line), nominal VTX (dotted line) and alternative VTX geometry (filled grey histogram). The bottom plot shows the ratio between the VTX geometries (empty squares the nominal one and filled triangles the alternative) and nominal Belle II. \\
-On the right:  B decay vertex resolution along the \textit{z} axis for the nominal VTX geometry in the three background scenarios: optimistic \textbf{v1} (green solid line), intermediate \textbf{v2} (blue dotted line) and pessimistic \textbf{v3} (red filled histogram). The bottom plot represents the ratio between the two higher background scenarios and the optimistic one.}
+On the right:  B decay vertex resolution along the \textit{z} axis for the nominal VTX geometry in the three background scenarios: optimistic \textbf{v1} (green solid line), intermediate \textbf{v2} (blue dotted line) and pessimistic \textbf{v3} (red filled histogram). The bottom plot represents the ratio between the two higher background scenarios and the optimistic one. From \cite{F.Forti:3930}.}
 \label{fig:simulation_vertex}
 \end{figure}
 
@@ -234,54 +257,86 @@ In~\autoref{tab:simulation_vertex_table} a summary of the results that shows tha
 \end{table}
 
 
-Similar studies for the $K_{S}^{0}$ decay vertex resolution are displayed in~\autoref{fig:simulation_vertex_K} and in the same way, the upgraded geometries reach a better vertexing resolution with respect to the nominal Belle II detector without any signifcant degradation as the backgrounds increase.
+Similar studies for the $K_{S}^{0}$ decay vertex resolution are displayed in~\autoref{fig:simulation_vertex_K} and in the same way, the upgraded geometries reach a better vertexing resolution with respect to the nominal Belle II detector, without any significant degradation as the backgrounds increase.
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=.65]{simulation_vertex_K}
+\includegraphics[scale=.75]{simulation_vertex_K}
 \caption{On the left: comparison of the $K_{S}^{0}$ decay vertex resolution along the \textit{z} axis in $B^{0} \rightarrow J/\psi K_{S}^{0}$ events for the nominal Belle II (solid line), nominal VTX (dotted line) and alternative VTX (filled grey histogram). The bottom plot shows the ratio between the VTX geometries (empty squares for the nominal and filled triangles for the alternative) and nominal Belle II detector. 
-On the right: $K_{S}^{0}$ decay vertex resolution along the \textit{z} axis for the nominal VTX in the three background scenarios: optimistic \textbf{v1} (green solid line), intermediate \textbf{v2} (blue dotted line) and pessimistic \textbf{v3} (red filled histogram). The bottom plot represents the ratio between the two higher background scenarios and the optimistic one.}
+On the right: $K_{S}^{0}$ decay vertex resolution along the \textit{z} axis for the nominal VTX in the three background scenarios: optimistic \textbf{v1} (green solid line), intermediate \textbf{v2} (blue dotted line) and pessimistic \textbf{v3} (red filled histogram). The bottom plot represents the ratio between the two higher background scenarios and the optimistic one. From \cite{F.Forti:3930}.}
 \label{fig:simulation_vertex_K}
 \end{figure}
 
 \clearpage
 
 %---------------------------------------------
-%			3.3
+%			4.3
 %---------------------------------------------
 \section{OBELIX chip design}
 
-The VTX detector is designed with a single type sensor optimized for the specific needs of Belle II, called OBELIX (Optimized BELle II pIXel sensor) and currently under development, based on fast and high granular Depleted Monolithic Active Pixel Sensor (DMAPS). This sensor design comes from an evolution of TJ-Monopix2, whose characterization is the main topic of this thesis, and which will be discussed in~\autoref{ch:TJ2}. Both of them are fabricated in a modified TowerJazz Semiconductor \SI{180}{nm} CMOS process.\\
+The VTX detector is designed with a single type sensor optimized for the specific needs of Belle II, called OBELIX (Optimized BELle II pIXel sensor) and currently under development, based on fast and high granular Depleted Monolithic Active Pixel Sensors (DMAPS). The sensor design comes from an evolution of TJ-Monopix2 chip, whose characterization will be discussed in~\autoref{ch:TJ2}. Both of them are fabricated in a modified TowerJazz Semiconductor \SI{180}{nm} CMOS process.
 
 
 \subsection{Sensor specification}
 
 The main design specifications for the OBELIX chip are listed in~\autoref{tab:obelix_features}.
 
+
+%\begin{comment}
+\begin{table}[h!]
+\centering
+\begin{tabular}{c|c}
+\hline 
+\hline
+Pixel pitch & 30 to \SI{40}{\micro m} \\
+\hline
+Matrix size & 512 rows\numproduct{_x 928} to 752 columns \\
+\hline
+Time stamping & 25 to \SI{100}{ns} precision over 7 bits\\
+\hline
+Signal Time over threshold & 7 bits\\
+\hline
+Output bandwidth & 320 to \SI{640}{Mbps}\\
+\hline
+Power dissipation & 100 to \SI{200}{mW/cm^{2}}\\
+\hline
+Radiation tolerance & \SI{1}{MGy} and \SI{e14}{n_{eq}/cm^{2}}\\
+\hline
+\hline
+\end{tabular}
+\caption{Designed specifications of the OBELIX sensor.}
+\label{tab:obelix_features}
+\end{table}
+%\end{comment}
+
+\begin{comment}
 \begin{table}[h!]
 \centering
 \includegraphics[scale=.7]{obelix_features}
 \caption{Designed specifications of the OBELIX sensor.}
 \label{tab:obelix_features}
 \end{table}
+\end{comment}
 
-The pixel pitches\footnote{The distance between the centers of two contiguous pixels.} are designed to be from \SI{30}{\micro m} to \SI{40}{\micro m} in both directions. This range is necessary to achieve a spatial resolution below \SI{15}{\micro m}, which is required to obtain sufficient tracking performance.
-%reference: REQUIRED RESOLUTION FROM CDR 15UM
+The pixel pitches\footnote{The distance between the centers of two contiguous pixels.} are designed to be from \SI{30}{\micro m} to \SI{40}{\micro m} in both directions. This range is necessary to achieve a spatial resolution below \SI{15}{\micro m}, which is required to obtain sufficient tracking performance \cite{F.Forti:3930}.
+
 
 Moreover the sensor thickness has to be below \SI{100}{\micro m} to respect the material budget constraint of 0.2\% $X_{0}$ (\SI{100}{\micro m} Si correspond to 0.1\% $X_{0}$) which is possible with the DMAPS technology. 
-To deal with the target hit rate of \SI{120}{MHz/cm^{2}}, the timestamp clock signal can reach down to \SI{25}{ns}, even if studies have demonstrated that a window of \SI{100}{ns} (\textit{integration time}) is enough to limit to \SI{320}{Mbps} the data throughput at the same expected hit rate. 
+To deal with the target hit rate of \SI{120}{MHz/cm^{2}}, the timestamp clock signal can reach down to \SI{25}{ns}, even if studies have demonstrated that a window of \SI{100}{ns} (\textit{integration time}) is enough to limit to \SI{320}{Mbps} the data throughput at the same expected hit rate. The expected radiation tolerance must comply with the radiation robustness requirements mentioned in~\autoref{sec:VTX_requirements}.
 All characteristics inspected above allow to realize a sensor with high granularity in both space and time.\\
 
-With respect to TJ-Monopix2, which is equipped with a triggerless column-drain readout without memory at the periphery, OBELIX must have a triggered readout architecture, in order to satisfy the needs of Belle II. Moreover the latency is fixed to \SI{10}{\micro s} and it might operate up to 30 KHz trigger rate.
+With respect to TJ-Monopix2, which is equipped with a triggerless column-drain readout without memory at the periphery (\autoref{sec:TJ_arch}), OBELIX must have a triggered readout architecture to satisfy the needs of Belle II. The latency is fixed to \SI{10}{\micro s} and it might operate up to 30 KHz trigger rate.
 
-Single Event Upset~\autoref{foo:SEU} is a concern for the operation of the future detector but its size has not yet been quantified. Therefore an important feature of the chip must be to ensure that the control system is able to reset the sensor registers to default operational values at least every minutes. The reset frequency will be chosen after the measurement of the SEU cross section with OBELIX and the comparison to the occurence distribution of large energy loss in the experiment.
 
-The expected power consumption instead, is expected to be about \SI{200}{mW/cm^{2}}, a value which should allow air-cooling for the small areas corresponding to the two inner layers and liquid coolant for the outer ones. 
+Single Event Upset~\footnote{A Single Event Upset (SEU), also known as a Single Event Error (SEE), occurs if the charge released by ionizing particle, happens to be deposited close to a sensitive node of the device (RAM cell, register), causing a bit value to flip leading to corrupt information.} is a concern for future detector operation, therefore an important feature of the chip must be to ensure that the control system is able to reset the sensor registers to default operational values at least every minutes. The reset frequency will be chosen after the measurement of the SEU cross section with OBELIX and the comparison to the occurrence distribution of large energy loss in the experiment.
+%but its size has not yet been quantified.
+
+The power consumption is expected to be about \SI{200}{mW/cm^{2}}, a value which should allow air-cooling for the small areas corresponding to the two inner layers and liquid coolant for the outer ones. This relatively high value is necessary to obtain the required speed of the chip.
 
 
 \subsection{Sensor implementation}
 
-A schematic layout of the chip is shown in~\autoref{fig:obelix_scheme} . The size of the sensor is expected to be \numproduct{3 x 1.9}~\unit{cm^{2}}, with an active area of \numproduct{3 x 1.6}~\unit{cm^{2}} and an additional part in the periphery of about \numproduct{3 x 0.3}~\unit{cm^{2}}, dedicated to data pre-processing and triggering.
+A schematic layout of the chip is shown in~\autoref{fig:obelix_scheme} . The sensor size is expected to be \numproduct{3 x 1.9}~\unit{cm^{2}}, with an active area of \numproduct{3 x 1.6}~\unit{cm^{2}} and an additional part in the periphery of about \numproduct{3 x 0.3}~\unit{cm^{2}}, dedicated to data pre-processing and triggering.
 
 \begin{figure}[h!]
 \centering
@@ -292,10 +347,9 @@ A schematic layout of the chip is shown in~\autoref{fig:obelix_scheme} . The siz
 
 As mentioned above, this new sensor is the development of TJ-Monopix2, whose characteristics fit already many of the Belle II requirements (\autoref{tab:obelix_specification}).\\
 
-%\begin{comment}
-\begin{sidewaystable}
 
-%\begin{table}
+%\begin{sidewaystable}
+\begin{table}
 \centering
 \begin{tabular}{lc|c}
 \hline
@@ -307,7 +361,7 @@ Sensitive layer thickness & $< 50 \mu m$ & $30 \mu m$ and $ 100\mu m$ \\
 Sensor thickness & $< 100\mu m$ & - \\
 \hline
 Hit rate capability in the matrix & $> 600$~MHz~cm$^{-2}$ & $> 600$~MHz~cm$^{-2}$ \\
-Hit rate capability at the sensor output & $>120$~MHz~cm$^{-2}$ & $\gg 100$~MHz~cm$^{-2}$ \\
+\shortstack{Hit rate capability at the \\sensor output} & $>120$~MHz~cm$^{-2}$ & $\gg 100$~MHz~cm$^{-2}$ \\
 Trigger delay & $>10 \mu s$ & - \\
 Trigger rate & $30$~kHz & - \\
 %(optional) Track-trigger capability & \rem{to fill} & - \\
@@ -316,7 +370,7 @@ Overall integration time & $<100$~ns & - \\
 \hline
 Total ionizing dose tolerance & 100~kGy/year & 1~MGy/year \\
 NIEL fluence tolerance & \SI{5 e 13}{n_{eq}/cm^2/year}  & \SI{1.5 e 15}{n_{eq}/cm^2/year} \\
-SEU tolerance & frequently (~min$^{-1}$) flash configuration & - \\
+SEU tolerance & flash configuration(~min$^{-1}$) & - \\
 \hline
 Matrix dimensions & around $30 \times 16 mm^{2}$ & $19 \times 19 mm^{2}$ \\
 Overall sensor dimensions & around $30 \times 19 mm^{2}$ & $20 \times 19 mm^{2}$\\
@@ -325,32 +379,23 @@ Outputs & one at $<200 \rm{ MHz}$ & one at $160$~MHz \\
 \hline
 \hline
 \end{tabular}
-\caption{OBELIX sensor specifications, compared to the relevant specification of the TJ-Monopix2 sensor.}
-\label{tab:obelix_specification}
-%\caption{bandwidth with average hit rate and max hit rate}
-%\end{table}
-\end{sidewaystable}
-%\end{comment}
-
-\begin{comment}
-\begin{table}[h!]
-\centering
-\includegraphics[scale=.6]{obelix_specification}
-\caption{Comparison between BELLE II requirements and TJ-Monopix2 features.}
+\caption{OBELIX sensor specifications, compared to the relevant specifications of the TJ-Monopix2 sensor.}
 \label{tab:obelix_specification}
 \end{table}
-\end{comment}
+%\end{sidewaystable}
 
-From TJ-Monopix2 design, the pixel size of \numproduct{33 x 33}~\unit{\micro m^{2}} is maintained, as well as the layout of both digital and analog parts (\autoref{sec:TJ}). Also the Time-Over-Threshold method to digitize the signal is preserved, with a bus width of 7 bit, togheter with the column-drain readout architecture implemented for pairs of columns. Other features, which will be explained in depth in~\autoref{ch:TJ2}, have been conserved in the new design like the 3-bit register dedicated to the threshold tuning, but with a larger range of correction for the last bit. 
-Moreover to aim at the integration time of \SI{100}{ns}, the clock frequency which defines the precision of ToT and BCID (that is the timestamp), has been decreased from 40 to \SI{20}{MHz}. So the current baseline for OBELIX timestamp precision is \SI{50}{ns}.
 
-Additionally two new modules have been added to the implementation, related to the Belle II trigger: the Trigger Logic Unit (TRU) and the Track Trigger Transmitter (TTT). 
+
+From TJ-Monopix2 design, the pixel size of \numproduct{33 x 33}~\unit{\micro m^{2}} is maintained, as well as the layout of both digital and analog parts (\autoref{sec:TJ}). Also the Time-Over-Threshold method to digitize the signal is preserved, with a bus width of 7 bit, together with the column-drain readout architecture implemented for pairs of columns. Other features which will be explained in depth in~\autoref{ch:TJ2}, have been maintained in the new design, like the 3-bit register dedicated to the threshold tuning, but with a larger range of correction (for the last bit). 
+To aim at the integration time of \SI{100}{ns}, the clock frequency which defines the precision of TOT and BCID (that is the timestamp), has been decreased from 40 to \SI{20}{MHz}. Thus the current baseline for OBELIX timestamp precision is \SI{50}{ns}.
+
+Additionally, two new modules have been added to the implementation, related to the Belle II trigger: the Trigger Logic Unit (TRU) and the Track Trigger Transmitter (TTT). 
 
 \begin{description}
 \item \textbf{Trigger Logic Unit (TRU)}
 \end{description}
 
-The TRU has the task to select the fired pixel information from the matrix which are in-time with the triggers sent by the Belle II system. In more details, this module employs two stages of memory in order to manage the data coming from the pixel matrix (\autoref{fig:obelix_tru}). These components are design in order to minimize power dissipation and to optimize the efficiency even in severe operating conditions: maximum hit rate of \SI{120}{MHz/cm^{2}}, \SI{30}{KHz} of trigger rate and \SI{10}{\micro s} of trigger delay.
+The TRU has the task to select the fired pixel information from the matrix which are in-time with the triggers sent by the Belle II system. For this purpose it employs two stages of memory (\autoref{fig:obelix_tru}): the first stage has to store the pixel information during the trigger delay; the second memory has to compare the BCID (Bunch Crossing ID) of the fired pixel with each trigger time information buffered in a dedicated global memory. When they have a match, the pixel data is transferred to the Transmission Unit (TXU). Considering the BCID time precision, the time integration of the OBELIX sensor becomes \SI{100}{ns}.
 
 \begin{figure}[h!]
 \centering
@@ -359,41 +404,45 @@ The TRU has the task to select the fired pixel information from the matrix which
 \label{fig:obelix_tru}
 \end{figure}
 
-The first stage has to store the pixel information during the trigger delay. The second memory instead, has the function to compare the BCID of the fired pixel with each trigger time information buffered in a dedicated global memory which keeps track of received triggers. When they have a match, the pixel data is transferred to the Transmission Unit (TXU). In this way, the physics hits associated to a trigger but timestamped with a later BCID, for example due to timewalk effect, are also considered for further analysis.
-Considering the BCID precision time, the time integration of the OBELIX sensor becomes \SI{100}{ns}.
+ %In this way, the physics hits associated to a trigger but timestamped with a later BCID, for example due to timewalk effect, are also considered for further analysis.
+These components are designed to minimize power dissipation and to optimize the efficiency, even in severe operating conditions: maximum hit rate of \SI{120}{MHz/cm^{2}}, \SI{30}{KHz} of trigger rate and \SI{10}{\micro s} of trigger delay.
 
 
 \begin{description}
 \item \textbf{Track Trigger Transmitter (TTT)}
 \end{description}
 
-The TTT module divides the matrix in 8 logic regions (this value is still under study) and generates a one-byte word depending on the region that is fired. It is expected taht this information could be transmitted to trigger system within \SI{100}{ns} and along a line of transmission parallel to the main data output of the sensor. 
+It is under study the possibility for OBELIX to generate information to be used for a fast track reconstruction at trigger time.
+The TTT module divides the matrix in 8 logic regions (this value is still under study) and generates a one-byte word depending on the region firing. It is expected that this information could be transmitted to trigger system within \SI{100}{ns} and along a line of transmission parallel to the main data output of the sensor. 
 This component behaviour is still under study and it needs of further simulations in correlation with the whole VTX system.
 
-
+\newpage
 \begin{description}
 \item \textbf{Control Unit (CRU) and power dissipation}
 \end{description}
 
-The OBELIX sensor, as well as TJ-Monopix2, is configured by several registers which allow to set important features for its operation like threshold settings, masked pixels, time response of the pixels, but they also define its power consumption. The Control Unit is responsible for receiving these instructions about the configuration and the trigger information and at the same time sending out data coming from TXU module.
+%The OBELIX sensor, as well as TJ-Monopix2, is configured by several registers which allow to set important features for its operation like threshold settings, masked pixels, time response of the pixels, but they also define its power consumption.
 
-For what concern power dissipation, there are three main features which have the greatest impact: the biasing current flowing into the in-pixel amplifier (\textit{$I_{BIAS}$}), the BCID clock frequency (on which depends the timestamping precision) and the hit rate. In~\autoref{fig:obelix_power_cons} is shown the estimations of power dissipation as these parameters vary.
+As well as TJ-Monopix2, the main features of the OBELIX chip operation could be configured by several registers, which allow to determine the threshold settings, masked pixels, time response of the pixels, and which also define its power consumption. The Control Unit is responsible for receiving these configuration instructions and the trigger information, and at the same time, sending out data coming from TXU module.
+
+For what concern power dissipation, there are three main features which have the greatest impact: the biasing current flowing into the in-pixel amplifier (\textit{$I_{BIAS}$}), the BCID clock frequency (on which the timestamping precision depends) and the hit rate. In~\autoref{fig:obelix_power_cons} the estimations of power dissipation varying these parameters is shown.
 
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=.8]{obelix_power_cons}
-\caption{OBELIX sensor power dissipation depending on the front edn current (\textbf{$I_{bias}$}, the BCID frequency (\textbf{tbin}) and the hit rate).}
+\caption{OBELIX sensor power dissipation depending on the front end current (\textbf{$I_{bias}$}, the BCID frequency (tbin) and the hit rate).}
 \label{fig:obelix_power_cons}
 \end{figure}
 
-As we can see, the power consumption at the maximum hit rate of \SI{120}{MHz/cm^{2}} exceeds by little more than 10\% the power budget of \SI{200}{mW/cm^{2}}, considering the higher precision for the timestamp of 50 ns. Therefore to stay within the power budget it is necessary to find a compromise: reducing timing precision by worsening the BCID precision to 100 ns or decreasing the pre-amplifier biasing current causing a degradation of the time walk.
+As we can see, the power consumption at the maximum hit rate of \SI{120}{MHz/cm^{2}} exceeds by little more than 10\% the power budget of \SI{200}{mW/cm^{2}}, considering the higher precision for the timestamp of \SI{50}{ns}. Therefore, it is necessary to find a compromise between the value of timing precision and the biasing current to stay within the power budget.
+%: reducing timing precision by worsening the BCID precision to 100 ns or decreasing the pre-amplifier biasing current causing a degradation of the time walk.
 
 
-The first version of the sensor, called OBELIX-1, is being designed and the submission for fabrication is planned in the last month of 2023. A second improved version, OBELIX-2, will be designed based on performance studies on the first version and it is expected that it will be the final sensor needed for the experiment.\\
+The first version of the sensor, called OBELIX-1, is being designed. A second improved version, OBELIX-2, will be designed based on performance studies on the first version and it is expected that it will be the final sensor needed for the experiment.
+%and the submission for fabrication is planned in the last month of 2023.
 
 
 \begin{comment}
-\bigskip
 
 In this chapter we have introduced some of the fundamental aspects of the proposed VTX upgrade, suppported by continuous studies and simulations. In the following we will see in more details the technology on which the whole proposal is based: the CMOS Monolithic Active Pixel Sensor.
 
