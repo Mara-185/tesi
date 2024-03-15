@@ -18,12 +18,19 @@ from tqdm import tqdm
 import sys
 import math
 
+# FRONTENDS_PARAM_NO = [
+#     # a , b, c, t , name
+#     (0.12, 4, 200, 20, 'Normal'),
+#     (0.119, 1.4, 140, 40, 'Cascode'),
+#     (0.257, 3.2, 160, 17, 'HV Casc.'),
+#     (0.275, 2.3, 140, 13, 'HV')]
+
 FRONTENDS_PARAM_NO = [
     # a , b, c, t , name
-    (0.12, 4, 200, 20, 'Normal'),
-    (0.119, 1.4, 140, 40, 'Cascode'),
-    (0.257, 3.2, 160, 17, 'HV Casc.'),
-    (0.275, 2.3, 140, 13, 'HV')]
+    (0.1470, -2.72, 16, 50.2, 'Normal'),
+    (0.1402, -3.21, 17, 57.6, 'Cascode'),
+    (0.2765, -1.04, 28, 31.9, 'HV Casc.'),
+    (0.291, -1.12, 28, 28.1, 'HV')]
 
 FRONTENDS_PARAM_TH= [
     # threshold, name

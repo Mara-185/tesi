@@ -18,12 +18,19 @@ from tqdm import tqdm
 import sys
 import math
 
+# FRONTENDS_PARAM_NO = [
+#     # a , b, c, t , name
+#     (0.12, 4, 200, 20, 'Normal'),
+#     (0.119, 1.4, 140, 40, 'Cascode'),
+#     (0.257, 3.2, 160, 17, 'HV Casc.'),
+#     (0.275, 2.3, 140, 13, 'HV')]
+
 FRONTENDS_PARAM_NO = [
     # a , b, c, t , name
-    (0.12, 4, 200, 20, 'Normal'),
-    (0.119, 1.4, 140, 40, 'Cascode'),
-    (0.257, 3.2, 160, 17, 'HV Casc.'),
-    (0.275, 2.3, 140, 13, 'HV')]
+    (-0.1470, -2.72, 16, 50.2, 'Normal'),
+    (-0.1402, -3.21, 17, 57.6, 'Cascode'),
+    (0.2765, -1.04, 28, 31.9, 'HV Casc.'),
+    (0.291, -1.12, 28, 28.1, 'HV')]
 
 FRONTENDS_PARAM_TH= [
     # threshold, name
@@ -77,10 +84,26 @@ if __name__ == "__main__":
                 print(f"{i+1}_+ = {tot_dac1}", file=outf)
                 #print(f"{i}_- = {tot_dac2}\n")
                 c_el = el/tot_dac1
+
+                q_e = tot_dac1*10.1
+
+                print(f"{i+1}_+_e = {q_e}\n")
+                print(f"{i+1}_+_e = {q_e}", file=outf)
+
+                diff = el-q_e
+
+                print(f"diff = {diff}\n")
+                print(f"diff = {diff}", file=outf)
+
+                R = diff/el
+
+                print(f"R = {R}\n")
+                print(f"R = {R}", file=outf)
+
                 # c_sum+=c_el
 
-                print(f"    C = {c_el}")
-                print(f"    C = {c_el}", file=outf)
+                # print(f"    C = {c_el}")
+                # print(f"    C = {c_el}", file=outf)
                 if p!=0:
                     tot_dac[j, i] = tot_dac1
                     c_from_inj[j,i] = c_el

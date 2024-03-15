@@ -40,7 +40,7 @@ def main(k_file, fe, overwrite=False):
         cb.set_label("Conversion factor [e-/DAC]")
         frontend_names_on_top()
         plt.clim([8,11])
-        plt.savefig(f"k_maps.png")
+        plt.savefig(f"k_maps-{fe}.png")
         plt.clf()
 
 
@@ -48,45 +48,47 @@ def main(k_file, fe, overwrite=False):
         col = np.arange(224)
 
         # NORMAL
-        convfac2 = convfac[0:224,:]
-        print(convfac2.shape)
+        if fe=="Normal":
+            convfac2 = convfac[0:224,:]
+            print(convfac2.shape)
 
 
-        #plt.axes((0.125, 0.11, 0.775, 0.72))
-        plt.pcolormesh(col, row, convfac2.transpose(),
-                       rasterized=True)  # Necessary for quick save and view in PDF
-        #plt.title(subtitle)
-        plt.suptitle("Conversion factor K map")
-        plt.xlabel("Column")
-        plt.ylabel("Row")
-        set_integer_ticks(plt.gca().xaxis, plt.gca().yaxis)
-        cb = plt.colorbar()
-        cb.set_label("Conversion factor [e-/DAC]")
-        frontend_names_on_top()
-        plt.clim([8,11])
-        plt.savefig(f"k_maps_Normal.png")
-        plt.clf()
+            #plt.axes((0.125, 0.11, 0.775, 0.72))
+            plt.pcolormesh(col, row, convfac2.transpose(),
+                           rasterized=True)  # Necessary for quick save and view in PDF
+            #plt.title(subtitle)
+            plt.suptitle("Conversion factor K map")
+            plt.xlabel("Column")
+            plt.ylabel("Row")
+            set_integer_ticks(plt.gca().xaxis, plt.gca().yaxis)
+            cb = plt.colorbar()
+            cb.set_label("Conversion factor [e-/DAC]")
+            frontend_names_on_top()
+            plt.clim([8,11])
+            plt.savefig(f"k_maps_Normal.png")
+            plt.clf()
 
         #CASCODE
-        convfac3 = convfac[224:448,:]
-        print(convfac2.shape)
+        if fe=="Cascode":
+            convfac3 = convfac[224:448,:]
+            print(convfac3.shape)
 
-        col = np.arange(224,448)
-        
+            col = np.arange(224,448)
 
-        #plt.axes((0.125, 0.11, 0.775, 0.72))
-        plt.pcolormesh(col, row, convfac3.transpose(),
-                       rasterized=True)  # Necessary for quick save and view in PDF
-        #plt.title(subtitle)
-        plt.suptitle("Conversion factor K map")
-        plt.xlabel("Column")
-        plt.ylabel("Row")
-        set_integer_ticks(plt.gca().xaxis, plt.gca().yaxis)
-        cb = plt.colorbar()
-        cb.set_label("Conversion factor [e-/DAC]")
-        frontend_names_on_top()
-        plt.clim([8,11])
-        plt.savefig(f"k_maps_Cascode.png")
+
+            #plt.axes((0.125, 0.11, 0.775, 0.72))
+            plt.pcolormesh(col, row, convfac3.transpose(),
+                           rasterized=True)  # Necessary for quick save and view in PDF
+            #plt.title(subtitle)
+            plt.suptitle("Conversion factor K map")
+            plt.xlabel("Column")
+            plt.ylabel("Row")
+            set_integer_ticks(plt.gca().xaxis, plt.gca().yaxis)
+            cb = plt.colorbar()
+            cb.set_label("Conversion factor [e-/DAC]")
+            frontend_names_on_top()
+            plt.clim([8,11])
+            plt.savefig(f"k_maps_Cascode.png")
 
 
 

@@ -49,6 +49,7 @@ def main(input_file, overwrite=False):
         # print("Summary")
 
         if args.npz is None:
+
             # Prepare histogram
             counts = np.zeros((512, 512, 128))
 
@@ -81,6 +82,7 @@ def main(input_file, overwrite=False):
             print("\"*.npz\" file is created.")
 
         else:
+
             for i,ft in enumerate(tqdm(args.npz, unit="file")):
                 with np.load(ft) as data:
                     counts = data['tot']
@@ -162,6 +164,8 @@ def main(input_file, overwrite=False):
 
 
 
+
+
         # Find peaks each frontend
         for fc, lc, name in FRONTENDS:
             #print(name, fc, lc)
@@ -215,8 +219,8 @@ def main(input_file, overwrite=False):
 
         # plt.close()
         # sys.exit()
-
-
+        plt.close()
+        sys.exit()
 
         # Analysis for each pixel
         peaks = np.full((512,512), np.nan)
@@ -335,6 +339,7 @@ if __name__ == "__main__":
 
     # Set OptimizeWarning
     warnings.simplefilter("error", OptimizeWarning)
+    print(args.npz)
 
     files = []
     if args.input_file:  # If anything was given on the command line

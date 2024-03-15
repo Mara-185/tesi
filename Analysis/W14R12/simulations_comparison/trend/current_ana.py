@@ -22,7 +22,7 @@ from tqdm import tqdm
     In particular we want all trends in one plot for varying ITHR
     and antoher one varying.
 
-    The data of thresholds and threshold dispersions obtained from the fit are 
+    The data of thresholds and threshold dispersions obtained from the fit are
     reported by hand. """
 
 
@@ -52,10 +52,12 @@ def tplot(x, y, lab):
     plt.plot(x, y, label=f"{lab}")
     plt.suptitle("Threshold vs ICASN")
     plt.xlabel("ICASN [DAC]")
-    plt.ylabel("Threshold [DAC]")
+    #plt.ylabel("Threshold [DAC]")
+    plt.ylabel("Threshold [$e^{-}]$")
     plt.grid()
     plt.legend()
     plt.savefig(f"all_trends(ICASN).pdf")
+    plt.savefig(f"all_trends(ICASN)_last.png")
 
 def iplot2(x,y,out_name, fmt=""):
     sub="ICASN= "+f"{out_name[5:]}, ITHR= {x}"
@@ -83,11 +85,12 @@ def tplot2(x, y, lab):
     plt.plot(x, y, label=f"{lab}")
     plt.suptitle("Threshold vs ITHR")
     plt.xlabel("ITHR [DAC]")
-    plt.ylabel("Threshold [DAC]")
+    #plt.ylabel("Threshold [DAC]")
+    plt.ylabel("Threshold [$e^{-}]$")
     plt.grid(visible=True, axis="both")
     plt.legend()
     plt.savefig(f"all_trends(ITHR).pdf")
-
+    plt.savefig(f"all_trends(ITHR)_last.png")
 
 if __name__ == "__main__":
 
@@ -96,17 +99,20 @@ if __name__ == "__main__":
 
     #DATA:
     #ITHR = 64
-    th1 = [61.43, 53.42, 50.33, 48.21, 46.70, 45.59, 46.09]
+    #th1 = [61.43, 53.42, 50.33, 48.21, 46.70, 45.59, 46.09]
+    th1 = [61.43*10.1, 53.42*10.1, 50.33*10.1, 48.21*10.1, 46.70*10.1, 45.59*10.1, 46.09*10.1]
     thd1 = [2.45, 2.45, 2.45, 2.41, 2.38, 2.52, 2.50]
     ica1 = [0, 5, 10, 15, 20, 25, 30]
 
     #ITHR = 40
-    th2 = [47.28, 41.07, 38.39, 36.65, 35.53, 33.37]
+    #th2 = [47.28, 41.07, 38.39, 36.65, 35.53, 33.37]
+    th2 = [47.28*10.1, 41.07*10.1, 38.39*10.1, 36.65*10.1, 35.53*10.1, 33.37*10.1]
     thd2 = [2.12, 2.02, 2.03, 1.95, 1.91, 2.04]
     ica2 = [0, 5, 10, 15, 20, 30]
 
     #ITHR = 20
-    th3 = [34.43, 28.10, 26.59, 24.66]
+    #th3 = [34.43, 28.10, 26.59, 24.66]
+    th3 = [34.43*10.1, 28.10*10.1, 26.59*10.1, 24.66*10.1]
     thd3 = [1.95, 1.72, 1.75, 1.77]
     ica3 = ica2[:-2]
 
@@ -122,7 +128,7 @@ if __name__ == "__main__":
         outdisp.append(f"{out[m]}_disp")
 
 
-    #Single PLOT trend THR vs ICASN
+    # #Single PLOT trend THR vs ICASN
     # for x, y, outf in zip(ica, th, out):
     #     iplot(x, y, outf)
     #

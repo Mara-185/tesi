@@ -219,6 +219,7 @@ def main(input_file, overwrite=False):
         w = np.maximum(0, 0.5 - np.abs(occupancy - 0.5))
         threshold_DAC = average(occupancy_charges, axis=2, weights=w, invalid=0)
 
+
         # Threshold hist
         m1 = int(max(charge_dac_range[0], threshold_DAC.min() - 2))
         m2 = int(min(charge_dac_range[1], threshold_DAC.max() + 2))

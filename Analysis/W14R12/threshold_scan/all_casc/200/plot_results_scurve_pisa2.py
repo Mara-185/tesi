@@ -606,7 +606,7 @@ if __name__ == "__main__":
 
         plt.pcolormesh(
             charge_shift, np.linspace(-0.5, 127.5, 128, endpoint=True),
-            tot.transpose(), vmin=1, cmap=VIRIDIS_WHITE_UNDER, rasterized=True)  # Necessary for quick save and view in PDF
+            tot.transpose(), vmin=100, cmap=VIRIDIS_WHITE_UNDER, rasterized=True)  # Necessary for quick save and view in PDF
 
         print(*popt)
         print(*perr)

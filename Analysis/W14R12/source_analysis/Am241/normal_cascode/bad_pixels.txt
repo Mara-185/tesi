@@ -1,7 +1,5 @@
 Bad pixels:
-((260, 24)) - Cascode
+((260, 62)) - Cascode
+((260, 172)) - Cascode
 ((335, 158)) - Cascode
-((362, 283)) - Cascode
 ((364, 377)) - Cascode
-((366, 250)) - Cascode
-((390, 296)) - Cascode

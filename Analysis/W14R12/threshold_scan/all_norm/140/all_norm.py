@@ -317,6 +317,72 @@ def main(input_file, overwrite=False):
         pdf.savefig();
         plt.savefig("threshold_map_norm_140.png"); plt.clf()
 
+        #THRESHOLD MAP SAME SCALE OF Cascode
+        plt.axes((0.125, 0.11, 0.775, 0.72))
+        plt.pcolormesh(occupancy_edges[0], occupancy_edges[1], threshold_DAC.transpose(),
+                       rasterized=True)  # Necessary for quick save and view in PDF
+        plt.title(subtitle)
+        plt.suptitle("Threshold map")
+        plt.xlabel("Column")
+        plt.ylabel("Row")
+        set_integer_ticks(plt.gca().xaxis, plt.gca().yaxis)
+        cb = plt.colorbar()
+        cb.set_label("Threshold [DAC]")
+        plt.clim([45,65])
+        frontend_names_on_top()
+        pdf.savefig();
+        plt.savefig("threshold_map_norm_140_lim1.png"); plt.clf()
+
+        #
+        plt.axes((0.125, 0.11, 0.775, 0.72))
+        plt.pcolormesh(occupancy_edges[0], occupancy_edges[1], threshold_DAC.transpose(),
+                       rasterized=True)  # Necessary for quick save and view in PDF
+        plt.title(subtitle)
+        plt.suptitle("Threshold map")
+        plt.xlabel("Column")
+        plt.ylabel("Row")
+        set_integer_ticks(plt.gca().xaxis, plt.gca().yaxis)
+        cb = plt.colorbar()
+        cb.set_label("Threshold [DAC]")
+        plt.clim([45,60])
+        frontend_names_on_top()
+        pdf.savefig();
+        plt.savefig("threshold_map_norm_140_lim2.png"); plt.clf()
+
+        #
+        plt.axes((0.125, 0.11, 0.775, 0.72))
+        plt.pcolormesh(occupancy_edges[0], occupancy_edges[1], threshold_DAC.transpose(),
+                       rasterized=True)  # Necessary for quick save and view in PDF
+        plt.title(subtitle)
+        plt.suptitle("Threshold map")
+        plt.xlabel("Column")
+        plt.ylabel("Row")
+        set_integer_ticks(plt.gca().xaxis, plt.gca().yaxis)
+        cb = plt.colorbar()
+        cb.set_label("Threshold [DAC]")
+        plt.clim([50,65])
+        frontend_names_on_top()
+        pdf.savefig();
+        plt.savefig("threshold_map_norm_140_lim3.png"); plt.clf()
+
+        #
+        plt.axes((0.125, 0.11, 0.775, 0.72))
+        plt.pcolormesh(occupancy_edges[0], occupancy_edges[1], threshold_DAC.transpose(),
+                       rasterized=True)  # Necessary for quick save and view in PDF
+        plt.title(subtitle)
+        plt.suptitle("Threshold map")
+        plt.xlabel("Column")
+        plt.ylabel("Row")
+        set_integer_ticks(plt.gca().xaxis, plt.gca().yaxis)
+        cb = plt.colorbar()
+        cb.set_label("Threshold [DAC]")
+        plt.clim([55,65])
+        frontend_names_on_top()
+        pdf.savefig();
+        plt.savefig("threshold_map_norm_140_lim4.png"); plt.clf()
+
+
+
         #Compute the noise (the width of the up-slope of the s-curve)
         #as a variance with the weights above
 
@@ -416,6 +482,8 @@ def main(input_file, overwrite=False):
         frontend_names_on_top()
         pdf.savefig();
         plt.savefig("Noise_map_norm_140.png"); plt.clf()
+
+        #NOISE MAP SAME SCALE OF CASCODE
 
         plt.axes((0.125, 0.11, 0.775, 0.72))
         plt.pcolormesh(occupancy_edges[0], occupancy_edges[1], noise_DAC.transpose(),

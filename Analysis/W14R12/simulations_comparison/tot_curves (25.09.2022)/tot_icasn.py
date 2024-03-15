@@ -314,6 +314,7 @@ if __name__ == "__main__":
         except Exception:
             print(traceback.format_exc())
 
+    print(f"ICASN = {ith}")
     leg20 = ["icasn=0", "icasn=5", "icasn=10", "icasn=15"]
     leg40 = ["icasn=0", "icasn=5", "icasn=10", "icasn=15", "icasn=20", "icasn=30"]
     leg64 = ["icasn=0", "icasn=5", "icasn=10", "icasn=15", "icasn=20","icasn=25", "icasn=30"]
@@ -324,7 +325,7 @@ if __name__ == "__main__":
     plt.title(f"{ith}")
     plt.suptitle("ToT curves")
     plt.xlabel("True injected charge [e-]")
-    plt.ylabel("ToT [us]")
+    plt.ylabel("ToT [$\mu$s]")
     plt.grid()
     plt.legend()
     #plt.savefig(f"tot_curves[{ic}]2.pdf")
